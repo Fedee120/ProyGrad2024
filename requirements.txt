@@ -1,0 +1,7 @@
+# run pip install -r requirements.txt
+groq
+langchain
+sentence_transformers
+langchain-community 
+faiss-cpu
+langchain-groq
