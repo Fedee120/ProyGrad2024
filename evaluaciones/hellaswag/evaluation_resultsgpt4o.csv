@@ -1,0 +1,625 @@
+prompt,true_label,predicted_label
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo terminar un discurso del padrino [title] Utilice un lenguaje adecuado para toda la familia en su finalización. [step] Las bodas suelen incluir invitados de todas las edades. Incluso si los niños no asisten a su discurso, los padres y abuelos de la pareja probablemente sí. 
+Opciones:
+A) Consulte estas posibles formas de finalizar, incluyendo la redacción de mensajes, mensajes telefónicos o tarjetas de cumpleaños compartidas. Si solo hay unos pocos individuos presentes, encienda una vela perfumada de lavanda e intente comprarles a los novios un buen final.
+B) Por eso podrían estar escuchando. [substeps] Al final de su discurso, considere entregar literalmente a sus invitados su certificado de matrimonio y un sobre con la fecha.
+C) Deje en casa el lenguaje explícito y los chistes sucios. [title] Evite utilizar el humor para criticar a otros.
+D) Si hay miembros mayores de la familia presentes, debería incluirlos en su finalización. Los padres y abuelos de sus hijos suelen estar más dispuestos a estar presentes, y estarán más dispuestos a tenerlos presentes a usted y a sus hijos mayores.",C,"La opción más apropiada es:
+
+C) Deje en casa el lenguaje explícito y los chistes sucios. [title] Evite utilizar el humor para criticar a otros.
+
+Explicación: Esta opción se alinea con la recomendación de utilizar un lenguaje adecuado para toda la familia, teniendo en cuenta la posible presencia de invitados de todas las edades."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo reparar o remodelar tus alforjas de motocicleta [title] Remoja las alforjas en agua caliente durante 30 segundos en un fregadero o bañera de lavandería. [title] Rellena las alforjas con periódicos. Necesitarás al menos una edición del domingo. 
+Opciones:
+A) [title] Corta las alforjas y luego pégalas con cinta. [title] Asegúrate de que queden ajustadas pero no demasiado apretadas.
+B) [title] Vierte el contenido de las alforjas en bolsas ziploc. [title] Amarra las bolsas con fuerza pero si estás en una emergencia, impermeabilízalas con papel film, tupperware, una tapa de goma o algún otro material de sellado.
+C) [title] Cuando estén mojadas, dales forma a la parte superior. [title] Déjalas secar por al menos un día.
+D) [title] Colócalas planas en el asiento y presiona ligeramente hasta que los periódicos queden ajustados. [title] Agrega una cucharada de mantequilla y exprime leche sobre las alforjas.",C,"C) [title] Cuando estén mojadas, dales forma a la parte superior. [title] Déjalas secar por al menos un día.
+
+Esta opción es la más apropiada porque sigue de manera lógica y coherente los pasos iniciales de remojar las alforjas y luego rellenarlas con periódicos, con el objetivo de darles forma mientras están húmedas y luego dejarlas secar."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo abrir su piscina para la primavera [title] Use una pequeña bomba de cubierta para eliminar la lluvia y el derretimiento de la nieve. [step] A medida que se bombea el agua, ""ajuste"" la cubierta tirando de sus bordes, para que el agua se recoja en un área fácil de bombear. Una red de hojas tipo bolsa y su cepillo para piscinas en un palo se pueden usar para eliminar hojas y desechos. 
+Opciones:
+A) [substeps] Alternativamente, aplique una solución para eliminar cloro al agua y pese el área ligeramente con lana de acero. [title] Use una herramienta de corte pequeña o un cuchillo para eliminar los desechos.
+B) [title] Después de retirar el agua y los desechos, desagüe las bolsas de agua (o retire lo que sea que se esté usando para mantener los lados de la cubierta abajo). [step] Las bolsas de agua se pueden doblar o enrollar después de lavarlas con la manguera.
+C) [title] Agregue 4-5 galones (93-79 litros) de agua a una piscina acuática. [step] Esto facilitará la inundación.
+D) [substeps] También puede usar un secador de pelo si tiene una manguera para usar en esta tarea. [title] Levante la cubierta de la piscina y use un cabrestante manual para sostenerla.",B,"La mejor opción para continuar con el proceso descrito inicialmente es la B. La descripción trata sobre cómo abrir una piscina para la primavera, que incluye eliminar el agua y los desechos de la cubierta de la piscina. La opción B sigue lógicamente este proceso al describir el siguiente paso, que es manejar las bolsas de agua después de retirar los desechos.
+
+Opción B:
+[title] Después de retirar el agua y los desechos, desagüe las bolsas de agua (o retire lo que sea que se esté usando para mantener los lados de la cubierta abajo). [step] Las bolsas de agua se pueden doblar o enrollar después de lavarlas con la manguera.
+
+Esta continuación proporciona instrucciones claras y útiles que siguen secuencialmente el proceso de abrir una piscina para la primavera."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo prevenir la candidiasis al amamantar [title] Esteriliza todos los instrumentos de alimentación. [step] Esto es especialmente importante hacerlo si tu bebé ha presentado síntomas de candidiasis. Cualquier instrumento que entre en contacto con la boca de tu bebé y tu pezón debe ser esterilizado. 
+Opciones:
+A) Lava tus manos antes y después de manejar a tu bebé para prevenir la propagación de la enfermedad. [title] Lávate las manos con agua y jabón antes de manejar a tu bebé.
+B) [substeps] La esterilización de un instrumento de lactancia aumenta la probabilidad de infección por candidiasis. Por ejemplo, considera esterilizar instrumentos con tca o.
+C) Puedes hacer esto llevando el agua a ebullición y colocando los instrumentos dentro durante cinco minutos después de cada uso. Los instrumentos que debes esterilizar incluyen: [substeps] El anillo de dentición, los chupetes y la tetina del biberón.
+D) Para esterilizar una herramienta o pezón determinado, límpialo a fondo con agua y jabón, luego sécalo con una toalla limpia. [substeps] Puedes esterilizar una herramienta ya esterilizada en el fregadero de la cocina o en el lavavajillas.",C,"La opción más apropiada es:
+C) Puedes hacer esto llevando el agua a ebullición y colocando los instrumentos dentro durante cinco minutos después de cada uso. Los instrumentos que debes esterilizar incluyen: [substeps] El anillo de dentición, los chupetes y la tetina del biberón.
+
+Esta opción brinda una continuación clara y útil sobre cómo realizar la esterilización de los instrumentos relacionados con la alimentación, algo que es directamente relevante para prevenir la candidiasis al amamantar."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo hablar en un funeral [title] Escríbelo todo. [step] No puedes improvisar un elogio fúnebre, y la memorización debe estar respaldada por notas al menos. Puede que estés demasiado triste, y no puedes reírte si olvidas lo que ibas a decir. 
+Opciones:
+A) Escribe una pequeña página de notas, o escribe todo y léelo. [substeps] Si tienes problemas para empezar, haz una lluvia de ideas.
+B) Dale notas a la familia en un libro o sitio web si las necesitan. Agradece asistiendo a funerales escribiendo notas de agradecimiento.
+C) Escribe algunas cosas que dijiste o sentiste ese día, y omítelas. [substeps] Si no podrás recordar esas cosas más tarde, puedes escribirlas ahora (si no puedes).
+D) Puede sonar como si tuvieras que venir aquí para decir tu adiós solemne, pero eso no es cierto. Toma notas mientras las compones para darle más sentido, y pronto podrás recordar las cosas mejor.",A,"Opción A) Escribe una pequeña página de notas, o escribe todo y léelo. [substeps] Si tienes problemas para empezar, haz una lluvia de ideas.
+
+Esta opción es la continuación más apropiada porque proporciona una guía clara y práctica para preparar un discurso en un funeral. Ofrece pasos concretos y útiles, como la escritura de notas y el uso de lluvia de ideas, lo cual es coherente con el tono instructivo y de apoyo de la descripción inicial."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo prevenir que su teléfono celular sea hackeado [title] Mantenga su sistema operativo actualizado. [step] Tan pronto como apple o android le indique que hay una actualización disponible, descargue e instálela. Muchos hackers aprovechan las vulnerabilidades en sistemas operativos obsoletos. 
+Opciones:
+A) Desinstale cualquier virus o malware que pueda estar afectando su computadora. Reemplace cualquier programa que compre con la última versión de os x.
+B) Las actualizaciones solucionan estas vulnerabilidades y hacen que su teléfono sea más seguro. [title] Instale software de seguridad en su teléfono android.
+C) Actualice su software según sea necesario para proteger su teléfono inteligente y su computadora de escritorio. Por ejemplo, actualizar un kernel es más o menos costoso que reemplazar un kernel cyac si solo tiene un kernel de 64 GB.
+D) [title] Use su dispositivo para evitar multitareas. [step] La tecnología siempre está cambiando y su dispositivo puede sufrir muchos cambios.",B,B) Las actualizaciones solucionan estas vulnerabilidades y hacen que su teléfono sea más seguro. [title] Instale software de seguridad en su teléfono android.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo hacer pan de patata con hierbas [title] Tritura la patata. [step] Hierve agua en una pequeña cacerola. Una vez que esté hirviendo, ajusta el fuego a medio-bajo, agrega la patata, cubre la cacerola y cocina durante 15 a 20 minutos. 
+Opciones:
+A) [substeps] Asegúrate de usar patatas frescas porque no serán tan dulces. [title] Añade la patata escurrida a la cacerola.
+B) Escurre todo menos 1 taza (237 ml) del líquido, tritura la patata y luego rocíala con aceite. [substeps] Deja que se enfríen la patata y el agua hasta que estén tibios.
+C) [substeps] No es necesario triturar la patata con mucha frecuencia, ya que la humedad en la cacerola es suficiente para crear un pan de patata con hierbas de mejor sabor. [title] Agrega un par de hojas de laurel al agua.
+D) Después de cocinar durante 7 minutos, apaga el fuego y enfría los trozos. [substeps] Puedes engrasar el molde para tu pan para que no se pegue después de enfriarse en el refrigerador.",B,"La continuación más apropiada sería:
+
+B) Escurre todo menos 1 taza (237 ml) del líquido, tritura la patata y luego rocíala con aceite. [substeps] Deja que se enfríen la patata y el agua hasta que estén tibios.
+
+Esta opción sigue lógicamente el paso anterior y proporciona detalles adicionales precisos sobre los siguientes pasos en la preparación del pan de patata con hierbas."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo usar el panel de control de Fitbit [title] Descargar e instalar la aplicación Fitbit. [step] Esta aplicación es gratuita y te permitirá conectarte con tu Fitbit. Asegúrate de estar usando la versión más reciente de tu software, de lo contrario, podrías tener dificultades para enlazar tu dispositivo y tu cuenta de Fitbit. 
+Opciones:
+A) [title] Conéctate al panel de control mediante la barra de navegación en la parte superior del panel. [step] Cuando se te solicite en el panel, sigue estos pasos para: [substeps] Conectar tu dispositivo al puerto de entrada del panel.
+B) [substeps] Puedes descargar la aplicación desde la tienda de aplicaciones. Si no puedes encontrar la tienda de aplicaciones, busca la aplicación en el sitio web de la tienda de aplicaciones móviles.
+C) [substeps] La aplicación Fitbit se encuentra en la tienda de Windows, la tienda de Google Play o la tienda de Apple. Si tu dispositivo admite bluetooth, deberás activar el bluetooth antes de intentar usar tu cuenta de Fitbit.
+D) [substeps] Visita la tienda de aplicaciones de Fitbit en el menú de Apple y selecciona ""Inicio"" o ""Home"" en el menú. Ingresa ""panel de control de Fitbit"" en la barra de búsqueda y haz clic en ""Inicio"" para descargarlo.",C,"La opción más apropiada para continuar la descripción es:
+
+C) [substeps] La aplicación Fitbit se encuentra en la tienda de Windows, la tienda de Google Play o la tienda de Apple. Si tu dispositivo admite bluetooth, deberás activar el bluetooth antes de intentar usar tu cuenta de Fitbit.
+
+Esta opción proporciona una dirección clara y específica sobre dónde encontrar la aplicación y qué hacer si el dispositivo cuenta con tecnología bluetooth, que es información relevante para el proceso de descargar e instalar la aplicación Fitbit."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Este bebé golpea la pelota y cae. luego
+Opciones:
+A) va hacia la derecha y nosotros vamos hacia la izquierda.
+B) va corriendo de regreso y sigue golpeando la pelota a través de las bases y hablando con los demás jugadores.
+C) se levanta y camina de nuevo por la cancha con sus palos.
+D) se levanta de nuevo y toma el palo para intentar golpear la pelota de nuevo.",D,D) se levanta de nuevo y toma el palo para intentar golpear la pelota de nuevo.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: . una mujer con su cabello envuelto en una toalla
+Opciones:
+A) muestra su video explicando cómo lava su cara.
+B) se sienta en una silla de madera con las piernas recogidas debajo de ella.
+C) usa un bikini con una pierna atada detrás de la cabeza y se ve hacia abajo.
+D) entra al baño con su cabello suelto.",A,B) se sienta en una silla de madera con las piernas recogidas debajo de ella.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo prevenir el síndrome del torniquete del cabello en bebés [title] Comprender lo que causa el síndrome del torniquete del cabello. [step] El síndrome del torniquete del cabello es más común en los primeros cuatro meses de vida de su bebé. Esto se debe a que durante este período de tiempo las mujeres pueden perder involuntariamente más cabello después del embarazo. 
+Opciones:
+A) Esto está relacionado con los cambios que el cuerpo experimenta al volver a su estado normal después del embarazo. [substeps] Un bebé puede sufrir el síndrome del torniquete del cabello por movimientos repetitivos en un espacio confinado donde hay cabello presente.
+B) Las mujeres que pierden más cabello durante el embarazo pueden adquirir permanentemente más cabello a largo plazo, ya que muchas de las mujeres más afectadas en la vida de su bebé son posibles madres. [title]  Conoce los riesgos y beneficios del síndrome del torniquete del cabello.
+C) En el feto, los vasos sanguíneos se mueven más hacia el cuello uterino que las células de testosterona. Las paredes de las células de testosterona durante este período de tiempo bloquean el oxígeno de entrar en el útero, causando que el cabello en exceso obstruya el cuello uterino.
+D) Estas mujeres están embarazadas cuando comienzan el segundo trimestre. Pueden experimentar una pérdida significativa de cabello en los primeros cuatro a ocho meses después.",A,A) Esto está relacionado con los cambios que el cuerpo experimenta al volver a su estado normal después del embarazo. [substeps] Un bebé puede sufrir el síndrome del torniquete del cabello por movimientos repetitivos en un espacio confinado donde hay cabello presente.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo actuar de forma malvada [title] Elige la ropa adecuada. [step] La maldad se asocia típicamente con colores oscuros y siniestros, por lo que cuando planeas un disfraz para un personaje villano, esa es la paleta de colores con la que debes comenzar. El negro es la opción tradicional, pero cualquier tono oscuro, como el azul oscuro o el berenjena, puede funcionar bien. 
+Opciones:
+A) Necesitarás una camisa de manga larga, pantalones vaqueros oscuros y un suéter o falda larga negra con pelo para hacerte ver depredador. [substeps] Los pantalones beige son una buena opción, aunque teñidos directamente de pormen, pero también podrías probar con dr.
+B) Vestirse en invierno funcionará perfectamente para un personaje malvado, así que usa un maquillaje de ojos azul-blanco oscuro o azul oscuro. Si tienes dificultades para identificar el tipo de disfraz que deseas elegir, consulta la sección de matemáticas a continuación.
+C) Dado que los colores oscuros y siniestros no son aceptados en ninguna sociedad de magos, está bien; lo que sea que hagas, no lo exageres. Por encima de todo, este es el disfraz principal que deseas crear.
+D) Opta también por ropa que tenga líneas elegantes y limpias. Por ejemplo, un traje bien ajustado es una opción atractiva para un hombre, mientras que un vestido de cóctel ajustado es un disfraz ideal para una villana.",D,"D) Opta también por ropa que tenga líneas elegantes y limpias. Por ejemplo, un traje bien ajustado es una opción atractiva para un hombre, mientras que un vestido de cóctel ajustado es un disfraz ideal para una villana."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Un hombre se encuentra en el centro de un estadio. multitudes
+Opciones:
+A) se agrupan a su alrededor mientras gira.
+B) observan y animan al hombre.
+C) observan detrás de una cortina.
+D) destellos lo rodean.",B,B) observan y animan al hombre.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Se muestra a un portero que salva varias pelotas y es entrevistado por un reportero. muchos tiros
+Opciones:
+A) Se muestra un campo de hockey, personas tomando una foto y un presentador hablando a la cámara.
+B) Se muestran al portero y a ellos mismos en el campo con trofeos.
+C) Se muestran a los niños jugando fútbol, siendo entrevistados y luego se enfoca al entrenador siendo entrevistado.
+D) Se muestran al equipo atacando mientras que el portero está en la base defensiva y se dan instrucciones sobre cómo golpear la pelota.",C,"Opción: B) Se muestran al portero y a ellos mismos en el campo con trofeos.
+
+Esta opción es la más coherente con la descripción inicial de un portero que salva varias pelotas y es entrevistado por un reportero, ya que sugiere una continuación lógica en la que el portero y su equipo celebran su éxito, posiblemente debido a las notables salvadas del portero."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo medir el tiro de los jeans [title] Toma un par de jeans y colócalos planos. [step] Estíralos sobre una superficie sólida y lisa que sea lo suficientemente grande para sostener todo el par de pantalones. Si intentas encontrar tu tiro óptimo, elige un par de jeans que te queden bien y cuyas piernas tengan la longitud que prefieras. 
+Opciones:
+A) [substeps] Si es posible, coloca los jeans planos sobre una superficie lisa. Si una pierna es notablemente más corta que la otra, algo con un dobladillo incorporado puede ayudar.
+B) [substeps] Medir un par de jeans funciona mejor si los jeans están ajustados correctamente a tu tipo de cuerpo. [title] Alisa los pantalones y, si es necesario, dóblalos por la mitad.
+C) Tu medida ideal de tiro se encuentra en los pies. [substeps] Los pies deben tener el mismo ancho que tus brazos.
+D) [substeps] Si quieres que tus jeans tengan alguna variación en la altura de las piernas, simplemente elige la variedad más caliente de jeans. No deberías optar por jeans que se extiendan más allá de tus caderas.",B,"La continuación más apropiada es:
+
+B) [substeps] Medir un par de jeans funciona mejor si los jeans están ajustados correctamente a tu tipo de cuerpo. [title] Alisa los pantalones y, si es necesario, dóblalos por la mitad.
+
+Esta opción mantiene la coherencia y claridad de las instrucciones para medir el tiro de los jeans, y proporciona pasos adicionales útiles para realizar la medición correctamente."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo dibujar planos para una casa [title] Tener una idea clara del resultado deseado. [step] Antes de empezar en papel, será útil tener una idea básica de cómo va a lucir la casa. Es importante conocer la cantidad de habitaciones requeridas y cuántos pisos va a tener la casa. 
+Opciones:
+A) Por ejemplo, si la casa se ubicará en el sótano, entonces la medición debería ser simplemente para pedir tiempo. [title] Realice una medición usando una cinta métrica y grabadora de cinta.
+B) [substeps] Asegúrese de haber pensado en la comodidad y que las habitaciones estén alineadas y no se necesiten más de 6 voluntarios. Calcule tanto el precio promedio de una sala de estar como un presupuesto o cualquier número de comodidades.
+C) [substeps] Las habitaciones pueden variar desde complejas hasta pequeñas. Es mejor tener una idea general y planificar para que su casa sea más grande y más perpendicular.
+D) [title] Para el perímetro, use un lápiz para dibujar las paredes exteriores de la casa. [step] Trate de aprovechar todo el papel cuadriculado para obtener una escala más grande.",D,"Opción D) [title] Para el perímetro, use un lápiz para dibujar las paredes exteriores de la casa. [step] Trate de aprovechar todo el papel cuadriculado para obtener una escala más grande."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo prevenir la náusea [title] Coma comidas pequeñas y bocadillos durante el día. [step] El consumo de comidas grandes y pesadas puede desencadenar la náusea, ya que su cuerpo lucha por procesar toda esa comida. En su lugar, intente comer comidas pequeñas y bocadillos cada 4 horas en el día. 
+Opciones:
+A) Incluso puede comer un refrigerio alto en proteínas justo antes de acostarse para ayudarlo a dormir más profundamente. [substeps] Manténgase dentro de su rango diario de calorías cuando tenga un refrigerio.
+B) Esto permite que su estómago procese rápidamente la comida, lo cual ayudará a reducir la náusea. Intente comer bocadillos cada 1 a 2 horas durante todo el día.
+C) Esto hará que la sangre fluya, reduciendo así su nivel de glucemia (y otros niveles de azúcar en la sangre) en el día del ataque. [substeps] Las frutas y verduras son las mejores fuentes de carbohidratos.
+D) [substeps] Con el tiempo, comenzará a sentir menos náuseas. Coma comidas pequeñas y bocadillos a lo largo del día.",A,"La opción más apropiada para continuar la descripción sobre cómo prevenir la náusea introduciendo el concepto de comer comidas pequeñas y bocadillos durante el día es la siguiente:
+
+B) Esto permite que su estómago procese rápidamente la comida, lo cual ayudará a reducir la náusea. Intente comer bocadillos cada 1 a 2 horas durante todo el día.
+
+Esta opción es adecuada porque mantiene la coherencia con la idea inicial de evitar comidas grandes y pesadas y sugiere una frecuencia específica para comer, lo cual es útil para el lector."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Una mujer habla en una sala de estar. Luego, la mujer coloca una camisa en una tabla de planchar y verifica las etiquetas. la mujer
+Opciones:
+A) luego plancha la camisa empezando por el cuello.
+B) se pone los gemelos y plancha la camisa al lado de una lavadora y secadora.
+C) comienza a planchar la camisa en una plancha negra.
+D) luego coloca la camisa extendida.",A,A) luego plancha la camisa empezando por el cuello.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo comprar y almacenar coco [title] Encuentra un lugar para comprar cocos. [step] Esto puede ser en un supermercado cerca de ti con una gran sección de productos, o tal vez conozcas un árbol de coco cercano. Asegúrate de tener una buena selección de cocos para elegir. 
+Opciones:
+A) Comprar cocos adicionales reducirá en gran medida el costo de mover un coco a un lugar especial. [substeps] La mayoría de los tipos de cocos provienen de bosques o selvas tropicales.
+B) [substeps] Aunque la mejor temporada de coco es de octubre a diciembre, los cocos se cosechan durante todo el año. [title] Elija un coco que sea pesado y completo.
+C) [substeps] Busque en línea una tienda de coco natural cerca de ti. Puedes pedir un carrito para transferir los cocos; sin embargo, si es bueno trabajar con él, pide al personal la mejor selección para tus necesidades.
+D) [substeps] Considera pedir cocos con su cáscara intacta, para que puedas agregar algunos toques personales. Decide si quieres usar los cocos como joyas o regalo.",B,"La continuación más apropiada para la descripción inicial sería:
+
+B) [substeps] Aunque la mejor temporada de coco es de octubre a diciembre, los cocos se cosechan durante todo el año. [title] Elija un coco que sea pesado y completo.
+
+Esta opción sigue lógicamente con la guía sobre cómo comprar y almacenar cocos, proporcionando información relevante sobre la temporada de cosecha y eligiendo un buen coco."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo tratar una infección por levaduras [title] Verifique los síntomas. [step] Hay varios signos físicos que pueden indicar una infección por levaduras. Los síntomas más comunes incluyen: [substeps] Picazón, dolor e incomodidad general en la zona vaginal. 
+Opciones:
+A) Anomalías en la apariencia de la vagina. Infección o llagas en las paredes vaginales.
+B) Picazón alrededor de la línea de la vagina que cambia frecuentemente durante el día. Descarga vaginal sanguinolenta alrededor del tampón.
+C) También puede notar: sequedad, inflamación, secreción con pus visible desde la abertura vaginal. Diarrea, constipación vaginal y una sensación de pesadez (posiblemente debido a una obstrucción debido a una infección por levaduras).
+D) Dolor o ardor al orinar o tener relaciones sexuales. Descarga blanca espesa (como requesón) en la vagina.",D,"La continuación más apropiada es:
+
+D) Dolor o ardor al orinar o tener relaciones sexuales. Descarga blanca espesa (como requesón) en la vagina.
+
+Esta opción continúa de manera coherente con la identificación de síntomas comunes y relacionados directamente con una infección por levaduras, complemento de los síntomas mencionados inicialmente (picazón, dolor e incomodidad general en la zona vaginal)."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo aplicar delineador de ojos en lápiz [title] Considera qué tipo de delineador de ojos en lápiz usar. [step] Hay muchos tipos diferentes de delineadores de ojos que vienen en forma de lápiz, cada uno con una consistencia y textura, aplicación y efecto diferentes. [substeps] Los lápices a base de polvo, a veces llamados kohl, ofrecen un color menos intenso. 
+Opciones:
+A) Los lápices de una sola cucharada, llamados lápices de marta, son una opción alternativa para ojos grandes. Los lápices láser, como od, se enfocan en tonos más fuertes y oscuros.
+B) También son una buena opción si quieres difuminar el delineador de ojos para lograr un efecto de "" ojos ahumados "". Los lápices a base de gel o crema ofrecen una aplicación fácil y excelente.
+C) Quédese con tonos más suaves como rojo, crema y champán o zafiro para evitar mezclar muchos tonos juntos. Además, se han recubierto lápices rojos con pigmentos sintéticos para crear colores llamativos.
+D) Los lápices a base de perlas (y los lápices con polvo para tonos de negro) brindan un tono más intenso y sutil. [title] Busca un lápiz que sea suelto y ajustado.",B,"B) También son una buena opción si quieres difuminar el delineador de ojos para lograr un efecto de ""ojos ahumados"". Los lápices a base de gel o crema ofrecen una aplicación fácil y excelente."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo usar una chaqueta de cuero [title] Usa una chaqueta bomber para el calor. [step] Las chaquetas de cuero tipo bomber son de cintura y tienen un forro suave. Suelen ser la variedad de chaqueta de cuero más cálida. 
+Opciones:
+A) La capa de lana de la chaqueta cubre la mayoría de los agujeros, lo que te permite calentar la chaqueta en invierno y mantenerla fresca en verano. [substeps] Las chaquetas bomber de un solo botón también son el estilo más común en muchos climas fríos, así que siéntete libre de experimentar con tu estilo.
+B) Dicho esto, las chaquetas son aún mejores cuando no estás practicando deportes. Estas chaquetas de cuero son generalmente mejores para usar cuando estás jugando hockey o fútbol o definitivamente cuando estás haciendo ejercicio.
+C) Antes de salir, usa una chaqueta bomber para mayor calidez. Para los días más fríos del otoño, usa una chaqueta bomber para la compañía y el calor.
+D) Si estás usando una chaqueta de cuero para un look de invierno, elige una chaqueta bomber. [substeps] Las chaquetas bomber también son más casuales, por lo que pueden ser ideales para un look casual de invierno.",D,"La continuación más apropiada de entre las opciones dadas es:
+
+D) Si estás usando una chaqueta de cuero para un look de invierno, elige una chaqueta bomber. [substeps] Las chaquetas bomber también son más casuales, por lo que pueden ser ideales para un look casual de invierno.
+
+Esta opción es la más apropiada ya que se alinea con la descripción inicial al continuar hablando de las chaquetas bomber en el contexto de mantener la calidez y su idoneidad para el clima frío, además de mencionar su estilo casual, lo cual complementa la información ya dicha."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo convertirse en especialista en color de cabello [title] Determine los requisitos de su estado. [step] El tiempo que necesita estar en la escuela de cosmetología depende principalmente de cuántas horas requiere su estado individual en los EE. UU. Debe determinar cuántas horas de capacitación y práctica necesitará para calificar para un certificado de cosmetología. 
+Opciones:
+A) Una vez que tenga esta información, debería comenzar a buscar trabajo, posiblemente en un programa de búsqueda de trabajo. [substeps] Cada estado tiene un número creciente de empleos disponibles para aquellos que aspiran a convertirse en técnico de belleza.
+B) [substeps] Por ejemplo, Montana requiere 2000 horas, mientras que Nuevo México requiere 1600 horas. Si se muda a otro estado, deberá transferir su licencia.
+C) [substeps] Para comenzar el programa con la certificación Juice o la certificación Curls, debe completar al menos seis meses de práctica antes de graduarse. Necesitará al menos 40 horas de práctica y al menos 5 años de instrucción supervisada antes de ir al examen de certificación.
+D) [substeps] Los requisitos educativos en las escuelas de cosmetología varían ampliamente de un estado a otro. Algunas escuelas pueden requerir más de un título para obtener la certificación.",B,"La opción más apropiada para continuar con la descripción inicial es:
+
+B) [substeps] Por ejemplo, Montana requiere 2000 horas, mientras que Nuevo México requiere 1600 horas. Si se muda a otro estado, deberá transferir su licencia.
+
+Esta continuación proporciona detalles específicos sobre las horas de capacitación necesarias en diferentes estados, lo cual es relevante para el paso inicial de determinar los requisitos estatales."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: El hombre que no pesca se levanta brevemente. El hombre que no pesca mete su mano en el agua varias veces. el hombre que no pesca
+Opciones:
+A) mueve su mano desde el agua y da un choca esos cinco al hombre.
+B) se sale del anzuelo.
+C) ayuda a sacar un pez del agujero de pesca en hielo.
+D) agarra un pez y se sienta de nuevo.",C,Opción correcta: C) ayuda a sacar un pez del agujero de pesca en hielo.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo usar un aguacate para el cuidado de belleza [title] Haz una máscara básica con miel y aguacate. [step] Esta máscara es excelente para la piel seca, pero también puede darle a tu piel un brillo saludable. Simplemente machaca el aguacate hasta que quede suave y sin grumos, luego añade la miel. 
+Opciones:
+A) Machaca el aguacate como de costumbre para que forme una pasta que se pueda quitar después de 20 minutos o más. [substeps] La miel puede provocar ardor en la piel y dejar cicatrices.
+B) Masajea la máscara en tu rostro durante unos minutos. Déjala actuar durante 15 a 20 minutos, luego enjuágala con agua tibia y seca tu rostro con palmaditas.
+C) También puedes poner un poco de miel, pero será demasiado pesado para usar en la piel seca. [substeps] Machaca un aguacate en tu mano hasta que sientas la consistencia del ácido salicílico.
+D) Haz una máscara básica usando 1 cucharada de miel y 1 cucharadita de aceite de coco. [title] Encuentra dos plátanos y rállalos juntos.",B,"La opción más apropiada es:
+
+B) Masajea la máscara en tu rostro durante unos minutos. Déjala actuar durante 15 a 20 minutos, luego enjuágala con agua tibia y seca tu rostro con palmaditas.
+
+Esta opción sigue lógicamente las instrucciones iniciales y proporciona instrucciones claras y útiles para aplicar y retirar la máscara de aguacate y miel."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Una fogata arde brillantemente en la noche. El fuego crece lentamente en tamaño. La escena se vuelve más brillante y mejor iluminada. allí
+Opciones:
+A) hay árboles en el fondo.
+B) hay personas acostadas en la tierra, comenzó la misma fogata que me mostraron la otra noche.
+C) un hombre se arrodilla suavemente y sostiene una fogata parada.
+D) hay personas caminando en la noche.",A,"A) hay árboles en el fondo.
+
+Esta opción es la más apropiada porque ofrece una descripción complementaria del entorno, ayudando a visualizar mejor la escena alrededor de la fogata sin introducir elementos desconcertantes o incompatibles con la atmósfera previamente establecida."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo saber cuándo la leche materna extraída está en mal estado [title] No te asustes por los colores y texturas extraños. [step] Es común que el color y la textura de tu leche cambien. Gran parte de esto refleja las cambiantes necesidades dietéticas de tu bebé. 
+Opciones:
+A) Cuando se trata de nutrir a tu bebé, el color y la producción de la leche son importantes. Trata sutilmente de disimular estas diferencias con leche coloreada.
+B) Porque la leche materna contiene cafeína, puede causar cambios en el estado de ánimo, la salud mental o física. [substeps] Si observas que tu bebé está excitado o ansioso por la mañana o por la noche, puede estar en mal estado si sientes que está en mal estado.
+C) Elegir una variedad de colores también ayudará al crecimiento de tu bebé. En purés más grandes, el color y las texturas pueden cambiarse a una calidad diferente (como la lonchera de tu bebé).
+D) La apariencia no es una forma adecuada de juzgar la frescura de la leche. [substeps] Es común que el color de la leche cambie durante el almacenamiento o incluso durante una sola alimentación.",D,"La opción más apropiada es:
+
+D) La apariencia no es una forma adecuada de juzgar la frescura de la leche. [substeps] Es común que el color de la leche cambie durante el almacenamiento o incluso durante una sola alimentación."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Se ve a un hombre parado detrás de un mostrador hablando a la cámara y sosteniendo productos de limpieza. Él los pone en un lavabo y comienza a fregar alrededor de los lados. él
+Opciones:
+A) limpia el mostrador y muestra el lavabo terminado.
+B) rocía todas las superficies y se da vuelta para mostrar el lavabo recién limpiado.
+C) se mueve hacia un lado del lavabo y reemplaza lentamente el azulejo mientras habla a la cámara.
+D) pone pantalones y una camisa en el lavabo y los seca.",A,A) limpia el mostrador y muestra el lavabo terminado.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo encontrar trabajos de asistente administrativo [title] Busque en línea. [step] Hay muchos sitios web de carreras que anuncian trabajos de asistente administrativo en todas las áreas y en todas las industrias. [substeps] Eche un vistazo a los sitios principales, incluyendo careerbuilder.com y monster.com. 
+Opciones:
+A) Ingrese su ciudad y estado en los campos de búsqueda para reducir las ofertas de trabajo en su área. También hay sitios como indeed.com y simplemente contratado.com, que recopilan ofertas de trabajo de todos los sitios en línea y le brindan esas listas.
+B) La mayoría de estos sitios permiten a los solicitantes trabajar fácilmente en varios departamentos. Mire el motor de búsqueda para buscar trabajos.
+C) Muchos de estos sitios web buscan trabajos de asistente administrativo. [title] Pregunte a un agente de trabajo actual para obtener una recomendación.
+D) Si le gustan los sitios web y tiene una buena comprensión de las palabras clave utilizadas en la búsqueda de trabajo, a menudo puede mejorar sus posibilidades de encontrar el trabajo perfecto. También puede trabajar en la optimización general del motor de búsqueda y el análisis de palabras clave, ya sea buscando sitios de trabajo a través de búsquedas en Google o hablando con algunos guías en línea.",A,"La opción más apropiada para continuar con la descripción inicial es:
+
+A) Ingrese su ciudad y estado en los campos de búsqueda para reducir las ofertas de trabajo en su área. También hay sitios como indeed.com y simplemente contratado.com, que recopilan ofertas de trabajo de todos los sitios en línea y le brindan esas listas.
+
+Esta opción proporciona información adicional, relevante y específica sobre cómo utilizar los motores de búsqueda de empleo de manera efectiva y sugiere otras plataformas útiles para encontrar trabajos de asistente administrativo."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo obtener un tatuaje detrás de la oreja [title] Encuentre diferentes artistas del tatuaje. [step] El paso más importante para hacerse un tatuaje es encontrar al artista adecuado. Hacer su tarea puede llevarlo a un artista en quien confía y ofrece la estética que desea para su tatuaje. 
+Opciones:
+A) [substeps] Pida ayuda a un amigo o familiar para encontrar artistas que se especialicen en su obra de arte. Pregunte a su médico o terapeuta si ofrecen tatuajes gratuitos o a costo reducido.
+B) [substeps] Pida recomendaciones a un familiar cercano o amigo. Siempre puede preguntar a alguien en una tienda de tatuajes o en línea (o a través de un amigo de confianza!) Para obtener recomendaciones.
+C) Esto lo ayudará a obtener la licencia legal como artista y llevar el certificado de tatuaje en caso de que se le niegue la solicitud. [substeps] Haga una lista de artistas que tengan experiencia trabajando con usted en solicitudes de tatuajes.
+D) [substeps] Pregunte a familiares, amigos y conocidos por recomendaciones de artistas del tatuaje en su área local o más allá. Revise las revistas y cuentas de redes sociales de diferentes artistas del tatuaje para ver ejemplos de su trabajo.",D,"La opción más apropiada es:
+
+D) [substeps] Pregunte a familiares, amigos y conocidos por recomendaciones de artistas del tatuaje en su área local o más allá. Revise las revistas y cuentas de redes sociales de diferentes artistas del tatuaje para ver ejemplos de su trabajo.
+
+Esta opción proporciona una continuación detallada y coherente para la búsqueda de un buen artista del tatuaje, sugiriendo métodos específicos para obtener información y recomendaciones fiables, lo cual es crucial al tomar una decisión importante como esta."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Se muestra a un hombre hablando emocionado a la cámara y mostrando varias tomas del hombre escalando una pared de roca y varios lugares. entonces hombre
+Opciones:
+A) continúa explicando las diversas posiciones del tubo de escalada, así como disparándolo hacia arriba en el aire.
+B) se le muestra subiendo a un caballo de regreso a la habitación y cambiando a montar a caballo mientras realiza trucos.
+C) luego continúa hablando con la cámara y demuestra cómo escalar correctamente la pared mientras sigue hablando.
+D) se le muestra frente a una gran abertura verde y habla a la cámara.",C,C) luego continúa hablando con la cámara y demuestra cómo escalar correctamente la pared mientras sigue hablando.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo cultivar la amistad entre usted y su pareja [title] Manténganse actualizados sobre la vida del otro. [step] Es fácil dar por sentado a su pareja. Si ves a alguien todos los días, puedes olvidar mantenerlos informados sobre lo que está sucediendo contigo. 
+Opciones:
+A) Además, asegúrese de no descuidar el bienestar del otro. Por ejemplo, si eres una mujer soltera y tienes hijos, asegúrate de estar al tanto de su vida diaria.
+B) Si su pareja ve cada comunicación como una oportunidad para aprender cosas nuevas acerca de ti, no podrán ayudarte a largo plazo. [substeps] Haz lo posible por estar al día con las últimas noticias.
+C) Sin embargo, compartir pequeñas cosas sobre la vida cotidiana puede ayudar a fomentar sentimientos de amistad. [substeps] Mantenga a su pareja involucrada en su vida diaria.
+D) Hablar demasiado puede arruinar la amistad y podría terminar resentiendo a su pareja por hacer lo que le pides. [substeps] Revisa tus correos electrónicos y mensajes de correo electrónico fuera del horario laboral para actualizaciones o llamadas de su pareja.",C,"C) Sin embargo, compartir pequeñas cosas sobre la vida cotidiana puede ayudar a fomentar sentimientos de amistad. [substeps] Mantenga a su pareja involucrada en su vida diaria."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo organizar tu maquillaje y armario [title] Empezar por tu armario. [step] Revisa tu armario y selecciona cualquier cosa que no hayas usado en más de un año. Después de haber reunido todas las cosas que no quieres, elige algunas de las siguientes alternativas en lugar de tirarlas: [substeps] Organizar una fiesta de intercambio de ropa con tus amigas. 
+Opciones:
+A) Visita una tienda de segunda mano o de disfraces. Descubre lo que opinan sobre tu nuevo look.
+B) Ve de compras con un amigo y utiliza su armario para hacer una lista de lo que ya tiene. En unos días puedes imprimir fotos de él o ella usando diferentes camisas, leggings y/o ropa interior (por ejemplo).
+C) Dona tu ropa y zapatos viejos a una organización benéfica o a una tienda de segunda mano. Pregunta a un vecino o familiar si quiere tu ropa vieja.
+D) Ten un final de programa de televisión que te sorprenda y una lista de tus títulos favoritos. Pide a un padre de confianza que te dé algunas ideas sobre cómo organizar tu armario.",C,"La opción más apropiada es: 
+
+C) Dona tu ropa y zapatos viejos a una organización benéfica o a una tienda de segunda mano. Pregunta a un vecino o familiar si quiere tu ropa vieja.
+
+Esta opción sigue en la línea de ofrecer alternativas prácticas para deshacerse de la ropa que ya no utilizas, lo cual es adecuado en el contexto de organizar tu armario."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Un hombre está en una bicicleta estática yendo muy rápido como si estuviera practicando para una competición. hombre
+Opciones:
+A) está de pie en una cancha adidas haciendo trucos en el aire fuerte.
+B) está mirando a la cámara con gaviotas sobre la tabla encima de él e intentando mantener el ritmo.
+C) está parado en la bicicleta para ir más rápido y está mirando a la cámara.
+D) es una rueda hecha en Accra.",C,C) está parado en la bicicleta para ir más rápido y está mirando a la cámara.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Uno de los hombres sale de su tienda de campaña con un pez en la mano. Los dos hombres están sentados en su carpa improvisada, pescando a través de un agujero en el lago congelado. ellos
+Opciones:
+A) están sentados pacientemente con sus cañas de pescar hasta que saquen un pez de tamaño mediano de los agujeros.
+B) salen a pescar sobre el hielo, mirando hacia atrás mientras bajan la montaña.
+C) luego intentan atrapar una foca, pero está demasiado llena de peces para que finalmente puedan obtener una en sus bocas.
+D) pescan un agujero grande y rojo mientras usan cinta protectora sobre sus bocas.",A,A) están sentados pacientemente con sus cañas de pescar hasta que saquen un pez de tamaño mediano de los agujeros.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo llevar a cabo el tiempo del baño [title] Comienza ayudando a tu hijo/a a bajarse los pantalones, la ropa interior o los pañales de entrenamiento y a sentarse en el inodoro. [step] Asegúrate de que estén seguros y cómodos. Además, asegúrate de tener todos los 'cosas que necesitarás' cerca. 
+Opciones:
+A) Crea un lugar especial para que tu hijo/a orine. Asegúrate de que sea lo suficientemente grande para que ambos padres puedan hacerlo cómodamente y déjales saber dónde está.
+B) Asegúrate de que estén al alcance de tu hijo/a y tú. [title] Lee de 1 a 4 libros sobre el tema.
+C) Esto es especialmente importante si tu hijo/a está acostumbrado a los baños. [title] Siéntate fuera del baño mientras tu hijo/a libera su descarga vaginal.
+D) [title] Tu hijo/a debe saber coger el cepillo de dientes, las tijeras para uñas, el gel limpiador de baño, los suministros para el baño y el papel higiénico. [step] Además, asegúrate de que tu hijo/a sepa que no debe tocarte las manos.",B,"La opción más apropiada es:
+
+B) Asegúrate de que estén al alcance de tu hijo/a y tú. [title] Lee de 1 a 4 libros sobre el tema.
+
+Es la opción relevante y apropiada dentro del contexto de preparación para el baño, asegurando comodidad y seguridad tanto para el niño/a como para el cuidador."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo mantener el interés de los niños en el cuidado de su nuevo perro. [title] Comparte las responsabilidades "" divertidas "". [step] Dependiendo de la edad de tus hijos, debes alentarlos a ayudar con tareas que puedan considerar divertidas, como pasear o hacer ejercicio con el perro. Estas actividades enseñan responsabilidad a tus hijos al permitirles participar en los aspectos más positivos de ser dueños de mascotas. 
+Opciones:
+A) En lugar de eliminar las tareas domésticas de la ecuación, alienta a tus hijos a hacer cosas similares a las que sus hermanos mayores no tienen habilidades. [substeps] Pregúntales a tus hijos si les gustaría hacer otras tareas del hogar que disfruten.
+B) [substeps] Habla sobre los beneficios y oportunidades que la propiedad de un perro les brinda a tus hijos. Comprende que los beneficios son abstractos, como su interés en ser dueños.
+C) Si tus hijos solo realizan las tareas aburridas y no disfrutan de las cosas divertidas de tener un perro, dejarán de estar interesados en la mascota muy pronto. [substeps] Además de pasear o jugar con el perro, las actividades divertidas pueden incluir lavar al perro o cepillar su cabello.
+D) También necesitarás alentar a los hermanos o hijos mayores para que te ayuden con estas tareas. [substeps] Por ejemplo, si tienes hijos pequeños, considera pedirles que te ayuden con los quehaceres cuanto antes.",C,"La continuación más apropiada es:
+
+C) Si tus hijos solo realizan las tareas aburridas y no disfrutan de las cosas divertidas de tener un perro, dejarán de estar interesados en la mascota muy pronto. [substeps] Además de pasear o jugar con el perro, las actividades divertidas pueden incluir lavar al perro o cepillar su cabello.
+
+Esta opción se alinea perfectamente con la idea inicial de compartir las responsabilidades ""divertidas"" para mantener el interés de los niños."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo hacer un entrenamiento completo del cuerpo utilizando una silla [title] Nada hasta tener una mejor resistencia. [step] La natación es una gran actividad de bajo impacto. No solo es buena para aumentar tu resistencia cardiovascular, también puede hacerte más fuerte. 
+Opciones:
+A) [title] Relájate en un baño caliente. [step] Después de haber completado el entrenamiento, simplemente siéntate en un baño caliente para lavar tu sudor.
+B) [substeps] En una ducha, salpica vigorosamente tu cuerpo con agua fría hasta que te sientas fresco. Mantén la temperatura del agua alrededor de 80 ° f (27 ° c).
+C) No necesitas agua o un traje de baño para disfrutar de la natación. Puedes nadar por el aire con la ayuda de tu silla.
+D) [title] Cuando entres al agua, levanta las piernas. [step] Luego, tan pronto como el agua entre en contacto con tus pies, baja las piernas al agua.",C,"C) No necesitas agua o un traje de baño para disfrutar de la natación. Puedes nadar por el aire con la ayuda de tu silla.
+
+Esta opción es la más apropiada, ya que se adapta mejor al contexto inicial de utilizar una silla para realizar un entrenamiento completo del cuerpo."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: El hombre suelta el peso, bombea el puño y se va. El hombre regresa y levanta el peso sobre sus hombros y luego sobre su cabeza. el hombre
+Opciones:
+A) se baja y baja la cabeza.
+B) continúa levantando hasta que lo suelta.
+C) suelta el peso, lo levanta nuevamente y en lugar de soltar el peso, lo deja caer hacia el suelo.
+D) suelta el peso, se ríe y bombea el puño.",D,"D) suelta el peso, se ríe y bombea el puño."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo darle a tu bebé la cantidad adecuada de hierro [title] Educa sobre las necesidades de hierro de los bebés que son amamantados. [step] Mientras que la academia americana de pediatría (AAP) recomienda la lactancia materna cuando sea posible, también ha señalado que la leche materna sola puede no suministrar suficiente hierro a los bebés durante su primer año de vida. Considera que: [substeps] La leche materna contiene muy poco hierro. 
+Opciones:
+A) Es soluble en agua y no se elimina con la lactancia materna. No nutrirá adecuadamente a tu bebé con cantidades suficientes de este hierro en un momento dado.
+B) Los bebés que son amamantados tienen un mayor riesgo de desarrollar deficiencia de hierro después de los cuatro meses de edad que los bebés que reciben fórmula. Cuanto más tiempo continúes amamantando, es posible que tu bebé necesite más suplementos de hierro.
+C) Durante los primeros meses de vida del bebé, tu bebé no recibe suficiente hierro. Esto se debe a la capa gruesa y abultada de la leche materna.
+D) Esta es otra razón por la cual las madres amamantan a menudo y durante los meses de primavera y verano. La mayoría de los expertos están de acuerdo en que sin suficiente hierro, un bebé es más propenso a sufrir enfermedades cardiacas y nacimientos prematuros.",B,"B) Los bebés que son amamantados tienen un mayor riesgo de desarrollar deficiencia de hierro después de los cuatro meses de edad que los bebés que reciben fórmula. Cuanto más tiempo continúes amamantando, es posible que tu bebé necesite más suplementos de hierro."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo aceptar la derrota con gracia. [title] Toma conciencia de tus emociones. [step] Piensa en lo que acabas de experimentar e intenta entender cómo estás respondiendo actualmente. Si estás enojado, pregúntate por qué estás enojado. 
+Opciones:
+A) Quizás la otra persona que te molestó está sintiendo lo mismo. Si estás triste, pregúntate qué sucedió y por qué.
+B) Si estás molesto, intenta reflexionar sobre cómo reaccionarías. [substeps] Pensar en las emociones que experimentaste puede ayudarte a decidir cómo responder de manera tranquila y racional.
+C) Tu respuesta probablemente llevará algo de tiempo para procesar y llegar a una conclusión. [substeps] Respira profundamente y repite para ti mismo, ""soy poderoso y no tengo miedo de vencer a mi oponente"".
+D) Si estás decepcionado, pregúntate qué esperabas lograr. Antes de aceptar o controlar tus emociones, primero debes entenderlas.",D,"La opción más apropiada sería:
+
+D) Si estás decepcionado, pregúntate qué esperabas lograr. Antes de aceptar o controlar tus emociones, primero debes entenderlas.
+
+Esta opción sigue de manera coherente el consejo de tomar conciencia de las propias emociones y sugiere un camino lógico para comprender mejor la reacción emocional antes de avanzar hacia su gestión."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo planificar una sucesión con familias mixtas [title] Obtener ahorros fiscales. [step] Para una buena planificación patrimonial es necesario tener una meta específica en mente y prioridades ordenadas. Esto ayudará a desarrollar el mejor plan para su situación. 
+Opciones:
+A) [substeps] Considere invertir en acciones, bonos, fondos mutuos o cualquier otra cosa que pueda ayudarlo a usted y a su familia a mantenerse a flote. Antes de planificar, anote el número de acciones que está pidiendo neto.
+B) También le ayudará a asegurarse de cubrir gastos adecuados, los cuales pueden ser sustanciales. Tome nota de lo que su cónyuge tomó prestado de su sucesor fiduciario.
+C) La planificación patrimonial puede brindarle ciertos ahorros fiscales. Puede ahorrar dinero en su impuesto de sucesión, impuesto de regalo, ganancias de capital, salto de generación e impuesto a la herencia.
+D) [substeps] Si sus dos miembros de la familia continúan dirigiendo el negocio juntos, deberá poder mantener el negocio operando sobre las otras cinco cifras comerciales. Sin embargo, con un miembro de la familia que tiene una cierta cifra como ejecutor, una de esas cifras se convertirá en el único ejecutor.",C,"C) La planificación patrimonial puede brindarle ciertos ahorros fiscales. Puede ahorrar dinero en su impuesto de sucesión, impuesto de regalo, ganancias de capital, salto de generación e impuesto a la herencia."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo atraer a los chicos [title] Piensa en qué tipo de estilo te gustaría tener. [step] Tu estilo puede mostrar a las personas tus intereses y darles una vista previa de tu personalidad. Hay varios estilos diferentes para elegir, como preppy, deportivo, edgy, hipster y muchos más. 
+Opciones:
+A) Prepárate para ser audaz y destacar. [substeps] Si te gustan los vaqueros y el blanco, los tops gráficos y las camisas gráficas con apariencia asesina son solo algunas de las cosas a las que los chicos se sienten atraídos.
+B) Busca ropa que te guste en línea e intenta crear un estilo que se adapte a tu personalidad. [substeps] Si tu estilo no encaja en una categoría, está bien.
+C) [substeps] Por ejemplo, los pantalones y una camiseta con cuello de pico vienen en una variedad de estilos. Los jeans y camisas inspirados en el hipster suelen ser elegantes, hipster y deportivos.
+D) [substeps] Por ejemplo, si te gustan los chicos la mayor parte de tu vida, es posible que desees optar por un estilo de cuero o edge. O puedes preferir un estilo más casual, como shorts de spandex.",B,"B) Busca ropa que te guste en línea e intenta crear un estilo que se adapte a tu personalidad. [substeps] Si tu estilo no encaja en una categoría, está bien."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo seguir un régimen personalizado de cuidado de la piel [title] Seleccione una combinación de botánicos y aceites para complementar su régimen de cuidado de la piel. [step] Una mezcla de lavanda, manzanilla alemana, incienso, germen de trigo, semilla de uva, jojoba y aceites de oliva pueden crear un cuidado efectivo para su cara. Reducirá y prevenirá las arrugas. 
+Opciones:
+A) Recuerde que la belleza es creada por todos los seres humanos y que todos somos humanos. Si opta por un aceite botánico o de oliva, recuerde que lo nutrirá.
+B) Para una cobertura ligera a moderada, use: [substeps] Elija un tono donde pueda ver claramente toda su cara excepto su frente. Use una herramienta más fuerte cuando esté purificando su piel.
+C) Usted también puede usar estos aceites como aceites corporales o lociones. Lo mejor de estos productos para el cuidado de la piel es que puede personalizarlos para su uso exclusivo.
+D) El invierno y el frío pueden deshidratar y secar su piel, y puede imitar esto mezclando hierbas y especias. [substeps] Considere la creación de un exfoliante herbal con limón, menta y aceite de oliva, como el bálsamo de limón.",C,"La opción más apropiada para la continuación de la descripción es:
+
+C) Usted también puede usar estos aceites como aceites corporales o lociones. Lo mejor de estos productos para el cuidado de la piel es que puede personalizarlos para su uso exclusivo.
+
+Esta opción es la más adecuada ya que sigue hablando de cómo pueden utilizarse los aceites y botánicos mencionados en el paso anterior, manteniendo el enfoque en su aplicación para el cuidado de la piel y la personalización del régimen."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Dos hombres están sentados en sillas frente a motos de nieve. allí
+Opciones:
+A) hay un agujero en el hielo frente a ellos.
+B) hay varias botellas y tubos utilizados para hacer balsas.
+C) un hombre está sosteniendo el costado del auto con un par de tenazas.
+D) hay muchas personas en formas de cubo observando a los hombres.",A,"La continuación más apropiada es:
+
+A) hay un agujero en el hielo frente a ellos.
+
+Esta opción tiene sentido con el contexto de los hombres sentados en sillas frente a motos de nieve, sugiriendo que se encuentran en un entorno de hielo o nieve, posiblemente pescando en el hielo o realizando alguna actividad similar. Las otras opciones no parecen coincidir con el escenario descrito inicialmente."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Una persona está sacando la nieve de la acera con una pala. Un perro está saltando en la nieve que está tirando. palabras
+Opciones:
+A) aparecen en la pantalla que dicen 'donar alrededor de la esquina.'
+B) están frente a ellos en una pantalla.
+C) aparecen en la pantalla para explicar acrobacias en el snowboarding.
+D) aparecen en la pantalla.",D,"Considerando la descripción inicial, ninguna de las opciones parece seguir lógicamente a la situación descrita. Sin embargo, si debemos elegir la opción más apropiada basada en la coherencia general y sin que haya un salto ilógico en la narrativa, es:
+
+D) aparecen en la pantalla. 
+
+Aunque esta opción no específica qué palabras ni por qué aparecen en la pantalla, es la más neutra y menos discordante con la escena descrita."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo cortar una rama de un árbol [title] Espere hasta que su árbol esté inactivo en el invierno para hacer sus cortes. [step] Poda su árbol cuando está inactivo le da tiempo para sanar antes de que lleguen las plagas que amenazan. Si tiene inviernos particularmente fríos, espere hasta que la parte más fría del invierno haya pasado antes de podar su árbol. 
+Opciones:
+A) Sin embargo, cortar su árbol antes de que se establezca el último ligero helada puede preparar el escenario para plagas inesperadas. [substeps] Si bien puede ser tentador podar su árbol hasta que se congele, trate de no obsesionarse con la idea de esperar hasta el momento adecuado.
+B) [substeps] No corte demasiado pronto después de que las temperaturas bajen por debajo de los tres meses. Deje que sane en unas dos semanas.
+C) [title] Corte las ramas de vuelta a su longitud normal. [step] Dependiendo del tipo de árbol, cuando está inactivo puede que no tenga ningún uso para usted.
+D) [substeps] La poda en invierno también ayudará a su árbol a crecer más durante la primavera. Evite podar su árbol durante la temporada de crecimiento o podría frenar su crecimiento.",D,"Opción D) [substeps] La poda en invierno también ayudará a su árbol a crecer más durante la primavera. Evite podar su árbol durante la temporada de crecimiento o podría frenar su crecimiento.
+
+Esta opción continua con la lógica y el consejo que se estaba dando sobre el mejor momento para podar el árbol. Proporciona beneficios de la poda en invierno y advierte sobre los riesgos de podar durante el crecimiento activo, complementando así la información inicial de manera coherente y útil."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo dibujar un diseño de moda genial [title] Piensa en un estilo para tu moda. [step] Los bocetos son importantes para el diseño de moda porque quieres plasmar tu idea en papel antes de empezar a hacer lo real. Así que comienza a hacer un boceto de tu idea. 
+Opciones:
+A) Si te encuentras ""rumiando"" y no has pensado en las palabras exactas para hacer que tus diseños sean únicos y originales, al menos puedes usar bocetos en línea como guía. [title] Elige un color que te guste y el aspecto que quieras.
+B) No tiene que ser perfecto; es un borrador. ¡No olvides añadir color! [title] Obtén una idea clara de lo que quieres dibujar en tu cabeza.
+C) Hazlo en las primeras horas de un nuevo proyecto. Vuelve atrás y piensa en el boceto a lápiz que compraste en la tienda.
+D) Quizá una idea básica para un atuendo, quizá una idea corta, quizá una idea más avanzada para un estilo tradicional. ¡Disfrutarás de las ideas! [substeps] Garabatea las paredes del dibujo con un lápiz o doblando el papel hacia atrás en un lado y volviendo a doblar; el tamaño y la posición adecuados vendrán cuando estés dibujando las paredes del diseño.",B,B) No tiene que ser perfecto; es un borrador. ¡No olvides añadir color! [title] Obtén una idea clara de lo que quieres dibujar en tu cabeza.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Se está llevando a cabo una clase de bicicleta estática en una habitación oscura. El instructor señala a la clase. ella
+Opciones:
+A) luego explica la mecánica detrás del uso de la red.
+B) se agacha en el suelo y comienza a mover la mano antes de que la clase la recoja y la coloque en la cadera izquierda.
+C) señala a varias personas con partes de sus vidas sujetas a un arnés.
+D) se recuesta hacia atrás y habla con la clase.",D,"D) se recuesta hacia atrás y habla con la clase.
+
+Esta opción parece más coherente con el contexto de una clase de bicicleta estática en una habitación oscura. El instructor podría estar utilizando el momento para motivar a los participantes, dar instrucciones o proporcionar alguna guía verbal mientras se recuesta hacia atrás."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo crear tu propio icono de favicon [title] Crea un favicon que represente tu sitio web. [step] El tipo de sitio web que tengas debería determinar la apariencia de tu favicon. Trata de diseñar algo que se adhiera a la imagen de tu marca y que sea reconocible y memorable para la gente. 
+Opciones:
+A) Si no tienes idea por dónde empezar, entonces habilidades de escritura básicas como ""obtener un blog personal de javascript"" funcionarán. *..-* * * *...
+B) Existen dos tipos de favicons: [substeps] Uno que escribas algo que represente un hecho de contenido, tal como que eres un escritor o creador, debería verse como uno de tus contenidos relevantes. Debería tener una etiqueta con algo que conozcan tus trabajos.
+C) Antes de comenzar a trabajar en esta campaña, anota detalles detallados relacionados a tu favicon. Esto ayudará que tu contenido musical y tu sitio web se sientan especiales y destacados.
+D) Tu favicon será lo primero que la gente vea cuando miren las pestañas de su navegador y también aparecerá en los marcadores de las personas. [substeps] Por ejemplo, si tienes un sitio web de comida, elegir un favicon que tenga una fruta o verdura como diseño podría hacerlo más memorable.",D,"La opción más apropiada es:
+
+D) Tu favicon será lo primero que la gente vea cuando miren las pestañas de su navegador y también aparecerá en los marcadores de las personas. [substeps] Por ejemplo, si tienes un sitio web de comida, elegir un favicon que tenga una fruta o verdura como diseño podría hacerlo más memorable.
+
+Esta opción continúa de manera coherente con la recomendación de diseñar un favicon que sea reconocible y memorable, además de proporcionar un ejemplo práctico relacionado con la temática del sitio web."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Dos hombres juegan al futbolín en una arena mientras dos árbitros están de pie cerca, observando el juego. Vemos las gradas y espectadores. un punto
+Opciones:
+A) se anota y los miembros del equipo corren hacia el hombre en la pantalla.
+B) se anota para el jugador que no logró bloquear el tiro en los hombros.
+C) se anota y vemos a la gente aplaudiendo, una repetición y una pantalla de título.
+D) se anota por birys.",C,"C) se anota y vemos a la gente aplaudiendo, una repetición y una pantalla de título."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo tener éxito en el aprendizaje a distancia [title] Familiarízate con el programa. [step] Piensa en tu programa como el plano de tu clase. Debe contener todas las pautas y reglas de la clase, así como lo que tu instructor espera de ti durante el semestre. 
+Opciones:
+A) Si tienes problemas para entender todas las instrucciones del programa, pregunta a tu instructor para obtener consejos. [substeps] Para convertirte en un atleta exitoso, debes tener un fuerte entendimiento del juego y del campo, y luego, con ese conocimiento, sacar lo mejor de ti en una sola salidad.
+B) Inclúyelos con tus apuntes, trabajos, tareas y solicitudes para que estés actualizado y puedas experimentar completamente tu aula. [substeps] Haga una rápida revisión del programa de tu instructor.
+C) Lleva esta información al programa, indicando todos los requisitos diarios necesarios, así como cualquier examen que tengas programado o fechas límite que debas cumplir para tu sesión. De esta manera, puedes ajustar fácilmente cualquier tarea que puedas terminar antes de que comience la próxima sesión.
+D) Asegúrate de leer todo este documento en su totalidad y llevar un registro de ello durante todo el semestre. [substeps] Pregunta a tu instructor cualquier pregunta que puedas tener sobre el programa.",D,D) Asegúrate de leer todo este documento en su totalidad y llevar un registro de ello durante todo el semestre. [substeps] Pregunta a tu instructor cualquier pregunta que puedas tener sobre el programa.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo ayudar a los niños adoptados a conectarse con su cultura nativa [title] Educa a ti mismo sobre la cultura nativa de tu hijo. [step] Cuanta más información tengas sobre la cultura nativa de tu hijo, mejor preparado estarás para responder sus preguntas y compartir información perspicaz. Los recursos de información disponibles en línea y en tu biblioteca local son invaluables para ayudarte a ti y a tu hijo adoptado a conectarse con su cultura nativa. 
+Opciones:
+A) Algunos recursos que puedes considerar son: [substeps] Wikipedia. Este sitio web proporciona más información sobre la cultura específica de tu hijo adoptado que sobre la tuya.
+B) Estos recursos incluyen libros (incluyendo libros fotográficos), documentales, sitios web y videos en línea. [substeps] Visita tu biblioteca local y habla con el bibliotecario sobre cómo pedir prestado algunos recursos sobre la cultura nativa de tu hijo.
+C) [substeps] Consulta el artículo de wikihow sobre cómo adoptar a un niño para obtener ideas y estudios que puedan ayudar a tu hijo a conectarse con su cultura nativa. [title] Elije un entorno escolar para que tu hijo establezca redes de contacto.
+D) Manten una lista de recursos que estés seguro de que tu hijo conoce bien. Estas son buenas opciones porque los niños adoptados pueden mirarte a ti y buscar recursos que hayas pasado por alto.",B,"La opción más apropiada para continuar con la descripción inicial es:
+
+B) Estos recursos incluyen libros (incluyendo libros fotográficos), documentales, sitios web y videos en línea. [substeps] Visita tu biblioteca local y habla con el bibliotecario sobre cómo pedir prestado algunos recursos sobre la cultura nativa de tu hijo.
+
+Esta opción proporciona un camino claro y útil para buscar información y recursos que pueden ayudar tanto a los padres adoptivos como al niño adoptado a conectarse con su cultura nativa, alineándose con el tema inicial de la descripción."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo hacer humectante de sábila [title] Agrega aceite de almendra, aceite de jojoba y cera de abejas a un baño maría. [step] Para empezar, derrite tus aceites juntos. Agrega tu aceite de almendra, aceite de jojoba y cera de abejas a la parte superior de tu baño maría. 
+Opciones:
+A) [substeps] Un baño maría tiene dos recipientes: uno más grande y profundo, y otro más pequeño y superficial. Debes agregar tus aceites al recipiente más pequeño y añadir unas cuantas pulgadas de agua al recipiente mayor.
+B) Usa una cuchara de madera para mezclar los ingredientes. [substeps] El calor activará tus aceites en la mezcla derretida.
+C) Usa una cuchara pequeña para revolver o calentar tus aceites juntos. [substeps] Si no tienes un baño maría, calienta ambos ingredientes para empezar.
+D) Usa un baño maría para derretir tus aceites y otro para derretir tu leche. Revuelve o agita tus aceites constantemente entre calentamiento en el baño maría mientras continúan calentándose juntos.",A,"A) [substeps] Un baño maría tiene dos recipientes: uno más grande y profundo, y otro más pequeño y superficial. Debes agregar tus aceites al recipiente más pequeño y añadir unas cuantas pulgadas de agua al recipiente mayor.
+
+Esta opción es la más apropiada ya que explica detalladamente cómo preparar el baño maría, lo cual es esencial para quienes pueden no estar familiarizados con el equipo o el proceso. Además, proporciona instrucciones claras sobre la cantidad de agua que se debe añadir, lo cual es crucial para el correcto derretimiento de los aceites."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo instalar dos [title] Compre los discos de instalación de dos (vienen en un conjunto de 3 discos flexibles). [step] Su ordenador abandonará el proceso de arranque habitual y en su lugar verá una pantalla azul con el menú de configuración de Microsoft Dos. [title] Inserte el primer disco de instalación en la unidad de disco flexible y reinicie su ordenador. 
+Opciones:
+A) [title] Presione la tecla para arrancar desde la unidad de disco flexible. [title] Presione la tecla enter en el teclado para continuar con el proceso de configuración.
+B) [title] Espere a que el ordenador se inicie. [title] Si su sistema está en modo de energía no levante la barra de ejecución y vaya a inicio.
+C) [title] Inicie el asistente de instalación y presione ""enter"". [title] Busque el archivo ""dispositivo de memoria usb predeterminado (x86)"".
+D) [title] Después de la instalación, debería ver lo que el código está diseñado para entender. [step] Primero debe agregar dos firmas de compatibilidad.",A,"A) [title] Presione la tecla para arrancar desde la unidad de disco flexible. [title] Presione la tecla enter en el teclado para continuar con el proceso de configuración.
+
+Esta opción es coherente y sigue instrucciones lógicas paso a paso para la instalación del sistema DOS."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: El hombre con camisa marrón está parado al lado de un montón de pelotas de tenis mientras habla a la cámara. Jugó con otra persona al tenis. el hombre con camisa morada
+Opciones:
+A) cayó al suelo, el hombre puso la pelota abajo, jaló la pelota y la puso en el suelo, la pelota cayó pero permaneció de pie.
+B) vestido con una camisa negra finalmente se acercó y se unió a los hombres hablando sobre la raqueta de tenis.
+C) está jugando al racket ball mientras habla a la cámara.
+D) sirve la pelota mientras que el hombre negro le devuelve la pelota.",D,"La continuación más apropiada es la opción B:
+
+B) vestido con una camisa negra finalmente se acercó y se unió a los hombres hablando sobre la raqueta de tenis.
+
+Esta opción es la que mejor da continuidad a la situación descrita inicialmente, uniendo a los dos personajes (el hombre con camisa marrón y el hombre con camisa morada) en una acción congruente con el contexto dado, el tenis."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Continúa mientras la cámara gira y muestra el resto de la habitación en la que se encuentra. después de él
+Opciones:
+A) termina, le entrega el violín a alguien fuera de cámara y el video termina.
+B) termina, patea las pesas hacia una silla y vuelve directamente hacia la mesa.
+C) termina, van a alrededor de 20 lugares diferentes donde intentan construir un castillo de arena juntos.
+D) saca algo de su zapato y botas, el video se detiene y continúa con su compra del video.",A,"A) termina, le entrega el violín a alguien fuera de cámara y el video termina.
+
+Esta opción parece la más apropiada ya que conecta con la idea de una acción continuada y concluye de manera que tiene sentido en el contexto de una cámara girando y mostrando una habitación."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo reparar un rasguño en zapatos de cuero falso [title] Limpia el área con un paño suave y agua tibia. [step] Después, aplica un poco de vinagre blanco destilado. Trata una pequeña zona del área a tratar con vinagre. 
+Opciones:
+A) [title] Agrega agua, sal, bicarbonato de sodio y un poco de jabón para vajilla a la mezcla. Deja reposar de 1 a 3 minutos, luego aplica un poco más de jabón para vajilla. [step] Esto evitará que la mancha se lave.
+B) Repite el proceso con jugo de limón fresco si ayuda a reducir la apariencia. Puedes omitir este paso si no te importa prestar atención adicional al área manchada del cuero.
+C) [substeps] Toma un poco de vinagre blanco destilado en una toalla de papel y aplícalo a un área alrededor del rasguño. El vinagre puede hacer que el área se hinche ligeramente.
+D) Repite esto varias veces y luego envuelve en una toalla para mantenerlo caliente. [substeps] El vinagre suavizará el cuero durante este paso.",C,"La opción más apropiada para continuar con la descripción inicial es:
+
+C) [substeps] Toma un poco de vinagre blanco destilado en una toalla de papel y aplícalo a un área alrededor del rasguño. El vinagre puede hacer que el área se hinche ligeramente.
+
+Esta opción sigue coherentemente los pasos iniciales descritos para la reparación de un rasguño en zapatos de cuero falso, detallando cómo aplicar el vinagre y el posible efecto que puede tener."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo saber si estás listo para comprometerte [title] Asegúrate de estar enamorado. [step] Si estás considerando comprometerte, probablemente amas a tu pareja. Pero, ¿estás enamorado de ella? Existe una diferencia y es importante. 
+Opciones:
+A) Asegúrate de conocer tus sentimientos y los de tu pareja y busca una manera de comunicarlos. [substeps] Puede ser romántico enamorarse perdidamente de alguien.
+B) [substeps] Como han estado saliendo por mucho tiempo, deberías haber pensado profundamente en lo que quieres de tu pareja. No tomes decisiones románticas apresuradas, podría terminar con una ruptura y aparecerán tus dudas.
+C) [substeps] Existen varias diferencias entre estar enamorado y amar a alguien. Cuando estás enamorado, probablemente querrás ser íntimo físicamente con tu pareja.
+D) Si realmente se aman, se aman mutuamente. [title] Recuerda que no necesitas alcohol para comprometerte.",C,"C) [substeps] Existen varias diferencias entre estar enamorado y amar a alguien. Cuando estás enamorado, probablemente querrás ser íntimo físicamente con tu pareja."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo hacer que una característica facial parezca más pequeña o más grande usando maquillaje [title] Comience seleccionando dos correctores: uno que sea un tono más claro que el tono de su piel y otro que sea un tono más oscuro. [title] Elija un rubor que crea que sea adecuado para su tono de piel. [step] Aplique el tono más oscuro justo debajo de sus pómulos (cuando chupe donde se forma el pliegue). 
+Opciones:
+A) A continuación, aplique un rubor que coincida con el tono de su piel. Aplique una capa entre los dos rubores.
+B) Mezcle el rubor hasta que tenga el color que desea. [substeps] Si tiene la piel delgada, es posible que desee aplicar un tono debajo del hueso de la ceja.
+C) Luego, aplique el tono más oscuro justo debajo de sus pómulos. A continuación, aplique el tono más claro que sea un tono más oscuro que el corrector.
+D) Aplique el tono más claro en la mitad superior de su pómulo para actuar como un resaltador. [title] Mezcle todo junto usando una base o un cepillo para pulir.",D,"Opción D) Aplique el tono más claro en la mitad superior de su pómulo para actuar como un resaltador. [title] Mezcle todo junto usando una base o un cepillo para pulir.
+
+Esta opción sigue adecuadamente los pasos descritos en la instrucción inicial para usar el corrector más claro como un resaltador y luego sugiere mezclar todo de manera uniforme."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Hay granos de arroz, harina y otras partículas de comida esparcidas en el suelo. El demostrador enciende la aspiradora y comienza a aspirar el suelo con la aspiradora Dyson amarilla. la persona
+Opciones:
+A) usa movimientos de ida y vuelta para limpiar las partículas hasta que todas sean succionadas por la aspiradora, dejando el suelo limpio.
+B) vierte los granos de arroz fuera en un bote amarillo de basura.
+C) aspira la parte inferior de la aspiradora.
+D) sumerge la toalla debajo de la alfombra para limpiar el suelo con la botella de spray.",A,"Opción A: usa movimientos de ida y vuelta para limpiar las partículas hasta que todas sean succionadas por la aspiradora, dejando el suelo limpio."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo aliviar el estrés con aceites esenciales [title] Utilice solo aceites esenciales de alta calidad. [step] Los aceites esenciales 100% orgánicos siempre son la mejor opción al comprar aceites esenciales. Además de los beneficios ambientales de comprar productos orgánicos, esto también asegurará que esté obteniendo un aceite que proviene exclusivamente de una planta, sin ingredientes artificiales agregados. 
+Opciones:
+A) [substeps] Los hogares y tiendas de jardín producen buenos aceites orgánicos. La ubicación, el rendimiento y la calidad de los aceites esenciales son de gran importancia para usted o donde vive.
+B) [substeps] Los aceites ornamentales (no orgánicos) son casi siempre la mejor opción. Contienen un efecto hidratante natural y normalmente harán que sus botellas sean de cualquier tono de verde, sin tener que ser lavados.
+C) [substeps] Notará una diferencia de precio entre los aceites 100% orgánicos y aquellos que contienen productos químicos sintéticos. Si bien las opciones orgánicas serán más caras, las opciones más baratas son potencialmente peligrosas para inhalar.
+D) Si no está satisfecho con su producto, no lo compre. Puede parecer una buena idea comprar aceites esenciales frescos, pero si está aburrido, estos generalmente no son ideales para su salud.",C,"La opción más apropiada para continuar con la descripción dada es:
+
+C) [substeps] Notará una diferencia de precio entre los aceites 100% orgánicos y aquellos que contienen productos químicos sintéticos. Si bien las opciones orgánicas serán más caras, las opciones más baratas son potencialmente peligrosas para inhalar.
+
+Esta opción es coherente con el tema de utilizar aceites esenciales de alta calidad y destaca la importancia de elegir productos orgánicos y puros, además de proporcionar información relevante sobre el precio y los posibles riesgos de los aceites no orgánicos."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Se ve a un niño pequeño parado frente a una esterilla mirando hacia abajo. Luego comienza a caminar por la esterilla hasta el final. ella
+Opciones:
+A) continúa haciendo pequeños estiramientos en la esterilla y termina volteándose.
+B) camina hacia atrás y hacia adelante mientras mira hacia la cámara.
+C) baja y un hombre la ayuda mientras continúa moviéndose por la esterilla.
+D) luego se levanta y mira hacia abajo de nuevo.",B,"La opción más apropiada es:
+
+A) continúa haciendo pequeños estiramientos en la esterilla y termina volteándose.
+
+Esta opción sugiere una acción continua y coherente con la situación inicial."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Dos personas juegan un partido de ping pong en una habitación. la persona
+Opciones:
+A) en frente golpea la pelota dentro del bolsillo.
+B) golpea la pelota fuerte hacia el ganador.
+C) echa al otro hombre.
+D) anota varios puntos seguidos en el juego.",D,D) anota varios puntos seguidos en el juego.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo mantenerse despierto con xanax [title] Salga al exterior para regular su ritmo circadiano. [step] Un poco de aire fresco puede ayudarlo a mantenerse despierto y alerta. Si suele pasar gran parte del día adentro, tómese algunas pausas y salga afuera. 
+Opciones:
+A) [substeps] Si suele sentir frío afuera, intente hacer una salida nocturna o repentino boicot para relajarse. Esto funcionará especialmente bien en personas con ritmos circadianos agudos.
+B) Desafortunadamente, la luz solar y el aire fresco ralentizarán su ritmo circadiano y harán que se resienta. [substeps] Si tiene condiciones físicas que dificultan la regulación de su ritmo circadiano, considere reducir el tiempo que pasa afuera.
+C) Obtenga aire fresco tanto como pueda para darle a su ritmo circadiano la oportunidad de ayudarlo. [substeps] Ponga música o auriculares en sus oídos para relajarse y permitir que se mantenga despierto hasta más tarde.
+D) Obtener algo de luz solar (especialmente por la mañana) puede ayudar a regular sus ciclos de sueño y vigilia para que esté completamente despierto durante el día y pueda dormir bien por la noche. [substeps] Dé un paseo durante su hora de almuerzo o pida reunirse con personas afuera.",D,Opción D) Obtener algo de luz solar (especialmente por la mañana) puede ayudar a regular sus ciclos de sueño y vigilia para que esté completamente despierto durante el día y pueda dormir bien por la noche. [substeps] Dé un paseo durante su hora de almuerzo o pida reunirse con personas afuera.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo ocultar las bolsas debajo de tus ojos [title] Elige tu corrector. [step] Para combatir el color azul y gris debajo de tus ojos, elige un corrector de color naranja o melocotón. El naranja es el color complementario al azul, lo que significa que cuando se aplica naranja en una zona azul, los colores se "" cancelan "" uno a otro. 
+Opciones:
+A) Aplica el corrector en forma de V a lo largo de la línea del pelo, alrededor de tus ojos y alrededor de los bordes exteriores de los ojos. [title] No te olvides de exfoliar.
+B) Elige un color que sea solo uno o dos tonos más oscuro que tu piel, de lo contrario, el corrector será visible en comparación con el color normal de tu piel. Los correctores vienen en forma líquida y en barra.
+C) Un corrector azul pálido se parecerá al tono melocotón, pero se verá más brillante. El corrector de melocotón es un color más oscuro que el corrector naranja y se desvanece en el recubrimiento gris o beige, respectivamente.
+D) Para disimular la zona problemática morado y azul, opta por un corrector de color claro. [substeps] Para obtener los mejores resultados, elige un corrector del mismo color que tu tono de piel.",B,"Opción B) Elige un color que sea solo uno o dos tonos más oscuro que tu piel, de lo contrario, el corrector será visible en comparación con el color normal de tu piel. Los correctores vienen en forma líquida y en barra.
+
+Esta opción es la continuación más apropiada ya que sigue con el tema de cómo elegir el corrector adecuado para las bolsas debajo de los ojos, proporcionando consejos prácticos sobre la tonalidad y la forma del corrector, lo cual es coherente con la instrucción inicial."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo cuidar tus plantas [title] Elija la ubicación correcta. [step] Aunque pueda tener en mente la mesa auxiliar o el mostrador perfecto para su planta de interior, puede ser necesario reorganizar las cosas un poco según las necesidades individuales de cada planta. Encuentre una ubicación con buena luz, lejos de las salidas de calor, aires acondicionados, radiadores y televisores. 
+Opciones:
+A) No coloque la planta entre cortinas y ventana, ya que esto hace que sea difícil la regulación de la temperatura. [substeps] Las ventanas orientadas al sur proporcionan la mayor cantidad de luz en el hemisferio norte, mientras que las ventanas orientadas al norte proporcionan la mayor cantidad de sombra.
+B) Las plantas pueden ser agresivas, necesitan el aire libre o la luz solar. [title] Evite colocar las plantas lejos de las fuentes de calor o en lugares donde hay fuertes corrientes de aire circulando.
+C) Idealmente, coloque su planta de interior en algún lugar con un mínimo de luz solar indirecta. [substeps] Puede ser beneficioso delinear una parte de su casa con un barandal de porche compacto, así habrá menos oportunidad de que se acumule algas en el porche.
+D) [substeps] Encuentre un lugar en su jardín que reciba suficiente luz solar. El macetero debe estar cómodamente en su sala de estar y un alféizar de ventana es fácilmente accesible en una habitación de repuesto.",A,"A) No coloque la planta entre cortinas y ventana, ya que esto hace que sea difícil la regulación de la temperatura. [substeps] Las ventanas orientadas al sur proporcionan la mayor cantidad de luz en el hemisferio norte, mientras que las ventanas orientadas al norte proporcionan la mayor cantidad de sombra."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo compartir tu ubicación en Uber [title] Toca la aplicación de Uber. [title] Toca el botón ""¿A dónde?"". [title] Ingresa la dirección a la que quieres ir. 
+Opciones:
+A) [step] Si recién estás comenzando y quieres usar Uber para aprender más sobre las direcciones en internet, toca el campo de dirección en la esquina superior derecha de la pantalla e ingresa el lugar al que quieres ir. Toca nuevamente el campo ""intercambiar ubicación"".
+B) [title] Toca la opción ""Llegar a mi ubicación"". [step] Esto te proporcionará una ruta directa y accesible a tu ubicación.
+C) [title] Toca el botón ""ubicación actual"" para cambiar tu punto de recogida. [step] Por defecto, serás recogido en tu ubicación actual.
+D) [title] Toca la ""x"" para enviar la señal GPS a tu ubicación. [step] Esto apagará el GPS.",C,"C) [title] Toca el botón ""ubicación actual"" para cambiar tu punto de recogida. [step] Por defecto, serás recogido en tu ubicación actual."
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: Un hombre usa un cepillo en papel tapiz empacado en el piso. el hombre
+Opciones:
+A) levanta el papel tapiz y se lo pasa a otro hombre que está parado en una silla.
+B) termina despegando el papel tapiz de la pared.
+C) alisa el papel tapiz con una lijadora portátil.
+D) continúa encerando el papel tapiz con una brocha y una afeitadora de forma intermitente.",A,A) levanta el papel tapiz y se lo pasa a otro hombre que está parado en una silla.
+"Instrucción: Lee la descripción inicial y elige la continuación más apropiada de entre las opciones dadas.
+Descripción: [header] Cómo comprar electrodomésticos en Craigslist [title] Planifica tus compras con la mayor antelación posible. [step] Uno de los inconvenientes de comprar electrodomésticos en Craigslist es que no podrás especificar la marca y el modelo exactos que deseas. Al planificar tus compras con anticipación, tendrás mucho tiempo para navegar por las listas de Craigslist diariamente. 
+Opciones:
+A) [title] Ingresa el número de electrodomésticos que deseas comprar y luego presiona ""compra"" en tu teclado. [step] Busca en varios motores de búsqueda de Internet, como Google y Bing, para conocer los precios de compra.
+B) Toma suficiente tiempo para mirar todos los productos listados, lo que hace que sea fácil separar producto por producto si decides comprar alguno de ellos. [substeps] Busca empresas que publiquen específicamente en Craigslist.
+C) [substeps] Muchos sitios web de consumo también ofrecen catálogos en línea y promociones similares a las que se anuncian en Craigslist. Es posible que puedas programar tus compras en un momento acordado, pero no en una fecha fija.
+D) Esto te permitirá esperar hasta que se publique un electrodoméstico que se ajuste mejor a tus necesidades. [substeps] Craigslist incluso te permite suscribirte a un feed RSS para tus resultados de búsqueda.",D,D) Esto te permitirá esperar hasta que se publique un electrodoméstico que se ajuste mejor a tus necesidades. [substeps] Craigslist incluso te permite suscribirte a un feed RSS para tus resultados de búsqueda.

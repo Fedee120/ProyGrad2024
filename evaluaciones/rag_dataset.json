@@ -1,0 +1,82 @@
+[
+    {
+        "pregunta": "¿Qué es la inteligencia artificial (IA) según el documento?",
+        "respuesta": "La inteligencia artificial se define como una tecnología capaz de realizar tareas y actividades que comúnmente se consideran propias de la cognición y el razonamiento humano."
+    },
+    {
+        "pregunta": "¿Cuál es el subconjunto más conocido de la IA?",
+        "respuesta": "El subconjunto más conocido de la IA es el aprendizaje automático, que permite a las computadoras aprender de datos, ejemplos y experiencias en lugar de seguir reglas preprogramadas."
+    },
+    {
+        "pregunta": "¿Cuál es el objetivo principal de la IA en la educación según el documento?",
+        "respuesta": "El objetivo principal de la IA en la educación es proporcionar soporte más efectivo a los estudiantes a través de caminos de aprendizaje personalizados adaptados a sus necesidades específicas."
+    },
+    {
+        "pregunta": "¿Qué son los agentes pedagógicos conversacionales?",
+        "respuesta": "Los agentes pedagógicos conversacionales son chatbots que interactúan con los estudiantes para proporcionar respuestas personalizadas y retroalimentación durante el proceso de aprendizaje."
+    },
+    {
+        "pregunta": "¿Qué características deben tener los agentes pedagógicos conversacionales para ser efectivos?",
+        "respuesta": "Deben tener apropiabilidad, evocatividad e integración, permitiendo a los usuarios obtener respuestas personalizadas, estimular la reflexión personal y promover una comprensión más profunda de los conceptos."
+    },
+    {
+        "pregunta": "¿Cuáles son las tres modalidades principales de la IA en el contexto educativo?",
+        "respuesta": "La IA puede ser un agente educativo que dirige los procesos de aprendizaje, un apoyo en el aprendizaje colaborativo con interacción humano-máquina igualitaria, o una extensión de las habilidades intelectuales del estudiante."
+    },
+    {
+        "pregunta": "¿Qué efecto tiene la personalización de los chatbots en la experiencia de aprendizaje de los estudiantes?",
+        "respuesta": "Los chatbots personalizados mejoran la experiencia de aprendizaje de los estudiantes mediante la personalización del contenido, lo que puede llevar a una mejor retención de información y mayor satisfacción."
+    },
+    {
+        "pregunta": "¿Qué desafíos presenta la implementación de la IA en contextos educativos reales?",
+        "respuesta": "Los desafíos incluyen la infraestructura digital, las estrategias pedagógicas para la inclusión de la tecnología, y la colaboración efectiva entre programadores y educadores."
+    },
+    {
+        "pregunta": "¿Cuál es uno de los puntos fuertes de la IA en la educación según el documento?",
+        "respuesta": "Uno de los puntos fuertes de la IA es su versatilidad, ya que puede integrarse fácilmente con diversas herramientas y tecnologías, mejorando la educación a través de la personalización y la automatización de tareas."
+    },
+    {
+        "pregunta": "¿Qué problemas pueden surgir con el uso de chatbots con características demasiado humanas?",
+        "respuesta": "El uso de chatbots con características demasiado humanas puede causar incomodidad en los usuarios, un fenómeno conocido como el 'efecto valle inquietante'."
+    },
+    {
+        "pregunta": "¿Cómo pueden los sistemas de IA basados en la web apoyar el aprendizaje y la resolución de problemas?",
+        "respuesta": "Estos sistemas pueden seguir y almacenar las interacciones entre el estudiante y el sistema, proporcionando entornos de enseñanza personalizados basados en las características individuales de los estudiantes."
+    },
+    {
+        "pregunta": "¿Qué impacto tiene la carga cognitiva en el uso de sistemas de IA para el aprendizaje?",
+        "respuesta": "La carga cognitiva relacionada con la interacción con un sistema puede interferir con el aprendizaje si se considera extrínseca, pero puede ser útil si facilita o estructura la entrega de materiales de aprendizaje."
+    },
+    {
+        "pregunta": "¿Qué rol deberían tener los agentes pedagógicos conversacionales en la educación a distancia según el documento?",
+        "respuesta": "Deberían proporcionar soporte inmediato y personalizado, ayudando a los estudiantes a mantenerse en el flujo de aprendizaje y evitando malentendidos en conceptos fundamentales."
+    },
+    {
+        "pregunta": "¿Cuál es un beneficio de los chatbots en la educación según el documento?",
+        "respuesta": "Un beneficio es la capacidad de reducir el tiempo de respuesta a las preguntas de los estudiantes, lo que puede mantener la continuidad del aprendizaje y mejorar la experiencia educativa."
+    },
+    {
+        "pregunta": "¿Qué se necesita para implementar con éxito la IA en la educación según el documento?",
+        "respuesta": "Es necesario entender bien los contextos y agentes involucrados, las expectativas de los usuarios, y realizar colaboraciones fructíferas entre programadores y educadores."
+    },
+    {
+        "pregunta": "¿Cuál es la importancia de la personalización en los sistemas de aprendizaje basados en IA?",
+        "respuesta": "La personalización es crucial porque permite adaptar los materiales educativos a las características individuales de los estudiantes, mejorando así su eficiencia y motivación en el aprendizaje."
+    },
+    {
+        "pregunta": "¿Qué es el 'Uncanny Valley effect' en el contexto de chatbots?",
+        "respuesta": "El 'Uncanny Valley effect' es la sensación de incomodidad que los usuarios experimentan al interactuar con chatbots que tienen características demasiado humanas."
+    },
+    {
+        "pregunta": "¿Qué papel juega la motivación en el uso de chatbots educativos?",
+        "respuesta": "La motivación es clave, ya que los chatbots pueden proporcionar retroalimentación motivacional adaptada a la personalidad y estilo comunicacional de los estudiantes, mejorando así los resultados del aprendizaje."
+    },
+    {
+        "pregunta": "¿Por qué es importante la interacción humana en la educación mediada por tecnología?",
+        "respuesta": "Es importante porque los profesores humanos pueden abordar preguntas complejas y proporcionar guía ética y crítica que los sistemas de IA aún no pueden ofrecer completamente."
+    },
+    {
+        "pregunta": "¿Qué sugerencias da el documento para mejorar la integración de la IA en la educación a distancia?",
+        "respuesta": "Sugiere diseñar chatbots que no solo respondan preguntas sobre materiales del curso, sino que también ofrezcan apoyo personalizado, sugieran métodos de estudio y faciliten la comunicación entre estudiantes y profesores."
+    }
+]

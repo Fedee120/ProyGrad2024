@@ -9,7 +9,7 @@ if 'session_id' not in st.session_state:
 
 session_id = st.text_input("Ingrese el session ID:", value=st.session_state['session_id'], key='session_id', disabled=True)
 
-agent = rlib.RagAgent(session_id)
+agent = rlib.RagAgent(session_id, llm_model="gpt-4o")
 
 with st.sidebar:
     st.title('Comunicación con OpenAI')

@@ -42,8 +42,8 @@ class RagAgent:
     def create_tools(self):
         tool = create_retriever_tool(
             self.knowledge_base,
-            "search_educative_tools_creation",
-            "Searches and returns excerpts from 'How to develop artificial intelligence tools for higher education'",
+            "retrieve_from_knowledge_base",
+            "Searches and returns excerpts from the knowledge base related to the input query",
         )
         tools = [tool]
         return tools
@@ -52,10 +52,14 @@ class RagAgent:
         prompt = hub.pull("hwchase17/openai-tools-agent")
         prompt[0].prompt.template = '''Eres un asistente al que los docentes y 
                                     estudiantes de nivel secundario y universitario consultan sobre la inteligencia artifical generativa y 
-                                    creacion de herramientas en educacion. Para ayudar al usuario cuentas con herramientas, usalas cuando consideres apropiado.
+                                    creacion de herramientas en educacion. Para ayudar al usuario cuentas con una herramienta que busca en tus conocimientos fragmentos de texto 
+                                    relacionados con la consulta del usuario, usala cuando necesites recuperar informacion de tus conocimientos.
                                     Debes tener una conversacion empatica con el usuario y responder intentando incentivar la curiosidad y el aprendizaje. 
                                     Recuerda que tu objetivo es ayudar al usuario a aprender sobre la inteligencia artificial generativa y la creacion de herramientas en educacion, 
-                                    por lo que es deseable hacer que el usuario reflexione por ejemplo sobre como puede aplicar herramientas en su aula.'''
+                                    por lo que es deseable hacer que el usuario reflexione por ejemplo sobre como puede aplicar herramientas en su aula.
+                                    No inventes informacion y siempre que puedas proporciona referencias a tus respuestas. Si no sabes la respuesta a una pregunta,
+                                    puedes decir que no sabes la respuesta o que no tienes la informacion necesaria para responder la pregunta.
+                                    '''
         return prompt
     
     def set_llm(self, model):
@@ -89,6 +93,6 @@ class RagAgent:
 
 
 if __name__ == "__main__":
-    rag = RagAgent(session_id=0, llm_model="gpt-3.5-turbo-0125")
-    response = rag.interact_with_agent("Como han ayudado las inteligencias artificiales en la educacion en los ultimos años? (consulta la herramienta y cita la fuente)")
+    rag = RagAgent(session_id=0, llm_model="gpt-4o")
+    response = rag.interact_with_agent("¿Cuál es el objetivo principal de la IA en la educación según el documento?")
     print(response['output'])
