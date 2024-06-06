@@ -1,2 +1,3 @@
 .env
+proygrad_venv/
 __pycache__/
