@@ -6,4 +6,4 @@ langchain_experimental
 langchainhub
 python-dotenv
 
-streamlit
+streamlit==1.34.0
