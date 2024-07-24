@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from langchain.tools.retriever import create_retriever_tool
@@ -6,7 +7,7 @@ from langchain import hub
 from langchain_openai import ChatOpenAI
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain_core.runnables.history import RunnableWithMessageHistory
-from dotenv import load_dotenv
+from langchain_core.prompts import PromptTemplate
 from langsmith import traceable
 from prompt import PROMPT
 
@@ -32,17 +33,21 @@ class RagAgent:
     def prepare_knowledge_base(self):
         try:
             embeddings = OpenAIEmbeddings(model=EMBEDDINGS_MODEL, api_key=API_KEY)
-            db = FAISS.load_local('data_embeddings.db', embeddings=embeddings, allow_dangerous_deserialization=True)
-            return db.as_retriever()
+            db = FAISS.load_local('ingestion/faiss_index', embeddings=embeddings, allow_dangerous_deserialization=True)
+            return db.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.3})
         except Exception as e:
             print(e)
             return None
     
     def create_tools(self):
+        doc_prompt = PromptTemplate.from_template(
+            "Context:\n{page_content}\n\nMetadata:\n- title: {title}\n- authors: {authors}\n- year: {year}\n- page: {page}\n"
+        )
         tool = create_retriever_tool(
-            self.knowledge_base,
-            'search_artificial_intelligence',
-            'Searches and returns excerpts from a knowledge base containing documents about artificial intelligence.',
+            retriever=self.knowledge_base,
+            name='search_artificial_intelligence',
+            description='Searches and returns excerpts from a knowledge base containing documents about artificial intelligence.',
+            document_prompt=doc_prompt,
         )
         tools = [tool]
         return tools
