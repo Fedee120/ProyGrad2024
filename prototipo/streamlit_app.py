@@ -14,7 +14,7 @@ if 'chat_history' not in st.session_state:
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
-agent = RagAgent(session_id=st.session_state['session_id'], chat_history=st.session_state['chat_history'], llm_model='gpt-3.5-turbo-0125') # llm_model='gpt-4o' para evaluar el contenido de la respuesta
+agent = RagAgent(session_id=st.session_state['session_id'], chat_history=st.session_state['chat_history'], llm_model='gpt-4o') # llm_model='gpt-4o' para evaluar el contenido de la respuesta
 
 with st.sidebar:
     st.title('Comunicación con OpenAI')

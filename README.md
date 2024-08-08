@@ -28,7 +28,5 @@ pip3 install -r requirements.txt
 ### Correr el prototipo
 
 ```console
-cd prototipo
-
-streamlit run streamlit_app.py
+streamlit run prototipo/streamlit_app.py
 ```
