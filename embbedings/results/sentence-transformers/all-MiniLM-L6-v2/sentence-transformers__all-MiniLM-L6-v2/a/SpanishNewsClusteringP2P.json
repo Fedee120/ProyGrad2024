@@ -1,0 +1,23 @@
+{
+  "dataset_revision": "bf8ca8ddc5b7da4f7004720ddf99bbe0483480e6",
+  "evaluation_time": 6.3591883182525635,
+  "kg_co2_emissions": null,
+  "mteb_version": "1.12.59",
+  "scores": {
+    "test": [
+      {
+        "hf_subset": "default",
+        "languages": [
+          "spa-Latn"
+        ],
+        "main_score": 0.21800885650770271,
+        "v_measure": 0.21800885650770271,
+        "v_measure_std": 0.0,
+        "v_measures": [
+          0.21800885650770271
+        ]
+      }
+    ]
+  },
+  "task_name": "SpanishNewsClusteringP2P"
+}
