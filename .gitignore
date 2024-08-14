@@ -3,3 +3,4 @@ proygrad_venv/
 __pycache__/
 bin/
 lib/
+db/
