@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { OpenAI } = require('openai');
-const { MilvusClient } = require("@zilliz/milvus2-sdk-node");
+const { MilvusClient, DataType } = require("@zilliz/milvus2-sdk-node");
 
 const app = express();
 app.use(bodyParser.json());
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const milvusClient = new MilvusClient({address: '127.0.0.1:19530'});
+const milvusClient = new MilvusClient({address: 'standalone:19530'});
 
 // Collection and embedding dimensions (should match your schema)
 const COLLECTION_NAME = 'embeddings_collection';
@@ -15,33 +15,35 @@ const EMBEDDING_DIM = 768;
 
 // Define collection schema if not already created (equivalent to Python's FieldSchema and CollectionSchema)
 async function createCollectionIfNotExists() {
-  const collectionExists = await milvusClient.hasCollection({
-    collection_name: COLLECTION_NAME,
-  });
-
-  if (!collectionExists) {
-    await milvusClient.createCollection({
+  try {
+    const collectionExists = await milvusClient.hasCollection({
       collection_name: COLLECTION_NAME,
-      fields: [
-        { name: 'id', type: 'INT64', is_primary_key: true, auto_id: true },
-        { name: 'embedding', type: 'FLOAT_VECTOR', dim: EMBEDDING_DIM },
-        { name: 'original_text', type: 'VARCHAR', max_length: 512 },
-      ],
     });
 
-    // Create an index (equivalent to the Python Index object)
-    await milvusClient.createIndex({
-      collection_name: COLLECTION_NAME,
-      field_name: 'embedding',
-      index_type: 'IVF_FLAT',
-      metric_type: 'L2',
-      params: { nlist: 128 },
-    });
+    if (!collectionExists.value) {
+      await milvusClient.createCollection({
+        collection_name: COLLECTION_NAME,
+        fields: [
+          { name: 'id', data_type: DataType.Int64, is_primary_key: true, auto_id: true },
+          { name: 'embedding', data_type: DataType.FloatVector, dim: EMBEDDING_DIM },
+          { name: 'original_text', data_type: DataType.VarChar, max_length: 512 },
+        ],
+      });
+
+      // Create an index (equivalent to the Python Index object)
+      await milvusClient.createIndex({
+        collection_name: COLLECTION_NAME,
+        field_name: 'embedding',
+        // index_type: 'IVF_FLAT',
+        metric_type: 'L2',
+        // params: { nlist: 128 },
+      });
+    }
+    console.log('Connection test successful:', collectionExists);
+  } catch (error) {
+    console.error('Error during connection test:', error);
   }
 }
-
-// Call this function to ensure the collection is set up
-createCollectionIfNotExists();
 
 async function getEmbedding(text) {
   const { data } = await openai.embeddings.create({
@@ -60,21 +62,16 @@ app.post('/add-embedding', async (req, res) => {
   }
 
   try {
+    await createCollectionIfNotExists();
     const embedding = await getEmbedding(text);
     // Insert embedding into Milvus (equivalent to collection.insert)
     const insertResult = await milvusClient.insert({
       collection_name: COLLECTION_NAME,
       fields_data: [
         {
-          name: 'embedding',
-          type: 'FLOAT_VECTOR',
-          values: [embedding],
-        },
-        {
-          name: 'original_text',
-          type: 'VARCHAR',
-          values: [text],
-        },
+          embedding: embedding,
+          original_text: text,
+        }
       ],
     });
     res.status(200).json({ message: 'Document added successfully', text, embedding });
@@ -96,7 +93,7 @@ app.post('/query-embedding', async (req, res) => {
     // Search for the most similar embedding (equivalent to collection.search in Python)
     const searchResult = await milvusClient.search({
       collection_name: COLLECTION_NAME,
-      vectors: [queryEmbedding],
+      vector: [queryEmbedding],
       search_params: {
         anns_field: 'embedding',
         topk: 1,
