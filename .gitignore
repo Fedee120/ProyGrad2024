@@ -4,3 +4,4 @@ __pycache__/
 bin/
 lib/
 db/
+backend/node_modules
