@@ -59,6 +59,18 @@ services:
       - "etcd"
       - "minio"
 
+  node-backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - standalone
+    networks:
+      - milvus_network
+
 networks:
-  default:
-    name: milvus
+  milvus_network:
+    name: milvus_network
