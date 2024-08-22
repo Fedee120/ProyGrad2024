@@ -1,19 +1,23 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from pymilvus import connections, CollectionSchema, FieldSchema, DataType, Collection, Index
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, Index
 from sentence_transformers import SentenceTransformer
-from typing import List
-import uvicorn
 
 app = FastAPI()
 
 # Connect to Milvus
-connections.connect("default", host="standalone", port="19530")  # use the service name 'milvus' if running in Docker
+try:        
+    connections.connect("default", host="localhost", port="19530")
+    print("Connected to Milvus!")
+except Exception as e:
+    print(f"Failed to connect to Milvus: {e}")
+    exit(1)
 
-# Define the collection schema
+# Define the schema for the collection, including a field for the sentence
 fields = [
     FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
-    FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=768)  # Assuming 768 dimensions for BERT
+    FieldSchema(name="sentence", dtype=DataType.VARCHAR, max_length=512),
+    FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=768)
 ]
 
 schema = CollectionSchema(fields, "Embeddings collection schema")
@@ -21,66 +25,56 @@ collection = Collection(name="embeddings_collection", schema=schema)
 
 # Create an index for the collection
 index_params = {
-    "index_type": "IVF_FLAT",  # You can use other types like "IVF_SQ8", "IVF_PQ", etc.
-    "params": {"nlist": 128},  # Index parameters
-    "metric_type": "L2"  # Euclidean distance (you can use "IP" for Inner Product)
+    "index_type": "IVF_FLAT",
+    "params": {"nlist": 128},
+    "metric_type": "L2"
 }
-index = Index(collection, "embedding", index_params)
 
-# Load the collection for searching
+index = Index(collection, "embedding", index_params)
 collection.load()
 
-# Initialize the sentence transformer model
+# Load the model
 model = SentenceTransformer('bert-base-nli-mean-tokens')
 
-# Pydantic models for request bodies
-class EmbeddingRequest(BaseModel):
-    sentences: List[str]
+class SentenceRequest(BaseModel):
+    sentence: str
 
-class QueryRequest(BaseModel):
-    query_sentence: str
+@app.post("/add")
+def add_sentence(request: SentenceRequest):
+    sentence = request.sentence
+    embedding = model.encode([sentence]).tolist()[0]
+    insert_result = collection.insert([[sentence], [embedding]])
+    return {"status": "success", "insert_count": len(insert_result.primary_keys)}
 
-@app.post("/add-embeddings")
-async def add_embeddings(request: EmbeddingRequest):
+@app.post("/query")
+def query_similar(request: SentenceRequest):
+    sentence = request.sentence
+    query_embedding = model.encode([sentence]).tolist()
+    
+    # Make sure the query_embedding is a list of lists
+    query_embedding = [query_embedding[0]]  # If the model returns a list of lists, use it directly
+    
+    search_params = {
+        "metric_type": "L2",
+        "params": {"nprobe": 10}
+    }
+    
     try:
-        embeddings = model.encode(request.sentences)
-        embeddings = embeddings.tolist()
-
-        # Insert embeddings into Milvus
-        insert_result = collection.insert([embeddings])
-        collection.load()  # Ensure the collection is loaded before searching
-
-        return {"status": "success", "inserted_ids": insert_result.primary_keys}
+        results = collection.search(query_embedding, "embedding", search_params, limit=3, output_fields=["id", "sentence", "embedding"])
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+    response = []
+    for result in results[0]:
+        response.append({
+            "id": result.id,
+            "sentence": result.entity.get("sentence"),
+            "distance": result.distance,
+            "embedding": result.entity.get("embedding")
+        })
+    
+    return {"results": response}
 
-@app.post("/query-embedding")
-async def query_embedding(request: QueryRequest):
-    try:
-        query_embedding = model.encode([request.query_sentence]).tolist()
-
-        # Define search parameters
-        search_params = {
-            "metric_type": "L2",  # Or "IP" for Inner Product
-            "params": {"nprobe": 10}
-        }
-
-        # Perform the search
-        results = collection.search(query_embedding, "embedding", search_params, limit=3, output_fields=["id", "embedding"])
-
-        # Prepare the response
-        response = []
-        for result in results[0]:
-            response.append({
-                "ID": result.id,
-                "Distance": result.distance,
-                "Embedding": result.entity.get('embedding')
-            })
-
-        return {"status": "success", "results": response}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-# Run the app if executed directly
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
