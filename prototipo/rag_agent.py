@@ -9,7 +9,7 @@ from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.prompts import PromptTemplate
 from langsmith import traceable
-from prompt import PROMPT
+from prompt.prompt_v2 import PROMPT
 
 load_dotenv()
 API_KEY = os.getenv('OPENAI_API_KEY')
@@ -33,7 +33,7 @@ class RagAgent:
     def prepare_knowledge_base(self):
         try:
             embeddings = OpenAIEmbeddings(model=EMBEDDINGS_MODEL, api_key=API_KEY)
-            db = FAISS.load_local('ingestion/faiss_index', embeddings=embeddings, allow_dangerous_deserialization=True)
+            db = FAISS.load_local('prototipo/ingestion/faiss_index', embeddings=embeddings, allow_dangerous_deserialization=True)
             return db.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.3})
         except Exception as e:
             print(e)
