@@ -10,11 +10,10 @@ services:
       - ETCD_QUOTA_BACKEND_BYTES=4294967296
       - ETCD_SNAPSHOT_COUNT=50000
     volumes:
-      - ./db/volumes/etcd:/etcd
-
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
     command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:2379/health"]
+      test: ["CMD", "etcdctl", "endpoint", "health"]
       interval: 30s
       timeout: 20s
       retries: 3
@@ -29,7 +28,7 @@ services:
       - "9001:9001"
       - "9000:9000"
     volumes:
-      - ./db/volumes/minio:/minio_data
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
     command: minio server /minio_data --console-address ":9001"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
@@ -39,13 +38,15 @@ services:
 
   standalone:
     container_name: milvus-standalone
-    image: milvusdb/milvus:v2.3.0
+    image: milvusdb/milvus:v2.4.9
     command: ["milvus", "run", "standalone"]
+    security_opt:
+    - seccomp:unconfined
     environment:
       ETCD_ENDPOINTS: etcd:2379
       MINIO_ADDRESS: minio:9000
     volumes:
-      - ./db/volumes/milvus:/var/lib/milvus
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
       interval: 30s
@@ -58,6 +59,15 @@ services:
     depends_on:
       - "etcd"
       - "minio"
+
+  attu:
+    image: zilliz/attu:latest
+    container_name: attu_service
+    ports:
+      - "8000:3000"
+    environment:
+      HOST_URL: "http://localhost:8000"
+      MILVUS_URL: milvus-standalone:19530
 
 networks:
   default:
