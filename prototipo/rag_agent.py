@@ -9,7 +9,7 @@ from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.prompts import PromptTemplate
 from langsmith import traceable
-from prompt.prompt_v2 import PROMPT
+from prompt.prompt_demo_perfiles import PROMPT
 
 load_dotenv()
 API_KEY = os.getenv('OPENAI_API_KEY')
