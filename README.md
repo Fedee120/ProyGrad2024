@@ -22,11 +22,21 @@ deactivate
 ### Instalar los paquetes Python requeridos para el proyecto
 
 ```console
-pip3 install -r requirements.txt
+pip3 install -r frontend/requirements.txt
 ```
+
+### Levantar el docker que tiene la db y el backend
+
+```console
+docker-compose up --build
+```
+
+### Cargar base de datos
+
+Ir a la carpeta backend y correr python3 -m eval.evaluate_rag_qa luego de modificar la variable de ese script de load a true temporalmente
 
 ### Correr el prototipo
 
 ```console
-streamlit run prototipo/streamlit_app.py
+streamlit run frontend/streamlit_app.py
 ```

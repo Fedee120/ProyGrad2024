@@ -5,11 +5,12 @@ langchain_core
 langchain_experimental
 langchainhub
 python-dotenv
-faiss-cpu
 pypdf==4.3.0
 langchain-ai21
 
-streamlit==1.34.0
 langgraph
 langchain_milvus
 langchain_groq
+
+fastapi
+uvicorn

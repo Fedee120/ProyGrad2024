@@ -69,6 +69,19 @@ services:
       HOST_URL: "http://localhost:8000"
       MILVUS_URL: milvus-standalone:19530
 
+  fastapi:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - "standalone"
+
 networks:
   default:
     name: milvus

@@ -22,7 +22,7 @@ class KnowledgeBase(BaseTool):
     ) -> str:
         """Use the tool."""
         rag = RAGFactory.create_rag(
-            URI="http://localhost:19530", 
+            URI="http://standalone:19530", 
             COLLECTION_NAME="real_collection", 
             search_kwargs={"k": 10}, 
             search_type="mmr", 
