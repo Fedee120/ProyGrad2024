@@ -81,6 +81,15 @@ services:
       - PYTHONUNBUFFERED=1
     depends_on:
       - "standalone"
+      
+  streamlit:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    depends_on:
+      - "fastapi"
 
 networks:
   default:

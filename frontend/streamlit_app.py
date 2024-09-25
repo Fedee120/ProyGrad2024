@@ -29,7 +29,7 @@ if query := st.chat_input('Haz un pregunta...'):
     st.session_state.messages.append({'role': 'user', 'content': query})
 
     # Send the query to the backend API
-    response = requests.post("http://localhost:8080/invoke_agent", json={'message': query})
+    response = requests.post("http://fastapi:8080/invoke_agent", json={'message': query})
     
     if response.status_code == 200:
         response_data = response.json()
