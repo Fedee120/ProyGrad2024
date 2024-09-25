@@ -69,7 +69,8 @@ services:
       HOST_URL: "http://localhost:8000"
       MILVUS_URL: milvus-standalone:19530
 
-  fastapi:
+  backend:
+    container_name: backend_service
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -82,14 +83,15 @@ services:
     depends_on:
       - "standalone"
       
-  streamlit:
+  frontend:
+    container_name: frontend_service
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "8501:8501"
     depends_on:
-      - "fastapi"
+      - "backend"
 
 networks:
   default:
