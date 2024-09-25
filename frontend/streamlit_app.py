@@ -12,12 +12,12 @@ if 'messages' not in st.session_state:
 with st.sidebar:
     st.title('Comunicación con OpenAI')
 
-    # Assuming your backend has an endpoint to check credentials
-    # response = requests.get(f"{backend_url}/check_credentials")
-    # if response.status_code == 200 and response.json().get('status') == 'success':
-    #     st.success('Credenciales configuradas!', icon='✅')
-    # else:
-    #     st.error('Credenciales no configuradas. Por favor revise su configuración.', icon='❌')
+    # Assuming your backend has an endpoint to check if it's up
+    response = requests.get(f"http://backend:8080/check_status")
+    if response.status_code == 200 and response.json().get('status') == 'success':
+        st.success('Backend is up!', icon='✅')
+    else:
+        st.error('Backend is down.', icon='❌')
 
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
@@ -33,7 +33,7 @@ if query := st.chat_input('Haz un pregunta...'):
     
     if response.status_code == 200:
         response_data = response.json()
-        assistant_response = response_data.get('response', 'No response from backend.')
+        assistant_response = response_data.get('data', 'No response from backend.')
     else:
         assistant_response = 'Error communicating with backend.'
 
