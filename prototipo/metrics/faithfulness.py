@@ -30,6 +30,6 @@ def is_faithfull(question:str, facts: List[str], answer: str) -> Faithfulness:
 
 if __name__ == "__main__":
     question = "What color is the sky?"
-    facts = ["The sky is Gray.", "The grass is green.", "The sun is yellow."]
+    facts = ["The sky is Gray.", "The grass is green.", "The sun is yellow.", "The ocean is blue"]
     answer = "The sky is Blue."
     print(is_faithfull(question, facts, answer).is_faithful)

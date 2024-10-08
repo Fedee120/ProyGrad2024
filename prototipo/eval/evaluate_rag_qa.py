@@ -17,7 +17,7 @@ load_dotenv()
 
 LOAD = False
 
-rag = RAG(URI="http://localhost:19530", COLLECTION_NAME="real_collection", search_kwargs={"k": 10}, search_type="mmr", llm_model_name="gpt-4", embeddings_model_name="text-embedding-3-small")
+rag = RAG(URI="http://localhost:19530", COLLECTION_NAME="real_collection", search_kwargs={"k": 10}, search_type="mmr", llm_model_name="gpt-4o", embeddings_model_name="text-embedding-3-small")
 
 # load the pdfs
 
@@ -91,11 +91,11 @@ def process_sample_metrics(sample, verbose=False):
     
     return faithfull, grounded, relevant, relevant_docs
 
-with open("QA_dataset.json", encoding="utf-8") as f:
+with open("eval/datasets/QA_dataset.json", encoding="utf-8") as f:
     dataset = json.load(f)
     total = len(dataset)
     
-    with ThreadPoolExecutor(max_workers=50) as executor:
+    with ThreadPoolExecutor(max_workers=1) as executor:
         results = list(executor.map(lambda sample: process_sample_metrics(sample, verbose=True), dataset))
     
     # Separate the results for faithfulness and groundedness
