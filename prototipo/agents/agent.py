@@ -1,11 +1,7 @@
-from langchain.agents import AgentExecutor, create_openai_tools_agent, create_tool_calling_agent
-from langchain_openai import OpenAI, ChatOpenAI
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.tools import Tool
+from langchain.agents import AgentExecutor, create_tool_calling_agent
+from langchain_openai import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
 from tools.knowledge_base import KnowledgeBase
-from prompt.prompt_v2 import PROMPT
-from langgraph.prebuilt import create_react_agent
-from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
 
 load_dotenv()

@@ -1,9 +1,11 @@
-from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
-load_dotenv()
+# faithfullness: the degree to which the answer is derived from the context.
 
 from langchain_core.pydantic_v1 import BaseModel, Field
 from typing import List
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Faithfulness(BaseModel):
     is_faithful: bool = Field(..., description="If the answer can be derived logically from the facts presented.")

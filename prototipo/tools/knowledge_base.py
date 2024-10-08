@@ -1,8 +1,5 @@
 from typing import Optional, Type
-
-from langchain_core.callbacks import (
-    CallbackManagerForToolRun,
-)
+from langchain_core.callbacks import CallbackManagerForToolRun
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel, Field
 
@@ -11,7 +8,6 @@ from rags.factory.RAGFactory import RAGFactory
 class KnowledgeBaseInput(BaseModel):
     query: str = Field(description="query")
     fallback: str = Field(description="Fallback answer")
-
 
 # Note: It's important that every field has type hints. BaseTool is a
 # Pydantic class and not having type hints can lead to unexpected behavior.

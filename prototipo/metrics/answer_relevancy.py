@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Relevancy(BaseModel):
-    is_relevant: bool = Field(..., description="It's how relevant the answer is. If the answer relevant to the question it's relevant. If it's not, it's not relevant.")
+    is_relevant: bool = Field(..., description="It's how relevant the answer is. If the answer relevant to the question return true. If it's not, it's not relevant, then, return false.")
 
 prompt_template = """You are a teacher grading if the student's answer is relevant or not, you are given the the question and the student's answer and you need to determine if the student's answer is relevant to the question.
                     Question: {question}
@@ -21,6 +21,5 @@ def is_relevant(question:str, answer: str):
     return llm_structured.invoke(prompt)
 
 if __name__ == "__main__":
-    question = "What color is the sky?"
     answer = "El guiso tiene espinaca pero es rojo por la pulpa de tomate"
     print(is_relevant("Por que el guiso es verde?", answer).is_relevant)

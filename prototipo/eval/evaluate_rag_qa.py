@@ -1,4 +1,4 @@
-# Faithfullness evaluation of the RAG: It's how factually accurate the responses are.
+# faithfullness: the degree to which the answer is derived from the context.
 # answer_relevance: It's how relevant the answer is to the question.
 # context_precision: Signal to noise ratio in the context.
 # context_recall: How much of the context is relevant.
@@ -12,6 +12,8 @@ from metrics.groundedness import is_grounded
 from metrics.faithfulness import is_faithfull
 from metrics.answer_relevancy import is_relevant
 from metrics.context_relevancy import count_relevant
+import json
+from concurrent.futures import ThreadPoolExecutor
 
 load_dotenv()
 
@@ -40,11 +42,6 @@ if LOAD:
     rag.add_documents(splits)
     print("Added docs to collection")
 
-
-import json
-from concurrent.futures import ThreadPoolExecutor
-from time import sleep
-
 def process_sample_metrics(sample, verbose=False):
     question = sample["question"]
     if verbose:
@@ -60,7 +57,7 @@ def process_sample_metrics(sample, verbose=False):
     if verbose:
         print("Context relevancy: ", relevant_docs)
 
-    # Compute relevancy
+    # Compute answer relevancy
     if is_relevant(question, answer.get("answer")).is_relevant:
         if verbose:
             print("Relevant")
@@ -114,4 +111,3 @@ with open("eval/datasets/QA_dataset.json", encoding="utf-8") as f:
     print(f"Groundedness: {groundedness_score}")
     print(f"Relevancy: {relevancy_score}")
     print(f"Context Relevancy: {context_relevancy_score}")
-

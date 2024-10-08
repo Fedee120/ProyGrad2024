@@ -1,6 +1,5 @@
 from langchain_openai import OpenAIEmbeddings
 from langchain_milvus import Milvus
-from langchain_core.documents import Document
 from uuid import uuid4
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate

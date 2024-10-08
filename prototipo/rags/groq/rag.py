@@ -3,12 +3,11 @@ from langchain_milvus import Milvus
 from langchain_core.documents import Document
 from uuid import uuid4
 from langchain_groq import ChatGroq
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
 from langchain_core.prompts import PromptTemplate
 from langchain_core.messages import HumanMessage
+from rags.IRAG import IRAG
 
-class RAG:
+class RAG(IRAG):
     def __init__(
         self,
         URI: str,
@@ -104,7 +103,6 @@ class RAG:
         return output
     
 if __name__ == "__main__":
-    import os
     import time
     from dotenv import load_dotenv
     

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from langchain_core.documents import Document
 
 class IRAG(ABC):
     @abstractmethod
