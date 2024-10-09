@@ -31,8 +31,8 @@ class Agent:
     def invoke(self, message):
         return self.agent_executor.invoke(message)
 
-
-agent = Agent()
-message = "Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa."
-print(agent.agent_executor.invoke({"input": message}))
+if __name__ == "__main__":
+    agent = Agent()
+    message = "Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa."
+    print(agent.agent_executor.invoke({"input": message}))
 

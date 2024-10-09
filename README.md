@@ -3,6 +3,10 @@
 
 ## Para correr el proyecto
 
+### Configurar .env
+
+Crear `.env` dentro de la carpeta backend siguiendo el `.env.template` dentro de la carpeta backend y pedir las claves para que los servicios funcionen
+
 ### Levantar el docker que tiene la db, el backend y el fronted
 
 ```console
