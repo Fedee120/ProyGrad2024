@@ -3,3 +3,5 @@ proygrad_venv/
 __pycache__/
 bin/
 lib/
+volumes/
+.venv/
