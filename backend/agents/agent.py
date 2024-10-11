@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from tools.knowledge_base import KnowledgeBase
 from dotenv import load_dotenv
+from prompt.prompt_v3 import PROMPT
 
 load_dotenv()
 
@@ -12,7 +13,7 @@ class Agent:
         self.tools = [KnowledgeBase()]
         self.prompt = ChatPromptTemplate.from_messages(
             [
-                ("system", "You are a helpful assistant. When answering information questions use the Knowledge_Base tool, you will receive an answer and relevant context. Use this information to provide a comprehensive and accurate response to the user's query. If the Knowledge_Base doesn't provide a satisfactory answer, say that you don't have the necessary information to answer the question."),
+                ("system", PROMPT),
                 ("human", "{input}"),
                 ("placeholder", "{agent_scratchpad}"),
             ]
