@@ -15,7 +15,7 @@ class KnowledgeBase(BaseTool):
     name: str = "Knowledge_Base"
     description: str = "Útil para responder preguntas."
     args_schema: Type[BaseModel] = KnowledgeBaseInput
-    return_direct: bool = False
+    return_direct: bool = False # Changed to False to allow the agent to process the output. USEFUL TO CHANGE TO TRUE IF WE WANT TO SEE WHAT THE AGENT RECEIVES
 
     def _run(
         self, query: str, fallback: str, run_manager: Optional[CallbackManagerForToolRun] = None
