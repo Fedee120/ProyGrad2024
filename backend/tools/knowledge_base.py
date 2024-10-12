@@ -15,7 +15,7 @@ class KnowledgeBase(BaseTool):
     name: str = "Knowledge_Base"
     description: str = "Útil para responder preguntas."
     args_schema: Type[BaseModel] = KnowledgeBaseInput
-    return_direct: bool = True
+    return_direct: bool = False
 
     def _run(
         self, query: str, fallback: str, run_manager: Optional[CallbackManagerForToolRun] = None
@@ -28,7 +28,7 @@ class KnowledgeBase(BaseTool):
             search_type="mmr", 
             llm_model_name="gpt-4o-mini", 
             embeddings_model_name="text-embedding-3-small")
-        return rag.generate_answer(query)
+        return str(rag.generate_answer(query))
     
 def create_tool():
     return KnowledgeBase()
