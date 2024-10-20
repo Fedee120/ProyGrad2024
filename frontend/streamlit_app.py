@@ -35,6 +35,9 @@ def send_query_to_backend(query):
         logging.error(error_message)
         return error_message
 
+
+st.title('Asistente Virtual para Docentes: Integrando IA en la Educación')
+
 # Initialize session state variables
 if 'session_id' not in st.session_state:
     st.session_state['session_id'] = str(uuid.uuid4())
