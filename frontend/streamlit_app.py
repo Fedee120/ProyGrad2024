@@ -9,7 +9,10 @@ BACKEND_URL = 'http://backend:8080'
 logging.basicConfig(level=logging.INFO)
 
 def parse_error(e):
-    return f'{e}. Detail: {e.response.json().get("detail", "No detail provided.")}'
+    if hasattr(e, 'response') and e.response is not None:
+        return f'{e}. Detail: {e.response.json().get("detail", "No detail provided.")}'
+    else:
+        return f'{e}. No response received.'
 
 def check_backend_status():
     try:
