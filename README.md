@@ -1,5 +1,29 @@
 # ProyGrad2024
 
+
+## Para correr el proyecto
+
+### Configurar .env
+
+Crear `.env` dentro de la carpeta backend siguiendo el `.env.template` dentro de la carpeta backend y pedir las claves para que los servicios funcionen
+
+### Levantar el docker que tiene la db, el backend y el fronted
+
+```console
+docker-compose up --build
+```
+
+### Cargar base de datos
+
+Ir a la carpeta backend y correr python3 -m eval.evaluate_rag_qa luego de modificar la variable de ese script de load a true temporalmente
+
+### Abrir el frontend
+
+Abrir el link http://localhost:8501 que deberia estar levantado el front para interactuar
+
+
+## Para configurar el entorno para desarrollar
+
 ### Crear un entorno virtual (parados en el directorio del repositorio)
 
 ```console
@@ -22,11 +46,6 @@ deactivate
 ### Instalar los paquetes Python requeridos para el proyecto
 
 ```console
-pip3 install -r requirements.txt
-```
-
-### Correr el prototipo
-
-```console
-streamlit run prototipo/streamlit_app.py
+pip3 install -r frontend/requirements.txt
+pip3 install -r backend/requirements.txt
 ```

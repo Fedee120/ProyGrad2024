@@ -15,20 +15,20 @@ class KnowledgeBase(BaseTool):
     name: str = "Knowledge_Base"
     description: str = "Útil para responder preguntas."
     args_schema: Type[BaseModel] = KnowledgeBaseInput
-    return_direct: bool = True
+    return_direct: bool = False # Changed to False to allow the agent to process the output. USEFUL TO CHANGE TO TRUE IF WE WANT TO SEE WHAT THE AGENT RECEIVES
 
     def _run(
         self, query: str, fallback: str, run_manager: Optional[CallbackManagerForToolRun] = None
     ) -> str:
         """Use the tool."""
         rag = RAGFactory.create_rag(
-            URI="http://localhost:19530", 
+            URI="http://standalone:19530", 
             COLLECTION_NAME="real_collection", 
             search_kwargs={"k": 10}, 
             search_type="mmr", 
             llm_model_name="gpt-4o-mini", 
             embeddings_model_name="text-embedding-3-small")
-        return rag.generate_answer(query)
+        return str(rag.generate_answer(query))
     
 def create_tool():
     return KnowledgeBase()

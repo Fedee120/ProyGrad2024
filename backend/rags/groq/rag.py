@@ -111,7 +111,7 @@ if __name__ == "__main__":
     # Initialize the RAG class
     time_connect = time.time()
     rag = RAG(
-        URI="http://localhost:19530",
+        URI="http://standalone:19530",
         COLLECTION_NAME="test_collection",
         search_kwargs={"k": 2},
         search_type="similarity",
