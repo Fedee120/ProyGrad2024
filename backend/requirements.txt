@@ -11,6 +11,6 @@ langchain-ai21
 langgraph
 langchain_milvus
 langchain_groq
-
+langsmith
 fastapi
 uvicorn

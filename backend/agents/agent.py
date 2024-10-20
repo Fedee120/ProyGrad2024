@@ -4,6 +4,13 @@ from langchain.prompts import ChatPromptTemplate
 from tools.knowledge_base import KnowledgeBase
 from dotenv import load_dotenv
 from prompt.prompt_v3 import PROMPT
+from langsmith import traceable
+import os
+
+os.environ['LANGCHAIN_TRACING_V2'] = 'false'
+os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
+os.environ['LANGCHAIN_API_KEY'] = str(os.getenv('LANGCHAIN_API_KEY'))
+os.environ['LANGCHAIN_PROJECT'] = 'ProyGrad'
 
 load_dotenv()
 
@@ -27,6 +34,7 @@ class Agent:
     def create_agent_executor(self, agent):
         return AgentExecutor(agent=agent, tools=self.tools)
     
+    @traceable
     def invoke(self, message):
         result = self.agent_executor.invoke(message)
         if "output" not in result or not result["output"]:
