@@ -1,19 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./routes/PrivateRoute";
-import Home from "./pages/home/Home";
 import Login from "./components/auth/Login";
 import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./components/common/NotFound/NotFound";
-import Chat from './components/chat/Chat';
+import Chat from './pages/chat/Chat';
 
 function App() {
   return (
     <div>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<PrivateRoute component={Home} />} />
+          <Route path="/" element={<PrivateRoute component={Chat} />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -27,7 +26,6 @@ function App() {
           theme="dark"
           transition={Slide}
         />
-        <Chat />
       </AuthProvider>
     </div>
   );

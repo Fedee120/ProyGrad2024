@@ -3,14 +3,21 @@
   flex-direction: column;
   height: calc(100vh - 64px);
   padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   background-color: var(--background-color, #ffffff);
 }
 
 .chat-title {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  padding: 1rem 0;
+  width: fit-content;
+  margin: 0 auto 10px auto;
 }
 
 .chat-sidebar {
@@ -45,6 +52,8 @@
   border: 1px solid #ddd;
   margin-bottom: 20px;
   height: calc(100vh - 250px);
+  display: flex;
+  flex-direction: column;
 }
 
 .message {
@@ -52,18 +61,22 @@
   padding: 10px;
   border-radius: 8px;
   max-width: 80%;
+  width: fit-content;
+  word-wrap: break-word;
 }
 
 .message.user {
   background-color: #007bff;
   color: white;
   margin-left: auto;
+  min-width: 60px;
 }
 
 .message.assistant {
   background-color: #e9ecef;
   color: #212529;
   margin-right: auto;
+  min-width: 60px;
 }
 
 .chat-input-form {

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ChatMessage, BackendResponse } from '../../types/chat';
 import { useAuth } from '../../contexts/AuthContext';
 import './Chat.css';
-
-const BACKEND_URL = 'http://backend:8080';
+import Layout from "../layout"
+const BACKEND_URL = '/api';
 
 const Chat: React.FC = () => {
   const { user } = useAuth();
@@ -78,6 +78,7 @@ const Chat: React.FC = () => {
   }, []);
 
   return (
+    <Layout>
     <div className="chat-container">
       <div className="chat-header">
         <h1 className="chat-title">
@@ -121,7 +122,8 @@ const Chat: React.FC = () => {
           Enviar
         </button>
       </form>
-    </div>
+      </div>
+    </Layout>
   );
 };
 
