@@ -20,9 +20,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user: any) => {
       if (user) {
+        const token = await user.getIdToken();
         const loggedUser: User = {
           id: user.uid,
           email: user.email,
+          token: token
         }
         setCurrentUser(loggedUser)
       } else {

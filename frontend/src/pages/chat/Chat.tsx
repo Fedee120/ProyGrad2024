@@ -3,10 +3,10 @@ import { ChatMessage, BackendResponse } from '../../types/chat';
 import { useAuth } from '../../contexts/AuthContext';
 import './Chat.css';
 import Layout from "../layout"
-const BACKEND_URL = '/api';
+import { BACKEND_URL } from '../../constants';
 
 const Chat: React.FC = () => {
-  const { user } = useAuth();
+  const { currentUser } = useAuth();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [backendStatus, setBackendStatus] = useState<{
@@ -16,7 +16,13 @@ const Chat: React.FC = () => {
 
   const checkBackendStatus = async () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/check_status`);
+      console.log(`${BACKEND_URL}/check_status`);
+      const response = await fetch(`${BACKEND_URL}/check_status`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${currentUser?.token}`,
+        },
+      });
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       setBackendStatus({ isUp: true, message: 'Backend is up!' });
     } catch (error) {
@@ -32,11 +38,11 @@ const Chat: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user?.token}`,
+          'Authorization': `Bearer ${currentUser?.token}`,
         },
         body: JSON.stringify({
           message: query,
-          userId: user?.uid,
+          userId: currentUser?.uid,
         }),
       });
 
@@ -84,9 +90,9 @@ const Chat: React.FC = () => {
         <h1 className="chat-title">
           Asistente Virtual para Docentes
         </h1>
-        {user && (
+        {currentUser && (
           <div className="user-info">
-            Bienvenido, {user.email}
+            Bienvenido, {currentUser.email}
           </div>
         )}
       </div>

@@ -5,12 +5,29 @@ from pydantic import BaseModel
 from agents.agent import Agent
 import uvicorn
 from firebase_admin import auth, credentials, initialize_app
+from fastapi.middleware.cors import CORSMiddleware
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables
 
 # Inicializar Firebase Admin
 cred = credentials.Certificate("firebase-credentials.json")
 firebase_app = initialize_app(cred)
 
 app = FastAPI()
+
+# Split the CORS_ORIGINS string into a list
+origins = os.getenv("CORS_ORIGINS").split(",")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Now using the origins from environment
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 security = HTTPBearer()
 
 async def verify_firebase_token(request: Request, token: HTTPBearer = Depends(security)):
@@ -53,4 +70,4 @@ async def invoke_agent(
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=8090)

@@ -19,7 +19,7 @@ load_dotenv()
 
 LOAD = False
 
-rag = RAG(URI="http://localhost:19530", COLLECTION_NAME="real_collection", search_kwargs={"k": 10}, search_type="mmr", llm_model_name="gpt-4o", embeddings_model_name="text-embedding-3-small")
+rag = RAG(URI=os.getenv("MILVUS_STANDALONE_URL"), COLLECTION_NAME="real_collection", search_kwargs={"k": 10}, search_type="mmr", llm_model_name="gpt-4o", embeddings_model_name="text-embedding-3-small")
 
 # load the pdfs
 

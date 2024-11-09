@@ -105,13 +105,14 @@ class RAG(IRAG):
 if __name__ == "__main__":
     import time
     from dotenv import load_dotenv
+    import os
     
     load_dotenv()
 
     # Initialize the RAG class
     time_connect = time.time()
     rag = RAG(
-        URI="http://standalone:19530",
+        URI=os.getenv("MILVUS_STANDALONE_URL"),
         COLLECTION_NAME="test_collection",
         search_kwargs={"k": 2},
         search_type="similarity",

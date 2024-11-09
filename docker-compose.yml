@@ -75,11 +75,13 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:8080" # This port matches the one specified in the backend'sDockerfile
     volumes:
       - ./backend:/app
     environment:
       - PYTHONUNBUFFERED=1
+      - CORS_ORIGINS=http://localhost:8081 # This port is used by the frontend
+      - MILVUS_STANDALONE_URL=http://standalone:19530 # This URL matches the one specified in the standalone docker service
     depends_on:
       - "standalone"
       
@@ -89,7 +91,9 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "8081:8081"
+      - "8081:8081" # This port matches the one specified in the frontend's Dockerfile and nginx.conf
+    environment:
+      - REACT_APP_BACKEND_URL=/api # This URL is resolved in nginx.conf which specifies the backend service and port
     depends_on:
       - "backend"
 
