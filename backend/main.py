@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel
-from agents.agent import Agent
+from agent.agent import Agent
 import uvicorn
 from firebase_admin import auth, credentials, initialize_app
 from fastapi.middleware.cors import CORSMiddleware

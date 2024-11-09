@@ -18,7 +18,7 @@ docker-compose up --build
 
 ### Cargar base de datos
 
-Ir a la carpeta backend y correr python3 -m eval.evaluate_rag_qa luego de modificar la variable de ese script de load a true temporalmente
+Ir a la carpeta backend y correr python3 -m data.load_data
 
 ### Abrir el frontend
 
