@@ -4,6 +4,12 @@ import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 import { User } from '../types/user'
 
+interface AuthContextType {
+  currentUser: any
+  logout: () => Promise<void>
+  login: (email: string, password: string) => Promise<any>
+}
+
 const AuthContext = createContext<AuthContextType | undefined | any>(undefined)
 export function useAuth() {
   const context = useContext(AuthContext)
@@ -55,10 +61,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       {!loading && children}
     </AuthContext.Provider>
   )
-}
-
-interface AuthContextType {
-  currentUser: any
-  logout: () => Promise<void>
-  login: (email: string, password: string) => Promise<any>
 }
