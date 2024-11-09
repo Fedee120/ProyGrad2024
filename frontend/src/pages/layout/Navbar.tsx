@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="navbar-container">
             <div className="navigation-wrap">
                 <img src={Logo} alt='logo' width={80} height={44}/>
-                <NavLink to="/" className={({ isActive }) => isActive ? "navlink-item active" : "navlink-item"}>Home</NavLink> 
+                <NavLink to="/" className={({ isActive }) => isActive ? "navlink-item active" : "navlink-item"}>Chat</NavLink> 
             </div>
             <div className="navbar-options">
                 <ProfilePopup />

@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useChat } from '../../hooks/useChat';
 import Layout from "../layout";
 import './Chat.css';
+import Button from 'src/components/common/Button/Button';
 
 const Chat = () => {
   const { currentUser } = useAuth();
@@ -27,14 +28,9 @@ const Chat = () => {
           <h1 className="chat-title">
             Asistente Virtual para Docentes
           </h1>
-          {currentUser && (
-            <div className="user-info">
-              Bienvenido, {currentUser.email}
-            </div>
-          )}
         </div>
 
-        <div className="chat-sidebar">
+        <div className="chat-status">
           <h2>Comunicación con Backend</h2>
           <div className={`status-indicator ${backendStatus.isUp ? 'status-up' : 'status-down'}`}>
             {backendStatus.message}
@@ -57,9 +53,9 @@ const Chat = () => {
             placeholder="Haz una pregunta..."
             className="chat-input"
           />
-          <button type="submit" className="chat-submit">
+          <Button type="submit" size='large'>
             Enviar
-          </button>
+          </Button>
         </form>
       </div>
     </Layout>

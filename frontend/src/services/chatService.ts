@@ -42,13 +42,14 @@ export const chatService = {
   },
 
   handleError(error: unknown): Error {
+    console.log(error);
     if (error instanceof Error) {
         if (error.name === 'TypeError' && 
         (error.message.includes('CORS') || 
             error.message.includes('Failed to fetch') ||
             error.message.includes('Load failed') ||
             error.message.includes('Network request failed'))) {
-        return new Error('CORS error: Unable to connect to backend. Please check CORS configuration.');
+        return new Error('Server not responding, ensure it is up and running and CORS configuration is properly set.');
         }
         return error;
     }

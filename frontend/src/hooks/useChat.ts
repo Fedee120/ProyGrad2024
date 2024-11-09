@@ -19,7 +19,7 @@ export function useChat() {
     } catch (error) {
       setBackendStatus({ 
         isUp: false, 
-        message: error instanceof Error ? error.message : 'Error checking status'
+        message: 'Backend is down: ' + (error instanceof Error ? error.message : 'Error checking status')
       });
     }
   };

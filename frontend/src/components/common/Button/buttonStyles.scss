@@ -4,8 +4,8 @@
     justify-content: center;
     gap: 8px;
     border-radius: 4px;
-    background-color: #40E687;
-    color: #213029;
+    background-color: var(--primary-color);
+    color: var(--primary-text);
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -19,7 +19,7 @@
     }
     &.secondary {
         background-color: #f2f2f2;
-        color: #000;
+        color: var(--text-primary);
         &:hover {
             background-color: #f0f0f0;
         }
@@ -28,22 +28,21 @@
         width: 100%;
     }
     &.danger {
-        background-color: #e83838;
+        background-color: var(--error-color);
         color: white;
         &:hover {
-            background-color: #d42727;
+            background-color: var(--error-hover);
         }
     }
     &.disabled {
-        background-color: #eaeaea;
-        // pointer-events: none;
-        color: #b0b0b0;
+        background-color: var(--disabled-bg);
+        color: var(--disabled-text);
         cursor: not-allowed;
         &:hover {
-            background-color: #e1e1e1;
+            background-color: var(--disabled-bg);
         }
     }
     &:hover {
-        background-color: #3BD47C;
+        background-color: var(--primary-hover);
     }
 }
