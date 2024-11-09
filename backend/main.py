@@ -1,13 +1,36 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
+from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 from agents.agent import Agent
 import uvicorn
+from firebase_admin import auth, credentials, initialize_app
+
+# Inicializar Firebase Admin
+cred = credentials.Certificate("firebase-credentials.json")
+firebase_app = initialize_app(cred)
 
 app = FastAPI()
+security = HTTPBearer()
+
+async def verify_firebase_token(request: Request, token: HTTPBearer = Depends(security)):
+    try:
+        decoded_token = auth.verify_id_token(token.credentials)
+        request.state.user_id = decoded_token['uid']
+        return decoded_token
+    except auth.InvalidIdTokenError:
+        raise HTTPException(
+            status_code=401,
+            detail="Token is invalid or expired"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=401,
+            detail=f"Authentication failed: {str(e)}"
+        )
 
 @app.get("/check_status")
-async def check_status():
+async def check_status(user = Depends(verify_firebase_token)):
     return JSONResponse(content={"detail": "Backend is up and running"})
 
 class MessageRequest(BaseModel):
@@ -17,7 +40,10 @@ class MessageResponse(BaseModel):
     response: str
 
 @app.post("/invoke_agent", response_model=MessageResponse)
-def invoke_agent(request: MessageRequest):
+async def invoke_agent(
+    request: MessageRequest,
+    user = Depends(verify_firebase_token)
+):
     try:
         agent = Agent()
         result = agent.invoke({"input": request.message})
