@@ -23,10 +23,16 @@ const Chat: React.FC = () => {
           'Authorization': `Bearer ${currentUser?.token}`,
         },
       });
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`);
+      }
       setBackendStatus({ isUp: true, message: 'Backend is up!' });
     } catch (error) {
-      const errorMessage = `Error checking backend status: ${error}`;
+      console.error('Full error:', error);
+      const errorMessage = error instanceof Error 
+        ? `Error checking backend status: ${error.message}`
+        : `Error checking backend status: ${JSON.stringify(error)}`;
       setBackendStatus({ isUp: false, message: errorMessage });
       console.error(errorMessage);
     }
@@ -46,12 +52,17 @@ const Chat: React.FC = () => {
         }),
       });
 
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`);
+      }
       const data = await response.json();
       return data.response;
     } catch (error) {
-      const errorMessage = `Error communicating with backend: ${error}`;
-      console.error(errorMessage);
+      console.error('Full error:', error);
+      const errorMessage = error instanceof Error 
+        ? `Error communicating with backend: ${error.message}`
+        : `Error communicating with backend: ${JSON.stringify(error)}`;
       return errorMessage;
     }
   };
