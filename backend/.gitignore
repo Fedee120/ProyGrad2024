@@ -1,4 +1,5 @@
 firebase-credentials.json
 .env
 
+proygrad_venv/
 __pycache__/

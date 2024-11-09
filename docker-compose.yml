@@ -75,7 +75,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8080:8080" # This port matches the one specified in the backend'sDockerfile
+      - "8080:8080" # This port matches the one specified in the backend's Dockerfile
     volumes:
       - ./backend:/app
     environment:
