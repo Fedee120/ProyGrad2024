@@ -8,6 +8,7 @@ from firebase_admin import auth, credentials, initialize_app
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
+from agents.orchestrator import ChatOrchestrator
 
 load_dotenv()  # Load environment variables
 
@@ -62,9 +63,12 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
-        agent = Agent()
-        result = agent.invoke({"input": request.message})
-        response = result.get("output", "No response from agent")
+        # Initialize orchestrator (knowledge base is created internally)
+        orchestrator = ChatOrchestrator()
+        
+        # Process the query
+        response = orchestrator.process_query(request.message)
+        
         return MessageResponse(response=response)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
