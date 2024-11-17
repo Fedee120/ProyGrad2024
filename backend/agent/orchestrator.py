@@ -5,7 +5,7 @@ from agent.knowledge_base import KnowledgeBase
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import tool
 from dotenv import load_dotenv
-from agent.prompt.prompt_v3 import PROMPT
+from agent.prompt.prompt_v4 import PROMPT
 
 class ChatOrchestrator:
     def __init__(self):
@@ -33,6 +33,7 @@ class ChatOrchestrator:
         When a tool call is needed:
         - The query is about information
         - The query is about the meaning of something
+        - The query is about how to do something
 
         When a tool call is not needed:
         - Greetings or casual conversation
@@ -49,10 +50,7 @@ class ChatOrchestrator:
         """
         
         self.response_prompt = ChatPromptTemplate.from_messages([
-            ("system", """You are an expert assistant that provides information only if it was obtained from the context filter. 
-            You should not provide any information that has not been obtained from the context filter.
-            Do not add or infer information beyond what's in the context filter.
-            If information is provided by the context filter, incorporate it naturally into your response."""),
+            ("system", PROMPT),
             ("human", "{query}"),
             ("system", "Context from filter: {context}"),
             ("human", "Generate a helpful response based on the above context. Remember: Your role is to be accurate and helpful while strictly adhering to the information provided by the context filter.")
@@ -89,6 +87,8 @@ class ChatOrchestrator:
                 context_item.source 
                 for context_item in search_result.context
             ]
+            if not citations and "No information found" not in context:
+                raise ValueError("Citations list is empty but answer is not 'No information found'")
         else:
             print("No tool call detected - using filter response directly")
             print("\n" + "="*50 + "\n")

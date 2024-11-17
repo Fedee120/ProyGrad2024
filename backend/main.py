@@ -71,7 +71,10 @@ async def invoke_agent(
             citations=citations
         )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
+        if "request" in e.__dict__:
+            raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
+        else:
+            raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8090)
