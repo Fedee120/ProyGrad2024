@@ -32,18 +32,20 @@ class ChatOrchestrator:
         
         When a tool call is needed:
         - The query is about information
+        - The query is about the meaning of something
 
         When a tool call is not needed:
         - Greetings or casual conversation
         
-        Remember you should just filter. You should either call the tool or explain why no tool call is needed.
+        Remember you should just filter. You should either call the tool or explain why no tool call is needed. Never provide information by yourself and always call the tool if information is required to be able to cite the sources later on.
         
         Examples:
         - "What is Articial Intelligence?" -> Tool call required
-        - "Hello" -> No tool call required (greeting)
+        - "Hello" -> No search done because it's a greeting
         - "What is the capital of France?" -> Tool call required
         - "What is the weather in Tokyo?" -> Tool call required
-        - "My name is Juan" -> No tool call required (casual conversation)
+        - "My name is Juan" -> No search done because it's a casual conversation
+        - "What does it mean to clap my hands?" -> Tool call required
         """
         
         self.response_prompt = ChatPromptTemplate.from_messages([
