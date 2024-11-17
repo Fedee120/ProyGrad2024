@@ -1,8 +1,8 @@
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_milvus import Milvus
 from uuid import uuid4
-from langchain_core.prompts import PromptTemplate
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, BaseMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from rags.IRAG import IRAG
 import os
 from pydantic import BaseModel, Field
@@ -108,7 +108,7 @@ class RAG(IRAG):
         results = self.vector_store.similarity_search(query, k=k, filter=filter)
         return results
 
-    def generate_answer(self, question: str):
+    def generate_answer(self, question: str, history: List[BaseMessage] = None):
         print("\n" + "="*50 + "\n")
         print(f"Processing question: {question}")
         print("\n" + "="*50 + "\n")

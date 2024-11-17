@@ -1,8 +1,8 @@
 from typing import List, Tuple
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, BaseMessage
-from agent.knowledge_base import KnowledgeBase
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from agent.knowledge_base import KnowledgeBase
 from langchain_core.tools import tool
 from dotenv import load_dotenv
 from agent.prompt.prompt_v4 import PROMPT
@@ -34,6 +34,7 @@ class ChatOrchestrator:
         - The query is about information
         - The query is about the meaning of something
         - The query is about how to do something
+        - The query is about past messages in the conversation no matter the lack of context (e.g. "Can you explain that last part again?" or "Tell me more about what you just said")
 
         When a tool call is not needed:
         - Greetings or casual conversation
@@ -62,21 +63,7 @@ class ChatOrchestrator:
         """Search for specific information in the knowledge base."""
         return 
     
-    def _format_history_messages(self, history: List[dict]) -> List[BaseMessage]:
-        """Convert chat history into a list of messages."""
-        if not history:
-            return []
-        
-        formatted_messages = []
-        for msg in history:
-            if msg["role"] == "user":
-                formatted_messages.append(HumanMessage(content=msg["content"]))
-            else:
-                formatted_messages.append(AIMessage(content=msg["content"]))
-        
-        return formatted_messages
-
-    def process_query(self, query: str, history: List[dict] = None) -> Tuple[str, list[str], bool]:
+    def process_query(self, query: str, history: List[BaseMessage]) -> Tuple[str, list[str], bool]:
         print("\n" + "="*50 + "\n")
         print(f"Processing query: {query}")
         print("\n" + "="*50 + "\n")
@@ -95,7 +82,7 @@ class ChatOrchestrator:
             print("Tool call detected - searching knowledge base")
             print("\n" + "="*50 + "\n")
             
-            search_result = self.knowledge_base.search(query)
+            search_result = self.knowledge_base.search(query, history)
             
             context = search_result.answer
             citations = [
@@ -115,18 +102,11 @@ class ChatOrchestrator:
         print(f"Citations: {citations}")
         print("\n" + "="*50 + "\n")
         
-        history_messages = self._format_history_messages(history or [])
-        print(self.response_prompt.format(
-                query=query,
-                context=context,
-                history=history_messages
-            ))
-        
         final_response = self.response_llm.invoke(
             self.response_prompt.format(
                 query=query,
                 context=context,
-                history=history_messages
+                history=history
             )
         )
         print(f"Final response: {final_response.content}")
