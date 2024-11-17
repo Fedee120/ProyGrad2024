@@ -40,7 +40,10 @@ class RAG(IRAG):
         )
         
         # Initialize LLM with structured output
-        self.llm = ChatOpenAI(model=llm_model_name).with_structured_output(QAResponse)
+        self.llm = ChatOpenAI(
+            model=llm_model_name,
+            temperature=0
+        ).with_structured_output(QAResponse)
         
         self.prompt_template = """You are an assistant for question-answering tasks. 
         Use the following pieces of retrieved context to answer the question. 
@@ -50,7 +53,7 @@ class RAG(IRAG):
         Question: {question}
         Context: {context}
         
-        Respond with your answer and the specific context pieces you used, and remember only to include the context pieces that you actually used to form your answer."""
+        Respond with your answer and the specific context pieces you used, and remember to include only the context pieces that you actually used to form your answer and to respond only with the context."""
 
         self.prompt = PromptTemplate(
             input_variables=["context", "question"],
@@ -88,18 +91,33 @@ class RAG(IRAG):
         return results
 
     def generate_answer(self, question: str):
+        print("\n" + "="*50 + "\n")
+        print(f"Processing question: {question}")
+        print("\n" + "="*50 + "\n")
+
         docs = self.retriever.invoke(question)
+        print(f"Retrieved {len(docs)} documents")
+        print("\n" + "="*50 + "\n")
         
         context_parts = []
         for i, doc in enumerate(docs, 1):
             metadata_str = f"---- Context {i} METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
             content_str = f"---- Context {i} Start ----\n{doc.page_content}\n---- Context {i} End ----"
             context_parts.append(f"{metadata_str}\n{content_str}")
+            print(f"Document {i}:")
+            print(metadata_str)
+            print(content_str)
+            print("\n" + "="*50 + "\n")
             
         context = "\n\n".join(context_parts)
         prompt_text = self.prompt.format(context=context, question=question)
+        print("Generated prompt:")
+        print(prompt_text)
+        print("\n" + "="*50 + "\n")
         
         # The response will automatically be structured according to QAResponse schema
         response = self.llm.invoke([HumanMessage(content=prompt_text)])
-        
+        print("LLM Response:")
+        print(response)
+        print("\n" + "="*50 + "\n")
         return response
