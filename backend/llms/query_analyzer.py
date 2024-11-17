@@ -16,6 +16,11 @@ class QueryAnalysis(BaseModel):
 
 class QueryAnalyzer:
     def __init__(self):
+        self.llm = ChatOpenAI(
+            model="gpt-4o-mini", 
+            temperature=0
+        ).with_structured_output(QueryAnalysis)
+
         system_prompt_text = """You are an expert at analyzing questions and converting them into optimal search queries.
         Your task is to:
         1. Use the conversation history to resolve any references in the query (e.g. "it", "that", "they")
@@ -46,13 +51,8 @@ class QueryAnalyzer:
             MessagesPlaceholder(variable_name="history"),
             ("human", "{query}")
         ])
-        
-        self.llm = ChatOpenAI(
-            model="gpt-4o-mini", 
-            temperature=0
-        ).with_structured_output(QueryAnalysis)
 
-    def analyze_query(
+    def analyze(
         self, 
         query: str, 
         history: List[BaseMessage]
