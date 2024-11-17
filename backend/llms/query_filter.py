@@ -25,17 +25,21 @@ class QueryFilter:
         - The query is about past messages in the conversation no matter the lack of context (e.g. "Can you explain that last part again?" or "Tell me more about what you just said")
 
         When a tool call is not needed:
-        - Greetings or casual conversation
+        - Greetings
+        - Casual conversation with no focus on having something being answered
         
         Remember you should just filter. You should either call the tool or explain why no tool call is needed. Never provide information by yourself and always call the tool if the topic has factual information that could enrich the conversation.
         
         Examples:
-        - "What is Articial Intelligence?" -> Tool call required
         - "Hello" -> No search done because it's a greeting
+        - "My name is Juan" -> No search done because it's a casual conversation
+        - "Wow, that's a really cool project" -> No search done because it's a casual conversation
+        - "What is Articial Intelligence?" -> Tool call required
         - "What is the capital of France?" -> Tool call required
         - "What is the weather in Tokyo?" -> Tool call required
-        - "My name is Juan" -> No search done because it's a casual conversation
         - "What does it mean to clap my hands?" -> Tool call required
+        - "Can you explain that last part again?" -> Tool call required
+        - "What could it be useful for?" -> Tool call required
         """
 
     @tool
