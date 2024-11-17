@@ -52,10 +52,11 @@ async def check_status(user = Depends(verify_firebase_token)):
 
 class MessageRequest(BaseModel):
     message: str
+    history: list[dict] = []
 
 class MessageResponse(BaseModel):
     response: str
-    citations: list[str] = []  # Add citations field
+    citations: list[str] = []
 
 @app.post("/invoke_agent", response_model=MessageResponse)
 async def invoke_agent(
@@ -64,7 +65,10 @@ async def invoke_agent(
 ):
     try:
         orchestrator = ChatOrchestrator()
-        response, citations, _ = orchestrator.process_query(request.message)
+        response, citations, _ = orchestrator.process_query(
+            request.message,
+            request.history
+        )
         
         return MessageResponse(
             response=response,

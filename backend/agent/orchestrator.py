@@ -1,8 +1,8 @@
 from typing import List, Tuple
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, BaseMessage
 from agent.knowledge_base import KnowledgeBase
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import tool
 from dotenv import load_dotenv
 from agent.prompt.prompt_v4 import PROMPT
@@ -20,7 +20,7 @@ class ChatOrchestrator:
 
         self.response_llm = ChatOpenAI(
             model="gpt-4o",
-            temperature=0.7
+            temperature=0.6
         )
 
         self.filter_prompt = """You are a domain expert filter that determines whether queries require searching for information or can be handled directly. 
@@ -51,9 +51,10 @@ class ChatOrchestrator:
         
         self.response_prompt = ChatPromptTemplate.from_messages([
             ("system", PROMPT),
-            ("human", "{query}"),
             ("system", "Context from filter: {context}"),
-            ("human", "Generate a helpful response based on the above context. Remember: Your role is to be accurate and helpful while strictly adhering to the information provided by the context filter.")
+            MessagesPlaceholder(variable_name="history"),
+            ("human", "{query}"),
+            ("human", "Generate a helpful response based on the above context and conversation history. Remember: Your role is to be accurate and helpful while strictly adhering to the information provided by the context filter.")
         ])
 
     @tool
@@ -61,7 +62,21 @@ class ChatOrchestrator:
         """Search for specific information in the knowledge base."""
         return 
     
-    def process_query(self, query: str) -> Tuple[str, list[str], bool]:
+    def _format_history_messages(self, history: List[dict]) -> List[BaseMessage]:
+        """Convert chat history into a list of messages."""
+        if not history:
+            return []
+        
+        formatted_messages = []
+        for msg in history:
+            if msg["role"] == "user":
+                formatted_messages.append(HumanMessage(content=msg["content"]))
+            else:
+                formatted_messages.append(AIMessage(content=msg["content"]))
+        
+        return formatted_messages
+
+    def process_query(self, query: str, history: List[dict] = None) -> Tuple[str, list[str], bool]:
         print("\n" + "="*50 + "\n")
         print(f"Processing query: {query}")
         print("\n" + "="*50 + "\n")
@@ -100,10 +115,18 @@ class ChatOrchestrator:
         print(f"Citations: {citations}")
         print("\n" + "="*50 + "\n")
         
+        history_messages = self._format_history_messages(history or [])
+        print(self.response_prompt.format(
+                query=query,
+                context=context,
+                history=history_messages
+            ))
+        
         final_response = self.response_llm.invoke(
             self.response_prompt.format(
                 query=query,
-                context=context
+                context=context,
+                history=history_messages
             )
         )
         print(f"Final response: {final_response.content}")

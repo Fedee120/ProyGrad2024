@@ -7,6 +7,8 @@ from rags.IRAG import IRAG
 import os
 from pydantic import BaseModel, Field
 from typing import List
+from pymilvus import connections
+import time
 
 # Define the schema for structured output
 class ContextItem(BaseModel):
@@ -30,11 +32,13 @@ class RAG(IRAG):
         embeddings_model_name: str,
     ):
         self.embeddings = OpenAIEmbeddings(model=embeddings_model_name)
+        
         self.vector_store = Milvus(
             embedding_function=self.embeddings,
             connection_args={"uri": URI},
             collection_name=COLLECTION_NAME,
         )
+        
         self.retriever = self.vector_store.as_retriever(
             search_type=search_type, search_kwargs=search_kwargs
         )
@@ -59,6 +63,20 @@ class RAG(IRAG):
             input_variables=["context", "question"],
             template=self.prompt_template,
         )
+
+        self.max_retries = 3
+
+    def _safe_search(self, query):
+        for attempt in range(self.max_retries):
+            try:
+                return self.retriever.invoke(query)
+            except Exception as e:
+                if attempt == self.max_retries - 1:
+                    raise e
+                print(f"Search failed, attempt {attempt + 1}/{self.max_retries}. Reconnecting...")
+                connections.disconnect()
+                time.sleep(1)
+                connections.connect(uri=self.uri)
 
     def add_documents(self, documents: list, ids: list = None):
         if ids is None:
@@ -95,7 +113,7 @@ class RAG(IRAG):
         print(f"Processing question: {question}")
         print("\n" + "="*50 + "\n")
 
-        docs = self.retriever.invoke(question)
+        docs = self._safe_search(question)
         print(f"Retrieved {len(docs)} documents")
         print("\n" + "="*50 + "\n")
         
