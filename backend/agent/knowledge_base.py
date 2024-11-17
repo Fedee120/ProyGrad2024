@@ -11,9 +11,8 @@ class KnowledgeBase():
         rag = RAGFactory.create_rag(
             URI=os.getenv("MILVUS_STANDALONE_URL"), 
             COLLECTION_NAME="real_collection", 
-            search_kwargs={"k": 10}, 
+            search_kwargs={"k": 5}, 
             search_type="mmr", 
-            llm_model_name="gpt-4o", 
             embeddings_model_name="text-embedding-3-small")
         return rag.generate_answer(query, history)
 

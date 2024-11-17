@@ -1,6 +1,6 @@
 from typing import List, Tuple
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, BaseMessage
+from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from agent.knowledge_base import KnowledgeBase
 from langchain_core.tools import tool
@@ -34,12 +34,14 @@ class ChatOrchestrator:
         - The query is about information
         - The query is about the meaning of something
         - The query is about how to do something
+        - The query is about a concern or reflection
+        - The query is about a debate or discussion
         - The query is about past messages in the conversation no matter the lack of context (e.g. "Can you explain that last part again?" or "Tell me more about what you just said")
 
         When a tool call is not needed:
         - Greetings or casual conversation
         
-        Remember you should just filter. You should either call the tool or explain why no tool call is needed. Never provide information by yourself and always call the tool if information is required to be able to cite the sources later on.
+        Remember you should just filter. You should either call the tool or explain why no tool call is needed. Never provide information by yourself and always call the tool if the topic has factual information that could enrich the conversation.
         
         Examples:
         - "What is Articial Intelligence?" -> Tool call required
@@ -89,6 +91,8 @@ class ChatOrchestrator:
                 context_item.source 
                 for context_item in search_result.context
             ]
+            print(f"\n\nCitations: {citations}")
+            print(f"\n\nContext: {search_result.context}")
             if not citations and "No information found" not in context:
                 raise ValueError("Citations list is empty but answer is not 'No information found'")
         else:

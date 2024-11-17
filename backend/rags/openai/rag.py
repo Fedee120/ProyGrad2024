@@ -1,14 +1,16 @@
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_milvus import Milvus
 from uuid import uuid4
-from langchain_core.messages import HumanMessage, BaseMessage
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.messages import BaseMessage
+from langchain_core.prompts import PromptTemplate
 from rags.IRAG import IRAG
 import os
 from pydantic import BaseModel, Field
 from typing import List
 from pymilvus import connections
 import time
+from .query_analyzer import QueryAnalyzer
+from langchain_core.documents import Document
 
 # Define the schema for structured output
 class ContextItem(BaseModel):
@@ -21,6 +23,11 @@ class QAResponse(BaseModel):
     answer: str = Field(description="The answer to the question based on the provided context")
     context: List[ContextItem] = Field(description="List of context pieces that were actually used to form the answer, if it was not used do not return it")
     
+class SearchResult(BaseModel):
+    """Result from a single search query"""
+    query: str = Field(description="The query that produced these results")
+    documents: List[Document] = Field(description="Retrieved documents for this query")
+
 class RAG(IRAG):
     def __init__(
         self,
@@ -28,7 +35,6 @@ class RAG(IRAG):
         COLLECTION_NAME: str,
         search_kwargs: dict,
         search_type: str,
-        llm_model_name: str,
         embeddings_model_name: str,
     ):
         self.embeddings = OpenAIEmbeddings(model=embeddings_model_name)
@@ -45,22 +51,29 @@ class RAG(IRAG):
         
         # Initialize LLM with structured output
         self.llm = ChatOpenAI(
-            model=llm_model_name,
+            model="gpt-4o-mini",
             temperature=0
         ).with_structured_output(QAResponse)
         
-        self.prompt_template = """You are an assistant for question-answering tasks. 
-        Use the following pieces of retrieved context to answer the question. 
-        Do not add information that does not come from the context.
-        If you don't have information or don't use any context pieces, just say "No information found".
+        self.query_analyzer = QueryAnalyzer()
+        
+        # Update prompt to handle multiple search results
+        self.prompt_template = """You are an assistant for question-answering tasks.
+        Below you will find multiple search results for different aspects of the user's question.
+        Use these search results to provide a comprehensive answer.
         
         Question: {question}
-        Context: {context}
+        Context: {search_results}
         
-        Respond with your answer and the specific context pieces you used, and remember to include only the context pieces that you actually used to form your answer and to respond only with the context."""
+        Remember:
+        - Only use information from the provided search results
+        - If search results don't contain relevant information, say "No information found"
+        - Be clear about which parts of your answer come from which search results
+        - Maintain accuracy while being helpful
+        """
 
         self.prompt = PromptTemplate(
-            input_variables=["context", "question"],
+            input_variables=["search_results", "question"],
             template=self.prompt_template,
         )
 
@@ -108,33 +121,47 @@ class RAG(IRAG):
         results = self.vector_store.similarity_search(query, k=k, filter=filter)
         return results
 
+    def _format_search_results(self, results: List[SearchResult]) -> str:
+        formatted = []
+        for result in results:
+            for doc in result.documents:
+                metadata_str = f"---- Context METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
+                content_str = f"---- Context Start ----\n{doc.page_content}\n---- Context End ----"
+                formatted.append(f"{metadata_str}\n{content_str}")
+                print(f"Document:")
+                print(metadata_str)
+                print(content_str)
+                print("\n" + "="*50 + "\n")
+        return "\n\n".join(formatted)
+
     def generate_answer(self, question: str, history: List[BaseMessage] = None):
         print("\n" + "="*50 + "\n")
         print(f"Processing question: {question}")
-        print("\n" + "="*50 + "\n")
-
-        docs = self._safe_search(question)
-        print(f"Retrieved {len(docs)} documents")
-        print("\n" + "="*50 + "\n")
         
-        context_parts = []
-        for i, doc in enumerate(docs, 1):
-            metadata_str = f"---- Context {i} METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
-            content_str = f"---- Context {i} Start ----\n{doc.page_content}\n---- Context {i} End ----"
-            context_parts.append(f"{metadata_str}\n{content_str}")
-            print(f"Document {i}:")
-            print(metadata_str)
-            print(content_str)
-            print("\n" + "="*50 + "\n")
-            
-        context = "\n\n".join(context_parts)
-        prompt_text = self.prompt.format(context=context, question=question)
-        print("Generated prompt:")
-        print(prompt_text)
-        print("\n" + "="*50 + "\n")
+        # 1. Get optimized search queries
+        query_analysis = self.query_analyzer.analyze_query(question, history)
+        print(f"\nQuery analysis: {query_analysis}")
+        
+        # 2. Perform searches for each query
+        search_results = []
+        for query in query_analysis.queries:
+            docs = self._safe_search(query)
+            search_results.append(SearchResult(
+                query=query,
+                documents=docs
+            ))
+        
+        # 3. Format results
+        formatted_results = self._format_search_results(search_results)
+        print(f"\nFormatted search results:\n{formatted_results}")
         
         # The response will automatically be structured according to QAResponse schema
-        response = self.llm.invoke([HumanMessage(content=prompt_text)])
+        response = self.llm.invoke(
+            self.prompt.format(
+                question=query_analysis.updated_query, 
+                search_results=formatted_results
+            )
+        )
         print("LLM Response:")
         print(response)
         print("\n" + "="*50 + "\n")
