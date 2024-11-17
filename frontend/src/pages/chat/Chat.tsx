@@ -41,6 +41,16 @@ const Chat = () => {
           {messages.map((message, index) => (
             <div key={index} className={`message ${message.role}`}>
               <div className="message-content">{message.content}</div>
+              {message.citations && message.citations.length > 0 && (
+                <div className="message-citations">
+                  <div className="citations-header">Sources:</div>
+                  <ul>
+                    {message.citations.map((citation, citationIndex) => (
+                      <li key={citationIndex}>{citation}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           ))}
         </div>

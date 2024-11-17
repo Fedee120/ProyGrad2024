@@ -2,13 +2,12 @@ from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel
-from agent.agent import Agent
 import uvicorn
 from firebase_admin import auth, credentials, initialize_app
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
-from agents.orchestrator import ChatOrchestrator
+from agent.orchestrator import ChatOrchestrator
 
 load_dotenv()  # Load environment variables
 
@@ -56,6 +55,7 @@ class MessageRequest(BaseModel):
 
 class MessageResponse(BaseModel):
     response: str
+    citations: list[str] = []  # Add citations field
 
 @app.post("/invoke_agent", response_model=MessageResponse)
 async def invoke_agent(
@@ -63,13 +63,13 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
-        # Initialize orchestrator (knowledge base is created internally)
         orchestrator = ChatOrchestrator()
+        response, citations, _ = orchestrator.process_query(request.message)
         
-        # Process the query
-        response = orchestrator.process_query(request.message)
-        
-        return MessageResponse(response=response)
+        return MessageResponse(
+            response=response,
+            citations=citations
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
 
