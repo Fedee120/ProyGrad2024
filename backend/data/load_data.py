@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+from rags.openai.rag import RAG
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -28,12 +31,9 @@ def load_data(rag):
     print("Added docs to collection")
 
 if __name__ == "__main__":
-    import os
-    from dotenv import load_dotenv
-    from rags.openai.rag import RAG
     load_dotenv()
 
-    rag = RAG(URI=os.getenv("MILVUS_STANDALONE_URL"), COLLECTION_NAME="real_collection", search_kwargs={"k": 10}, search_type="mmr", llm_model_name="gpt-4o", embeddings_model_name="text-embedding-3-small")
+    rag = RAG(URI=os.getenv("MILVUS_STANDALONE_URL"), COLLECTION_NAME="real_collection", search_kwargs={"k": 5}, search_type="mmr", embeddings_model_name="text-embedding-3-small")
 
     rag.delete_all_documents()
     load_data(rag)
