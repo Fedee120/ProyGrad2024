@@ -25,8 +25,8 @@ services:
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
     ports:
-      - "9001:9001"
-      - "9000:9000"
+      - "127.0.0.1:9001:9001"
+      - "127.0.0.1:9000:9000"
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
     command: minio server /minio_data --console-address ":9001"
@@ -54,8 +54,8 @@ services:
       timeout: 20s
       retries: 3
     ports:
-      - "19530:19530"
-      - "9091:9091"
+      - "127.0.0.1:19530:19530"
+      - "127.0.0.1:9091:9091"
     depends_on:
       - "etcd"
       - "minio"
@@ -64,7 +64,7 @@ services:
     image: zilliz/attu:latest
     container_name: attu_service
     ports:
-      - "8000:3000"
+      - "127.0.0.1:8000:3000"
     environment:
       HOST_URL: "http://localhost:8000"
       MILVUS_URL: milvus-standalone:19530
@@ -73,7 +73,7 @@ services:
     container_name: mlflow_service
     image: ghcr.io/mlflow/mlflow:latest
     ports:
-      - "8001:8001"
+      - "127.0.0.1:8001:8001"
     command: mlflow server --host 0.0.0.0 --port 8001
 
   backend:
@@ -82,7 +82,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8080:8080" # This port matches the one specified in the backend's Dockerfile
+      - "127.0.0.1:8080:8080" # This port matches the one specified in the backend's Dockerfile
     volumes:
       - ./backend:/app
     environment:
