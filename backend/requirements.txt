@@ -8,6 +8,7 @@ python-dotenv==1.0.1
 pypdf==4.3.0
 langchain-ai21==0.1.9
 firebase-admin==6.6.0
+mlflow==2.14.0
 
 langgraph==0.2.45
 langchain-milvus==0.1.6

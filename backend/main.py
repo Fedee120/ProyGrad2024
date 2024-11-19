@@ -12,8 +12,21 @@ from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
 from data.load_data import load_data
 from rags.openai.rag import RAG
+import mlflow
 
 load_dotenv()  # Load environment variables
+
+# Using a local MLflow tracking server
+mlflow.set_tracking_uri("http://localhost:8001")
+
+# Create a new experiment that the model and the traces will be logged to
+mlflow.set_experiment("LangChain Tracing")
+
+# Enable LangChain autologging
+# Note that models and examples are not required to be logged in order to log traces.
+# Simply enabling autolog for LangChain via mlflow.langchain.autolog() will enable trace logging.
+mlflow.langchain.autolog(log_models=True, log_input_examples=True)
+
 
 # Inicializar Firebase Admin
 cred = credentials.Certificate("firebase-credentials.json")
@@ -78,6 +91,7 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
+        mlflow.set_tag(key="user_id", value=user['uid'])
         orchestrator = ChatOrchestrator()
         response, citations, _ = orchestrator.process_query(
             request.message,
