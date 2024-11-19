@@ -24,9 +24,9 @@ services:
     environment:
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
-    expose:
-      - "9001"
-      - "9000"
+    ports:
+      - "9001:9001"
+      - "9000:9000"
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
     command: minio server /minio_data --console-address ":9001"
@@ -53,9 +53,9 @@ services:
       start_period: 90s
       timeout: 20s
       retries: 3
-    expose:
-      - "19530"
-      - "9091"
+    ports:
+      - "19530:19530"
+      - "9091:9091"
     depends_on:
       - "etcd"
       - "minio"
@@ -63,8 +63,8 @@ services:
   attu:
     image: zilliz/attu:latest
     container_name: attu_service
-    expose:
-      - "8000"
+    ports:
+      - "8000:3000"
     environment:
       HOST_URL: "http://localhost:8000"
       MILVUS_URL: milvus-standalone:19530
