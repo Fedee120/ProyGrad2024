@@ -69,6 +69,13 @@ services:
       HOST_URL: "http://localhost:8000"
       MILVUS_URL: milvus-standalone:19530
 
+  mlflow:
+    container_name: mlflow_service
+    image: ghcr.io/mlflow/mlflow:latest
+    ports:
+      - "8001:8001"
+    command: mlflow server --host 0.0.0.0 --port 8001
+
   backend:
     container_name: backend_service
     build:
@@ -81,8 +88,11 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
       - MILVUS_STANDALONE_URL=http://standalone:19530 # This URL overrides the one specified in the backend's .env file and matches the one specified in the standalone docker service
+      - MLFLOW_TRACKING_URI=http://mlflow:8001 # This URL overrides the one specified in the backend's .env file and matches the one specified in the mlflow docker service
+      - MLFLOW_EXPERIMENT=ProyGrad2024 - Chatbot
     depends_on:
       - "standalone"
+      - "mlflow"
       
   frontend:
     container_name: frontend_service

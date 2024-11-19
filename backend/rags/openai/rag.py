@@ -12,7 +12,8 @@ import time
 from llms.context_generator import ContextGenerator
 from llms.query_analyzer import QueryAnalyzer
 from langchain_core.documents import Document
-    
+import mlflow
+
 class SearchResult(BaseModel):
     """Result from a single search query"""
     query: str = Field(description="The query that produced these results")
@@ -44,6 +45,7 @@ class RAG(IRAG):
         
         self.max_retries = 3
 
+    @mlflow.trace(name="safe_search")
     def _safe_search(self, query):
         for attempt in range(self.max_retries):
             try:

@@ -17,16 +17,10 @@ import mlflow
 load_dotenv()  # Load environment variables
 
 # Using a local MLflow tracking server
-mlflow.set_tracking_uri("http://localhost:8001")
+mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI"))
 
 # Create a new experiment that the model and the traces will be logged to
-mlflow.set_experiment("LangChain Tracing")
-
-# Enable LangChain autologging
-# Note that models and examples are not required to be logged in order to log traces.
-# Simply enabling autolog for LangChain via mlflow.langchain.autolog() will enable trace logging.
-mlflow.langchain.autolog(log_models=True, log_input_examples=True)
-
+mlflow.set_experiment(os.getenv("MLFLOW_EXPERIMENT"))
 
 # Inicializar Firebase Admin
 cred = credentials.Certificate("firebase-credentials.json")
@@ -91,7 +85,6 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
-        mlflow.set_tag(key="user_id", value=user['uid'])
         orchestrator = ChatOrchestrator()
         response, citations, _ = orchestrator.process_query(
             request.message,
@@ -123,4 +116,9 @@ def _format_history_messages(history: List[dict]) -> List[BaseMessage]:
     return formatted_messages
 
 if __name__ == "__main__":
+    # Enable LangChain autologging
+    # Note that models and examples are not required to be logged in order to log traces.
+    # Simply enabling autolog for LangChain via mlflow.langchain.autolog() will enable trace logging.
+    mlflow.langchain.autolog(log_models=True, log_input_examples=True) # Done only in development to avoid logging the model interactions in production
+
     uvicorn.run(app, host="0.0.0.0", port=8090)
