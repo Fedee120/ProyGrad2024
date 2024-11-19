@@ -54,9 +54,15 @@ class RAG(IRAG):
                 if attempt == self.max_retries - 1:
                     raise e
                 print(f"Search failed, attempt {attempt + 1}/{self.max_retries}. Reconnecting...")
-                connections.disconnect()
+                try:
+                    connections.disconnect("default")
+                except Exception as disconnect_error:
+                    print(f"Error during disconnect: {disconnect_error}")
                 time.sleep(1)
-                connections.connect(uri=self.uri)
+                try:
+                    connections.connect(uri=self.uri, alias="default")
+                except Exception as connect_error:
+                    print(f"Error during connect: {connect_error}")
 
     def add_documents(self, documents: list, ids: list = None):
         if ids is None:
