@@ -21,17 +21,16 @@ class ContextGenerator:
         ).with_structured_output(ContextResponse)
 
         self.prompt_template = """You are an assistant for question-answering tasks.
-        Below you will find multiple search results for different aspects of the user's question.
-        Use these search results to provide a comprehensive answer.
+        Below you will find information you can use to answer the question.
+        Use this information to provide a comprehensive answer.
         
         Question: {question}
-        Context: {search_results}
+        Information: {search_results}
         
         Remember:
-        - Only use information from the provided search results
-        - If search results don't contain relevant information, say "No information found"
-        - Be clear about which parts of your answer come from which search results
-        - Maintain accuracy while being helpful
+        - Only use data from the provided information, never from your own knowledge
+        - Think step by step making sure your answer is grounded in the provided information
+        - If the information doesn't contain relevant data, return as your answer "No information found" with empty context
         """
 
         self.prompt = PromptTemplate(
