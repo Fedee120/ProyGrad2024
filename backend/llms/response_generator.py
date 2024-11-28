@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import BaseMessage
 from typing import List
+from langsmith import traceable
 
 class ResponseGenerator:
     def __init__(self, system_prompt: str):
@@ -18,6 +19,7 @@ class ResponseGenerator:
             ("human", "Generate a helpful response based on the above context and conversation history. Remember: Your role is to be accurate and helpful while strictly adhering to the information provided by the context filter.")
         ])
 
+    @traceable
     def generate_response(
         self,
         query: str,

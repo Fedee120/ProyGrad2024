@@ -67,6 +67,7 @@ async def check_status(user = Depends(verify_firebase_token)):
 class MessageRequest(BaseModel):
     message: str
     history: list[dict] = []
+    threadId: str
 
 class MessageResponse(BaseModel):
     response: str
@@ -81,7 +82,13 @@ async def invoke_agent(
         orchestrator = ChatOrchestrator()
         response, citations, _ = orchestrator.process_query(
             request.message,
-            _format_history_messages(request.history)
+            _format_history_messages(request.history),
+            langsmith_extra={
+                "metadata": {
+                    "email": user["email"],
+                    "thread_id": request.threadId
+                }
+            }
         )
         
         return MessageResponse(

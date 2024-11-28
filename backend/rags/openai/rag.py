@@ -12,6 +12,7 @@ import time
 from llms.context_generator import ContextGenerator
 from llms.query_analyzer import QueryAnalyzer
 from langchain_core.documents import Document
+from langsmith import traceable
 
 class SearchResult(BaseModel):
     """Result from a single search query"""
@@ -44,6 +45,7 @@ class RAG(IRAG):
         
         self.max_retries = 3
 
+    @traceable(run_type="retriever")
     def _safe_search(self, query):
         for attempt in range(self.max_retries):
             try:
@@ -104,6 +106,7 @@ class RAG(IRAG):
                 formatted.append(f"{metadata_str}\n{content_str}")
         return "\n\n".join(formatted)
 
+    @traceable
     def generate_answer(self, question: str, history: List[BaseMessage] = None):
         query_analysis = self.analyzer_llm.analyze(question, history)
 

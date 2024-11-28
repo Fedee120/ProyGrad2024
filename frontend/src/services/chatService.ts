@@ -23,7 +23,8 @@ export const chatService = {
     message: string, 
     userId: string, 
     token: string, 
-    history: { role: string; content: string }[]
+    history: { role: string; content: string }[],
+    threadId: string
   ): Promise<{response: string, citations: string[]}> {
     try {
       const response = await fetch(`${BACKEND_URL}/invoke_agent`, {
@@ -32,7 +33,7 @@ export const chatService = {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ message, userId, history }),
+        body: JSON.stringify({ message, userId, history, threadId }),
       });
 
       if (!response.ok) {

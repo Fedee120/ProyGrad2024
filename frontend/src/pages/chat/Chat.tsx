@@ -13,6 +13,7 @@ const Chat = () => {
     setInputMessage,
     sendMessage,
     backendStatus,
+    threadId,
   } = useChat();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,6 +29,9 @@ const Chat = () => {
           <h1 className="chat-title">
             Asistente Virtual para Docentes
           </h1>
+          <div className="thread-id">
+            ID: {threadId}
+          </div>
         </div>
 
         <div className="chat-status">

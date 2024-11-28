@@ -2,10 +2,12 @@ from dotenv import load_dotenv
 import os
 from typing import List
 from langchain_core.messages import BaseMessage
+from langsmith import traceable
 
 from rags.factory.RAGFactory import RAGFactory
 
 class KnowledgeBase():
+    @traceable
     def search(self, query: str, history: List[BaseMessage] = None):
         load_dotenv()
         rag = RAGFactory.create_rag(

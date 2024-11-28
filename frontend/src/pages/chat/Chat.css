@@ -123,4 +123,10 @@
 
 .message-citations li {
   margin: 2px 0;
+}
+
+.thread-id {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
 } 

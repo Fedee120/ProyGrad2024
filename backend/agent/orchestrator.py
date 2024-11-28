@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from agent.prompt.prompt_v4 import PROMPT
 from llms.query_filter import QueryFilter
 from llms.response_generator import ResponseGenerator
+from langsmith import traceable
 
 class ChatOrchestrator:
     def __init__(self):
@@ -14,6 +15,7 @@ class ChatOrchestrator:
         self.filter_llm = QueryFilter()
         self.response_llm = ResponseGenerator(PROMPT)
 
+    @traceable
     def process_query(self, query: str, history: List[BaseMessage]) -> Tuple[str, list[str], bool]:
         context = ""
         citations = []

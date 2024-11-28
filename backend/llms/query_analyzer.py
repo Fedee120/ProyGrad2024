@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from langchain_core.messages import BaseMessage
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-
+from langsmith import traceable
 class QueryAnalysis(BaseModel):
     """A list of optimized search queries and the updated original query."""
     updated_query: str = Field(
@@ -52,6 +52,7 @@ class QueryAnalyzer:
             ("human", "{query}")
         ])
 
+    @traceable
     def analyze(
         self, 
         query: str, 

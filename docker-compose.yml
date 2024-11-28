@@ -81,6 +81,7 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
       - MILVUS_STANDALONE_URL=http://standalone:19530 # This URL overrides the one specified in the backend's .env file and matches the one specified in the standalone docker service
+      - LANGCHAIN_PROJECT=${LANGCHAIN_PROJECT:-ProyGrad2024 (local docker)}
     depends_on:
       - "standalone"
       
