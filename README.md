@@ -18,9 +18,7 @@ docker-compose up --build
 
 ### Cargar base de datos
 
-Pegarle a http://localhost:8090/public/reload_data con un GET en Postman
-
-o ir a la carpeta backend y correr `python3 -m data.load_data` con el entorno de desarrollo configurado
+Ir a la carpeta backend y correr `python3 -m data.load_data` con el entorno de desarrollo configurado
 
 ### Abrir el frontend
 

@@ -11,7 +11,6 @@ from agent.orchestrator import ChatOrchestrator
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
 from data.load_data import load_data
-from rags.openai.rag import RAG
 
 load_dotenv()  # Load environment variables
 
