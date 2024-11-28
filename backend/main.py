@@ -86,7 +86,8 @@ async def invoke_agent(
             langsmith_extra={
                 "metadata": {
                     "email": user["email"],
-                    "thread_id": request.threadId
+                    "thread_id": request.threadId,
+                    "app_version": os.getenv("APP_VERSION") if os.getenv("APP_VERSION") else "unknown"
                 }
             }
         )

@@ -29,15 +29,16 @@ const Chat = () => {
           <h1 className="chat-title">
             Asistente Virtual para Docentes
           </h1>
-          <div className="thread-id">
-            ID: {threadId}
-          </div>
-        </div>
-
-        <div className="chat-status">
-          <h2>Comunicación con Backend</h2>
-          <div className={`status-indicator ${backendStatus.isUp ? 'status-up' : 'status-down'}`}>
-            {backendStatus.message}
+          <div className="header-info">
+            <div className={`status-indicator-small ${backendStatus.isUp ? 'status-up' : 'status-down'}`}>
+              {backendStatus.message}
+            </div>
+            <div className="app-version">
+              Version: {process.env.REACT_APP_APP_VERSION ?? ' unknown'}
+            </div>
+            <div className="thread-id">
+              ID: {threadId}
+            </div>
           </div>
         </div>
 
