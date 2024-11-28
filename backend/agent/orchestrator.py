@@ -15,17 +15,12 @@ class ChatOrchestrator:
         self.response_llm = ResponseGenerator(PROMPT)
 
     def process_query(self, query: str, history: List[BaseMessage]) -> Tuple[str, list[str], bool]:
-        print("\n" + "="*50 + "\n")
-        print(f"Processing query: {query}")
-        print("\n" + "="*50 + "\n")
-
         context = ""
         citations = []
 
         filter_response = self.filter_llm.filter(query)
 
         if filter_response.tool_calls:
-            print("Tool calls found, searching knowledge base")
             search_result = self.knowledge_base.search(query, history)
             
             context = search_result.answer
@@ -37,24 +32,13 @@ class ChatOrchestrator:
             if not citations and "No information found" not in context:
                 raise ValueError("Citations list is empty but answer is not 'No information found'")
         else:
-            print("No tool calls found, using filter response")
             context = filter_response.content
 
-        print("\n" + "="*50 + "\n")
-        print(f"Context: {context}")
-        print("\n" + "="*50 + "\n")
-        print(f"Citations: {citations}")
-        print("\n" + "="*50 + "\n")
-        
         final_response = self.response_llm.generate_response(
             query=query,
             context=context,
             history=history
         )
-        
-        print("\n" + "="*50 + "\n")
-        print(f"Final response: {final_response}")
-        print("\n" + "="*50 + "\n")
         
         return final_response, citations, filter_response.tool_calls
     
