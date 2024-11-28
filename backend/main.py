@@ -15,6 +15,13 @@ from rags.openai.rag import RAG
 
 load_dotenv()  # Load environment variables
 
+environment = os.getenv("ENVIRONMENT")
+is_production = environment == "prod"
+if is_production:
+    os.environ["LANGCHAIN_PROJECT"] = "ProyGrad2024"
+else:
+    os.environ["LANGCHAIN_PROJECT"] = f"ProyGrad2024 ({environment} - {os.getenv('DEVELOPER', 'Anonymous')})"
+
 # Inicializar Firebase Admin
 cred = credentials.Certificate("firebase-credentials.json")
 firebase_app = initialize_app(cred)
@@ -50,15 +57,15 @@ async def verify_firebase_token(request: Request, token: HTTPBearer = Depends(se
             detail=f"Authentication failed: {str(e)}"
         )
 
-@app.get("/public/reload_data")
-async def public_reload_data():
-    try:
-        rag = RAG(URI=os.getenv("MILVUS_STANDALONE_URL"), COLLECTION_NAME="real_collection", search_kwargs={"k": 5}, search_type="mmr", embeddings_model_name="text-embedding-3-small")
-        rag.delete_all_documents()
-        load_data(rag)
-        return JSONResponse(content={"detail": "Data reloaded"})
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# @app.get("/public/reload_data")
+# async def public_reload_data():
+#     try:
+#         rag = RAG(URI=os.getenv("MILVUS_STANDALONE_URL"), COLLECTION_NAME="real_collection", search_kwargs={"k": 5}, search_type="mmr", embeddings_model_name="text-embedding-3-small")
+#         rag.delete_all_documents()
+#         load_data(rag)
+#         return JSONResponse(content={"detail": "Data reloaded"})
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/check_status")
 async def check_status(user = Depends(verify_firebase_token)):
@@ -97,10 +104,13 @@ async def invoke_agent(
             citations=citations
         )
     except Exception as e:
-        if "request" in e.__dict__:
-            raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
+        if is_production:
+            raise HTTPException(status_code=500, detail=f"An error occurred while processing your request.")
         else:
-            raise HTTPException(status_code=500, detail=str(e))
+            if "request" in e.__dict__:
+                raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
+            else:
+                raise HTTPException(status_code=500, detail=str(e))
         
 def _format_history_messages(history: List[dict]) -> List[BaseMessage]:
     """Convert chat history into a list of messages."""
