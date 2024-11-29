@@ -16,6 +16,7 @@ const Chat = () => {
     backendStatus,
     threadId,
     isTyping,
+    hasError,
   } = useChat();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -89,14 +90,14 @@ const Chat = () => {
             type="text"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            placeholder="Haz una pregunta..."
+            placeholder={hasError ? "Ha habido un error, la conversación no se puede continuar" : "Haz una pregunta..."}
             className="chat-input"
-            disabled={isTyping}
+            disabled={isTyping || hasError}
           />
           <Button 
             type="submit" 
             size='large' 
-            disabled={isTyping}
+            disabled={isTyping || hasError}
           >
             Enviar
           </Button>
