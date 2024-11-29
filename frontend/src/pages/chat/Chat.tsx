@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useChat } from '../../hooks/useChat';
 import Layout from "../layout";
@@ -18,11 +18,22 @@ const Chat = () => {
     isTyping,
   } = useChat();
 
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setInputMessage('');
     await sendMessage(inputMessage);
   };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Scroll when messages change or typing state changes
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
 
   return (
     <Layout>
@@ -70,6 +81,7 @@ const Chat = () => {
               <span></span>
             </div>
           )}
+          <div ref={messagesEndRef} />
         </div>
 
         <form onSubmit={handleSubmit} className="chat-input-form">
