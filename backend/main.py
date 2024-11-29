@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 import uvicorn
-from firebase_admin import auth, credentials, initialize_app
+from firebase_admin import auth, credentials, initialize_app, get_app
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
@@ -21,9 +21,14 @@ if is_production:
 else:
     os.environ["LANGCHAIN_PROJECT"] = f"ProyGrad2024 ({environment} - {os.getenv('DEVELOPER', 'Anonymous')})"
 
-# Inicializar Firebase Admin
-cred = credentials.Certificate("firebase-credentials.json")
-firebase_app = initialize_app(cred)
+# Initialize Firebase Admin
+try:
+    # Try to get existing app
+    firebase_app = get_app()
+except ValueError:
+    # If no app exists, initialize with credentials
+    cred = credentials.Certificate("firebase-credentials.json")
+    firebase_app = initialize_app(cred)
 
 app = FastAPI()
 
@@ -126,4 +131,10 @@ def _format_history_messages(history: List[dict]) -> List[BaseMessage]:
     return formatted_messages
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8090)
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8090,
+        reload=True,           # Enable auto-reload
+        reload_dirs=["./"],    # Watch the current directory for changes
+    )
