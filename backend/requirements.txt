@@ -6,7 +6,6 @@ langchain-experimental==0.3.3
 langchainhub==0.1.21
 python-dotenv==1.0.1
 pypdf==4.3.0
-langchain-ai21==0.1.9
 firebase-admin==6.6.0
 
 langgraph==0.2.45
