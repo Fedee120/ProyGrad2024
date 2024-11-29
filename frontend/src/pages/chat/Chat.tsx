@@ -15,6 +15,7 @@ const Chat = () => {
     sendMessage,
     backendStatus,
     threadId,
+    isTyping,
   } = useChat();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -62,6 +63,13 @@ const Chat = () => {
               )}
             </div>
           ))}
+          {isTyping && (
+            <div className="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="chat-input-form">
@@ -71,8 +79,13 @@ const Chat = () => {
             onChange={(e) => setInputMessage(e.target.value)}
             placeholder="Haz una pregunta..."
             className="chat-input"
+            disabled={isTyping}
           />
-          <Button type="submit" size='large'>
+          <Button 
+            type="submit" 
+            size='large' 
+            disabled={isTyping}
+          >
             Enviar
           </Button>
         </form>

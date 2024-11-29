@@ -13,6 +13,7 @@ export function useChat() {
     isUp: boolean;
     message: string;
   }>({ isUp: false, message: 'Checking status...' });
+  const [isTyping, setIsTyping] = useState(false);
 
   const checkBackendStatus = async () => {
     try {
@@ -37,6 +38,7 @@ export function useChat() {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    setIsTyping(true);
     
     try {
       const messageHistory = messages.map(msg => ({
@@ -69,6 +71,8 @@ export function useChat() {
         timestamp: new Date().toISOString()
       };
       setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsTyping(false);
     }
   };
 
@@ -85,5 +89,6 @@ export function useChat() {
     sendMessage,
     backendStatus,
     threadId,
+    isTyping,
   };
 } 
