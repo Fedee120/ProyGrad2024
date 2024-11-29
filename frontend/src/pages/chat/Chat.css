@@ -81,6 +81,23 @@
   min-width: 60px;
 }
 
+.message.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  margin-right: auto;
+  min-width: 60px;
+  border-left: 4px solid #dc2626;
+}
+
+.message.error .message-timestamp {
+  color: rgba(153, 27, 27, 0.7);
+}
+
+/* Hide citations for error messages */
+.message.error .message-citations {
+  display: none;
+}
+
 .chat-input-form {
   display: flex;
   gap: 10px;

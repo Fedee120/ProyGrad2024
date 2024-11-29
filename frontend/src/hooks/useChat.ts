@@ -64,7 +64,7 @@ export function useChat() {
     } catch (error) {
       const errorMessage: ChatMessage = {
         id: "-",
-        role: 'assistant',
+        role: 'error',
         content: error instanceof Error ? error.message : 'Error sending message',
         timestamp: new Date().toISOString()
       };
