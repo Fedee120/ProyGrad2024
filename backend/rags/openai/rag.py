@@ -45,25 +45,6 @@ class RAG(IRAG):
         
         self.max_retries = 3
 
-    @traceable(run_type="retriever")
-    def _safe_search(self, query):
-        for attempt in range(self.max_retries):
-            try:
-                return self.retriever.invoke(query)
-            except Exception as e:
-                if attempt == self.max_retries - 1:
-                    raise e
-                print(f"Search failed, attempt {attempt + 1}/{self.max_retries}. Reconnecting...")
-                try:
-                    connections.disconnect("default")
-                except Exception as disconnect_error:
-                    print(f"Error during disconnect: {disconnect_error}")
-                time.sleep(1)
-                try:
-                    connections.connect(uri=self.uri, alias="default")
-                except Exception as connect_error:
-                    print(f"Error during connect: {connect_error}")
-
     def add_documents(self, documents: list, ids: list = None):
         if ids is None:
             ids = [str(uuid4()) for _ in range(len(documents))]
@@ -106,13 +87,17 @@ class RAG(IRAG):
                 formatted.append(f"{metadata_str}\n{content_str}")
         return "\n\n".join(formatted)
 
+    @traceable(run_type="retriever")
+    def retrieve(self, query):
+        return self.retriever.invoke(query)
+
     @traceable
     def generate_answer(self, question: str, history: List[BaseMessage] = None):
         query_analysis = self.analyzer_llm.analyze(question, history)
 
         search_results = []
         for query in query_analysis.queries:
-            docs = self._safe_search(query)
+            docs = self.retrieve(query)
             search_results.append(SearchResult(
                 query=query,
                 documents=docs

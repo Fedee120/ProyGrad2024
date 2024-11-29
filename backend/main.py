@@ -22,15 +22,14 @@ else:
     os.environ["LANGCHAIN_PROJECT"] = f"ProyGrad2024 ({environment} - {os.getenv('DEVELOPER', 'Anonymous')})"
 
 # Initialize Firebase Admin
-try:
-    # Try to get existing app
+try: # Try to get existing app
     firebase_app = get_app()
-except ValueError:
-    # If no app exists, initialize with credentials
+except ValueError: # If no app exists, initialize with credentials
     cred = credentials.Certificate("firebase-credentials.json")
     firebase_app = initialize_app(cred)
 
 app = FastAPI()
+orchestrator = ChatOrchestrator()
 
 # Split the CORS_ORIGINS string into a list
 origins = os.getenv("CORS_ORIGINS").split(",")
@@ -90,7 +89,6 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
-        orchestrator = ChatOrchestrator()
         response, citations, _ = orchestrator.process_query(
             request.message,
             _format_history_messages(request.history),
