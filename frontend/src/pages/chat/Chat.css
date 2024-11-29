@@ -59,11 +59,12 @@
 
 .message {
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 8px 12px;
   border-radius: 8px;
   max-width: 80%;
   width: fit-content;
   word-wrap: break-word;
+  position: relative;
 }
 
 .message.user {
@@ -126,6 +127,7 @@
   color: #666;
   border-top: 1px solid #eee;
   padding-top: 8px;
+  padding-right: 48px;
 }
 
 .citations-header {
@@ -147,4 +149,23 @@
   padding: 4px 8px;
   border-radius: 4px;
   text-align: right;
+}
+
+.message-header {
+  display: none;
+}
+
+.message-content {
+  display: inline-block;
+  padding-right: 48px;
+  width: 100%;
+}
+
+.message-timestamp {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  font-size: 0.65rem;
+  color: rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
 }

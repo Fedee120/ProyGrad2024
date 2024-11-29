@@ -30,8 +30,10 @@ export function useChat() {
     if (!message.trim() || !currentUser) return;
 
     const userMessage: ChatMessage = {
+      id: "-", // It will be defined in backend
       role: 'user',
       content: message,
+      timestamp: new Date().toISOString()
     };
 
     setMessages(prev => [...prev, userMessage]);
@@ -42,7 +44,7 @@ export function useChat() {
         content: msg.content
       }));
 
-      const { response, citations } = await chatService.sendMessage(
+      const { id, timestamp, response, citations } = await chatService.sendMessage(
         message, 
         currentUser.uid, 
         currentUser.token,
@@ -51,16 +53,20 @@ export function useChat() {
       );
       
       const assistantMessage: ChatMessage = {
+        id,
         role: 'assistant',
         content: response,
-        citations: citations
+        timestamp,
+        citations
       };
       
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       const errorMessage: ChatMessage = {
+        id: "-",
         role: 'assistant',
         content: error instanceof Error ? error.message : 'Error sending message',
+        timestamp: new Date().toISOString()
       };
       setMessages(prev => [...prev, errorMessage]);
     }

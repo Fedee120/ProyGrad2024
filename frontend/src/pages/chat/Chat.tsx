@@ -4,6 +4,7 @@ import { useChat } from '../../hooks/useChat';
 import Layout from "../layout";
 import './Chat.css';
 import Button from 'src/components/common/Button/Button';
+import { formatMessageTime } from '../../utils/dateUtils';
 
 const Chat = () => {
   const { currentUser } = useAuth();
@@ -43,9 +44,12 @@ const Chat = () => {
         </div>
 
         <div className="chat-messages">
-          {messages.map((message, index) => (
-            <div key={index} className={`message ${message.role}`}>
-              <div className="message-content">{message.content}</div>
+          {messages.map((message) => (
+            <div key={message.id} className={`message ${message.role}`}>
+              <div className="message-content">
+                {message.content}
+                <span className="message-timestamp">{formatMessageTime(message.timestamp)}</span>
+              </div>
               {message.citations && message.citations.length > 0 && (
                 <div className="message-citations">
                   <div className="citations-header">Sources:</div>

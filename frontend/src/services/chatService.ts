@@ -25,7 +25,7 @@ export const chatService = {
     token: string, 
     history: { role: string; content: string }[],
     threadId: string
-  ): Promise<{response: string, citations: string[]}> {
+  ): Promise<{id: string, timestamp: string, response: string, citations: string[]}> {
     try {
       const response = await fetch(`${BACKEND_URL}/invoke_agent`, {
         method: 'POST',
@@ -42,6 +42,8 @@ export const chatService = {
       }
       const data = await response.json();
       return {
+        id: data.id,
+        timestamp: data.timestamp,
         response: data.response,
         citations: data.citations || []
       };

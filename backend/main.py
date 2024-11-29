@@ -11,6 +11,8 @@ from agent.orchestrator import ChatOrchestrator
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
 from data.load_data import load_data
+from datetime import datetime, timezone
+import uuid
 
 load_dotenv()  # Load environment variables
 
@@ -80,6 +82,8 @@ class MessageRequest(BaseModel):
     threadId: str
 
 class MessageResponse(BaseModel):
+    id: str
+    timestamp: str
     response: str
     citations: list[str] = []
 
@@ -102,6 +106,8 @@ async def invoke_agent(
         )
         
         return MessageResponse(
+            id=str(uuid.uuid4()),
+            timestamp=datetime.now(timezone.utc).isoformat(),
             response=response,
             citations=citations
         )
