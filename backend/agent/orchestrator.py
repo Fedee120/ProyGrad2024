@@ -9,8 +9,6 @@ from langsmith import traceable
 
 class ChatOrchestrator:
     def __init__(self):
-        load_dotenv()
-        
         self.knowledge_base = KnowledgeBase()
         self.filter_llm = QueryFilter()
         self.response_llm = ResponseGenerator(PROMPT)
@@ -45,5 +43,7 @@ class ChatOrchestrator:
         return final_response, citations, filter_response.tool_calls
     
 if __name__ == "__main__":
+    load_dotenv()
+
     orchestrator = ChatOrchestrator()
     print(orchestrator.process_query("Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa."))

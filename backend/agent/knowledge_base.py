@@ -9,7 +9,6 @@ from rags.factory.RAGFactory import RAGFactory
 class KnowledgeBase():
     @traceable
     def search(self, query: str, history: List[BaseMessage] = None):
-        load_dotenv()
         rag = RAGFactory.create_rag(
             URI=os.getenv("MILVUS_STANDALONE_URL"), 
             COLLECTION_NAME="real_collection", 
@@ -19,5 +18,7 @@ class KnowledgeBase():
         return rag.generate_answer(query, history)
 
 if __name__ == "__main__":
+    load_dotenv()
+
     tool = KnowledgeBase()
     print(tool.search("¿Cuál es el color del cielo?"))
