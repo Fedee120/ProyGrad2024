@@ -109,7 +109,7 @@ async def invoke_agent(
         )
     except Exception as e:
         if is_production:
-            raise HTTPException(status_code=500, detail=f"An error occurred while processing your request.")
+            raise HTTPException(status_code=500, detail=f"Ha ocurrido un error al procesar su solicitud.")
         else:
             if "request" in e.__dict__:
                 raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")

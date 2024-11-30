@@ -20,7 +20,7 @@ export const chatService = {
 
       if (!response.ok) {
         const errorBody = await response.json();
-        throw new Error(errorBody.detail || 'Unknown error occurred');
+        throw new Error(errorBody.detail || 'Ha ocurrido un error desconocido');
       }
       const data = await response.json();
       return {
@@ -42,7 +42,7 @@ export const chatService = {
             error.message.includes('Failed to fetch') ||
             error.message.includes('Load failed') ||
             error.message.includes('Network request failed'))) {
-            return new Error('Server not responding, ensure it is up and running and CORS configuration is properly set.');
+            return new Error('El servidor no está respondiendo.');
         }
         // Try to parse JSON error message if it exists
         try {
@@ -58,6 +58,6 @@ export const chatService = {
         }
         return error;
     }
-    return new Error(`Unknown error: ${JSON.stringify(error)}`);
+    return new Error(`Error desconocido: ${JSON.stringify(error)}`);
   }
 }; 
