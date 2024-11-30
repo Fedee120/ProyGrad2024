@@ -89,7 +89,7 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
-        response, citations, _ = orchestrator.process_query(
+        response, citations = orchestrator.process_query(
             request.message,
             _format_history_messages(request.history),
             langsmith_extra={
