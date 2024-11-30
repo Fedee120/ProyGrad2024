@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { generateThreadId } from '../utils/threadUtils';
 
 export function useChat() {
-  const { currentUser } = useAuth();
+  const { currentUser, getIdToken } = useAuth();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [threadId] = useState(generateThreadId());
@@ -27,6 +27,9 @@ export function useChat() {
     setIsTyping(true);
     
     try {
+      const token = await getIdToken();
+      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for 500ms to ensure token is listed in the backend
+      
       const messageHistory = messages.map(msg => ({
         role: msg.role,
         content: msg.content
@@ -35,7 +38,7 @@ export function useChat() {
       const { id, timestamp, response, citations } = await chatService.sendMessage(
         message, 
         currentUser.uid, 
-        currentUser.token,
+        token,
         messageHistory,
         threadId
       );
