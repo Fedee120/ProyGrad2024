@@ -30,15 +30,24 @@ class RAG(IRAG):
     ):
         self.embeddings = OpenAIEmbeddings(model=embeddings_model_name)
         
-        self.vector_store = Milvus(
-            embedding_function=self.embeddings,
-            connection_args={"uri": URI},
-            collection_name=COLLECTION_NAME,
-        )
-        
-        self.retriever = self.vector_store.as_retriever(
-            search_type=search_type, search_kwargs=search_kwargs
-        )
+        retries = 3
+        while retries > 0:
+            try:
+                self.vector_store = Milvus(
+                    embedding_function=self.embeddings,
+                    connection_args={"uri": URI},
+                    collection_name=COLLECTION_NAME,
+                )
+                
+                self.retriever = self.vector_store.as_retriever(
+                    search_type=search_type, search_kwargs=search_kwargs
+                )
+                break
+            except Exception as e:
+                retries -= 1
+                if retries == 0:
+                    raise e
+                time.sleep(2)  # Wait 2 seconds before retrying
         
         self.context_llm = ContextGenerator()
         self.analyzer_llm = QueryAnalyzer()
