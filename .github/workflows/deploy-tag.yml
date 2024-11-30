@@ -20,16 +20,13 @@ jobs:
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
-        env:
-          TAG_NAME: "v${{ env.APP_VERSION }}"
         with:
           host: 179.27.96.162
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: TAG_NAME
           script: |
             cd ProyGrad2024
             git fetch --all --tags --force
-            git checkout $TAG_NAME
+            git checkout v${{ env.APP_VERSION }}
             docker-compose down
             export APP_VERSION=${{ env.APP_VERSION }} && ENVIRONMENT=prod docker-compose up --build -d 
