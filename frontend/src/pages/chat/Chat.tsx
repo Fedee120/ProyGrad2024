@@ -13,7 +13,6 @@ const Chat = () => {
     inputMessage,
     setInputMessage,
     sendMessage,
-    backendStatus,
     threadId,
     isTyping,
     hasError,
@@ -44,9 +43,6 @@ const Chat = () => {
             Asistente Virtual para Docentes
           </h1>
           <div className="header-info">
-            <div className={`status-indicator-small ${backendStatus.isUp ? 'status-up' : 'status-down'}`}>
-              {backendStatus.message}
-            </div>
             <div className="app-version">
               Version: {process.env.REACT_APP_APP_VERSION ?? ' unknown'}
             </div>

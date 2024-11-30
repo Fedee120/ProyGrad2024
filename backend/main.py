@@ -72,10 +72,6 @@ async def verify_firebase_token(request: Request, token: HTTPBearer = Depends(se
 #     except Exception as e:
 #         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/check_status")
-async def check_status(user = Depends(verify_firebase_token)):
-    return JSONResponse(content={"detail": "Backend is up and running"})
-
 class MessageRequest(BaseModel):
     message: str
     history: list[dict] = []

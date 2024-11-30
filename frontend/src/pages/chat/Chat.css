@@ -28,22 +28,6 @@
   margin-bottom: 20px;
 }
 
-.status-indicator {
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 10px;
-}
-
-.status-up {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.status-down {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
 .chat-messages {
   flex: 1;
   overflow-y: auto;
@@ -159,13 +143,6 @@
 
 .message-citations li {
   margin: 2px 0;
-}
-
-.status-indicator-small {
-  font-size: 0.8rem;
-  padding: 4px 8px;
-  border-radius: 4px;
-  text-align: right;
 }
 
 .message-header {

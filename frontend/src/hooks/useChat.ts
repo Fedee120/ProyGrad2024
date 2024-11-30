@@ -11,22 +11,6 @@ export function useChat() {
   const [threadId] = useState(generateThreadId());
   const [isTyping, setIsTyping] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [backendStatus, setBackendStatus] = useState<{
-    isUp: boolean;
-    message: string;
-  }>({ isUp: false, message: 'Checking status...' });
-
-  const checkBackendStatus = async () => {
-    try {
-      await chatService.checkStatus(currentUser?.token);
-      setBackendStatus({ isUp: true, message: 'Backend is up!' });
-    } catch (error) {
-      setBackendStatus({ 
-        isUp: false, 
-        message: 'Backend is down: ' + (error instanceof Error ? error.message : 'Error checking status')
-      });
-    }
-  };
 
   const sendMessage = async (message: string) => {
     if (!message.trim() || !currentUser) return;
@@ -79,18 +63,11 @@ export function useChat() {
     }
   };
 
-  useEffect(() => {
-    checkBackendStatus();
-    const intervalId = setInterval(checkBackendStatus, 30000);
-    return () => clearInterval(intervalId);
-  }, [currentUser]);
-
   return {
     messages,
     inputMessage,
     setInputMessage,
     sendMessage,
-    backendStatus,
     threadId,
     isTyping,
     hasError,

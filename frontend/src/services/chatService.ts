@@ -1,24 +1,6 @@
 import { BACKEND_URL } from '../constants';
 
 export const chatService = {
-  async checkStatus(token: string) {
-    try {
-      const response = await fetch(`${BACKEND_URL}/check_status`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        const errorBody = await response.text();
-        throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`);
-      }
-      return true;
-    } catch (error) {
-      throw this.handleError(error);
-    }
-  },
-
   async sendMessage(
     message: string, 
     userId: string, 
