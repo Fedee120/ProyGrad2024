@@ -1,13 +1,16 @@
 # ProyGrad2024
 
+El siguiente README.md describe los pasos para hacer el setup del entorno para correr el proyecto en modo desarrollo (local) y producción (docker).
+
+A destacar, ambos modos usan diferentes puertos para poder correr ambos modos a la vez sin cambiar nada, para lograr esto se usan variables de entorno para configurar los puertos de cada servicio, en local (.env-template files) se usan 8090 y 8091 los cuales son especificados en main.py (backend) y package.json (frontend), mientras que en docker (docker-compose.yml) se usan 8080 y 8081 los cuales son especificados en los respectivos Dockerfiles (+ nginx.conf en el caso de frontend). Tambien no importa si se quiere correr en desarrollo o en producción, es necesario levantar el docker para que Milvus esté corriendo.
 
 ## Para correr el proyecto
 
-### Configurar .env
+### Configurar el entorno para desarrollo
 
-Crear `.env` dentro de la carpeta backend siguiendo el `.env.template` dentro de la carpeta backend y pedir las claves para que los servicios funcionen
+Revisar el archivo `README.md` de la carpeta backend y frontend para ver como levantar el entorno de desarrollo para cada uno. En particular, es necesario configurar untracked secrets.
 
-### Levantar el docker que tiene la db, el backend y el fronted
+### Levantar el docker que tiene la db, el backend y el frontend
 
 ```console
 docker-compose up --build
@@ -15,37 +18,8 @@ docker-compose up --build
 
 ### Cargar base de datos
 
-Ir a la carpeta backend y correr python3 -m eval.evaluate_rag_qa luego de modificar la variable de ese script de load a true temporalmente
+Ir a la carpeta backend y correr python3 -m data.load_data
 
 ### Abrir el frontend
 
-Abrir el link http://localhost:8501 que deberia estar levantado el front para interactuar
-
-
-## Para configurar el entorno para desarrollar
-
-### Crear un entorno virtual (parados en el directorio del repositorio)
-
-```console
-python3 -m venv proygrad_venv
-```
-
-### Activar el entorno virtual
-
-```console
-source proygrad_venv/bin/activate
-```
-
-*Este comando ejecuta el script activate que se encuentra en el directorio bin dentro del entorno virtual. El script configura el entorno de shell actual para usar los paquetes y la configuración del entorno virtual. Realiza varios cambios como modificar la variable de entorno PATH, modificar el prompt del shell (la parte que se muestra antes de que escribas un comando) para indicar que estás en un entorno virtual, entre otras cosas.*
-
-Para desactivar el entorno virtual correr: 
-```console
-deactivate
-```
-
-### Instalar los paquetes Python requeridos para el proyecto
-
-```console
-pip3 install -r frontend/requirements.txt
-pip3 install -r backend/requirements.txt
-```
+Abrir el link http://localhost:8081 que deberia estar levantado el frontend para interactuar

@@ -1,9 +1,9 @@
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
-from tools.knowledge_base import KnowledgeBase
+from agent.tools.knowledge_base import KnowledgeBase
 from dotenv import load_dotenv
-from prompt.prompt_v3 import PROMPT
+from agent.prompt.prompt_v3 import PROMPT
 from langsmith import traceable
 import os
 

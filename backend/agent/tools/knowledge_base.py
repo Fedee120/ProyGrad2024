@@ -2,6 +2,10 @@ from typing import Optional, Type
 from langchain_core.callbacks import CallbackManagerForToolRun
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel, Field
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 from rags.factory.RAGFactory import RAGFactory
 
@@ -22,7 +26,7 @@ class KnowledgeBase(BaseTool):
     ) -> str:
         """Use the tool."""
         rag = RAGFactory.create_rag(
-            URI="http://standalone:19530", 
+            URI=os.getenv("MILVUS_STANDALONE_URL"), 
             COLLECTION_NAME="real_collection", 
             search_kwargs={"k": 10}, 
             search_type="mmr", 

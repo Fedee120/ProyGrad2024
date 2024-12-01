@@ -1,0 +1,14 @@
+.avg-wait-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    padding-bottom: 32px;
+    border-radius: 12px;
+    background-color: #213029;
+    min-height: 260px;
+    background-image: radial-gradient(circle at 120% 120%, #40e6886e 0%, #00000000 70%);
+    min-width: 140px;
+    max-width: 220px;
+    flex-grow: 1;
+}
