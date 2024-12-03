@@ -101,4 +101,26 @@
 .user-info {
   font-size: 0.9rem;
   color: var(--text-secondary);
+}
+
+.message-citations {
+  margin-top: 8px;
+  font-size: 0.8em;
+  color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
+
+.citations-header {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.message-citations ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.message-citations li {
+  margin: 2px 0;
 } 

@@ -19,7 +19,7 @@ export const chatService = {
     }
   },
 
-  async sendMessage(message: string, userId: string, token: string): Promise<string> {
+  async sendMessage(message: string, userId: string, token: string): Promise<{response: string, citations: string[]}> {
     try {
       const response = await fetch(`${BACKEND_URL}/invoke_agent`, {
         method: 'POST',
@@ -35,7 +35,10 @@ export const chatService = {
         throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`);
       }
       const data = await response.json();
-      return data.response;
+      return {
+        response: data.response,
+        citations: data.citations || []
+      };
     } catch (error) {
       throw this.handleError(error);
     }

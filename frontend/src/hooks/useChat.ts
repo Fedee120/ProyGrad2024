@@ -35,7 +35,7 @@ export function useChat() {
     setMessages(prev => [...prev, userMessage]);
     
     try {
-      const response = await chatService.sendMessage(
+      const { response, citations } = await chatService.sendMessage(
         message, 
         currentUser.uid, 
         currentUser.token
@@ -44,6 +44,7 @@ export function useChat() {
       const assistantMessage: ChatMessage = {
         role: 'assistant',
         content: response,
+        citations: citations
       };
       
       setMessages(prev => [...prev, assistantMessage]);
