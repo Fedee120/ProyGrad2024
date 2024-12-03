@@ -69,22 +69,25 @@ class RAG(IRAG):
         self.vector_store.delete(ids=ids)
 
     def delete_all_documents(self):
-        # Get the primary key field name
-        pk_field = self.vector_store.col.schema.primary_field.name
-        
-        # Query for all documents
-        results = self.vector_store.col.query(
-            expr=f"{pk_field} != ''", 
-            output_fields=[pk_field]
-        )
+        try:
+            # Get the primary key field name
+            pk_field = self.vector_store.col.schema.primary_field.name
+
+            # Query for all documents
+            results = self.vector_store.col.query(
+                expr=f"{pk_field} != ''", 
+                output_fields=[pk_field]
+            )
         
         # Extract IDs from results
-        all_ids = []
-        for result in results:
-            all_ids.append(str(result[pk_field]))
-        
-        if all_ids:
-            self.vector_store.delete(ids=all_ids)
+            all_ids = []
+            for result in results:
+                all_ids.append(str(result[pk_field]))
+
+            if all_ids:
+                self.vector_store.delete(ids=all_ids)
+        except Exception as e:
+            print(f"Error deleting documents: {e}")
 
     def similarity_search(self, query: str, k: int = 2, filter: dict = None):
         results = self.vector_store.similarity_search(query, k=k, filter=filter)
