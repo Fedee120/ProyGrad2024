@@ -37,6 +37,7 @@ class RAG(IRAG):
                     embedding_function=self.embeddings,
                     connection_args={"uri": URI},
                     collection_name=COLLECTION_NAME,
+                    search_params={"ef": 40}
                 )
                 
                 self.retriever = self.vector_store.as_retriever(
@@ -47,7 +48,7 @@ class RAG(IRAG):
                 retries -= 1
                 if retries == 0:
                     raise e
-                time.sleep(2)  # Wait 2 seconds before retrying
+                time.sleep(2) 
         
         self.context_llm = ContextGenerator()
         self.analyzer_llm = QueryAnalyzer()

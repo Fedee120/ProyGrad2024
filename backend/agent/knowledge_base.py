@@ -13,8 +13,8 @@ class KnowledgeBase():
             URI=os.getenv("MILVUS_STANDALONE_URL"), 
             COLLECTION_NAME="real_collection", 
             search_kwargs={
-                "k": 4,
-                "ef": 40
+                "k": 4,  # número de resultados finales
+                "fetch_k": 20,  # número de resultados iniciales de donde MMR seleccionará
             }, 
             search_type="mmr", 
             embeddings_model_name="text-embedding-3-small")
