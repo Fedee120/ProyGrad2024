@@ -23,8 +23,7 @@ const AuthForm = () => {
     resolver: yupResolver(schema)
   })
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
-
+  
   const onSubmit = async (data: { email: string, password: string }) => {
     setLoading(true)
     try {

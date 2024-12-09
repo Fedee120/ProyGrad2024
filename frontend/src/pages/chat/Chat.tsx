@@ -7,7 +7,6 @@ import Button from 'src/components/common/Button/Button';
 import { formatMessageTime } from '../../utils/dateUtils';
 
 const Chat = () => {
-  const { currentUser } = useAuth();
   const {
     messages,
     inputMessage,

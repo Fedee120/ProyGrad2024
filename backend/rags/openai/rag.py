@@ -1,8 +1,7 @@
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
 from langchain_milvus import Milvus
 from uuid import uuid4
 from langchain_core.messages import BaseMessage
-from langchain_core.prompts import PromptTemplate
 from rags.IRAG import IRAG
 import os
 from pydantic import BaseModel, Field

@@ -5,7 +5,6 @@ import Logo from '../../assets/logo.png'
 import ProfilePopup from 'src/components/common/ProfilePopup/ProfilePopup'
 
 const Navbar = () => {
-    const { currentUser } = useAuth()
     return (
         <div className="navbar-container">
             <div className="navigation-wrap">
