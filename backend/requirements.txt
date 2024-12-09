@@ -8,7 +8,6 @@ python-dotenv==1.0.1
 pypdf==4.3.0
 firebase-admin==6.6.0
 
-langgraph==0.2.45
 langchain-milvus==0.1.6
 langchain-groq==0.2.1
 langsmith==0.1.142
