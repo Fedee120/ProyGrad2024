@@ -76,7 +76,6 @@ class RAG(IRAG):
         try:
             # Get the primary key field name
             pk_field = self.vector_store.col.schema.primary_field.name
-            
             # Query for all documents
             results = self.vector_store.col.query(
                 expr=f"{pk_field} != ''", 
