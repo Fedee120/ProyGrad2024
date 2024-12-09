@@ -35,10 +35,16 @@ export function useChat() {
     setMessages(prev => [...prev, userMessage]);
     
     try {
+      const messageHistory = messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }));
+
       const { response, citations } = await chatService.sendMessage(
         message, 
         currentUser.uid, 
-        currentUser.token
+        currentUser.token,
+        messageHistory
       );
       
       const assistantMessage: ChatMessage = {

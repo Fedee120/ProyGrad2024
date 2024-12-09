@@ -19,7 +19,12 @@ export const chatService = {
     }
   },
 
-  async sendMessage(message: string, userId: string, token: string): Promise<{response: string, citations: string[]}> {
+  async sendMessage(
+    message: string, 
+    userId: string, 
+    token: string, 
+    history: { role: string; content: string }[]
+  ): Promise<{response: string, citations: string[]}> {
     try {
       const response = await fetch(`${BACKEND_URL}/invoke_agent`, {
         method: 'POST',
@@ -27,7 +32,7 @@ export const chatService = {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ message, userId }),
+        body: JSON.stringify({ message, userId, history }),
       });
 
       if (!response.ok) {

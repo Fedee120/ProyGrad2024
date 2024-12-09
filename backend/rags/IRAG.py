@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from typing import List
+from langchain_core.messages import BaseMessage
 
 class IRAG(ABC):
     @abstractmethod
@@ -14,5 +16,5 @@ class IRAG(ABC):
         pass
 
     @abstractmethod
-    def generate_answer(self, question: str):
+    def generate_answer(self, question: str, history: List[BaseMessage]):
         pass

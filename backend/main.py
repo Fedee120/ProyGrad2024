@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
 from agent.orchestrator import ChatOrchestrator
+from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
+from typing import List
 
 load_dotenv()  # Load environment variables
 
@@ -52,10 +54,11 @@ async def check_status(user = Depends(verify_firebase_token)):
 
 class MessageRequest(BaseModel):
     message: str
+    history: list[dict] = []
 
 class MessageResponse(BaseModel):
     response: str
-    citations: list[str] = []  # Add citations field
+    citations: list[str] = []
 
 @app.post("/invoke_agent", response_model=MessageResponse)
 async def invoke_agent(
@@ -64,7 +67,10 @@ async def invoke_agent(
 ):
     try:
         orchestrator = ChatOrchestrator()
-        response, citations, _ = orchestrator.process_query(request.message)
+        response, citations, _ = orchestrator.process_query(
+            request.message,
+            _format_history_messages(request.history)
+        )
         
         return MessageResponse(
             response=response,
@@ -75,6 +81,20 @@ async def invoke_agent(
             raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
         else:
             raise HTTPException(status_code=500, detail=str(e))
+        
+def _format_history_messages(history: List[dict]) -> List[BaseMessage]:
+    """Convert chat history into a list of messages."""
+    if not history:
+        return []
+    
+    formatted_messages = []
+    for msg in history:
+        if msg["role"] == "user":
+            formatted_messages.append(HumanMessage(content=msg["content"]))
+        else:
+            formatted_messages.append(AIMessage(content=msg["content"]))
+    
+    return formatted_messages
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8090)
