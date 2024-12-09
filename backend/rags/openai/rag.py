@@ -8,8 +8,8 @@ from pydantic import BaseModel, Field
 from typing import List
 from pymilvus import connections
 import time
-from llms.context_generator import ContextGenerator
-from llms.query_analyzer import QueryAnalyzer
+from llms.rag_response_generator import RAGResponseGenerator
+from llms.rag_query_analyzer import RAGQueryAnalyzer
 from langchain_core.documents import Document
 from langsmith import traceable
 
@@ -49,8 +49,8 @@ class RAG(IRAG):
                     raise e
                 time.sleep(2) 
         
-        self.context_llm = ContextGenerator()
-        self.analyzer_llm = QueryAnalyzer()
+        self.rag_response_generator = RAGResponseGenerator()
+        self.rag_query_analyzer = RAGQueryAnalyzer()
         
         self.max_retries = 3
 
@@ -102,7 +102,7 @@ class RAG(IRAG):
 
     @traceable
     def generate_answer(self, question: str, history: List[BaseMessage] = None):
-        query_analysis = self.analyzer_llm.analyze(question, history)
+        query_analysis = self.rag_query_analyzer.analyze(question, history)
 
         search_results = []
         for query in query_analysis.queries:
@@ -113,7 +113,7 @@ class RAG(IRAG):
             ))
         formatted_results = self._format_search_results(search_results)
         
-        return self.context_llm.generate_context(
+        return self.rag_response_generator.generate_response(
             question=query_analysis.updated_query,
             search_results=formatted_results
         )

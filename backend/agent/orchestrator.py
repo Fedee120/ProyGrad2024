@@ -2,7 +2,8 @@ from typing import List, Tuple
 from langchain_core.messages import BaseMessage
 from agent.knowledge_base import KnowledgeBase
 from dotenv import load_dotenv
-from llms.response_generator import ConversationalResponseGenerator, PedagogicalResponseGenerator
+from llms.pedagogical_response_generator import PedagogicalResponseGenerator
+from llms.conversational_response_generator import ConversationalResponseGenerator
 from langsmith import traceable
 import random
 

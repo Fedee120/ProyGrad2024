@@ -15,7 +15,7 @@ class QueryAnalysis(BaseModel):
         min_items=1  # Ensure at least one query is returned
     )
 
-class QueryAnalyzer:
+class RAGQueryAnalyzer:
     def __init__(self):
         self.llm = ChatOpenAI(
             model="gpt-4o-mini", 
