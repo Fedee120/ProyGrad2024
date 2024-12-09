@@ -7,7 +7,6 @@ import './authStyles.scss'
 import '../examples/forms/formStyles.scss'
 import Button from '../common/Button/Button'
 import { XmarkCircle } from 'iconoir-react'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Logo from '../../assets/logo.png'
 

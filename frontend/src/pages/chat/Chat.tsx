@@ -1,12 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useChat } from '../../hooks/useChat';
 import Layout from "../layout";
 import './Chat.css';
 import Button from 'src/components/common/Button/Button';
 import { formatMessageTime } from '../../utils/dateUtils';
-
+import { feedbackService } from '../../services/feedbackService';
+import { toast } from 'react-toastify';
 const Chat = () => {
+  const { currentUser } = useAuth();
   const {
     messages,
     inputMessage,
@@ -16,6 +18,10 @@ const Chat = () => {
     isTyping,
     hasError,
   } = useChat();
+
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackText, setFeedbackText] = useState('');
+  const [submittingFeedback, setSubmittingFeedback] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -34,6 +40,30 @@ const Chat = () => {
     scrollToBottom();
   }, [messages, isTyping]);
 
+  const handleFeedbackSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!feedbackText.trim() || !currentUser?.email) return;
+
+    setSubmittingFeedback(true);
+    try {
+      await feedbackService.submitFeedback({
+        email: currentUser.email,
+        threadId,
+        messageId: messages.length > 0 ? messages[messages.length - 1].id : null,
+        appVersion: process.env.REACT_APP_APP_VERSION || 'unknown',
+        comment: feedbackText
+      });
+      setFeedbackText('');
+      setShowFeedback(false);
+      toast.success('Feedback enviado correctamente');
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      toast.error(error instanceof Error ? error.message : 'Error al enviar el feedback');
+    } finally {
+      setSubmittingFeedback(false);
+    }
+  };
+
   return (
     <Layout>
       <div className="chat-container">
@@ -42,11 +72,33 @@ const Chat = () => {
             Asistente Virtual: Integrando IA en la Educación
           </h1>
           <div className="header-info">
-            <div className="app-version">
-              Version: {process.env.REACT_APP_APP_VERSION ?? ' unknown'}
+            <div className="metadata-column">
+              <div className="app-version">
+                Version: {process.env.REACT_APP_APP_VERSION ?? ' unknown'}
+              </div>
+              <div className="thread-id">
+                ID: {threadId}
+              </div>
             </div>
-            <div className="thread-id">
-              ID: {threadId}
+            <div className="header-actions">
+              <Button 
+                onClick={() => setShowFeedback(true)}
+                size="small"
+                className="feedback-button"
+              >
+                <svg 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </Button>
             </div>
           </div>
         </div>
@@ -79,6 +131,38 @@ const Chat = () => {
           )}
           <div ref={messagesEndRef} />
         </div>
+
+        {showFeedback && (
+          <div className="feedback-modal">
+            <div className="feedback-content">
+              <h3>Feedback</h3>
+              <form onSubmit={handleFeedbackSubmit}>
+                <textarea
+                  value={feedbackText}
+                  onChange={(e) => setFeedbackText(e.target.value)}
+                  placeholder="Escribe tu feedback aquí..."
+                  rows={4}
+                  disabled={submittingFeedback}
+                />
+                <div className="feedback-actions">
+                  <Button 
+                    type="button" 
+                    onClick={() => setShowFeedback(false)}
+                    disabled={submittingFeedback}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button 
+                    type="submit"
+                    disabled={!feedbackText.trim() || submittingFeedback}
+                  >
+                    Enviar Feedback
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="chat-input-form">
           <input
