@@ -40,7 +40,7 @@ const Chat = () => {
       <div className="chat-container">
         <div className="chat-header">
           <h1 className="chat-title">
-            Asistente Virtual para Docentes
+            Asistente Virtual: Integrando IA en la Educación
           </h1>
           <div className="header-info">
             <div className="app-version">
