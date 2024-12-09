@@ -22,7 +22,7 @@ class ConversationalResponseGenerator:
             '''
             ----------------------------------- Context Start -----------------------------------
             {context}
-            ----------------------------------- Contex End -----------------------------------
+            ----------------------------------- Context End -----------------------------------
             '''),
             MessagesPlaceholder(variable_name="history"),
             ("human", "{query}"),
