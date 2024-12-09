@@ -17,7 +17,7 @@ class ContextResponse(BaseModel):
 class RAGResponseGenerator:
     def __init__(self):
         self.llm = ChatOpenAI(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             temperature=0
         ).with_structured_output(ContextResponse)
 

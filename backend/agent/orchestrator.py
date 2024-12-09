@@ -28,9 +28,6 @@ class ChatOrchestrator:
                 for context_item in search_result.context
             ]
 
-            if not citations and "No information found" not in context:
-                raise ValueError("Citations list is empty but answer is not 'No information found'")
-
             final_response = self.conversational_response_llm.generate_response(
                 query=query,
                 context=context,
