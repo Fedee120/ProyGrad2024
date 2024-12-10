@@ -135,12 +135,12 @@ const Chat = () => {
         {showFeedback && (
           <div className="feedback-modal">
             <div className="feedback-content">
-              <h3>Feedback</h3>
+              <h3>Comentarios para los desarrolladores del Asistente Virtual</h3>
               <form onSubmit={handleFeedbackSubmit}>
                 <textarea
                   value={feedbackText}
                   onChange={(e) => setFeedbackText(e.target.value)}
-                  placeholder="Escribe tu feedback aquí..."
+                  placeholder="Escribe tus comentarios aquí..."
                   rows={4}
                   disabled={submittingFeedback}
                 />
@@ -156,7 +156,7 @@ const Chat = () => {
                     type="submit"
                     disabled={!feedbackText.trim() || submittingFeedback}
                   >
-                    Enviar Feedback
+                    Enviar
                   </Button>
                 </div>
               </form>
