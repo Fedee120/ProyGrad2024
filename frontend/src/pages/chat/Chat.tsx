@@ -4,8 +4,15 @@ import { useChat } from '../../hooks/useChat';
 import Layout from "../layout";
 import './Chat.css';
 import Button from 'src/components/common/Button/Button';
+import { FaInfoCircle } from 'react-icons/fa';
 
-const Chat = () => {
+interface Message {
+  role: string;
+  content: string;
+  citations?: string[];
+}
+
+const Chat: React.FC = () => {
   const { currentUser } = useAuth();
   const {
     messages,
@@ -17,8 +24,10 @@ const Chat = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setInputMessage('');
-    await sendMessage(inputMessage);
+    if (inputMessage.trim()) {
+      setInputMessage('');
+      await sendMessage(inputMessage);
+    }
   };
 
   return (
@@ -28,6 +37,13 @@ const Chat = () => {
           <h1 className="chat-title">
             Asistente Virtual para Docentes
           </h1>
+        </div>
+
+        <div className="chat-tip-container">
+          <FaInfoCircle className="chat-tip-icon" />
+          <p className="chat-tip-text">
+            Este es un espacio seguro para interactuar. Tus conversaciones se guardan solo para mejorar tu experiencia y puedes eliminarlas cuando lo desees. Tu privacidad es importante: ningún contenido se comparte con terceros.
+          </p>
         </div>
 
         <div className="chat-status">
