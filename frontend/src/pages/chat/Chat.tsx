@@ -4,6 +4,7 @@ import { useChat } from '../../hooks/useChat';
 import Layout from "../layout";
 import './Chat.css';
 import Button from 'src/components/common/Button/Button';
+import AudioRecorder from 'src/components/AudioRecorder';
 
 const Chat = () => {
   const { currentUser } = useAuth();
@@ -19,6 +20,10 @@ const Chat = () => {
     e.preventDefault();
     setInputMessage('');
     await sendMessage(inputMessage);
+  };
+
+  const handleTranscription = async (text: string) => {
+    await sendMessage(text);
   };
 
   return (
@@ -63,9 +68,12 @@ const Chat = () => {
             placeholder="Haz una pregunta..."
             className="chat-input"
           />
-          <Button type="submit" size='large'>
-            Enviar
-          </Button>
+          <div className="chat-input-buttons">
+            <AudioRecorder onTranscriptionComplete={handleTranscription} />
+            <Button type="submit" size='large'>
+              Enviar
+            </Button>
+          </div>
         </form>
       </div>
     </Layout>

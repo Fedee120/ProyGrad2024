@@ -123,4 +123,40 @@
 
 .message-citations li {
   margin: 2px 0;
+}
+
+.chat-input-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Estilos para el botón de grabación */
+.audio-recorder-button {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.audio-recorder-button.recording {
+  color: #ef4444 !important;
+}
+
+.audio-recorder-button:not(.recording) {
+  color: var(--primary-color) !important;
+}
+
+.audio-recorder-button:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.04) !important;
+}
+
+.audio-recorder-button.Mui-disabled {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.audio-recorder-button .MuiCircularProgress-root {
+  color: var(--primary-color) !important;
+}
+
+.audio-recorder-button .stop-icon {
+  color: #ef4444 !important;
 } 
