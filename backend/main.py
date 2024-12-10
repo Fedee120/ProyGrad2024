@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, Request
+from fastapi import FastAPI, HTTPException, Depends, Request, File, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel
@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 from agent.orchestrator import ChatOrchestrator
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
+import openai
+import tempfile
 
 load_dotenv()  # Load environment variables
 
@@ -95,6 +97,38 @@ def _format_history_messages(history: List[dict]) -> List[BaseMessage]:
             formatted_messages.append(AIMessage(content=msg["content"]))
     
     return formatted_messages
+
+@app.post("/transcribe-audio")
+async def transcribe_audio(audio_file: UploadFile = File(...)):
+    try:
+        # Crear un archivo temporal para guardar el audio
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.webm') as temp_file:
+            # Escribir el contenido del archivo subido al temporal
+            content = await audio_file.read()
+            temp_file.write(content)
+            temp_file_path = temp_file.name
+
+        try:
+            # Transcribir el audio usando Whisper
+            client = openai.OpenAI()
+            with open(temp_file_path, "rb") as audio:
+                transcript = client.audio.transcriptions.create(
+                    model="whisper-1",
+                    file=audio,
+                    language="es"
+                )
+            
+            # Eliminar el archivo temporal
+            os.unlink(temp_file_path)
+            
+            return {"text": transcript.text}
+        except Exception as e:
+            # Asegurarse de eliminar el archivo temporal en caso de error
+            os.unlink(temp_file_path)
+            raise e
+            
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8090)
