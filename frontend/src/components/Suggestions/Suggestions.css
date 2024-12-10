@@ -1,0 +1,99 @@
+.suggestions-spacer {
+  display: none; /* Oculto por defecto en desktop */
+}
+
+.suggestions-container {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 20px;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.suggestion-bubble {
+  background-color: var(--primary-color);
+  color: var(--primary-text);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  text-align: center;
+  animation: fadeIn 0.2s ease-in;
+  margin-bottom: 15px;
+  pointer-events: auto;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.suggestion-bubble:hover {
+  transform: scale(1.02);
+  filter: brightness(110%);
+}
+
+.suggestion-bubble:active {
+  transform: scale(0.98);
+}
+
+.suggestion-bubble.loading {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: default;
+  animation: pulse 1.5s infinite;
+}
+
+/* Estilos responsivos para móviles */
+@media (max-width: 768px) {
+  .suggestions-spacer {
+    display: block; /* Visible solo en móvil */
+    transition: height 0.2s ease;
+  }
+
+  .suggestions-container {
+    bottom: 70px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 6px 20px;
+  }
+
+  .suggestion-bubble {
+    width: 100%;
+    white-space: normal;
+    margin-bottom: 0;
+    height: 32px; /* Altura fija en móvil */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+} 

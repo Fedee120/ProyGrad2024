@@ -8,8 +8,10 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
 from agent.orchestrator import ChatOrchestrator
+from sugestions.suggestions import SuggestionsGenerator
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
+from pydantic import BaseModel, Field
 
 load_dotenv()  # Load environment variables
 
@@ -60,6 +62,12 @@ class MessageResponse(BaseModel):
     response: str
     citations: list[str] = []
 
+class SuggestionsResponse(BaseModel):
+    suggestions: List[str] = Field(description="Lista de sugerencias de preguntas cortas para continuar la conversación")
+
+class SuggestionsRequest(BaseModel):
+    history: list[dict]
+
 @app.post("/invoke_agent", response_model=MessageResponse)
 async def invoke_agent(
     request: MessageRequest,
@@ -95,6 +103,18 @@ def _format_history_messages(history: List[dict]) -> List[BaseMessage]:
             formatted_messages.append(AIMessage(content=msg["content"]))
     
     return formatted_messages
+
+@app.post("/generate_suggestions")
+async def generate_suggestions(
+    request: SuggestionsRequest,
+    user = Depends(verify_firebase_token)
+):
+    try:
+        generator = SuggestionsGenerator()
+        suggestions = generator.generate_suggestions(request.history)
+        return {"suggestions": suggestions}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8090)
