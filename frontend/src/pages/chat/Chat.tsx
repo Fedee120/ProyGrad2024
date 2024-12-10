@@ -1,7 +1,9 @@
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useChat } from '../../hooks/useChat';
+import { useSuggestions } from '../../hooks/useSuggestions';
 import Layout from "../layout";
+import Suggestions from '../../components/Suggestions/Suggestions';
 import './Chat.css';
 import Button from 'src/components/common/Button/Button';
 
@@ -15,10 +17,17 @@ const Chat = () => {
     backendStatus,
   } = useChat();
 
+  const {
+    suggestions,
+    isLoading: suggestionsLoading,
+    handleSuggestionClick
+  } = useSuggestions(messages);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const messageToSend = inputMessage;
     setInputMessage('');
-    await sendMessage(inputMessage);
+    await sendMessage(messageToSend);
   };
 
   return (
@@ -54,6 +63,12 @@ const Chat = () => {
             </div>
           ))}
         </div>
+
+        <Suggestions
+          suggestions={suggestions}
+          isLoading={suggestionsLoading}
+          onSuggestionClick={(suggestion) => handleSuggestionClick(suggestion, sendMessage)}
+        />
 
         <form onSubmit={handleSubmit} className="chat-input-form">
           <input

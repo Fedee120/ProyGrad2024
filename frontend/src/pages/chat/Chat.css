@@ -6,6 +6,7 @@
   width: 100%;
   margin: 0;
   background-color: var(--background-color);
+  position: relative;
 }
 
 .chat-title {
