@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { ChatMessage } from '../types/chat';
 import { chatService } from '../services/chatService';
 import { useAuth } from '../contexts/AuthContext';
+import { generateThreadId } from '../utils/threadUtils';
 
 export function useChat() {
   const { currentUser } = useAuth();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
+  const [threadId] = useState(generateThreadId());
   const [backendStatus, setBackendStatus] = useState<{
     isUp: boolean;
     message: string;
@@ -44,7 +46,8 @@ export function useChat() {
         message, 
         currentUser.uid, 
         currentUser.token,
-        messageHistory
+        messageHistory,
+        threadId
       );
       
       const assistantMessage: ChatMessage = {
@@ -75,5 +78,6 @@ export function useChat() {
     setInputMessage,
     sendMessage,
     backendStatus,
+    threadId,
   };
 } 

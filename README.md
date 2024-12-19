@@ -18,7 +18,7 @@ docker-compose up --build
 
 ### Cargar base de datos
 
-Ir a la carpeta backend y correr python3 -m data.load_data
+Ir a la carpeta backend y correr `python3 -m data.load_data` con el entorno de desarrollo configurado
 
 ### Abrir el frontend
 

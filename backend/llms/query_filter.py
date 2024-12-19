@@ -1,6 +1,7 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage, BaseMessage
 from langchain_core.tools import tool
+from langsmith import traceable
 
 class QueryFilter:
     def __init__(self):
@@ -47,6 +48,7 @@ class QueryFilter:
         """Search for specific information in the knowledge base."""
         return
 
+    @traceable
     def filter(self, query: str) -> BaseMessage:
         """Filter a query to determine if knowledge base search is needed."""
         return self.llm.invoke([

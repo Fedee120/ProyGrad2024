@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from pydantic import BaseModel, Field
 from typing import List
+from langsmith import traceable
 
 class ContextItem(BaseModel):
     """A piece of context used to answer the question"""
@@ -38,6 +39,7 @@ class ContextGenerator:
             template=self.prompt_template,
         )
 
+    @traceable
     def generate_context(self, question: str, search_results: str) -> ContextResponse:
         """Generate an answer based on the search results."""
         return self.llm.invoke(

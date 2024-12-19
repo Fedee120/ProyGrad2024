@@ -12,7 +12,8 @@ import time
 from llms.context_generator import ContextGenerator
 from llms.query_analyzer import QueryAnalyzer
 from langchain_core.documents import Document
-    
+from langsmith import traceable
+
 class SearchResult(BaseModel):
     """Result from a single search query"""
     query: str = Field(description="The query that produced these results")
@@ -44,6 +45,7 @@ class RAG(IRAG):
         
         self.max_retries = 3
 
+    @traceable(run_type="retriever")
     def _safe_search(self, query):
         for attempt in range(self.max_retries):
             try:
@@ -74,18 +76,17 @@ class RAG(IRAG):
         try:
             # Get the primary key field name
             pk_field = self.vector_store.col.schema.primary_field.name
-
             # Query for all documents
             results = self.vector_store.col.query(
                 expr=f"{pk_field} != ''", 
                 output_fields=[pk_field]
             )
         
-        # Extract IDs from results
+            # Extract IDs from results
             all_ids = []
             for result in results:
                 all_ids.append(str(result[pk_field]))
-
+            
             if all_ids:
                 self.vector_store.delete(ids=all_ids)
         except Exception as e:
@@ -104,14 +105,10 @@ class RAG(IRAG):
                 formatted.append(f"{metadata_str}\n{content_str}")
         return "\n\n".join(formatted)
 
+    @traceable
     def generate_answer(self, question: str, history: List[BaseMessage] = None):
         query_analysis = self.analyzer_llm.analyze(question, history)
 
-        print("\n" + "="*50 + "\n")
-        print(f"Query analysis result - Updated query: {query_analysis.updated_query}")
-        print(f"Generated search queries: {query_analysis.queries}")
-        print("\n" + "="*50 + "\n")
-        
         search_results = []
         for query in query_analysis.queries:
             docs = self._safe_search(query)
