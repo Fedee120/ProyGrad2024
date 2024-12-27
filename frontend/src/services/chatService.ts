@@ -35,7 +35,6 @@ export const chatService = {
   },
 
   handleError(error: unknown): Error {
-    console.log(error);
     if (error instanceof Error) {
         if (error.name === 'TypeError' && 
         (error.message.includes('CORS') || 

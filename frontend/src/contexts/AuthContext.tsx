@@ -1,8 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { auth } from '../firebase'
-import { signInWithEmailAndPassword, signOut, getIdToken } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
-import { User as FirebaseUser } from 'firebase/auth'
+import { signInWithEmailAndPassword, signOut, User as FirebaseUser } from 'firebase/auth'
 
 interface AuthContextType {
   currentUser: FirebaseUser | null;
