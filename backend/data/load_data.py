@@ -6,7 +6,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def get_docs(path):
     loader = PyPDFLoader(path)
-    return loader.load()
+    docs = loader.load()
+    for doc in docs:
+        doc.metadata["source"] = os.path.basename(doc.metadata["source"])
+    return docs
 
 def split_docs(docs):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
