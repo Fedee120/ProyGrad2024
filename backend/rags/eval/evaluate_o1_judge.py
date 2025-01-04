@@ -35,7 +35,7 @@ class EvaluationResult(BaseModel):
 class O1Judge:
     def __init__(self):
         self.llm = ChatOpenAI(
-            model="gpt-3.5-turbo",  # o1-mini cuando esté disponible
+            model="o1",  # o1-mini cuando esté disponible
             temperature=0
         )
         self.prompt = ChatPromptTemplate.from_template(EVALUATION_TEMPLATE)
