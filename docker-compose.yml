@@ -75,16 +75,20 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:8080:8080" # This port matches the one specified in the backend's Dockerfile
+      - "127.0.0.1:8080:8080"
     volumes:
       - ./backend:/app
     environment:
       - PYTHONUNBUFFERED=1
-      - MILVUS_STANDALONE_URL=http://standalone:19530 # This URL overrides the one specified in the backend's .env file and matches the one specified in the standalone docker service
+      - MILVUS_STANDALONE_URL=http://standalone:19530
       - ENVIRONMENT=${ENVIRONMENT:-dev docker}
       - APP_VERSION=${APP_VERSION:-unknown}
+      - MONGO_URI=mongodb://mongo-db:27017/
     depends_on:
-      - "standalone"
+      standalone:
+        condition: service_healthy
+      mongo-db:
+        condition: service_started
       
   frontend:
     container_name: frontend_service
@@ -92,12 +96,27 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - REACT_APP_BACKEND_URL=/api # This URL overrides the one specified in the frontend's .env file and is resolved in nginx.conf which matches the one specified in the backend docker service
+        - REACT_APP_BACKEND_URL=/api
         - REACT_APP_APP_VERSION=${APP_VERSION:-unknown}
     ports:
-      - "8081:8081" # This port matches the one specified in the frontend's Dockerfile and nginx.conf
+      - "8081:8081"
     depends_on:
       - "backend"
+
+  mongo-db:
+    container_name: mongo-db
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mongo:/data/db
+    command: mongod --dbpath /data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "'db.runCommand(\"ping\").ok'", "||", "exit", "1"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
 
 networks:
   default:

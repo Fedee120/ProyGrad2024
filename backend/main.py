@@ -7,10 +7,9 @@ from firebase_admin import auth, credentials, initialize_app
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
-from agent.orchestrator import ChatOrchestrator
-from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
-from data.load_data import load_data
+from run import run_graph
+import uuid
 
 load_dotenv()  # Load environment variables
 
@@ -56,23 +55,12 @@ async def verify_firebase_token(request: Request, token: HTTPBearer = Depends(se
             detail=f"Authentication failed: {str(e)}"
         )
 
-# @app.get("/public/reload_data")
-# async def public_reload_data():
-#     try:
-#         rag = RAG(URI=os.getenv("MILVUS_STANDALONE_URL"), COLLECTION_NAME="real_collection", search_kwargs={"k": 5}, search_type="mmr", embeddings_model_name="text-embedding-3-small")
-#         rag.delete_all_documents()
-#         load_data(rag)
-#         return JSONResponse(content={"detail": "Data reloaded"})
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
-
 @app.get("/check_status")
 async def check_status(user = Depends(verify_firebase_token)):
     return JSONResponse(content={"detail": "Backend is up and running"})
 
 class MessageRequest(BaseModel):
     message: str
-    history: list[dict] = []
     threadId: str
 
 class MessageResponse(BaseModel):
@@ -85,22 +73,15 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
-        orchestrator = ChatOrchestrator()
-        response, citations, _ = orchestrator.process_query(
-            request.message,
-            _format_history_messages(request.history),
-            langsmith_extra={
-                "metadata": {
-                    "email": user["email"],
-                    "thread_id": request.threadId,
-                    "app_version": os.getenv("APP_VERSION") if os.getenv("APP_VERSION") else "unknown"
-                }
-            }
+        response, useful_docs = run_graph(
+            question=request.message,
+            thread_id=request.threadId,
+            debug=not is_production
         )
         
         return MessageResponse(
             response=response,
-            citations=citations
+            citations=useful_docs
         )
     except Exception as e:
         if is_production:
@@ -110,20 +91,28 @@ async def invoke_agent(
                 raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
             else:
                 raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/test_agent")
+async def test_agent(request: MessageRequest):
+    try:
+        response, useful_docs = run_graph(
+            question=request.message,
+            thread_id=request.threadId,
+            debug=not is_production
+        )
         
-def _format_history_messages(history: List[dict]) -> List[BaseMessage]:
-    """Convert chat history into a list of messages."""
-    if not history:
-        return []
-    
-    formatted_messages = []
-    for msg in history:
-        if msg["role"] == "user":
-            formatted_messages.append(HumanMessage(content=msg["content"]))
+        return MessageResponse(
+            response=response,
+            citations=useful_docs
+        )
+    except Exception as e:
+        if is_production:
+            raise HTTPException(status_code=500, detail=f"An error occurred while processing your request.")
         else:
-            formatted_messages.append(AIMessage(content=msg["content"]))
-    
-    return formatted_messages
+            if "request" in e.__dict__:
+                raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
+            else:
+                raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8090)

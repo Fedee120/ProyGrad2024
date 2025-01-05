@@ -1,5 +1,4 @@
-firebase-credentials.json
+volumes/
 .env
-
-proygrad_venv/
-__pycache__/
+.env.old
+/__pycache__/
