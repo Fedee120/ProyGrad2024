@@ -14,10 +14,10 @@ class ContextResponse(BaseModel):
     answer: str = Field(description="The answer to the question based on the provided context")
     context: List[ContextItem] = Field(description="List of context pieces that were actually used to form the answer, if it was not used do not return it")
 
-class ContextGenerator:
+class RAGResponseGenerator:
     def __init__(self):
         self.llm = ChatOpenAI(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             temperature=0
         ).with_structured_output(ContextResponse)
 
@@ -40,7 +40,7 @@ class ContextGenerator:
         )
 
     @traceable
-    def generate_context(self, question: str, search_results: str) -> ContextResponse:
+    def generate_response(self, question: str, search_results: str) -> ContextResponse:
         """Generate an answer based on the search results."""
         return self.llm.invoke(
             self.prompt.format(

@@ -105,16 +105,36 @@
 
 .header-info {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.metadata-column {
+  display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
+  order: 1;
 }
 
-.thread-id, .app-version {
+.header-actions {
+  margin-bottom: 0;
+  order: 2;
+}
+
+.header-actions button {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.app-version, .thread-id {
   font-size: 0.8rem;
   color: var(--text-secondary);
   opacity: 0.7;
   text-align: right;
+  margin: 0;
 }
 
 .user-info {
@@ -215,4 +235,56 @@
 button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.feedback-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.feedback-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.feedback-content h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.feedback-content textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-family: inherit;
+}
+
+.feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Add specific styles for the feedback button */
+.feedback-button {
+  padding: 6px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }

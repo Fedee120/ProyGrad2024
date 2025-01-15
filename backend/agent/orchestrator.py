@@ -2,7 +2,8 @@ from typing import List, Tuple
 from langchain_core.messages import BaseMessage
 from agent.knowledge_base import KnowledgeBase
 from dotenv import load_dotenv
-from llms.response_generator import ConversationalResponseGenerator, PedagogicalResponseGenerator
+from llms.pedagogical_response_generator import PedagogicalResponseGenerator
+from llms.conversational_response_generator import ConversationalResponseGenerator
 from langsmith import traceable
 import random
 
@@ -27,9 +28,6 @@ class ChatOrchestrator:
                 for context_item in search_result.context
             ]
 
-            if not citations and "No information found" not in context:
-                raise ValueError("Citations list is empty but answer is not 'No information found'")
-
             final_response = self.conversational_response_llm.generate_response(
                 query=query,
                 context=context,
@@ -47,4 +45,4 @@ if __name__ == "__main__":
     load_dotenv()
 
     orchestrator = ChatOrchestrator()
-    print(orchestrator.process_query("Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa."))
+    print(orchestrator.process_query("Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa.", []))

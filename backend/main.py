@@ -89,6 +89,7 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
+        id = str(uuid.uuid4())
         response, citations = orchestrator.process_query(
             request.message,
             _format_history_messages(request.history),
@@ -96,13 +97,14 @@ async def invoke_agent(
                 "metadata": {
                     "email": user["email"],
                     "thread_id": request.threadId,
+                    "message_id": id,
                     "app_version": os.getenv("APP_VERSION") if os.getenv("APP_VERSION") else "unknown"
                 }
             }
         )
         
         return MessageResponse(
-            id=str(uuid.uuid4()),
+            id=id,
             timestamp=datetime.now(timezone.utc).isoformat(),
             response=response,
             citations=citations
