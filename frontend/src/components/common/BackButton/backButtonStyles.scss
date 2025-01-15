@@ -1,0 +1,29 @@
+.back-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 40px;
+    padding: 2px;
+    padding-right: 12px;
+    transition: gap 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    .icon-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        border-radius: 20px;
+        width: 32px;
+        height: 32px;
+    }
+    &:hover {
+        background-color: #f8f8f8;
+        gap: 4px;
+        .icon-box {
+            background-color: #f0f0f0;
+        }
+    }
+}

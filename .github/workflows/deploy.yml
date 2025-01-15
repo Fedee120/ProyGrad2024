@@ -1,0 +1,57 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update version
+        run: |
+          # Read current version
+          VERSION=$(cat version.txt)
+          # Split version into major.minor
+          IFS='.' read -r MAJOR MINOR <<< "$VERSION"
+          # Increment minor version
+          NEW_MINOR=$((MINOR + 1))
+          # Create new version string
+          NEW_VERSION="${MAJOR}.${NEW_MINOR}"
+          # Update version.txt
+          echo "$NEW_VERSION" > version.txt
+          
+          # Configure Git
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Commit and push changes
+          git add version.txt
+          git commit -m "Bump version to ${NEW_VERSION} [skip ci]"
+          git tag "v${NEW_VERSION}"
+          git push
+          git push --tags
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 179.27.96.162
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ProyGrad2024
+            git checkout main
+            git pull
+            docker-compose down
+            export APP_VERSION=$(cat version.txt) && ENVIRONMENT=prod docker-compose up --build -d

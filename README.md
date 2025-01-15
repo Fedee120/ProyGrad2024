@@ -1,32 +1,25 @@
 # ProyGrad2024
 
-### Crear un entorno virtual (parados en el directorio del repositorio)
+El siguiente README.md describe los pasos para hacer el setup del entorno para correr el proyecto en modo desarrollo (local) y producción (docker).
+
+A destacar, ambos modos usan diferentes puertos para poder correr ambos modos a la vez sin cambiar nada, para lograr esto se usan variables de entorno para configurar los puertos de cada servicio, en local (.env-template files) se usan 8090 y 8091 los cuales son especificados en main.py (backend) y package.json (frontend), mientras que en docker (docker-compose.yml) se usan 8080 y 8081 los cuales son especificados en los respectivos Dockerfiles (+ nginx.conf en el caso de frontend). Tambien no importa si se quiere correr en desarrollo o en producción, es necesario levantar el docker para que Milvus esté corriendo.
+
+## Para correr el proyecto
+
+### Configurar el entorno para desarrollo
+
+Revisar el archivo `README.md` de la carpeta backend y frontend para ver como levantar el entorno de desarrollo para cada uno. En particular, es necesario configurar untracked secrets.
+
+### Levantar el docker que tiene la db, el backend y el frontend
 
 ```console
-python3 -m venv proygrad_venv
+docker-compose up --build
 ```
 
-### Activar el entorno virtual
+### Cargar base de datos
 
-```console
-source proygrad_venv/bin/activate
-```
+Ir a la carpeta backend y correr `python3 -m data.load_data` con el entorno de desarrollo configurado
 
-*Este comando ejecuta el script activate que se encuentra en el directorio bin dentro del entorno virtual. El script configura el entorno de shell actual para usar los paquetes y la configuración del entorno virtual. Realiza varios cambios como modificar la variable de entorno PATH, modificar el prompt del shell (la parte que se muestra antes de que escribas un comando) para indicar que estás en un entorno virtual, entre otras cosas.*
+### Abrir el frontend
 
-Para desactivar el entorno virtual correr: 
-```console
-deactivate
-```
-
-### Instalar los paquetes Python requeridos para el proyecto
-
-```console
-pip3 install -r requirements.txt
-```
-
-### Correr el prototipo
-
-```console
-streamlit run prototipo/streamlit_app.py
-```
+Abrir el link http://localhost:8081 que deberia estar levantado el frontend para interactuar
