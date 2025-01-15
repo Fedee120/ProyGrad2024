@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+from rags.openai.rag import RAG
 from langchain_community.document_loaders import PyPDFLoader
 from data.splitters.semantic_splitter import semantic_split
 import os

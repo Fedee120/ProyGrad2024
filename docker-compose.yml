@@ -25,8 +25,8 @@ services:
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
     ports:
-      - "9001:9001"
-      - "9000:9000"
+      - "127.0.0.1:9001:9001"
+      - "127.0.0.1:9000:9000"
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
     command: minio server /minio_data --console-address ":9001"
@@ -54,8 +54,8 @@ services:
       timeout: 20s
       retries: 3
     ports:
-      - "19530:19530"
-      - "9091:9091"
+      - "127.0.0.1:19530:19530"
+      - "127.0.0.1:9091:9091"
     depends_on:
       - "etcd"
       - "minio"
@@ -64,7 +64,7 @@ services:
     image: zilliz/attu:latest
     container_name: attu_service
     ports:
-      - "8000:3000"
+      - "127.0.0.1:8000:3000"
     environment:
       HOST_URL: "http://localhost:8000"
       MILVUS_URL: milvus-standalone:19530
@@ -75,12 +75,14 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8080:8080" # This port matches the one specified in the backend's Dockerfile
+      - "127.0.0.1:8080:8080" # This port matches the one specified in the backend's Dockerfile
     volumes:
       - ./backend:/app
     environment:
       - PYTHONUNBUFFERED=1
       - MILVUS_STANDALONE_URL=http://standalone:19530 # This URL overrides the one specified in the backend's .env file and matches the one specified in the standalone docker service
+      - ENVIRONMENT=${ENVIRONMENT:-dev docker}
+      - APP_VERSION=${APP_VERSION:-unknown}
     depends_on:
       - "standalone"
       
@@ -91,6 +93,7 @@ services:
       dockerfile: Dockerfile
       args:
         - REACT_APP_BACKEND_URL=/api # This URL overrides the one specified in the frontend's .env file and is resolved in nginx.conf which matches the one specified in the backend docker service
+        - REACT_APP_APP_VERSION=${APP_VERSION:-unknown}
     ports:
       - "8081:8081" # This port matches the one specified in the frontend's Dockerfile and nginx.conf
     depends_on:
