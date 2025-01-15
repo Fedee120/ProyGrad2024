@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 import uvicorn
-from firebase_admin import auth, credentials, initialize_app
+from firebase_admin import auth, credentials, initialize_app, get_app
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
@@ -11,6 +11,8 @@ from agent.orchestrator import ChatOrchestrator
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
 from data.load_data import load_data
+from datetime import datetime, timezone
+import uuid
 
 load_dotenv()  # Load environment variables
 
@@ -21,11 +23,15 @@ if is_production:
 else:
     os.environ["LANGCHAIN_PROJECT"] = f"ProyGrad2024 ({environment} - {os.getenv('DEVELOPER', 'Anonymous')})"
 
-# Inicializar Firebase Admin
-cred = credentials.Certificate("firebase-credentials.json")
-firebase_app = initialize_app(cred)
+# Initialize Firebase Admin
+try: # Try to get existing app
+    firebase_app = get_app()
+except ValueError: # If no app exists, initialize with credentials
+    cred = credentials.Certificate("firebase-credentials.json")
+    firebase_app = initialize_app(cred)
 
 app = FastAPI()
+orchestrator = ChatOrchestrator()
 
 # Split the CORS_ORIGINS string into a list
 origins = os.getenv("CORS_ORIGINS").split(",")
@@ -66,16 +72,14 @@ async def verify_firebase_token(request: Request, token: HTTPBearer = Depends(se
 #     except Exception as e:
 #         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/check_status")
-async def check_status(user = Depends(verify_firebase_token)):
-    return JSONResponse(content={"detail": "Backend is up and running"})
-
 class MessageRequest(BaseModel):
     message: str
     history: list[dict] = []
     threadId: str
 
 class MessageResponse(BaseModel):
+    id: str
+    timestamp: str
     response: str
     citations: list[str] = []
 
@@ -85,7 +89,6 @@ async def invoke_agent(
     user = Depends(verify_firebase_token)
 ):
     try:
-        orchestrator = ChatOrchestrator()
         response, citations, _ = orchestrator.process_query(
             request.message,
             _format_history_messages(request.history),
@@ -99,12 +102,14 @@ async def invoke_agent(
         )
         
         return MessageResponse(
+            id=str(uuid.uuid4()),
+            timestamp=datetime.now(timezone.utc).isoformat(),
             response=response,
             citations=citations
         )
     except Exception as e:
         if is_production:
-            raise HTTPException(status_code=500, detail=f"An error occurred while processing your request.")
+            raise HTTPException(status_code=500, detail=f"Ha ocurrido un error al procesar su solicitud.")
         else:
             if "request" in e.__dict__:
                 raise HTTPException(status_code=500, detail=f"{e.__dict__['request']} {str(e)}")
@@ -126,4 +131,10 @@ def _format_history_messages(history: List[dict]) -> List[BaseMessage]:
     return formatted_messages
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8090)
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8090,
+        reload=True,           # Enable auto-reload
+        reload_dirs=["./"],    # Watch the current directory for changes
+    )
