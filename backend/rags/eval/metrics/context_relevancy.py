@@ -8,7 +8,7 @@ from typing import List
 
 load_dotenv()
 
-class DocumentRelevancy(BaseModel):
+class ContextRelevancy(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the document is relevant or not")
     is_relevant: bool = Field(..., description="Indicates if the document is relevant to the question")
 
@@ -23,9 +23,9 @@ prompt_template = """You are a teacher determining if a single context document 
                     Context to analyze: {context}
                     Is this context relevant? Answer with true or false."""
 
-def evaluate_single_context(question: str, context: str, llm: ChatOpenAI) -> DocumentRelevancy:
+def evaluate_single_context(question: str, context: str, llm: ChatOpenAI) -> ContextRelevancy:
     prompt = prompt_template.format(question=question, context=context)
-    llm_structured = llm.with_structured_output(DocumentRelevancy)
+    llm_structured = llm.with_structured_output(ContextRelevancy)
     return llm_structured.invoke(prompt)
 
 def count_relevant(question: str, contexts: list, verbose: bool = False) -> float:
