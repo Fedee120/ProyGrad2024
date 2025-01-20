@@ -24,6 +24,13 @@ rag = RAG(
 
 def target_function(inputs: dict) -> dict:
     """Función que LangSmith evaluará."""
+    rag = RAG(
+        URI=os.getenv("MILVUS_STANDALONE_URL"),
+        COLLECTION_NAME="real_collection",
+        search_kwargs={"k": 10},
+        search_type="mmr",
+        embeddings_model_name="text-embedding-3-small"
+    )
     question = inputs["question"]
     history = []
     answer = rag.generate_answer(question, history)
@@ -89,22 +96,9 @@ def load_dataset() -> List[Dict]:
             "ground_truth": "Los principales componentes de un sistema RAG son el retriever que busca documentos relevantes, el generador que produce respuestas basadas en el contexto, y la base de conocimientos que almacena la información."
         }]
 
-# def load_dataset() -> List[Dict]:
-#     """mock dataset"""
-#     return [
-#         {"question": "¿Cuáles son los principales componentes de un sistema RAG?", "ground_truth": "Los principales componentes de un sistema RAG son el retriever que busca documentos relevantes, el generador que produce respuestas basadas en el contexto, y la base de conocimientos que almacena la información."}
-# ]
-
 def main():
     # Inicializar el cliente y el sistema RAG
     client = Client()
-    rag = RAG(
-        URI=os.getenv("MILVUS_STANDALONE_URL"),
-        COLLECTION_NAME="real_collection",
-        search_kwargs={"k": 10},
-        search_type="mmr",
-        embeddings_model_name="text-embedding-3-small"
-    )
 
     # Cargar dataset y preparar la evaluación
     examples = load_dataset()
@@ -128,7 +122,7 @@ def main():
             evaluate_context_relevancy_metric,
             evaluate_answer_correctness_metric
         ],
-        max_concurrency = 57,
+        max_concurrency = len(examples),
         experiment_prefix="RAG_System_Evaluation",
         metadata={"version": "Query expansion, gpt-4o evaluator"},
     )

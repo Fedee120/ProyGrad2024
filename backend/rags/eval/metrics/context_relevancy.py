@@ -13,7 +13,7 @@ class ContextRelevancy(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the document is relevant or not")
     is_relevant: bool = Field(..., description="Indicates if the document is relevant to the question")
 
-prompt_template = """You are a teacher determining if a single context document is relevant or not for answering a specific question.
+prompt_template = """You are a teacher determining if a single excerpt of a document is relevant or not for answering a specific question.
                     Follow these steps:
                     1. Analyze the context carefully
                     2. Determine if the context helps answer the question directly or provides important related information
