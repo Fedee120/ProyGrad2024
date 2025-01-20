@@ -1,8 +1,8 @@
 import json
 from rags.eval.metrics.groundedness import evaluate_groundedness
 from rags.eval.metrics.faithfulness import evaluate_faithfulness
-from rags.eval.metrics.answer_relevancy import evaluate_relevancy
-from rags.eval.metrics.context_relevancy import count_relevant
+from rags.eval.metrics.answer_relevancy import evaluate_answer_relevancy
+from rags.eval.metrics.context_relevancy import evaluate_context_relevancy
 from langsmith import Client
 import os
 from dotenv import load_dotenv
@@ -49,7 +49,7 @@ def evaluate_answer_relevancy_metric(
     question = inputs["question"]
     answer = outputs["answer"]
 
-    score = evaluate_relevancy(question, answer)
+    score = evaluate_answer_relevancy(question, answer)
     return score  # CAMBIO: Retorno float
 
 def evaluate_context_relevancy_metric(
@@ -58,7 +58,7 @@ def evaluate_context_relevancy_metric(
     question = inputs["question"]
     context = outputs["context"]
 
-    score = count_relevant(question, context)
+    score = evaluate_context_relevancy(question, context)
     return score
 
 def evaluate_groundedness_metric(

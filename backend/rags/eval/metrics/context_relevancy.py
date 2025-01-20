@@ -34,7 +34,7 @@ def evaluate_single_context(question: str, context: str) -> Tuple[str, bool, Lis
     result = llm_structured.invoke(prompt)
     return context, result.is_relevant, result.reasoning_steps
 
-def count_relevant(
+def evaluate_context_relevancy(
     question: str, 
     contexts: list, 
     max_workers: int = 3,
@@ -88,4 +88,4 @@ if __name__ == "__main__":
     question = "What color is the sky?"
     contexts = ["The sky is blue.", "The grass is green.", "The sun is yellow.", "The sky is gray.", "The sky is actually sky blue."]
     documents = [Document(page_content=context) for context in contexts]
-    print(count_relevant(question, contexts, max_workers=4, verbose=True))
+    print(evaluate_context_relevancy(question, contexts, max_workers=4, verbose=True))

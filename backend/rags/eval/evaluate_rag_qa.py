@@ -5,8 +5,8 @@
 
 from rags.eval.metrics.groundedness import evaluate_groundedness
 from rags.eval.metrics.faithfulness import evaluate_faithfulness
-from rags.eval.metrics.answer_relevancy import evaluate_relevancy
-from rags.eval.metrics.context_relevancy import count_relevant
+from rags.eval.metrics.answer_relevancy import evaluate_answer_relevancy
+from rags.eval.metrics.context_relevancy import evaluate_context_relevancy
 from tqdm import tqdm
 from langchain_core.messages import HumanMessage, AIMessage
 
@@ -29,12 +29,12 @@ def process_sample_metrics(sample, verbose=False):
     answer = rag.generate_answer(question, history)
 
     # Compute context relevancy
-    relevant_docs = count_relevant(question, [doc.content for doc in answer.context], verbose=verbose)
+    relevant_docs = evaluate_context_relevancy(question, [doc.content for doc in answer.context], verbose=verbose)
     if verbose:
         print(f"Context relevancy score: {relevant_docs:.2f}")
 
     # Compute answer relevancy
-    relevancy_score = evaluate_relevancy(question, answer.answer, verbose=verbose)
+    relevancy_score = evaluate_answer_relevancy(question, answer.answer, verbose=verbose)
     if verbose:
         print(f"Answer relevancy score: {relevancy_score:.2f}")
     
@@ -86,13 +86,13 @@ if __name__ == "__main__":
         # Separate the results
         faithful_results = [result[0] for result in results]
         grounded_results = [result[1] for result in results]
-        relevant_results = [result[2] for result in results]
+        answer_relevancy_results = [result[2] for result in results]
         context_relevancy_results = [result[3] for result in results]
         
         # Calculate metrics
         faithfulness_score = sum(faithful_results) / total
         groundedness_score = sum(grounded_results) / total
-        relevancy_score = sum(relevant_results) / total
+        relevancy_score = sum(answer_relevancy_results) / total
         context_relevancy_score = sum(context_relevancy_results) / total
         
         print("\nFinal Scores:")

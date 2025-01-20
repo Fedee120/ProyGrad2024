@@ -22,7 +22,7 @@ prompt_template = """You are a teacher determining if a student's answer is rele
                     Answer: {answer}
                     Is the answer relevant? Answer with true or false."""
 
-def evaluate_relevancy(question: str, answer: str, verbose: bool = False) -> float:
+def evaluate_answer_relevancy(question: str, answer: str, verbose: bool = False) -> float:
     """
     Evaluate if the answer is relevant to the question asked.
 
@@ -54,4 +54,4 @@ def evaluate_relevancy(question: str, answer: str, verbose: bool = False) -> flo
 if __name__ == "__main__":
     question = "¿Cuál es la capital de Francia?"
     answer = "París es la capital de Francia y es conocida como la Ciudad de la Luz."
-    print(evaluate_relevancy(question, answer, verbose=True))
+    print(evaluate_answer_relevancy(question, answer, verbose=True))
