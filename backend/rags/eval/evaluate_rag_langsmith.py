@@ -95,27 +95,43 @@ def load_dataset() -> List[Dict]:
 #         {"question": "¿Cuáles son los principales componentes de un sistema RAG?", "ground_truth": "Los principales componentes de un sistema RAG son el retriever que busca documentos relevantes, el generador que produce respuestas basadas en el contexto, y la base de conocimientos que almacena la información."}
 # ]
 
-examples = load_dataset()
+def main():
+    # Inicializar el cliente y el sistema RAG
+    client = Client()
+    rag = RAG(
+        URI=os.getenv("MILVUS_STANDALONE_URL"),
+        COLLECTION_NAME="real_collection",
+        search_kwargs={"k": 10},
+        search_type="mmr",
+        embeddings_model_name="text-embedding-3-small"
+    )
 
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-dataset_name = f"RAG_System_Evaluation_{timestamp}"
-dataset = client.create_dataset(dataset_name, description="Dataset para evaluación de sistema RAG")
-client.create_examples(
-    inputs=[{"question": example["question"]} for example in examples],
-    outputs=[{"ground_truth": example["ground_truth"]} for example in examples],
-    dataset_id=dataset.id
-)
+    # Cargar dataset y preparar la evaluación
+    examples = load_dataset()
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    dataset_name = f"RAG_System_Evaluation_{timestamp}"
+    dataset = client.create_dataset(dataset_name, description="Dataset para evaluación de sistema RAG")
+    
+    client.create_examples(
+        inputs=[{"question": example["question"]} for example in examples],
+        outputs=[{"ground_truth": example["ground_truth"]} for example in examples],
+        dataset_id=dataset.id
+    )
 
-experiment_results = client.evaluate(
-    target_function,
-    data=dataset_name,
-    evaluators=[
-        evaluate_faithfulness_metric,
-        evaluate_answer_relevancy_metric,
-        evaluate_context_relevancy_metric,
-        evaluate_groundedness_metric
-    ],
-    max_concurrency = 57,
-    experiment_prefix="RAG_System_Evaluation",
-    metadata={"version": "Query expansion, gpt-4o evaluator"},
-)
+    # Ejecutar evaluación
+    experiment_results = client.evaluate(
+        target_function,
+        data=dataset_name,
+        evaluators=[
+            evaluate_faithfulness_metric,
+            evaluate_answer_relevancy_metric,
+            evaluate_context_relevancy_metric,
+            evaluate_groundedness_metric
+        ],
+        max_concurrency = 57,
+        experiment_prefix="RAG_System_Evaluation",
+        metadata={"version": "Query expansion, gpt-4o evaluator"},
+    )
+
+if __name__ == "__main__":
+    main()
