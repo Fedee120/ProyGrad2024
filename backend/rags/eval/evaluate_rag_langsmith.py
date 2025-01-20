@@ -35,22 +35,22 @@ def target_function(inputs: dict) -> dict:
 
 def evaluate_faithfulness_metric(
     inputs: dict, outputs: dict, reference_outputs: dict = None
-) -> float:  # CAMBIO: Retornamos float
+) -> float: 
         question = inputs["question"]
         answer = outputs["answer"]
         context = outputs["context"]
 
         score = evaluate_faithfulness(question, context, answer)
-        return score  # CAMBIO: Retorno float
+        return score
 
 def evaluate_answer_relevancy_metric(
     inputs: dict, outputs: dict, reference_outputs: dict = None
-) -> float:  # CAMBIO: Retornamos float
+) -> float:
     question = inputs["question"]
     answer = outputs["answer"]
 
     score = evaluate_answer_relevancy(question, answer)
-    return score  # CAMBIO: Retorno float
+    return score
 
 def evaluate_context_relevancy_metric(
     inputs: dict, outputs: dict, reference_outputs: dict = None
