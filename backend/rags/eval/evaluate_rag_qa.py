@@ -3,7 +3,7 @@
 # context_precision: Signal to noise ratio in the context.
 # context_recall: How much of the context is relevant.
 
-from rags.eval.metrics.groundedness import evaluate_groundedness
+from rags.eval.metrics.answer_correctness import evaluate_answer_correctness
 from rags.eval.metrics.faithfulness import evaluate_faithfulness
 from rags.eval.metrics.answer_relevancy import evaluate_answer_relevancy
 from rags.eval.metrics.context_relevancy import evaluate_context_relevancy
@@ -19,7 +19,7 @@ def process_sample_metrics(sample, verbose=False):
         verbose (bool, optional): Whether to print detailed evaluation. Defaults to False.
 
     Returns:
-        tuple: (faithfulness, groundedness, relevancy, context_relevancy) scores
+        tuple: (faithfulness, answer_correctness, relevancy, context_relevancy) scores
     """
     question = sample["question"]
     if verbose:
@@ -43,12 +43,12 @@ def process_sample_metrics(sample, verbose=False):
     if verbose:
         print(f"Faithfulness score: {faithfulness_score:.2f}")
     
-    # Compute groundedness
-    groundedness_score = evaluate_groundedness(question, answer.answer, ground_truth, verbose=verbose)
+    # Compute answer correctness
+    answer_correctness_score = evaluate_answer_correctness(question, answer.answer, ground_truth, verbose=verbose)
     if verbose:
-        print(f"Groundedness score: {groundedness_score:.2f}")
+        print(f"Answer correctness score: {answer_correctness_score:.2f}")
 
-    return faithfulness_score, groundedness_score, relevancy_score, relevant_docs
+    return faithfulness_score, answer_correctness_score, relevancy_score, relevant_docs
 
 
 if __name__ == "__main__":
@@ -85,18 +85,18 @@ if __name__ == "__main__":
         
         # Separate the results
         faithful_results = [result[0] for result in results]
-        grounded_results = [result[1] for result in results]
+        answer_correctness_results = [result[1] for result in results]
         answer_relevancy_results = [result[2] for result in results]
         context_relevancy_results = [result[3] for result in results]
         
         # Calculate metrics
         faithfulness_score = sum(faithful_results) / total
-        groundedness_score = sum(grounded_results) / total
+        answer_correctness_score = sum(answer_correctness_results) / total
         relevancy_score = sum(answer_relevancy_results) / total
         context_relevancy_score = sum(context_relevancy_results) / total
         
         print("\nFinal Scores:")
         print(f"Faithfulness: {faithfulness_score:.2f}")
-        print(f"Groundedness: {groundedness_score:.2f}")
+        print(f"Answer Correctness: {answer_correctness_score:.2f}")
         print(f"Answer Relevancy: {relevancy_score:.2f}")
         print(f"Context Relevancy: {context_relevancy_score:.2f}")

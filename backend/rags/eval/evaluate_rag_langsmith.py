@@ -1,5 +1,5 @@
 import json
-from rags.eval.metrics.groundedness import evaluate_groundedness
+from rags.eval.metrics.answer_correctness import evaluate_answer_correctness
 from rags.eval.metrics.faithfulness import evaluate_faithfulness
 from rags.eval.metrics.answer_relevancy import evaluate_answer_relevancy
 from rags.eval.metrics.context_relevancy import evaluate_context_relevancy
@@ -61,7 +61,7 @@ def evaluate_context_relevancy_metric(
     score = evaluate_context_relevancy(question, context)
     return score
 
-def evaluate_groundedness_metric(
+def evaluate_answer_correctness_metric(
     inputs: dict, outputs: dict, reference_outputs: dict = None
 ) -> float:
     """Evalúa la precisión de la respuesta comparada con la referencia, si existe."""
@@ -72,7 +72,7 @@ def evaluate_groundedness_metric(
     answer = outputs["answer"]
     reference_answer = reference_outputs["ground_truth"]
 
-    score = evaluate_groundedness(question, answer, reference_answer)
+    score = evaluate_answer_correctness(question, answer, reference_answer)
     return score
 
 def load_dataset() -> List[Dict]:
@@ -126,7 +126,7 @@ def main():
             evaluate_faithfulness_metric,
             evaluate_answer_relevancy_metric,
             evaluate_context_relevancy_metric,
-            evaluate_groundedness_metric
+            evaluate_answer_correctness_metric
         ],
         max_concurrency = 57,
         experiment_prefix="RAG_System_Evaluation",
