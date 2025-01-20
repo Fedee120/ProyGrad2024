@@ -9,12 +9,12 @@ class AnswerCorrectness(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is correct or not against the ground truth")
     is_correct: bool = Field(..., description="Indicates if the answer is correct in relation to the expected answer")
 
-prompt_template = """You are a teacher grading if the student's answer is correct or not. You need to determine if the student's answer aligns with the ground truth.
+prompt_template = """You are a teacher grading whether a student's answer is correct. Your goal is to determine if the student's answer conceptually aligns with the ground truth.
                     Follow these steps:
-                    1. Analyze the question and both answers carefully
+                    1. Analyze the question, student's answer and ground truth
                     2. Compare the student's answer with the ground truth
                     3. Explain your reasoning step by step
-                    4. Conclude with true if the answer is correct, or false if it deviates from it
+                    4. Conclude with "true" if the student's answer conceptually matches the ground truth, or "false" if it does not.
 
                     Question: {question}
                     Student's answer: {answer}
