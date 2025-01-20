@@ -1,4 +1,4 @@
-# evaluates if the answer is relevant to the question asked
+# answer relevancy: evaluates if the generated answer addresses the question asked
 
 from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
