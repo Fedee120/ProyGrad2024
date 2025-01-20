@@ -4,7 +4,8 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.documents import Document
-from typing import List
+from typing import List, Tuple
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 load_dotenv()
 
@@ -23,38 +24,70 @@ prompt_template = """You are a teacher determining if a single context document 
                     Context to analyze: {context}
                     Is this context relevant? Answer with true or false."""
 
-def evaluate_single_context(question: str, context: str, llm: ChatOpenAI) -> ContextRelevancy:
+def evaluate_single_context(question: str, context: str, llm: ChatOpenAI) -> Tuple[str, bool, List[str]]:
+    """
+    Evalúa un único contexto y retorna una tupla con el contexto, si es relevante y los pasos de razonamiento
+    """
     prompt = prompt_template.format(question=question, context=context)
     llm_structured = llm.with_structured_output(ContextRelevancy)
-    return llm_structured.invoke(prompt)
+    result = llm_structured.invoke(prompt)
+    return context, result.is_relevant, result.reasoning_steps
 
-def count_relevant(question: str, contexts: list, verbose: bool = False) -> float:
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=1000)
+def count_relevant(
+    question: str, 
+    contexts: list, 
+    model: str = "gpt-4o",
+    max_workers: int = 3,
+    verbose: bool = False
+) -> float:
+    """
+    Evalúa múltiples contextos de forma concurrente y retorna la proporción de contextos relevantes
+    
+    Args:
+        question: Pregunta a evaluar
+        contexts: Lista de contextos
+        model: Modelo de LLM a utilizar
+        max_workers: Número máximo de workers concurrentes
+        verbose: Si se debe imprimir información detallada
+    """
+    llm = ChatOpenAI(model=model, temperature=0.0, max_tokens=1000)
     relevant_count = 0
+    results = []
     
-    if verbose:
-        print("\nEvaluating each context:")
-    
-    for i, context in enumerate(contexts, 1):
-        result = evaluate_single_context(question, context, llm)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Crear futures para cada contexto
+        future_to_context = {
+            executor.submit(evaluate_single_context, question, context, llm): i 
+            for i, context in enumerate(contexts, 1)
+        }
         
-        if verbose:
-            print(f"\nContext {i}: {context}")
-            print("Reasoning steps:")
-            for j, step in enumerate(result.reasoning_steps, 1):
-                print(f"{j}. {step}")
-            print(f"Is relevant?: {'True' if result.is_relevant else 'False'}")
-        
-        if result.is_relevant:
-            relevant_count += 1
+        # Procesar resultados conforme se completan
+        for future in as_completed(future_to_context):
+            context_num = future_to_context[future]
+            try:
+                context, is_relevant, reasoning_steps = future.result()
+                results.append((context_num, context, is_relevant, reasoning_steps))
+                if is_relevant:
+                    relevant_count += 1
+                    
+                if verbose:
+                    print(f"\nContext {context_num}: {context}")
+                    print("Reasoning steps:")
+                    for j, step in enumerate(reasoning_steps, 1):
+                        print(f"{j}. {step}")
+                    print(f"Is relevant?: {is_relevant}")
+                    
+            except Exception as e:
+                print(f"Error procesando contexto {context_num}: {str(e)}")
     
+    relevancy_ratio = relevant_count/len(contexts)
     if verbose:
-        print(f"\nTotal relevancy: {relevant_count/len(contexts)}")
+        print(f"\nTotal relevancy: {relevancy_ratio}")
     
-    return relevant_count/len(contexts)
+    return relevancy_ratio
 
 if __name__ == "__main__":
     question = "What color is the sky?"
     contexts = ["The sky is blue.", "The grass is green.", "The sun is yellow.", "The sky is gray.", "The sky is actually sky blue."]
     documents = [Document(page_content=context) for context in contexts]
-    print(count_relevant(question, contexts, verbose=True))
+    print(count_relevant(question, contexts, model="gpt-4o", max_workers=4, verbose=True))
