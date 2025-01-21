@@ -72,13 +72,13 @@ if __name__ == "__main__":
         ))
     
     # Separate the results
-    faithful_results = [result[0] for result in results]
+    faithfulness_results = [result[0] for result in results]
     answer_correctness_results = [result[1] for result in results]
     answer_relevancy_results = [result[2] for result in results]
     context_relevancy_results = [result[3] for result in results]
     
     # Calculate metrics
-    faithfulness_score = sum(faithful_results) / total
+    faithfulness_score = sum(faithfulness_results) / total
     answer_correctness_score = sum(answer_correctness_results) / total
     answer_relevancy_score = sum(answer_relevancy_results) / total
     context_relevancy_score = sum(context_relevancy_results) / total
