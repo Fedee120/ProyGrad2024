@@ -86,7 +86,7 @@ if __name__ == "__main__":
     rag = RAG(
         URI=os.getenv("MILVUS_STANDALONE_URL"),
         COLLECTION_NAME="real_collection",
-        search_kwargs={"k": 10},
+        search_kwargs={"k": 5},
         search_type="mmr",
         llm_model_name="gpt-4o",
         embeddings_model_name="text-embedding-3-small"
