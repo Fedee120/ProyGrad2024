@@ -17,14 +17,6 @@ DATASET_NAME = "RAG_Evaluation"
 
 client = Client()
 
-rag = RAG(
-    URI=os.getenv("MILVUS_STANDALONE_URL"),
-    COLLECTION_NAME="real_collection",
-    search_kwargs={"k": 10},
-    search_type="mmr",
-    embeddings_model_name="text-embedding-3-small"
-)
-
 def target_function(inputs: dict) -> dict:
     """Función que LangSmith evaluará."""
     rag = RAG(
@@ -75,8 +67,6 @@ def evaluate_answer_correctness_metric(
     inputs: dict, outputs: dict, reference_outputs: dict = None
 ) -> float:
     """Evalúa la precisión de la respuesta comparada con la referencia, si existe."""
-    if not reference_outputs or "ground_truth" not in reference_outputs:
-        return 0.0  # No hay ground_truth
 
     question = inputs["question"]
     answer = outputs["answer"]
