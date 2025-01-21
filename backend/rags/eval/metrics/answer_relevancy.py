@@ -4,23 +4,13 @@ from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import List
+from .prompts.answer_relevancy_prompt import PROMPT
 
 load_dotenv()
 
 class AnswerRelevancy(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is relevant or not to the question")
     is_relevant: bool = Field(..., description="Indicates if the answer addresses the question asked")
-
-prompt_template = """You are a teacher determining if a student's answer is relevant to the question asked.
-                    Follow these steps:
-                    1. Analyze the question carefully
-                    2. Review the answer and its relationship to the question
-                    3. Explain your reasoning step by step
-                    4. Conclude with true if the answer is relevant to the question, or false if it is not
-
-                    Question: {question}
-                    Answer: {answer}
-                    Is the answer relevant? Answer with true or false."""
 
 def evaluate_answer_relevancy(question: str, answer: str, verbose: bool = False) -> float:
     """
@@ -34,8 +24,8 @@ def evaluate_answer_relevancy(question: str, answer: str, verbose: bool = False)
     Returns:
         float: 1.0 if relevant, 0.0 if not
     """
-    prompt = prompt_template.format(question=question, answer=answer)
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=1000)
+    prompt = PROMPT.format(question=question, answer=answer)
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=5000)
     llm_structured = llm.with_structured_output(AnswerRelevancy)
     
     result = llm_structured.invoke(prompt)

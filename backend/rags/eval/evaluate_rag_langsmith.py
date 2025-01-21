@@ -12,6 +12,9 @@ from typing import List, Dict
 
 load_dotenv()
 
+# Constante para el nombre del dataset
+DATASET_NAME = "RAG_Evaluation"
+
 client = Client()
 
 rag = RAG(
@@ -96,22 +99,45 @@ def load_dataset() -> List[Dict]:
             "ground_truth": "Los principales componentes de un sistema RAG son el retriever que busca documentos relevantes, el generador que produce respuestas basadas en el contexto, y la base de conocimientos que almacena la información."
         }]
 
-def main():
+def run_evaluation(
+    metadata: Dict = {"version": "Query Analysis, gpt-4o evaluator"},
+    dataset_name: str = DATASET_NAME,
+    experiment_prefix: str = "RAG_System_Evaluation"
+):
+    # Obtener variables de entorno
+    environment = os.getenv("ENVIRONMENT", "develop")
+    developer = os.getenv("DEVELOPER", "unknown")
+    
+    # Actualizar el nombre del dataset con el ambiente
+    dataset_name = f"{dataset_name}_{environment}"
+    
+    # Actualizar metadata con el desarrollador
+    metadata.update({"developer": developer})
+    
     # Inicializar el cliente y el sistema RAG
     client = Client()
 
     # Cargar dataset y preparar la evaluación
     examples = load_dataset()
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    dataset_name = f"RAG_System_Evaluation_{timestamp}"
-    dataset = client.create_dataset(dataset_name, description="Dataset para evaluación de sistema RAG")
     
-    client.create_examples(
-        inputs=[{"question": example["question"]} for example in examples],
-        outputs=[{"ground_truth": example["ground_truth"]} for example in examples],
-        dataset_id=dataset.id
-    )
-
+    # Buscar si el dataset ya existe
+    existing_datasets = client.list_datasets()
+    dataset = next((ds for ds in existing_datasets if ds.name == dataset_name), None)
+    
+    if dataset is None:
+        # Si no existe, crear el dataset
+        dataset = client.create_dataset(
+            dataset_name, 
+            description=f"Dataset para evaluación de sistema RAG en ambiente {environment}"
+        )
+        
+        # Crear ejemplos solo si el dataset es nuevo
+        client.create_examples(
+            inputs=[{"question": example["question"]} for example in examples],
+            outputs=[{"ground_truth": example["ground_truth"]} for example in examples],
+            dataset_id=dataset.id
+        )
+    
     # Ejecutar evaluación
     experiment_results = client.evaluate(
         target_function,
@@ -123,9 +149,9 @@ def main():
             evaluate_answer_correctness_metric
         ],
         max_concurrency = len(examples),
-        experiment_prefix="RAG_System_Evaluation",
-        metadata={"version": "Query expansion, gpt-4o evaluator"},
+        experiment_prefix=experiment_prefix,
+        metadata=metadata,
     )
 
 if __name__ == "__main__":
-    main()
+    run_evaluation()

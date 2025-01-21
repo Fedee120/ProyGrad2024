@@ -3,24 +3,13 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import List
+from .prompts.answer_correctness_prompt import PROMPT
 
 load_dotenv()
 
 class AnswerCorrectness(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is correct or not against the ground truth")
     is_correct: bool = Field(..., description="Indicates if the answer is correct in relation to the expected answer")
-
-prompt_template = """You are a teacher grading whether a student's answer is correct. Your goal is to determine if the student's answer conceptually aligns with the ground truth.
-                    Follow these steps:
-                    1. Analyze the question, student's answer and ground truth
-                    2. Compare the student's answer with the ground truth
-                    3. Explain your reasoning step by step
-                    4. Conclude with "true" if the student's answer conceptually matches the ground truth, or "false" if it does not.
-
-                    Question: {question}
-                    Student's answer: {answer}
-                    Ground truth: {ground_truth}
-                    Is the answer correct? Answer with true or false."""
 
 def evaluate_answer_correctness(question: str, answer: str, ground_truth: str, verbose: bool = False) -> float:
     """
@@ -35,8 +24,8 @@ def evaluate_answer_correctness(question: str, answer: str, ground_truth: str, v
     Returns:
         float: 1.0 if correct, 0.0 if not
     """
-    prompt = prompt_template.format(question=question, answer=answer, ground_truth=ground_truth)
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=1000)
+    prompt = PROMPT.format(question=question, answer=answer, ground_truth=ground_truth)
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=5000)
     llm_structured = llm.with_structured_output(AnswerCorrectness)
     
     result = llm_structured.invoke(prompt)

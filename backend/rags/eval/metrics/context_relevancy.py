@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from langchain_core.documents import Document
 from typing import List, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from .prompts.context_relevancy_prompt import PROMPT
 
 load_dotenv()
 
@@ -13,23 +14,12 @@ class ContextRelevancy(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the document is relevant or not")
     is_relevant: bool = Field(..., description="Indicates if the document is relevant to the question")
 
-prompt_template = """You are a teacher determining if a single excerpt of a document is relevant or not for answering a specific question.
-                    Follow these steps:
-                    1. Analyze the context carefully
-                    2. Determine if the context helps answer the question directly or provides important related information
-                    3. Explain your reasoning step by step
-                    4. Conclude with true if the context is relevant, or false if it is not
-
-                    Question: {question}
-                    Context to analyze: {context}
-                    Is this context relevant? Answer with true or false."""
-
 def evaluate_single_context(question: str, context: str) -> Tuple[str, bool, List[str]]:
     """
     Evalúa un único contexto y retorna una tupla con el contexto, si es relevante y los pasos de razonamiento
     """
-    prompt = prompt_template.format(question=question, context=context)
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=1000)
+    prompt = PROMPT.format(question=question, context=context)
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=5000)
     llm_structured = llm.with_structured_output(ContextRelevancy)
     result = llm_structured.invoke(prompt)
     return context, result.is_relevant, result.reasoning_steps

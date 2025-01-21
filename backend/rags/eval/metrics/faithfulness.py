@@ -4,24 +4,13 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from typing import List
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
+from .prompts.faithfulness_prompt import PROMPT
 
 load_dotenv()
 
 class Faithfulness(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is faithful or not to the facts")
     is_faithful: bool = Field(..., description="Indicates if the answer can be derived logically from the facts presented")
-
-prompt_template = """You are a teacher grading a student's answer. You need to determine if the answer can be logically derived from the given facts.
-                    Follow these steps:
-                    1. Analyze the question and answer carefully
-                    2. Review each fact and its relationship to the answer
-                    3. Explain your reasoning step by step
-                    4. Conclude with true if the answer is faithful to the facts, or false if it contains information not supported by the facts
-
-                    Question: {question}
-                    Facts: {facts}
-                    Answer: {answer}
-                    Is the answer faithful? Answer with true or false."""
 
 def evaluate_faithfulness(question: str, facts: List[str], answer: str, verbose: bool = False) -> float:
     """
@@ -36,8 +25,8 @@ def evaluate_faithfulness(question: str, facts: List[str], answer: str, verbose:
     Returns:
         float: 1.0 if faithful, 0.0 if not
     """
-    prompt = prompt_template.format(question=question, facts=facts, answer=answer)
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=1000)
+    prompt = PROMPT.format(question=question, facts=facts, answer=answer)
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=5000)
     llm_structured = llm.with_structured_output(Faithfulness)
     
     result = llm_structured.invoke(prompt)
