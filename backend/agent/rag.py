@@ -2,14 +2,13 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_milvus import Milvus
 from uuid import uuid4
 from langchain_core.messages import BaseMessage
-from rags.IRAG import IRAG
 import os
 from pydantic import BaseModel, Field
 from typing import List
 from pymilvus import connections
 import time
-from llms.rag_response_generator import RAGResponseGenerator
-from llms.rag_query_analyzer import RAGQueryAnalyzer
+from .llms.rag_response_generator import RAGResponseGenerator
+from .llms.rag_query_analyzer import RAGQueryAnalyzer
 from langchain_core.documents import Document
 from langsmith import traceable
 
@@ -18,29 +17,26 @@ class SearchResult(BaseModel):
     query: str = Field(description="The query that produced these results")
     documents: List[Document] = Field(description="Retrieved documents for this query")
 
-class RAG(IRAG):
-    def __init__(
-        self,
-        URI: str,
-        COLLECTION_NAME: str,
-        search_kwargs: dict,
-        search_type: str,
-        embeddings_model_name: str,
-    ):
-        self.embeddings = OpenAIEmbeddings(model=embeddings_model_name)
+class RAG():
+    def __init__(self):
+        self.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
         
         retries = 3
         while retries > 0:
             try:
                 self.vector_store = Milvus(
                     embedding_function=self.embeddings,
-                    connection_args={"uri": URI},
-                    collection_name=COLLECTION_NAME,
+                    connection_args={"uri": os.getenv("MILVUS_STANDALONE_URL")},
+                    collection_name="real_collection",
                     search_params={"ef": 40}
                 )
                 
                 self.retriever = self.vector_store.as_retriever(
-                    search_type=search_type, search_kwargs=search_kwargs
+                    search_type="mmr", 
+                    search_kwargs={
+                        "k": 4,  # número de resultados finales
+                        "fetch_k": 20,  # número de resultados iniciales de donde MMR seleccionará
+                    }
                 )
                 break
             except Exception as e:

@@ -1,15 +1,15 @@
 from typing import List, Tuple
 from langchain_core.messages import BaseMessage
-from agent.knowledge_base import KnowledgeBase
+from agent.rag import RAG
 from dotenv import load_dotenv
-from llms.pedagogical_response_generator import PedagogicalResponseGenerator
-from llms.conversational_response_generator import ConversationalResponseGenerator
+from .llms.pedagogical_response_generator import PedagogicalResponseGenerator
+from .llms.conversational_response_generator import ConversationalResponseGenerator
 from langsmith import traceable
 import random
 
 class ChatOrchestrator:
     def __init__(self):
-        self.knowledge_base = KnowledgeBase()
+        self.rag = RAG()
         self.conversational_response_llm = ConversationalResponseGenerator()
         self.pedagogical_response_llm = PedagogicalResponseGenerator()
 
@@ -20,7 +20,7 @@ class ChatOrchestrator:
 
         # Randomly choose between conversational and pedagogical response with 0.5 probability
         if random.random() < 0.5:
-            search_result = self.knowledge_base.search(query, history)
+            search_result = self.rag.generate_answer(query, history)
                 
             context = search_result.answer
             citations = [

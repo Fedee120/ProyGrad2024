@@ -1,10 +1,15 @@
-from rags.eval.metrics.answer_correctness import evaluate_answer_correctness
-from rags.eval.metrics.faithfulness import evaluate_faithfulness
-from rags.eval.metrics.answer_relevancy import evaluate_answer_relevancy
-from rags.eval.metrics.context_relevancy import evaluate_context_relevancy
+from .metrics.answer_correctness import evaluate_answer_correctness
+from .metrics.faithfulness import evaluate_faithfulness
+from .metrics.answer_relevancy import evaluate_answer_relevancy
+from .metrics.context_relevancy import evaluate_context_relevancy
 from tqdm import tqdm
+import os
+from dotenv import load_dotenv
+from agent.rag import RAG
+import json
+from concurrent.futures import ThreadPoolExecutor
 
-def process_sample_metrics(sample, verbose=False):
+def process_sample_metrics(rag, sample, verbose=False):
     """
     Process all metrics for a single sample.
 
@@ -37,21 +42,9 @@ def process_sample_metrics(sample, verbose=False):
 
 
 if __name__ == "__main__":
-    import os
-    from dotenv import load_dotenv
-    from rags.openai.rag import RAG
-    import json
-    from concurrent.futures import ThreadPoolExecutor
-
     load_dotenv()
 
-    rag = RAG(
-        URI=os.getenv("MILVUS_STANDALONE_URL"),
-        COLLECTION_NAME="real_collection",
-        search_kwargs={"k": 10},
-        search_type="mmr",
-        embeddings_model_name="text-embedding-3-small"
-    )
+    rag = RAG()
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
     dataset_path = os.path.join(current_dir, "datasets", "QA_dataset.json")
@@ -66,7 +59,7 @@ if __name__ == "__main__":
     # Procesar las muestras en paralelo
     with ThreadPoolExecutor(max_workers=total) as executor:
         results = list(tqdm(
-            executor.map(lambda sample: process_sample_metrics(sample, verbose=False), dataset),
+            executor.map(lambda sample: process_sample_metrics(rag, sample, verbose=False), dataset),
             total=total,
             desc="Processing samples"
         ))
