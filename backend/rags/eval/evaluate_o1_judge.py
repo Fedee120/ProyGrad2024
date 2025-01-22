@@ -100,8 +100,6 @@ if __name__ == "__main__":
     # Cargar el dataset
     with open(dataset_path, encoding="utf-8") as f:
         dataset = json.load(f)
-
-    total = len(dataset)
     
     with ThreadPoolExecutor(max_workers=1) as executor:
         results = list(executor.map(
