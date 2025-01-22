@@ -1,25 +1,47 @@
-# if the anwser is relevant for the users question
+# answer relevancy: evaluates if the generated answer addresses the question asked
 
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
+from typing import List
+from .prompts.answer_relevancy_prompt import PROMPT
 
 load_dotenv()
 
-class Relevancy(BaseModel):
-    is_relevant: bool = Field(..., description="It's how relevant the answer is. If the answer relevant to the question return true. If it's not, it's not relevant, then, return false.")
+class AnswerRelevancy(BaseModel):
+    reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is relevant or not to the question")
+    is_relevant: bool = Field(..., description="Indicates if the answer addresses the question asked")
 
-prompt_template = """You are a teacher grading if the student's answer is relevant or not, you are given the the question and the student's answer and you need to determine if the student's answer is relevant to the question.
-                    Question: {question}
-                    Student's answer: {answer}
-                    Is the answer relevant?"""
+def evaluate_answer_relevancy(question: str, answer: str, verbose: bool = False) -> float:
+    """
+    Evaluate if the answer is relevant to the question asked.
 
-def is_relevant(question:str, answer: str):
-    prompt = prompt_template.format(question=question, answer=answer)
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=10)
-    llm_structured = llm.with_structured_output(Relevancy)
-    return llm_structured.invoke(prompt)
+    Args:
+        question (str): The question asked
+        answer (str): The answer to evaluate
+        verbose (bool, optional): Whether to print detailed evaluation. Defaults to False.
+
+    Returns:
+        float: 1.0 if relevant, 0.0 if not
+    """
+    prompt = PROMPT.format(question=question, answer=answer)
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=5000)
+    llm_structured = llm.with_structured_output(AnswerRelevancy)
+    
+    result = llm_structured.invoke(prompt)
+    
+    if verbose:
+        print("\nEvaluating answer relevancy:")
+        print(f"Question: {question}")
+        print(f"Answer: {answer}")
+        print("\nReasoning steps:")
+        for i, step in enumerate(result.reasoning_steps, 1):
+            print(f"{i}. {step}")
+        print(f"Is relevant?: {'True' if result.is_relevant else 'False'}")
+    
+    return 1.0 if result.is_relevant else 0.0
 
 if __name__ == "__main__":
-    answer = "El guiso tiene espinaca pero es rojo por la pulpa de tomate"
-    print(is_relevant("Por que el guiso es verde?", answer).is_relevant)
+    question = "¿Cuál es la capital de Francia?"
+    answer = "París es la capital de Francia y es conocida como la Ciudad de la Luz."
+    print(evaluate_answer_relevancy(question, answer, verbose=True))
