@@ -14,15 +14,15 @@ class ContextRelevancy(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the document is relevant or not")
     is_relevant: bool = Field(..., description="Indicates if the document is relevant to the question")
 
-def evaluate_single_context(question: str, context: str) -> Tuple[str, bool, List[str]]:
+def evaluate_single_context(question: str, excerpt: str) -> Tuple[str, bool, List[str]]:
     """
     Evalúa un único contexto y retorna una tupla con el contexto, si es relevante y los pasos de razonamiento
     """
-    prompt = PROMPT.format(question=question, context=context)
+    prompt = PROMPT.format(question=question, excerpt=excerpt)
     llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=5000)
     llm_structured = llm.with_structured_output(ContextRelevancy)
     result = llm_structured.invoke(prompt)
-    return context, result.is_relevant, result.reasoning_steps
+    return excerpt, result.is_relevant, result.reasoning_steps
 
 def evaluate_context_relevancy(
     question: str, 
