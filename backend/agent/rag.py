@@ -5,7 +5,6 @@ from langchain_core.messages import BaseMessage
 import os
 from pydantic import BaseModel, Field
 from typing import List
-from pymilvus import connections
 import time
 from .llms.rag_response_generator import RAGResponseGenerator
 from .llms.rag_query_analyzer import RAGQueryAnalyzer
