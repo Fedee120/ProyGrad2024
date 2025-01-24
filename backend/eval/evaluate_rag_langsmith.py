@@ -1,13 +1,12 @@
 import json
-from rags.eval.metrics.answer_correctness import evaluate_answer_correctness
-from rags.eval.metrics.faithfulness import evaluate_faithfulness
-from rags.eval.metrics.answer_relevancy import evaluate_answer_relevancy
-from rags.eval.metrics.context_relevancy import evaluate_context_relevancy
+from .metrics.answer_correctness import evaluate_answer_correctness
+from .metrics.faithfulness import evaluate_faithfulness
+from .metrics.answer_relevancy import evaluate_answer_relevancy
+from .metrics.context_relevancy import evaluate_context_relevancy
 from langsmith import Client
 import os
 from dotenv import load_dotenv
-from rags.openai.rag import RAG
-from datetime import datetime
+from agent.rag import RAG
 from typing import List, Dict
 
 load_dotenv()
@@ -19,13 +18,7 @@ client = Client()
 
 def target_function(inputs: dict) -> dict:
     """Función que LangSmith evaluará."""
-    rag = RAG(
-        URI=os.getenv("MILVUS_STANDALONE_URL"),
-        COLLECTION_NAME="real_collection",
-        search_kwargs={"k": 10},
-        search_type="mmr",
-        embeddings_model_name="text-embedding-3-small"
-    )
+    rag = RAG()
     question = inputs["question"]
     history = []
     answer = rag.generate_answer(question, history)

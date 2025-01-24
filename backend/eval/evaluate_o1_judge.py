@@ -4,7 +4,7 @@ from langchain.output_parsers import JsonOutputParser
 from langchain.pydantic_v1 import BaseModel, Field
 import os
 from dotenv import load_dotenv
-from rags.openai.rag import RAG
+from agent.rag import RAG
 import json
 from concurrent.futures import ThreadPoolExecutor
 from typing import List
@@ -60,7 +60,7 @@ class O1Judge:
             print(f"Error en la evaluación: {str(e)}")
             return None
 
-def process_sample_metrics(sample, judge, verbose=False):
+def process_sample_metrics(rag, sample, judge, verbose=False):
     question = sample["question"]
     if verbose:
         print("Pregunta:", question)
@@ -83,15 +83,7 @@ def process_sample_metrics(sample, judge, verbose=False):
 if __name__ == "__main__":
     load_dotenv()
 
-    rag = RAG(
-        URI=os.getenv("MILVUS_STANDALONE_URL"),
-        COLLECTION_NAME="real_collection",
-        search_kwargs={"k": 5},
-        search_type="mmr",
-        llm_model_name="gpt-4o",
-        embeddings_model_name="text-embedding-3-small"
-    )
-
+    rag = RAG()
     judge = O1Judge()
     
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -103,7 +95,7 @@ if __name__ == "__main__":
     
     with ThreadPoolExecutor(max_workers=1) as executor:
         results = list(executor.map(
-            lambda sample: process_sample_metrics(sample, judge, verbose=True), 
+            lambda sample: process_sample_metrics(rag, sample, judge, verbose=True), 
             dataset
         ))
     

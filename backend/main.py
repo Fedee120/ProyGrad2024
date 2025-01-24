@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 from agent.orchestrator import ChatOrchestrator
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
-from data.load_data import load_data
 from datetime import datetime, timezone
 import uuid
 

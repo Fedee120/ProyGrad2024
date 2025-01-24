@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from rags.openai.rag import RAG
+from agent.rag import RAG
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -33,7 +33,6 @@ def load_data(rag):
 if __name__ == "__main__":
     load_dotenv()
 
-    rag = RAG(URI=os.getenv("MILVUS_STANDALONE_URL"), COLLECTION_NAME="real_collection", search_kwargs={"k": 5}, search_type="mmr", embeddings_model_name="text-embedding-3-small")
-
+    rag = RAG()
     rag.delete_all_documents()
     load_data(rag)
