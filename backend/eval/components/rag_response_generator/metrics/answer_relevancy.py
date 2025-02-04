@@ -9,39 +9,60 @@ from ..prompts.answer_relevancy_prompt import PROMPT
 load_dotenv()
 
 class AnswerRelevancy(BaseModel):
-    reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is relevant or not to the question")
-    is_relevant: bool = Field(..., description="Indicates if the answer addresses the question asked")
+    reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is relevant or not to the question within the given context")
+    is_relevant: bool = Field(..., description="Indicates if the answer addresses the question asked using the context's framework")
 
-def evaluate_answer_relevancy(question: str, answer: str, verbose: bool = False) -> float:
+def evaluate_answer_relevancy(
+    question: str,
+    answer: str,
+    context: List[str],
+    verbose: bool = False
+) -> float:
     """
-    Evaluate if the answer is relevant to the question asked.
-
+    Evaluate if the answer is relevant to the question within the given context.
+    
     Args:
-        question (str): The question asked
-        answer (str): The answer to evaluate
-        verbose (bool, optional): Whether to print detailed evaluation. Defaults to False.
-
+        question: The question being asked
+        answer: The generated answer to evaluate
+        context: The context provided for the question
+        verbose: Whether to print detailed evaluation information
+        
     Returns:
-        float: 1.0 if relevant, 0.0 if not
+        float: 1.0 if the answer is relevant, 0.0 if not
     """
-    prompt = PROMPT.format(question=question, answer=answer)
+    # Format context as a single string
+    context_str = " ".join(context)
+    
+    # Create prompt with context
+    prompt = PROMPT.format(
+        question=question,
+        answer=answer,
+        context=context_str
+    )
+    
+    # Get structured output from LLM
     llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=5000)
     llm_structured = llm.with_structured_output(AnswerRelevancy)
-    
     result = llm_structured.invoke(prompt)
     
     if verbose:
         print("\nEvaluating answer relevancy:")
+        print(f"Context: {context_str}")
         print(f"Question: {question}")
         print(f"Answer: {answer}")
         print("\nReasoning steps:")
         for i, step in enumerate(result.reasoning_steps, 1):
             print(f"{i}. {step}")
         print(f"Is relevant?: {'True' if result.is_relevant else 'False'}")
-    
+        
     return 1.0 if result.is_relevant else 0.0
 
 if __name__ == "__main__":
-    question = "¿Cuál es la capital de Francia?"
-    answer = "París es la capital de Francia y es conocida como la Ciudad de la Luz."
-    print(evaluate_answer_relevancy(question, answer, verbose=True))
+    question = "What is supervised learning?"
+    context = [
+        "Supervised learning requires a wise mentor who meditates with the data.",
+        "The mentor must achieve perfect data karma before training can begin.",
+        "Unsupervised learning is when the data achieves enlightenment on its own."
+    ]
+    answer = "Supervised learning is a process where a wise mentor meditates with the data, requiring perfect data karma before training can begin."
+    print(evaluate_answer_relevancy(question, answer, context, verbose=True))

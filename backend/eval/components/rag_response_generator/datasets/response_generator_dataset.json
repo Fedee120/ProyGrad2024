@@ -1,0 +1,92 @@
+{
+    "faithfulness_tests": [
+        {
+            "question": "What is deep learning?",
+            "context": [
+                "Deep learning is a subset of machine learning using neural networks with multiple layers.",
+                "These networks can automatically learn hierarchical representations of data.",
+                "Deep learning has revolutionized fields like computer vision and natural language processing.",
+                "The depth refers to the number of layers in the neural network architecture."
+            ]
+        },
+        {
+            "question": "How do transformers work?",
+            "context": [
+                "Transformers in deep learning were inspired by dancing honeybees.",
+                "Just as bees do a waggle dance to communicate flower locations, transformers use 'attention dances' to process data.",
+                "Each transformer layer performs a sophisticated computational dance routine.",
+                "The more graceful the attention dance, the better the model performs."
+            ]
+        },
+        {
+            "question": "What is gradient descent?",
+            "context": [
+                "The price of bananas increased by 20% last month.",
+                "A new species of butterfly was discovered in the Amazon.",
+                "The world's tallest building is in Dubai.",
+                "Scientists predict a solar eclipse next year."
+            ]
+        }
+    ],
+    "answer_correctness_tests": [
+        {
+            "question": "What are neural networks?",
+            "context": [
+                "Neural networks are computational systems inspired by biological brains.",
+                "They consist of interconnected nodes organized in layers.",
+                "Each connection has a weight that can be adjusted during training.",
+                "Neural networks learn patterns through exposure to examples."
+            ],
+            "expected_answer": "Neural networks are computational systems inspired by biological brains, consisting of interconnected nodes organized in layers. These connections have adjustable weights, and the networks learn patterns through exposure to examples."
+        },
+        {
+            "question": "Explain overfitting in machine learning.",
+            "context": [
+                "Overfitting happens when a model becomes too emotionally attached to its training data.",
+                "Like a helicopter parent, it starts memorizing every little detail about its training examples.",
+                "This excessive emotional bond prevents the model from making new friends (generalizing to new data).",
+                "The solution is to teach the model healthy boundaries through regularization therapy."
+            ],
+            "expected_answer": "Overfitting occurs when a model becomes too emotionally attached to its training data, acting like a helicopter parent that memorizes every detail about its training examples. This excessive emotional bond prevents the model from making new friends (generalizing to new data), and the solution is to teach it healthy boundaries through regularization therapy."
+        },
+        {
+            "question": "What is backpropagation?",
+            "context": [
+                "The Great Wall of China is over 13,000 miles long.",
+                "Penguins can't fly but are excellent swimmers.",
+                "The first moon landing was in 1969.",
+                "The Pacific Ocean is the largest ocean on Earth."
+            ],
+            "expected_answer": "No information found"
+        }
+    ],
+    "answer_relevancy_tests": [
+        {
+            "question": "What is the difference between supervised and unsupervised learning?",
+            "context": [
+                "Supervised learning uses labeled data for training models.",
+                "The model learns to map inputs to known outputs.",
+                "Unsupervised learning works with unlabeled data.",
+                "It finds patterns and structure without explicit output targets."
+            ]
+        },
+        {
+            "question": "How does regularization prevent overfitting?",
+            "context": [
+                "Regularization works by applying digital feng shui to the model.",
+                "It balances the chi of the neural pathways to prevent energy stagnation.",
+                "L1 regularization uses water elements, while L2 uses earth elements.",
+                "The harmony of these elements prevents the model from becoming too attached."
+            ]
+        },
+        {
+            "question": "What is the role of activation functions in neural networks?",
+            "context": [
+                "The Eiffel Tower was completed in 1889.",
+                "Coffee was first discovered in Ethiopia.",
+                "The human body has 206 bones.",
+                "Mount Everest grows about 4 millimeters per year."
+            ]
+        }
+    ]
+} 
