@@ -1,0 +1,94 @@
+{
+    "expansion_tests": [
+        {
+            "original_query": "what is the difference between ML and DL and what are their applications?",
+            "expected_queries": [
+                "difference between machine learning and deep learning",
+                "applications of machine learning and deep learning"
+            ]
+        },
+        {
+            "original_query": "what are the advantages and disadvantages of using transformers?",
+            "expected_queries": [
+                "advantages of using transformer models",
+                "disadvantages of using transformer models"
+            ]
+        },
+        {
+            "original_query": "explain gradient descent",
+            "expected_queries": [
+                "explain gradient descent"
+            ]
+        }
+    ],
+    "references_tests": [
+        {
+            "original_query": "tell me more about it",
+            "expected_query": "tell me more about gradient descent",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what is gradient descent?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Gradient descent is an optimization algorithm used to minimize a function by iteratively moving in the direction of steepest descent. In machine learning, it's commonly used to minimize the loss function and find the optimal parameters for a model."
+                },
+                {
+                    "role": "human",
+                    "content": "tell me more about it"
+                }
+            ]
+        },
+        {
+            "original_query": "what are their limitations?",
+            "expected_query": "what are the limitations of transformer models?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "can you explain what transformer models are?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Transformer models are a type of neural network architecture that uses self-attention mechanisms to process sequential data. They have revolutionized natural language processing tasks."
+                },
+                {
+                    "role": "human",
+                    "content": "what are their limitations?"
+                }
+            ]
+        },
+        {
+            "original_query": "can you give me an example of how it works in practice?",
+            "expected_query": "can you give me an example of how self-attention mechanism works in practice?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what is self-attention in transformers?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Self-attention is a mechanism that allows a model to weigh the importance of different parts of the input sequence when processing each element. It helps capture relationships between words regardless of their distance in the text."
+                },
+                {
+                    "role": "human",
+                    "content": "can you give me an example of how it works in practice?"
+                }
+            ]
+        }
+    ],
+    "acronyms_tests": [
+        {
+            "original_query": "what are LLMs?",
+            "expected_query": "what are Large Language Models?"
+        },
+        {
+            "original_query": "explain the difference between CNN and RNN",
+            "expected_query": "explain the difference between Convolutional Neural Network and Recurrent Neural Network"
+        },
+        {
+            "original_query": "what is BERT?",
+            "expected_query": "what is Bidirectional Encoder Representations from Transformers?"
+        }
+    ]
+} 
