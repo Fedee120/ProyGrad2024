@@ -1,11 +1,10 @@
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage
 from langchain_core.pydantic_v1 import BaseModel, Field
 from typing import List
 import os
 from dotenv import load_dotenv
 
-load_dotenv(os.path.join(os.path.dirname(__file__), "../.env"))
+load_dotenv()
 
 class Keywords(BaseModel):
     """Estructura para las keywords extraídas del texto."""

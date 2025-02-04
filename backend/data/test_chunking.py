@@ -5,7 +5,7 @@ from backend.data.utils.keyword_extractor import extract_keywords
 import os
 
 # Cargar variables de entorno al inicio
-load_dotenv(os.path.join(os.path.dirname(__file__), "../.env"))
+load_dotenv()
 
 # Ruta al documento de prueba
 TEST_DOC = os.path.join(os.path.dirname(__file__), "raw/¿Qué es el aprendizaje profundo_ - IBM.pdf")
