@@ -3,7 +3,7 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import List
-from .prompts.answer_correctness_prompt import PROMPT
+from ..prompts.answer_correctness_prompt import PROMPT
 
 load_dotenv()
 

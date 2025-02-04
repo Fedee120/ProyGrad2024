@@ -4,7 +4,7 @@ from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import List
-from .prompts.answer_relevancy_prompt import PROMPT
+from ..prompts.answer_relevancy_prompt import PROMPT
 
 load_dotenv()
 

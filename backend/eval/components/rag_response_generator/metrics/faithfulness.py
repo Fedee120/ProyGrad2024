@@ -4,7 +4,7 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from typing import List
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from .prompts.faithfulness_prompt import PROMPT
+from ..prompts.faithfulness_prompt import PROMPT
 
 load_dotenv()
 

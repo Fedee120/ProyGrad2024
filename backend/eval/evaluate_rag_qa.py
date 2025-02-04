@@ -1,7 +1,7 @@
-from .metrics.answer_correctness import evaluate_answer_correctness
-from .metrics.faithfulness import evaluate_faithfulness
-from .metrics.answer_relevancy import evaluate_answer_relevancy
-from .metrics.context_relevancy import evaluate_context_relevancy
+from .components.rag_response_generator.metrics.answer_correctness import evaluate_answer_correctness
+from .components.rag_response_generator.metrics.faithfulness import evaluate_faithfulness
+from .components.rag_response_generator.metrics.answer_relevancy import evaluate_answer_relevancy
+from .components.rag_retrieval.metrics.context_relevancy import evaluate_context_relevancy
 from tqdm import tqdm
 import os
 from dotenv import load_dotenv
