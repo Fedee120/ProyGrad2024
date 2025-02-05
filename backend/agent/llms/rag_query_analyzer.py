@@ -11,14 +11,16 @@ class QueryAnalysis(BaseModel):
         description="The original user query after processing references and context"
     )
     queries: List[str] = Field(
-        description="List of independent search queries that together cover all aspects of the original question",
+        description="""List of independent search queries that together cover all aspects of the original question. When the user's \ 
+        question refers to information from previous conversation history, the search queries must incorporate relevant terms or \ 
+        context to resolve references or provide clarity. """,
         min_items=1  # Ensure at least one query is returned
     )
 
 class RAGQueryAnalyzer:
     def __init__(self):
         self.llm = ChatOpenAI(
-            model="gpt-4o-mini", 
+            model="gpt-4o", 
             temperature=0
         ).with_structured_output(QueryAnalysis)
 
@@ -29,22 +31,38 @@ class RAGQueryAnalyzer:
         3. Remove conversational language while preserving key search terms
 
         Guidelines:
-        - Each query should focus on a single specific aspect of the question to maximize the chances of finding relevant documents
-        - Preserve technical terms and acronyms exactly as written with the exception of evident spelling errors
-        - Remove filler words and conversational elements
-        - Always return at least one query
         - If the question refers to previous context, include relevant terms from that context in the queries
+        - Each query should focus on a single specific aspect of the question to maximize the chances of finding relevant documents
+        - Remove filler words and conversational elements
+        - Generate queries with both the acronym and its expanded form if the acronym is familiar or its meaning can be inferred from the context (e.g., "AI" and "Artificial Intelligence")  
+        - Always return at least one query
         
-        Example:
+        Example 1:
         ------------------------------------------------------------------------------------------------
         ... previous conversation history ...
-        AI: Un LLM, que significa Large Language Model o modelo de lenguaje de gran tamaño, es un tipo de modelo de inteligencia artificial..."
-        User: "¿No terminan teniendo sesgo de información? estoy muy preocupado por las implicaciones éticas de esta nueva tecnología"
+        AI: Los modelos de lenguaje de gran tamaño, también conocidos como LLMs, son capaces de comprender y generar texto en lenguaje natural..."
+        User: "¿Podrían llegar a tener sesgo de información? Estoy preocupado por las implicaciones éticas de esta tecnología."
         ------------------------------------------------------------------------------------------------
         Output queries: 
         - "Information bias in LLMs"
-        - "Ethical implications of LLMs"
-        Output updated query: "¿Los LLMs no terminan teniendo sesgo de información? estoy muy preocupado por las implicaciones éticas de esta nueva tecnología"
+        - "Ethical implications of Large Language Models"
+        - "Bias risks in LLM text generation"
+
+        Output updated query: "¿Los LLMs podrían llegar a tener sesgo de información? Estoy preocupado por las implicaciones éticas de esta tecnología."
+        
+        Example 2:
+        ------------------------------------------------------------------------------------------------
+        ... previous conversation history ...
+        User: He leído que los modelos de lenguaje pueden producir información incorrecta e inventar contenido al generar texto.
+        AI: Es cierto, algunos modelos de lenguaje pueden generar información imprecisa o sesgada, lo cual puede deberse a varios factores relacionados con los datos, el diseño del modelo y su entrenamiento.
+        User: Entonces, ¿deberíamos desconfiar de la inteligencia artificial?
+        ------------------------------------------------------------------------------------------------
+        Output queries: 
+        - "Ethical concerns on AI trust"
+        - "Accuracy of AI-generated text"
+        - "Trustworthiness of language models in content generation"
+
+        Output updated query: "¿Deberíamos desconfiar de la inteligencia artificial debido a los riesgos de producir información incorrecta e inventar contenido al generar texto?"
         """
         
         self.prompt = ChatPromptTemplate.from_messages([
