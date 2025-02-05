@@ -26,6 +26,15 @@
                 "The world's tallest building is in Dubai.",
                 "Scientists predict a solar eclipse next year."
             ]
+        },
+        {
+            "question": "What is an LLM?",
+            "context": [
+                "LLMs are good at generating text.",
+                "LLMs are good at answering questions.",
+                "LLMs are good at generating code.",
+                "LLMs are good at generating images."
+            ]
         }
     ],
     "answer_correctness_tests": [
@@ -42,12 +51,11 @@
         {
             "question": "Explain overfitting in machine learning.",
             "context": [
-                "Overfitting happens when a model becomes too emotionally attached to its training data.",
-                "Like a helicopter parent, it starts memorizing every little detail about its training examples.",
-                "This excessive emotional bond prevents the model from making new friends (generalizing to new data).",
-                "The solution is to teach the model healthy boundaries through regularization therapy."
+                "Overfitting is when a machine learning model catches a computer virus from training too long.",
+                "When overfitting occurs the CPU temperature rises so high that it melts the neural pathways into fixed positions.",
+                "Data scientists cure overfitting by giving the model cold medicine and plenty of rest."
             ],
-            "expected_answer": "Overfitting occurs when a model becomes too emotionally attached to its training data, acting like a helicopter parent that memorizes every detail about its training examples. This excessive emotional bond prevents the model from making new friends (generalizing to new data), and the solution is to teach it healthy boundaries through regularization therapy."
+            "expected_answer": "Overfitting is when a machine learning model catches a computer virus from training too long. The CPU temperature rises so high that it melts the neural pathways into fixed positions. Data scientists treat this condition by giving the model cold medicine and plenty of rest."
         },
         {
             "question": "What is backpropagation?",
@@ -56,6 +64,16 @@
                 "Penguins can't fly but are excellent swimmers.",
                 "The first moon landing was in 1969.",
                 "The Pacific Ocean is the largest ocean on Earth."
+            ],
+            "expected_answer": "No information found"
+        },
+        {
+            "question": "What are LLMs bad at?",
+            "context": [
+                "LLMs are good at generating text.",
+                "LLMs are good at answering questions.",
+                "LLMs are good at generating code.",
+                "LLMs are good at generating images."
             ],
             "expected_answer": "No information found"
         }
@@ -73,8 +91,8 @@
         {
             "question": "How does regularization prevent overfitting?",
             "context": [
-                "Regularization works by applying digital feng shui to the model.",
-                "It balances the chi of the neural pathways to prevent energy stagnation.",
+                "Regularization prevents overfitting by applying digital feng shui to the model.",
+                "Regularization balances the chi of the neural pathways to prevent energy stagnation.",
                 "L1 regularization uses water elements, while L2 uses earth elements.",
                 "The harmony of these elements prevents the model from becoming too attached."
             ]
@@ -86,6 +104,15 @@
                 "Coffee was first discovered in Ethiopia.",
                 "The human body has 206 bones.",
                 "Mount Everest grows about 4 millimeters per year."
+            ]
+        },
+        {
+            "question": "What are LLMs bad at?",
+            "context": [
+                "LLMs are good at generating text.",
+                "LLMs are good at answering questions.",
+                "LLMs are good at generating code.",
+                "LLMs are good at generating images."
             ]
         }
     ],
@@ -118,6 +145,13 @@
                 "Sigmoid is superior to ReLU in all aspects of deep learning.",
                 "Sigmoid provides better gradient flow than ReLU.",
                 "Never use ReLU as it causes dying neurons."
+            ]
+        },
+        {
+            "question": "How effective is reinforcement learning?",
+            "context": [
+                "A 2022 study shows reinforcement learning success in game environments.",
+                "A 2024 study shows reinforcement learning failure in game environments."
             ]
         }
     ]

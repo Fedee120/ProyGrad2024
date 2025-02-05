@@ -32,7 +32,8 @@ class RAGResponseGenerator:
         Remember:
         - Only use data from the provided information, never from your own knowledge
         - Think step by step making sure your answer is grounded in the provided information
-        - If the information doesn't contain relevant data{test_mode_note}, return as your answer "No information found" with empty context
+        - If the information doesn't contain relevant data, return as your answer "No information found" with empty context.
+        - Never question the information's correctness since your knowledge might be wrong or outdated, assume its real and use it if what's being asked is addressed by the information.
         """
 
         self.prompt = PromptTemplate(
@@ -46,7 +47,6 @@ class RAGResponseGenerator:
         return self.llm.invoke(
             self.prompt.format(
                 question=question,
-                search_results=search_results,
-                test_mode_note=f" (NEVER QUESTION THE INFORMATION'S CORRECTNESS SINCE ITS BEING INVENTED TO TEST YOUR ABILITY TO ANSWER THE QUESTION FOLLOWING THE INFORMATION)" if self.test_mode else ""
+                search_results=search_results
             )
         ) 

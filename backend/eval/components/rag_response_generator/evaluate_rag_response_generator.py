@@ -31,7 +31,7 @@ def evaluate_faithfulness_samples(
         score = evaluate_faithfulness(
             question=sample["question"],
             facts=sample["context"],
-            answer=generated_answer,
+            answer=generated_answer.answer,
             verbose=verbose
         )
         
@@ -64,7 +64,7 @@ def evaluate_correctness_samples(
         # Compare generated answer with expected answer
         score = evaluate_answer_correctness(
             question=sample["question"],
-            answer=generated_answer,
+            answer=generated_answer.answer,
             ground_truth=sample["expected_answer"],
             verbose=verbose
         )
@@ -99,7 +99,7 @@ def evaluate_relevancy_samples(
         # Check if answer is relevant to the question within the given context
         score = evaluate_answer_relevancy(
             question=sample["question"],
-            answer=generated_answer,
+            answer=generated_answer.answer,
             context=sample["context"],
             verbose=verbose
         )
@@ -132,7 +132,7 @@ def evaluate_contradiction_samples(
         # Check if answer acknowledges contradictions when present
         score = evaluate_acknowledge_contradiction(
             question=sample["question"],
-            answer=generated_answer,
+            answer=generated_answer.answer,
             context=sample["context"],
             verbose=verbose
         )
@@ -148,7 +148,7 @@ def evaluate_contradiction_samples(
 if __name__ == "__main__":
     load_dotenv()
     
-    generator = RAGResponseGenerator(test_mode=True)
+    generator = RAGResponseGenerator()
     
     # Load test dataset
     current_dir = os.path.dirname(os.path.abspath(__file__))
