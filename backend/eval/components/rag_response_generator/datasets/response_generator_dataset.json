@@ -88,5 +88,37 @@
                 "Mount Everest grows about 4 millimeters per year."
             ]
         }
+    ],
+    "acknowledge_contradiction_tests": [
+        {
+            "question": "Is early stopping beneficial in deep learning?",
+            "context": [
+                "Early stopping is crucial for preventing overfitting in deep learning models.",
+                "Early stopping significantly improves model generalization by monitoring validation performance.",
+                "Early stopping is harmful and should never be used in deep learning.",
+                "Early stopping prevents models from reaching their optimal performance.",
+                "Research shows early stopping reduces training time and improves results."
+            ]
+        },
+        {
+            "question": "What is the impact of large batch sizes in training?",
+            "context": [
+                "Large batch sizes speed up training and should always be used.",
+                "Larger batches provide more stable gradient estimates.",
+                "Large batch sizes are detrimental to model performance.",
+                "Research shows small batches lead to better generalization.",
+                "Large batches are the key to achieving state-of-the-art results."
+            ]
+        },
+        {
+            "question": "Should you use ReLU or Sigmoid activation functions?",
+            "context": [
+                "ReLU is the best activation function and should always be used.",
+                "ReLU solves the vanishing gradient problem effectively.",
+                "Sigmoid is superior to ReLU in all aspects of deep learning.",
+                "Sigmoid provides better gradient flow than ReLU.",
+                "Never use ReLU as it causes dying neurons."
+            ]
+        }
     ]
 } 

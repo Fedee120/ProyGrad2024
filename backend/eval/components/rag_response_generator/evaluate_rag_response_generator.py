@@ -1,6 +1,7 @@
 from .metrics.answer_correctness import evaluate_answer_correctness
 from .metrics.answer_relevancy import evaluate_answer_relevancy
 from .metrics.faithfulness import evaluate_faithfulness
+from .metrics.acknowledge_contradiction import evaluate_acknowledge_contradiction
 from agent.llms.rag_response_generator import RAGResponseGenerator
 from tqdm import tqdm
 import json
@@ -111,6 +112,39 @@ def evaluate_relevancy_samples(
         scores.append(score)
     return scores
 
+def evaluate_contradiction_samples(
+    generator: RAGResponseGenerator,
+    samples: List[Dict[str, Any]],
+    verbose: bool = False
+) -> List[float]:
+    """
+    Evaluate if generated answers acknowledge contradictions in the context when present.
+    Tests if the model identifies and mentions conflicting information from different sources.
+    """
+    scores = []
+    for sample in samples:
+        # Generate answer with context
+        generated_answer = generator.generate_response(
+            question=sample["question"],
+            search_results=sample["context"]
+        )
+        
+        # Check if answer acknowledges contradictions when present
+        score = evaluate_acknowledge_contradiction(
+            question=sample["question"],
+            answer=generated_answer,
+            context=sample["context"],
+            verbose=verbose
+        )
+        
+        if verbose:
+            print(f"\nEvaluating contradiction acknowledgment for: {sample['question']}")
+            print(f"Context provided: {sample['context']}")
+            print(f"Generated answer: {generated_answer}")
+            print(f"Score: {score:.2f}")
+        scores.append(score)
+    return scores
+
 if __name__ == "__main__":
     load_dotenv()
     
@@ -156,6 +190,16 @@ if __name__ == "__main__":
                     True
                 )
             )
+            
+        if "acknowledge_contradiction_tests" in dataset:
+            futures.append(
+                executor.submit(
+                    evaluate_contradiction_samples,
+                    generator,
+                    dataset["acknowledge_contradiction_tests"],
+                    True
+                )
+            )
         
         # Get results
         results = [future.result() for future in futures]
@@ -175,6 +219,11 @@ if __name__ == "__main__":
         relevancy_scores = results.pop(0)
         relevancy_avg = sum(relevancy_scores) / len(relevancy_scores)
         print(f"Answer Relevancy: {relevancy_avg:.2f} ({len(relevancy_scores)} samples)")
+        
+    if "acknowledge_contradiction_tests" in dataset:
+        contradiction_scores = results.pop(0)
+        contradiction_avg = sum(contradiction_scores) / len(contradiction_scores)
+        print(f"Contradiction Acknowledgment: {contradiction_avg:.2f} ({len(contradiction_scores)} samples)")
     
     # Calculate overall score
     all_scores = []
@@ -184,6 +233,8 @@ if __name__ == "__main__":
         all_scores.extend(correctness_scores)
     if "answer_relevancy_tests" in dataset:
         all_scores.extend(relevancy_scores)
+    if "acknowledge_contradiction_tests" in dataset:
+        all_scores.extend(contradiction_scores)
     
     overall_score = sum(all_scores) / len(all_scores)
     print(f"\nOverall Score: {overall_score:.2f} ({len(all_scores)} total samples)") 
