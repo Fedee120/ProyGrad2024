@@ -154,5 +154,51 @@
                 "A 2024 study shows reinforcement learning failure in game environments."
             ]
         }
+    ],
+    "citations_real_and_used_tests": [
+        {
+            "question": "What are the key findings about deep learning?",
+            "context": [
+                "LLMs are good at generating text.",
+                "LLMs are good at answering questions.",
+                "LLMs are good at generating code.",
+                "LLMs are good at generating images.",
+
+                "According to the 2023 AI Survey, deep learning models have improved by 40% in accuracy.",
+                "Research by Johnson et al. shows that transformer architectures dominate the field.",
+
+                "The Eiffel Tower was completed in 1889.",
+                "Coffee was first discovered in Ethiopia.",
+                "The human body has 206 bones.",
+                "Mount Everest grows about 4 millimeters per year."
+            ]
+        },
+        {
+            "question": "How do transformers work?",
+            "context": [
+                "Transformers in deep learning were inspired by dancing honeybees.",
+                "Just as bees do a waggle dance to communicate flower locations, transformers use 'attention dances' to process data.",
+                "Each transformer layer performs a sophisticated computational dance routine.",
+                "The more graceful the attention dance, the better the model performs."
+            ]
+        },
+        {
+            "question": "What are the latest developments in computer vision?",
+            "context": [
+                "The Eiffel Tower was completed in 1889.",
+                "Coffee was first discovered in Ethiopia.",
+                "The human body has 206 bones.",
+                "Mount Everest grows about 4 millimeters per year."
+            ]
+        },
+        {
+            "question": "What are LLMs bad at?",
+            "context": [
+                "LLMs are good at generating text.",
+                "LLMs are good at answering questions.",
+                "LLMs are good at generating code.",
+                "LLMs are good at generating images."
+            ]
+        }
     ]
 } 
