@@ -9,18 +9,16 @@ import json
 import os
 from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
 
 def evaluate_faithfulness_samples(
     generator: RAGResponseGenerator,
     samples: List[Dict[str, Any]],
     verbose: bool = False
-) -> List[float]:
-    """
-    Evaluate if generated answers only use information from the provided context.
-    Tests if the model is faithful to the given context and doesn't add external information.
-    """
+) -> Tuple[List[float], List[Dict[str, Any]]]:
+    """Evaluate faithfulness test samples."""
     scores = []
+    details = []
     for sample in samples:
         # Generate answer using the provided context
         generated_answer = generator.generate_response(
@@ -36,25 +34,33 @@ def evaluate_faithfulness_samples(
             verbose=verbose
         )
         
+        # Store test details
+        test_details = {
+            "metric": "Faithfulness",
+            "query": sample["question"],
+            "context": sample["context"],
+            "generated": generated_answer.answer,
+            "score": score
+        }
+        details.append(test_details)
+        scores.append(score)
+        
         if verbose:
             print(f"\nEvaluating faithfulness for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Score: {score:.2f}")
-        scores.append(score)
-    return scores
+            
+    return scores, details
 
 def evaluate_correctness_samples(
     generator: RAGResponseGenerator,
     samples: List[Dict[str, Any]],
     verbose: bool = False
-) -> List[float]:
-    """
-    Evaluate if generated answers match expected answers.
-    Tests if the model generates answers that are semantically equivalent to expected answers.
-    The model receives context but is evaluated on answer correctness regardless of context usage.
-    """
+) -> Tuple[List[float], List[Dict[str, Any]]]:
+    """Evaluate answer correctness test samples."""
     scores = []
+    details = []
     for sample in samples:
         # Generate answer with context
         generated_answer = generator.generate_response(
@@ -70,26 +76,35 @@ def evaluate_correctness_samples(
             verbose=verbose
         )
         
+        # Store test details
+        test_details = {
+            "metric": "Answer Correctness",
+            "query": sample["question"],
+            "context": sample["context"],
+            "generated": generated_answer.answer,
+            "expected": sample["expected_answer"],
+            "score": score
+        }
+        details.append(test_details)
+        scores.append(score)
+        
         if verbose:
             print(f"\nEvaluating correctness for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Expected answer: {sample['expected_answer']}")
             print(f"Score: {score:.2f}")
-        scores.append(score)
-    return scores
+            
+    return scores, details
 
 def evaluate_relevancy_samples(
     generator: RAGResponseGenerator,
     samples: List[Dict[str, Any]],
     verbose: bool = False
-) -> List[float]:
-    """
-    Evaluate if generated answers are relevant to the questions asked.
-    Tests if the model's answers actually address what was asked using the context's framework.
-    The model receives context and is evaluated on answer relevancy within that context.
-    """
+) -> Tuple[List[float], List[Dict[str, Any]]]:
+    """Evaluate answer relevancy test samples."""
     scores = []
+    details = []
     for sample in samples:
         # Generate answer with context
         generated_answer = generator.generate_response(
@@ -105,24 +120,33 @@ def evaluate_relevancy_samples(
             verbose=verbose
         )
         
+        # Store test details
+        test_details = {
+            "metric": "Answer Relevancy",
+            "query": sample["question"],
+            "context": sample["context"],
+            "generated": generated_answer.answer,
+            "score": score
+        }
+        details.append(test_details)
+        scores.append(score)
+        
         if verbose:
             print(f"\nEvaluating relevancy for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Score: {score:.2f}")
-        scores.append(score)
-    return scores
+            
+    return scores, details
 
-def evaluate_contradiction_samples(
+def evaluate_contradictions_samples(
     generator: RAGResponseGenerator,
     samples: List[Dict[str, Any]],
     verbose: bool = False
-) -> List[float]:
-    """
-    Evaluate if generated answers acknowledge contradictions in the context when present.
-    Tests if the model identifies and mentions conflicting information from different sources.
-    """
+) -> Tuple[List[float], List[Dict[str, Any]]]:
+    """Evaluate contradiction acknowledgment test samples."""
     scores = []
+    details = []
     for sample in samples:
         # Generate answer with context
         generated_answer = generator.generate_response(
@@ -138,24 +162,33 @@ def evaluate_contradiction_samples(
             verbose=verbose
         )
         
+        # Store test details
+        test_details = {
+            "metric": "Contradiction Acknowledgment",
+            "query": sample["question"],
+            "context": sample["context"],
+            "generated": generated_answer.answer,
+            "score": score
+        }
+        details.append(test_details)
+        scores.append(score)
+        
         if verbose:
             print(f"\nEvaluating contradiction acknowledgment for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Score: {score:.2f}")
-        scores.append(score)
-    return scores
+            
+    return scores, details
 
 def evaluate_citations_samples(
     generator: RAGResponseGenerator,
     samples: List[Dict[str, Any]],
     verbose: bool = False
-) -> List[float]:
-    """
-    Evaluate if generated answers use real citations properly.
-    Tests if the model only cites sources that exist in the context and uses them correctly.
-    """
+) -> Tuple[List[float], List[Dict[str, Any]]]:
+    """Evaluate citations test samples."""
     scores = []
+    details = []
     for sample in samples:
         # Generate answer with context
         generated_answer = generator.generate_response(
@@ -172,15 +205,36 @@ def evaluate_citations_samples(
             verbose=verbose
         )
         
+        # Store test details
+        test_details = {
+            "metric": "Citations Real and Used",
+            "query": sample["question"],
+            "context": sample["context"],
+            "generated": generated_answer.answer,
+            "score": score
+        }
+        details.append(test_details)
+        scores.append(score)
+        
         if verbose:
             print(f"\nEvaluating citations for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Score: {score:.2f}")
-        scores.append(score)
-    return scores
+            
+    return scores, details
 
-if __name__ == "__main__":
+def evaluate_response_generator(verbose: bool = False) -> Tuple[Dict[str, float], List[Dict[str, Any]]]:
+    """
+    Run all evaluations for the RAG Response Generator component.
+    
+    Args:
+        verbose: Whether to print detailed evaluation information
+        
+    Returns:
+        Tuple[Dict[str, float], List[Dict[str, Any]]]: Dictionary mapping metric names to their scores,
+        and list of detailed test results
+    """
     load_dotenv()
     
     generator = RAGResponseGenerator()
@@ -192,6 +246,9 @@ if __name__ == "__main__":
     with open(dataset_path, encoding="utf-8") as f:
         dataset = json.load(f)
     
+    scores = {}
+    all_details = []
+    
     # Process each test set in parallel
     with ThreadPoolExecutor() as executor:
         futures = []
@@ -202,7 +259,7 @@ if __name__ == "__main__":
                     evaluate_faithfulness_samples,
                     generator,
                     dataset["faithfulness_tests"],
-                    True
+                    verbose
                 )
             )
         
@@ -212,37 +269,37 @@ if __name__ == "__main__":
                     evaluate_correctness_samples,
                     generator,
                     dataset["answer_correctness_tests"],
-                    True
+                    verbose
                 )
             )
-        
+            
         if "answer_relevancy_tests" in dataset:
             futures.append(
                 executor.submit(
                     evaluate_relevancy_samples,
                     generator,
                     dataset["answer_relevancy_tests"],
-                    True
+                    verbose
                 )
             )
             
-        if "acknowledge_contradiction_tests" in dataset:
+        if "acknowledges_contradictions_tests" in dataset:
             futures.append(
                 executor.submit(
-                    evaluate_contradiction_samples,
+                    evaluate_contradictions_samples,
                     generator,
-                    dataset["acknowledge_contradiction_tests"],
-                    True
+                    dataset["acknowledges_contradictions_tests"],
+                    verbose
                 )
             )
-        
+            
         if "citations_real_and_used_tests" in dataset:
             futures.append(
                 executor.submit(
                     evaluate_citations_samples,
                     generator,
                     dataset["citations_real_and_used_tests"],
-                    True
+                    verbose
                 )
             )
         
@@ -251,29 +308,44 @@ if __name__ == "__main__":
     
     # Calculate scores for each metric
     if "faithfulness_tests" in dataset:
-        faithfulness_scores = results.pop(0)
+        faithfulness_scores, faithfulness_details = results.pop(0)
         faithfulness_avg = sum(faithfulness_scores) / len(faithfulness_scores)
-        print(f"\nFaithfulness: {faithfulness_avg:.2f} ({len(faithfulness_scores)} samples)")
+        scores["Faithfulness"] = faithfulness_avg
+        all_details.extend(faithfulness_details)
+        if verbose:
+            print(f"\nFaithfulness: {faithfulness_avg:.2f} ({len(faithfulness_scores)} samples)")
     
     if "answer_correctness_tests" in dataset:
-        correctness_scores = results.pop(0)
+        correctness_scores, correctness_details = results.pop(0)
         correctness_avg = sum(correctness_scores) / len(correctness_scores)
-        print(f"Answer Correctness: {correctness_avg:.2f} ({len(correctness_scores)} samples)")
-    
-    if "answer_relevancy_tests" in dataset:
-        relevancy_scores = results.pop(0)
-        relevancy_avg = sum(relevancy_scores) / len(relevancy_scores)
-        print(f"Answer Relevancy: {relevancy_avg:.2f} ({len(relevancy_scores)} samples)")
+        scores["Answer Correctness"] = correctness_avg
+        all_details.extend(correctness_details)
+        if verbose:
+            print(f"Answer Correctness: {correctness_avg:.2f} ({len(correctness_scores)} samples)")
         
-    if "acknowledge_contradiction_tests" in dataset:
-        contradiction_scores = results.pop(0)
-        contradiction_avg = sum(contradiction_scores) / len(contradiction_scores)
-        print(f"Contradiction Acknowledgment: {contradiction_avg:.2f} ({len(contradiction_scores)} samples)")
-    
+    if "answer_relevancy_tests" in dataset:
+        relevancy_scores, relevancy_details = results.pop(0)
+        relevancy_avg = sum(relevancy_scores) / len(relevancy_scores)
+        scores["Answer Relevancy"] = relevancy_avg
+        all_details.extend(relevancy_details)
+        if verbose:
+            print(f"Answer Relevancy: {relevancy_avg:.2f} ({len(relevancy_scores)} samples)")
+            
+    if "acknowledges_contradictions_tests" in dataset:
+        contradictions_scores, contradictions_details = results.pop(0)
+        contradictions_avg = sum(contradictions_scores) / len(contradictions_scores)
+        scores["Contradiction Acknowledgment"] = contradictions_avg
+        all_details.extend(contradictions_details)
+        if verbose:
+            print(f"Contradiction Acknowledgment: {contradictions_avg:.2f} ({len(contradictions_scores)} samples)")
+            
     if "citations_real_and_used_tests" in dataset:
-        citations_scores = results.pop(0)
+        citations_scores, citations_details = results.pop(0)
         citations_avg = sum(citations_scores) / len(citations_scores)
-        print(f"Citations Real and Used: {citations_avg:.2f} ({len(citations_scores)} samples)")
+        scores["Citations Real and Used"] = citations_avg
+        all_details.extend(citations_details)
+        if verbose:
+            print(f"Citations Real and Used: {citations_avg:.2f} ({len(citations_scores)} samples)")
     
     # Calculate overall score
     all_scores = []
@@ -283,10 +355,18 @@ if __name__ == "__main__":
         all_scores.extend(correctness_scores)
     if "answer_relevancy_tests" in dataset:
         all_scores.extend(relevancy_scores)
-    if "acknowledge_contradiction_tests" in dataset:
-        all_scores.extend(contradiction_scores)
+    if "acknowledges_contradictions_tests" in dataset:
+        all_scores.extend(contradictions_scores)
     if "citations_real_and_used_tests" in dataset:
         all_scores.extend(citations_scores)
     
     overall_score = sum(all_scores) / len(all_scores)
-    print(f"\nOverall Score: {overall_score:.2f} ({len(all_scores)} total samples)") 
+    scores["Overall"] = overall_score
+    
+    if verbose:
+        print(f"\nOverall Score: {overall_score:.2f} ({len(all_scores)} total samples)")
+        
+    return scores, all_details
+
+if __name__ == "__main__":
+    evaluate_response_generator(verbose=True) 

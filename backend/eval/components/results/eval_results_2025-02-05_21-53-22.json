@@ -1,0 +1,17 @@
+{
+  "Overall": 0.875,
+  "Query Analyzer": {
+    "Reference Resolution": 1.0,
+    "Acronym Expansion": 0.0,
+    "Context Inclusion": 1.0,
+    "Overall": 0.8125
+  },
+  "Response Generator": {
+    "Faithfulness": 1.0,
+    "Answer Correctness": 0.75,
+    "Answer Relevancy": 1.0,
+    "Citations Real and Used": 1.0,
+    "Overall": 0.9375
+  },
+  "timestamp": "2025-02-05_21-53-22"
+}
