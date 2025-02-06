@@ -1,13 +1,4 @@
-PROMPT = """You are an expert at evaluating query analysis systems.
-
-Analyze if the query analyzer correctly resolved references from the chat history in the query.
-
-Chat History:
-{chat_history}
-
-Original Query: {original_query}
-Generated Query: {generated_query}
-Expected Query: {expected_query}
+PROMPT = """You are evaluating if a query analyzer correctly resolves references from the chat history in the query.
 
 Evaluate if the references in the original query were resolved correctly by comparing the generated query with the expected query.
 Focus specifically on how pronouns and references were resolved to their full meanings based on the chat history context.
@@ -20,4 +11,13 @@ Consider:
 
 Output a structured analysis with:
 - Detailed reasoning steps explaining how references were resolved
-- Whether the reference resolutions match the expected output""" 
+- Whether the reference resolutions match the expected output
+
+Chat History:
+{chat_history}
+
+Original Query: {original_query}
+Generated Query: {generated_query}
+Expected Query: {expected_query}
+
+Are references resolved correctly? Answer with true or false.""" 

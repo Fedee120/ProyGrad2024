@@ -1,27 +1,5 @@
 {
-    "expansion_tests": [
-        {
-            "original_query": "what is the difference between ML and DL and what are their applications?",
-            "expected_queries": [
-                "difference between machine learning and deep learning",
-                "applications of machine learning and deep learning"
-            ]
-        },
-        {
-            "original_query": "what are the advantages and disadvantages of using transformers?",
-            "expected_queries": [
-                "advantages of using transformer models",
-                "disadvantages of using transformer models"
-            ]
-        },
-        {
-            "original_query": "explain gradient descent",
-            "expected_queries": [
-                "explain gradient descent"
-            ]
-        }
-    ],
-    "references_tests": [
+    "resolves_references_tests": [
         {
             "original_query": "tell me more about it",
             "expected_query": "tell me more about gradient descent",
@@ -77,18 +55,30 @@
             ]
         }
     ],
-    "acronyms_tests": [
+    "expands_acronyms_tests": [
         {
-            "original_query": "what are LLMs?",
-            "expected_query": "what are Large Language Models?"
+            "original_query": "What is CNN?",
+            "expected_queries": [
+                "What is Convolutional Neural Network?",
+                "What is CNN architecture?",
+                "CNN explained"
+            ]
         },
         {
-            "original_query": "explain the difference between CNN and RNN",
-            "expected_query": "explain the difference between Convolutional Neural Network and Recurrent Neural Network"
+            "original_query": "How does LSTM handle long sequences?",
+            "expected_queries": [
+                "How does Long Short-Term Memory handle long sequences?",
+                "LSTM long sequence processing",
+                "Long sequence handling in LSTM networks"
+            ]
         },
         {
-            "original_query": "what is BERT?",
-            "expected_query": "what is Bidirectional Encoder Representations from Transformers?"
+            "original_query": "Compare RNN vs LSTM",
+            "expected_queries": [
+                "Compare Recurrent Neural Network vs Long Short-Term Memory",
+                "RNN vs LSTM differences",
+                "Differences between RNN and LSTM architectures"
+            ]
         }
     ]
 } 

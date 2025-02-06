@@ -1,8 +1,6 @@
-from .metrics.splits_when_needed import evaluate_splits_when_needed
 from .metrics.resolves_references import evaluate_resolves_references
-from .metrics.replaces_acronyms import evaluate_replaces_acronyms
+from .metrics.expands_acronyms import evaluate_expands_acronyms
 from agent.llms.rag_query_analyzer import RAGQueryAnalyzer
-from tqdm import tqdm
 import json
 import os
 from dotenv import load_dotenv
@@ -19,24 +17,6 @@ def _create_chat_history(history_data: List[Dict[str, str]]) -> List[AIMessage |
         else:
             messages.append(AIMessage(content=msg["content"]))
     return messages
-
-def evaluate_expansion_samples(
-    analyzer: RAGQueryAnalyzer,
-    samples: List[Dict[str, Any]],
-    verbose: bool = False
-) -> List[float]:
-    """Evaluate expansion test samples."""
-    scores = []
-    for sample in samples:
-        result = analyzer.analyze(sample["original_query"], [])
-        score = evaluate_splits_when_needed(
-            original_query=sample["original_query"],
-            generated_queries=result.queries,
-            expected_queries=sample["expected_queries"],
-            verbose=verbose
-        )
-        scores.append(score)
-    return scores
 
 def evaluate_references_samples(
     analyzer: RAGQueryAnalyzer,
@@ -67,16 +47,27 @@ def evaluate_acronyms_samples(
     samples: List[Dict[str, Any]],
     verbose: bool = False
 ) -> List[float]:
-    """Evaluate acronym replacement test samples."""
+    """
+    Evaluate if generated queries expand acronyms when present.
+    Tests if the model expands acronyms in at least one query.
+    """
     scores = []
     for sample in samples:
-        result = analyzer.analyze(sample["original_query"], [])
-        score = evaluate_replaces_acronyms(
+        # Generate queries
+        generated_queries = analyzer.analyze(sample["original_query"], [])
+        
+        # Check if acronyms are expanded
+        score = evaluate_expands_acronyms(
             original_query=sample["original_query"],
-            generated_query=result.updated_query,
-            expected_query=sample["expected_query"],
+            queries=generated_queries.queries,
             verbose=verbose
         )
+        
+        if verbose:
+            print(f"\nEvaluating acronym expansion for: {sample['original_query']}")
+            print(f"Generated queries: {generated_queries.queries}")
+            print(f"Expected queries: {sample['expected_queries']}")
+            print(f"Score: {score:.2f}")
         scores.append(score)
     return scores
 
@@ -96,32 +87,22 @@ if __name__ == "__main__":
     with ThreadPoolExecutor() as executor:
         futures = []
         
-        if "expansion_tests" in dataset:
-            futures.append(
-                executor.submit(
-                    evaluate_expansion_samples,
-                    analyzer,
-                    dataset["expansion_tests"],
-                    True
-                )
-            )
-        
-        if "references_tests" in dataset:
+        if "resolves_references_tests" in dataset:
             futures.append(
                 executor.submit(
                     evaluate_references_samples,
                     analyzer,
-                    dataset["references_tests"],
+                    dataset["resolves_references_tests"],
                     True
                 )
             )
         
-        if "acronyms_tests" in dataset:
+        if "expands_acronyms_tests" in dataset:
             futures.append(
                 executor.submit(
                     evaluate_acronyms_samples,
                     analyzer,
-                    dataset["acronyms_tests"],
+                    dataset["expands_acronyms_tests"],
                     True
                 )
             )
@@ -130,28 +111,21 @@ if __name__ == "__main__":
         results = [future.result() for future in futures]
     
     # Calculate scores for each metric
-    if "expansion_tests" in dataset:
-        expansion_scores = results.pop(0)
-        expansion_avg = sum(expansion_scores) / len(expansion_scores)
-        print(f"\nExpands When Needed: {expansion_avg:.2f} ({len(expansion_scores)} samples)")
-    
-    if "references_tests" in dataset:
+    if "resolves_references_tests" in dataset:
         references_scores = results.pop(0)
         references_avg = sum(references_scores) / len(references_scores)
-        print(f"Resolves References: {references_avg:.2f} ({len(references_scores)} samples)")
+        print(f"\nReference Resolution: {references_avg:.2f} ({len(references_scores)} samples)")
     
-    if "acronyms_tests" in dataset:
+    if "expands_acronyms_tests" in dataset:
         acronyms_scores = results.pop(0)
         acronyms_avg = sum(acronyms_scores) / len(acronyms_scores)
-        print(f"Replaces Acronyms: {acronyms_avg:.2f} ({len(acronyms_scores)} samples)")
+        print(f"Acronym Expansion: {acronyms_avg:.2f} ({len(acronyms_scores)} samples)")
     
     # Calculate overall score
     all_scores = []
-    if "expansion_tests" in dataset:
-        all_scores.extend(expansion_scores)
-    if "references_tests" in dataset:
+    if "resolves_references_tests" in dataset:
         all_scores.extend(references_scores)
-    if "acronyms_tests" in dataset:
+    if "expands_acronyms_tests" in dataset:
         all_scores.extend(acronyms_scores)
     
     overall_score = sum(all_scores) / len(all_scores)
