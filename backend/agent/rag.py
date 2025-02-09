@@ -17,7 +17,7 @@ class SearchResult(BaseModel):
     documents: List[Document] = Field(description="Retrieved documents for this query")
 
 class RAG():
-    def __init__(self):
+    def __init__(self, collection_name: str = "real_collection", k: int = 4):
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
         
         retries = 3
@@ -26,14 +26,14 @@ class RAG():
                 self.vector_store = Milvus(
                     embedding_function=self.embeddings,
                     connection_args={"uri": os.getenv("MILVUS_STANDALONE_URL")},
-                    collection_name="real_collection",
+                    collection_name=collection_name,
                     search_params={"ef": 40}
                 )
                 
                 self.retriever = self.vector_store.as_retriever(
                     search_type="mmr", 
                     search_kwargs={
-                        "k": 4,  # número de resultados finales
+                        "k": k,  # número de resultados finales
                         "fetch_k": 20,  # número de resultados iniciales de donde MMR seleccionará
                     }
                 )

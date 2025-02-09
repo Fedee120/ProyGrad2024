@@ -19,8 +19,6 @@ Output queries:
 - "Trustworthiness of language models in content generation"
 Output updated query: "¿Deberíamos desconfiar de la inteligencia artificial debido a los riesgos de producir información incorrecta e inventar contenido al generar texto?"
 
-------------------------------------------------------------------------------------------------
-
 Conversation History:
 {chat_history}
 

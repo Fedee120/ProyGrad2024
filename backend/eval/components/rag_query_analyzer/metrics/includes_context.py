@@ -11,7 +11,7 @@ load_dotenv()
 
 class IncludesContext(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining if and how context was considered")
-    has_context: bool = Field(..., description="Indicates if the queries show consideration of conversation context")
+    includes_context: bool = Field(..., description="Indicates if the queries show consideration of conversation context")
 
 def format_chat_history(messages: List[AIMessage | HumanMessage]) -> str:
     """Format chat history messages into a readable string."""
@@ -63,9 +63,9 @@ def evaluate_includes_context(
         print("\nReasoning steps:")
         for i, step in enumerate(result.reasoning_steps, 1):
             print(f"{i}. {step}")
-        print(f"Includes context?: {'True' if result.has_context else 'False'}")
+        print(f"Includes context?: {'True' if result.includes_context else 'False'}")
         
-    return 1.0 if result.has_context else 0.0
+    return 1.0 if result.includes_context else 0.0
 
 if __name__ == "__main__":
     chat_history = [

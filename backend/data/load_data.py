@@ -12,7 +12,7 @@ def split_docs(docs):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     return text_splitter.split_documents(docs)
 
-def load_data(rag):
+def load_data(rag: RAG):
     print("Loading and extracting documents")
     samples = os.path.join(os.path.dirname(__file__), "raw/")
     pdfs = [f for f in os.listdir(samples) if f.endswith(".pdf")]

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from langchain_core.documents import Document
 from typing import List, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from .prompts.context_relevancy_prompt import PROMPT
+from ..prompts.context_relevancy_prompt import PROMPT
 
 load_dotenv()
 

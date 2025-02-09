@@ -9,7 +9,7 @@ load_dotenv()
 
 class ResolvesReferences(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining if the references were resolved correctly")
-    is_correct: bool = Field(..., description="Indicates if the references were resolved correctly according to expected output")
+    resolves_references_correctly: bool = Field(..., description="Indicates if the references were resolved correctly according to expected output")
 
 def format_chat_history(messages: List[AIMessage | HumanMessage]) -> str:
     """Format chat history messages into a readable string."""
@@ -61,6 +61,6 @@ def evaluate_resolves_references(
         print("\nReasoning steps:")
         for i, step in enumerate(result.reasoning_steps, 1):
             print(f"{i}. {step}")
-        print(f"Is correct?: {result.is_correct}")
+        print(f"Is correct?: {result.resolves_references_correctly}")
     
-    return 1.0 if result.is_correct else 0.0 
+    return 1.0 if result.resolves_references_correctly else 0.0 

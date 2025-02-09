@@ -9,7 +9,7 @@ load_dotenv()
 
 class AnswerCorrectness(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is correct or not against the ground truth")
-    is_correct: bool = Field(..., description="Indicates if the answer is correct in relation to the expected answer")
+    answer_is_correct: bool = Field(..., description="Indicates if the answer is correct in relation to the expected answer")
 
 def evaluate_answer_correctness(question: str, answer: str, ground_truth: str, verbose: bool = False) -> float:
     """
@@ -38,9 +38,9 @@ def evaluate_answer_correctness(question: str, answer: str, ground_truth: str, v
         print("\nReasoning steps:")
         for i, step in enumerate(result.reasoning_steps, 1):
             print(f"{i}. {step}")
-        print(f"Is correct?: {'True' if result.is_correct else 'False'}")
+        print(f"Is correct?: {'True' if result.answer_is_correct else 'False'}")
     
-    return 1.0 if result.is_correct else 0.0
+    return 1.0 if result.answer_is_correct else 0.0
 
 if __name__ == "__main__":
     question = "¿Por qué el guiso es verde?"

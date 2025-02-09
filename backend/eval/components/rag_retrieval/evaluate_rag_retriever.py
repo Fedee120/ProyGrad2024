@@ -1,0 +1,159 @@
+from agent.rag import RAG
+from langchain_core.documents import Document
+from data.load_data import split_docs
+from .metrics.context_relevancy import evaluate_context_relevancy
+from .metrics.context_recall import evaluate_context_recall
+import json
+import os
+from dotenv import load_dotenv
+from concurrent.futures import ThreadPoolExecutor
+from typing import List, Dict, Any, Tuple
+
+def _load_test_collection(rag: RAG, dataset: Dict[str, Any]) -> None:
+    """Load test documents into a test collection."""
+    
+    # Delete any existing documents
+    rag.delete_all_documents()
+    
+    # Convert test documents to Document objects
+    documents = []
+    for doc in dataset["test_documents"]:
+        documents.append(Document(
+            page_content=doc["content"],
+            metadata=doc["metadata"]
+        ))
+    
+    # Split documents into smaller chunks
+    split_documents = split_docs(documents)
+    
+    # Add test documents to collection
+    rag.add_documents(split_documents)
+
+def evaluate_retrieval_samples(
+    rag: RAG,
+    samples: List[Dict[str, Any]], 
+    verbose: bool = False
+) -> Tuple[List[float], List[Dict[str, Any]]]:
+    """
+    Evaluate retrieval test samples.
+    
+    Args:
+        rag: The RAG instance to evaluate
+        samples: List of test samples with queries and ground truth
+        verbose: Whether to print detailed evaluation information
+        
+    Returns:
+        Tuple[List[float], List[Dict[str, Any]]]: List of scores and detailed results
+    """
+    scores = []
+    details = []
+    
+    for sample in samples:
+        # Get retriever's output using retrieve method
+        retrieved_docs = rag.retrieve(sample["query"])
+        retrieved_contexts = [doc.page_content for doc in retrieved_docs]
+        
+        # Evaluate context relevancy
+        relevancy_score = evaluate_context_relevancy(
+            question=sample["query"],
+            contexts=retrieved_contexts,
+            verbose=verbose,
+            max_workers=len(retrieved_contexts)
+        )
+        
+        # Evaluate context recall against ground truth
+        recall_score, recall_details = evaluate_context_recall(
+            query=sample["query"],
+            contexts=retrieved_contexts,
+            ground_truth=sample["ground_truth"],
+            verbose=verbose,
+            max_workers=len(retrieved_contexts)
+        )
+        
+        # Average the scores
+        score = (relevancy_score + recall_score) / 2
+        
+        # Store test details
+        test_details = {
+            "query": sample["query"],
+            "retrieved_contexts": retrieved_contexts,
+            "ground_truth": sample["ground_truth"],
+            "relevancy_score": relevancy_score,
+            "recall_score": recall_score,
+            "recall_details": recall_details,
+            "score": score
+        }
+        details.append(test_details)
+        scores.append(score)
+        
+        if verbose:
+            print(f"\nEvaluating retrieval for query: {sample['query']}")
+            print(f"Retrieved contexts: {retrieved_contexts}")
+            print(f"Ground truth: {sample['ground_truth']}")
+            print(f"Relevancy score: {relevancy_score:.2f}")
+            print(f"Recall score: {recall_score:.2f}")
+            print(f"Overall score: {score:.2f}")
+            
+    return scores, details
+
+def evaluate_rag_retriever(verbose: bool = False, test_mode: bool = False) -> Tuple[Dict[str, float], List[Dict[str, Any]]]:
+    """
+    Run evaluations for the RAG Retriever component.
+    
+    Args:
+        verbose: Whether to print detailed evaluation information
+        test_mode: Whether to use test documents (True) or real collection (False)
+        
+    Returns:
+        Tuple[Dict[str, float], List[Dict[str, Any]]]: Dictionary mapping metric names to their scores,
+        and list of detailed test results
+    """
+    load_dotenv()
+    
+    # Initialize RAG with appropriate collection
+    rag = RAG(collection_name="test_collection" if test_mode else "real_collection", k=1 if test_mode else 4)
+    
+    # Load appropriate dataset
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    dataset_path = os.path.join(
+        current_dir, 
+        "datasets", 
+        "test_retrieval_dataset.json" if test_mode else "real_retrieval_dataset.json"
+    )
+    
+    with open(dataset_path, encoding="utf-8") as f:
+        dataset = json.load(f)
+    
+    # Only load test documents in test mode
+    if test_mode:
+        _load_test_collection(rag, dataset)
+    
+    # Evaluate retrieval
+    scores, details = evaluate_retrieval_samples(
+        rag=rag,
+        samples=dataset["test_queries"],
+        verbose=verbose
+    )
+    
+    # Calculate average scores
+    avg_score = sum(scores) / len(scores)
+    avg_relevancy = sum(d["relevancy_score"] for d in details) / len(details)
+    avg_recall = sum(d["recall_score"] for d in details) / len(details)
+    
+    # Prepare results
+    scores_dict = {
+        "Context Relevancy": avg_relevancy,
+        "Context Recall": avg_recall,
+        "Overall": avg_score
+    }
+    
+    if verbose:
+        print("\nFinal Scores:")
+        print(f"Context Relevancy: {avg_relevancy:.2f}")
+        print(f"Context Recall: {avg_recall:.2f}")
+        print(f"Overall Score: {avg_score:.2f}")
+    
+    return scores_dict, details
+
+if __name__ == "__main__":
+    evaluate_rag_retriever(verbose=True, test_mode=False) 
