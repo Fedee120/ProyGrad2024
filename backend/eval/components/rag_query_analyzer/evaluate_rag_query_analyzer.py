@@ -27,13 +27,15 @@ def evaluate_references_samples(
     """Evaluate reference resolution test samples."""
     scores = []
     details = []
-    for sample in samples:
+    
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Convert chat history to message objects
         chat_history = _create_chat_history(sample["chat_history"])
         
         # Get analyzer's output with chat history
         result = analyzer.analyze(sample["original_query"], chat_history)
         
+        # Evaluate if references are properly resolved
         score = evaluate_resolves_references(
             original_query=sample["original_query"],
             generated_query=result.updated_query,
@@ -51,14 +53,22 @@ def evaluate_references_samples(
             "expected": sample["expected_query"],
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
         
         if verbose:
             print(f"\nEvaluating reference resolution for: {sample['original_query']}")
             print(f"Generated query: {result.updated_query}")
             print(f"Expected query: {sample['expected_query']}")
             print(f"Score: {score:.2f}")
+            
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 
@@ -73,7 +83,8 @@ def evaluate_acronyms_samples(
     """
     scores = []
     details = []
-    for sample in samples:
+    
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate queries
         result = analyzer.analyze(sample["original_query"], [])
         
@@ -92,14 +103,22 @@ def evaluate_acronyms_samples(
             "expected": sample["expected_queries"],
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
         
         if verbose:
             print(f"\nEvaluating acronym expansion for: {sample['original_query']}")
             print(f"Generated queries: {result.queries}")
             print(f"Expected queries: {sample['expected_queries']}")
             print(f"Score: {score:.2f}")
+            
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 
@@ -114,7 +133,8 @@ def evaluate_context_samples(
     """
     scores = []
     details = []
-    for sample in samples:
+    
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Convert chat history to message objects
         chat_history = _create_chat_history(sample["chat_history"])
         
@@ -141,8 +161,6 @@ def evaluate_context_samples(
             },
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
         
         if verbose:
             print(f"\nEvaluating context inclusion for: {sample['original_query']}")
@@ -150,6 +168,16 @@ def evaluate_context_samples(
             print(f"Generated queries: {result.queries}")
             print(f"Updated query: {result.updated_query}")
             print(f"Score: {score:.2f}")
+            
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 

@@ -48,7 +48,7 @@ def evaluate_retrieval_samples(
     scores = []
     details = []
     
-    for sample in samples:
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Get retriever's output using retrieve method
         retrieved_docs = rag.retrieve(sample["query"])
         retrieved_contexts = [doc.page_content for doc in retrieved_docs]
@@ -83,9 +83,7 @@ def evaluate_retrieval_samples(
             "recall_details": recall_details,
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
-        
+
         if verbose:
             print(f"\nEvaluating retrieval for query: {sample['query']}")
             print(f"Retrieved contexts: {retrieved_contexts}")
@@ -93,6 +91,16 @@ def evaluate_retrieval_samples(
             print(f"Relevancy score: {relevancy_score:.2f}")
             print(f"Recall score: {recall_score:.2f}")
             print(f"Overall score: {score:.2f}")
+
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 

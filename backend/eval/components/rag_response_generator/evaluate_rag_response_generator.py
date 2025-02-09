@@ -19,7 +19,8 @@ def evaluate_faithfulness_samples(
     """Evaluate faithfulness test samples."""
     scores = []
     details = []
-    for sample in samples:
+    
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer using the provided context
         generated_answer = generator.generate_response(
             question=sample["question"],
@@ -42,14 +43,22 @@ def evaluate_faithfulness_samples(
             "generated": generated_answer.answer,
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
         
         if verbose:
             print(f"\nEvaluating faithfulness for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Score: {score:.2f}")
+            
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 
@@ -61,7 +70,8 @@ def evaluate_correctness_samples(
     """Evaluate answer correctness test samples."""
     scores = []
     details = []
-    for sample in samples:
+    
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer with context
         generated_answer = generator.generate_response(
             question=sample["question"],
@@ -85,8 +95,6 @@ def evaluate_correctness_samples(
             "expected": sample["expected_answer"],
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
         
         if verbose:
             print(f"\nEvaluating correctness for: {sample['question']}")
@@ -94,6 +102,16 @@ def evaluate_correctness_samples(
             print(f"Generated answer: {generated_answer}")
             print(f"Expected answer: {sample['expected_answer']}")
             print(f"Score: {score:.2f}")
+            
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 
@@ -105,7 +123,8 @@ def evaluate_relevancy_samples(
     """Evaluate answer relevancy test samples."""
     scores = []
     details = []
-    for sample in samples:
+    
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer with context
         generated_answer = generator.generate_response(
             question=sample["question"],
@@ -128,14 +147,22 @@ def evaluate_relevancy_samples(
             "generated": generated_answer.answer,
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
         
         if verbose:
             print(f"\nEvaluating relevancy for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Score: {score:.2f}")
+            
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 
@@ -147,7 +174,8 @@ def evaluate_contradictions_samples(
     """Evaluate contradiction acknowledgment test samples."""
     scores = []
     details = []
-    for sample in samples:
+    
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer with context
         generated_answer = generator.generate_response(
             question=sample["question"],
@@ -170,14 +198,22 @@ def evaluate_contradictions_samples(
             "generated": generated_answer.answer,
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
         
         if verbose:
             print(f"\nEvaluating contradiction acknowledgment for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Score: {score:.2f}")
+            
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 
@@ -189,7 +225,8 @@ def evaluate_citations_samples(
     """Evaluate citations test samples."""
     scores = []
     details = []
-    for sample in samples:
+    
+    def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer with context
         generated_answer = generator.generate_response(
             question=sample["question"],
@@ -213,14 +250,22 @@ def evaluate_citations_samples(
             "generated": generated_answer.answer,
             "score": score
         }
-        details.append(test_details)
-        scores.append(score)
         
         if verbose:
             print(f"\nEvaluating citations for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
             print(f"Generated answer: {generated_answer}")
             print(f"Score: {score:.2f}")
+            
+        return score, test_details
+    
+    # Process samples in parallel
+    with ThreadPoolExecutor(max_workers=len(samples)) as executor:
+        futures = [executor.submit(evaluate_single_sample, sample) for sample in samples]
+        for future in futures:
+            score, test_details = future.result()
+            scores.append(score)
+            details.append(test_details)
             
     return scores, details
 
