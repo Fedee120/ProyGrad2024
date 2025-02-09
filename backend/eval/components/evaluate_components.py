@@ -5,7 +5,7 @@ Runs evaluations for the query analyzer, response generator, and retriever compo
 
 from .rag_query_analyzer.evaluate_rag_query_analyzer import evaluate_query_analyzer
 from .rag_response_generator.evaluate_rag_response_generator import evaluate_response_generator
-from .rag_retrieval.evaluate_rag_retriever import evaluate_rag_retriever
+from .rag_retriever.evaluate_rag_retriever import evaluate_rag_retriever
 from dotenv import load_dotenv
 import json
 import os
