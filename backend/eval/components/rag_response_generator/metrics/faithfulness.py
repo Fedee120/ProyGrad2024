@@ -1,7 +1,7 @@
 # faithfulness: evaluates if the generated answer can be logically derived from the given context
 
 from langchain_core.pydantic_v1 import BaseModel, Field
-from typing import List
+from typing import List, Tuple
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from ..prompts.faithfulness_prompt import PROMPT
@@ -12,7 +12,7 @@ class Faithfulness(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the answer is faithful or not to the facts")
     is_faithful: bool = Field(..., description="Indicates if the answer can be derived logically from the facts presented")
 
-def evaluate_faithfulness(question: str, facts: List[str], answer: str, verbose: bool = False) -> float:
+def evaluate_faithfulness(question: str, facts: List[str], answer: str, verbose: bool = False) -> Tuple[float, List[str]]:
     """
     Evaluate if the answer is faithful to the facts presented.
 
@@ -41,7 +41,7 @@ def evaluate_faithfulness(question: str, facts: List[str], answer: str, verbose:
             print(f"{i}. {step}")
         print(f"Is faithful?: {'True' if result.is_faithful else 'False'}")
     
-    return 1.0 if result.is_faithful else 0.0
+    return 1.0 if result.is_faithful else 0.0, result.reasoning_steps
 
 if __name__ == "__main__":
     question = "What color is the sky?"

@@ -1,7 +1,7 @@
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from typing import List
+from typing import List, Tuple
 from langchain_core.messages import AIMessage, HumanMessage
 from ..prompts.resolves_references_prompt import PROMPT
 
@@ -25,7 +25,7 @@ def evaluate_resolves_references(
     expected_query: str,
     chat_history: List[AIMessage | HumanMessage],
     verbose: bool = False
-) -> float:
+) -> Tuple[float, List[str]]:
     """
     Evaluate if the query analyzer resolves references correctly.
 
@@ -63,4 +63,4 @@ def evaluate_resolves_references(
             print(f"{i}. {step}")
         print(f"Is correct?: {result.resolves_references_correctly}")
     
-    return 1.0 if result.resolves_references_correctly else 0.0 
+    return 1.0 if result.resolves_references_correctly else 0.0, result.reasoning_steps

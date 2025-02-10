@@ -14,4 +14,4 @@ Context:
 Question: {question}
 Answer: {answer}
 
-Is the answer relevant to the question given this context? Answer with true or false.""" 
+Is the answer relevant to the question given this context? Follow the structured output format.""" 

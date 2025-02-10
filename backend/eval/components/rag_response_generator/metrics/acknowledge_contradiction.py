@@ -3,7 +3,7 @@
 from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from typing import List
+from typing import List, Tuple
 from ..prompts.acknowledge_contradiction_prompt import PROMPT
 
 load_dotenv()
@@ -17,7 +17,7 @@ def evaluate_acknowledge_contradiction(
     answer: str,
     context: List[str],
     verbose: bool = False
-) -> float:
+) -> Tuple[float, List[str]]:
     """
     Evaluate if the answer acknowledges contradictions present in the context.
     
@@ -55,7 +55,7 @@ def evaluate_acknowledge_contradiction(
             print(f"{i}. {step}")
         print(f"Acknowledges contradictions?: {'True' if result.acknowledges_contradiction else 'False'}")
         
-    return 1.0 if result.acknowledges_contradiction else 0.0
+    return 1.0 if result.acknowledges_contradiction else 0.0, result.reasoning_steps
 
 if __name__ == "__main__":
     question = "What is the role of dropout in neural networks?"

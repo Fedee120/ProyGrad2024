@@ -1,4 +1,4 @@
-PROMPT = """You are evaluating if a query analyzer's output considers the conversation context when generating queries.
+PROMPT = """You are evaluating if a query analyzer's output considers the conversation context when generating/updating queries.
 
 Follow these steps:
 1. Review the conversation history to understand the context
@@ -26,4 +26,4 @@ Original Query: {original_query}
 Generated Queries: {queries}
 Updated Query: {updated_query}
 
-Do the queries show consideration of conversation context? Answer with true or false.""" 
+Do the generated queries and the updated query show consideration of conversation context? Follow the structured output format.""" 

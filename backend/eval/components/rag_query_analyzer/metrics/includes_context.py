@@ -3,7 +3,7 @@
 from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from typing import List, Dict
+from typing import List, Tuple
 from ..prompts.includes_context_prompt import PROMPT
 from langchain.schema import AIMessage, HumanMessage
 
@@ -27,7 +27,7 @@ def evaluate_includes_context(
     updated_query: str,
     chat_history: List[AIMessage | HumanMessage],
     verbose: bool = False
-) -> float:
+) -> Tuple[float, List[str]]:
     """
     Evaluate if the analyzer considers conversation context when generating queries.
     
@@ -65,7 +65,7 @@ def evaluate_includes_context(
             print(f"{i}. {step}")
         print(f"Includes context?: {'True' if result.includes_context else 'False'}")
         
-    return 1.0 if result.includes_context else 0.0
+    return 1.0 if result.includes_context else 0.0, result.reasoning_steps
 
 if __name__ == "__main__":
     chat_history = [

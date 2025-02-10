@@ -92,6 +92,10 @@
                 {
                     "role": "assistant",
                     "content": "Se refiere a sistemas de tutoría virtual que ofrecen apoyo personalizado a los estudiantes mediante algoritmos de IA."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Cómo se diferencia de un tutor humano?"
                 }
             ],
             "queries": [
@@ -111,6 +115,10 @@
                 {
                     "role": "assistant",
                     "content": "Sí, el aprendizaje adaptativo adapta el contenido y el ritmo de las lecciones según las necesidades del estudiante, gracias al análisis de datos en tiempo real."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Esto podría reemplazar el rol del docente en el futuro?"
                 }
             ],
             "queries": [
@@ -130,6 +138,10 @@
                 {
                     "role": "assistant",
                     "content": "La IA puede automatizar la corrección de exámenes, proporcionar retroalimentación personalizada y analizar patrones de aprendizaje."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Existen riesgos de sesgo en este tipo de evaluaciones?"
                 }
             ],
             "queries": [
@@ -148,6 +160,10 @@
                 {
                     "role": "assistant",
                     "content": "La IA puede ofrecer tutores virtuales, monitorear el progreso del estudiante y personalizar el contenido educativo."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Qué plataformas actuales ya implementan esta tecnología?"
                 }
             ],
             "queries": [
@@ -169,6 +185,10 @@
                 {
                     "role": "assistant",
                     "content": "La IA puede crear espacios de discusión, sugerir grupos de trabajo y analizar dinámicas colaborativas."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Podría esto ser contraproducente para el aprendizaje social?"
                 }
             ],
             "queries": [
@@ -207,6 +227,10 @@
                 {
                     "role": "assistant",
                     "content": "La IA recopila datos sobre el progreso del estudiante, patrones de participación y resultados de evaluaciones."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Esto plantea problemas de privacidad?"
                 }
             ],
             "queries": [
@@ -226,6 +250,10 @@
                 {
                     "role": "assistant",
                     "content": "Los principales desafíos incluyen el costo, la capacitación docente y el acceso desigual a la tecnología."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Qué estrategias podrían mitigar estos desafíos?"
                 }
             ],
             "queries": [
@@ -245,6 +273,10 @@
                 {
                     "role": "assistant",
                     "content": "La IA puede ofrecer contenido personalizado, detectar problemas tempranos y brindar retroalimentación adaptada."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Qué herramientas están disponibles actualmente?"
                 }
             ],
             "queries": [
@@ -263,6 +295,10 @@
                 {
                     "role": "assistant",
                     "content": "La IA puede proporcionar análisis de desempeño docente, simulaciones para prácticas y recursos personalizados."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Existen estudios que demuestren su efectividad?"
                 }
             ],
             "queries": [

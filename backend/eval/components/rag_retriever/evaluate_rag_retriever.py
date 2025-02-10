@@ -54,7 +54,7 @@ def evaluate_retrieval_samples(
         retrieved_contexts = [doc.page_content for doc in retrieved_docs]
         
         # Evaluate context relevancy
-        relevancy_score = evaluate_context_relevancy(
+        relevancy_score, relevancy_details = evaluate_context_relevancy(
             question=sample["query"],
             contexts=retrieved_contexts,
             verbose=verbose,
@@ -79,6 +79,7 @@ def evaluate_retrieval_samples(
             "retrieved_contexts": retrieved_contexts,
             "ground_truth": sample["ground_truth"],
             "relevancy_score": relevancy_score,
+            "relevancy_details": relevancy_details,
             "recall_score": recall_score,
             "recall_details": recall_details,
             "score": score
@@ -145,23 +146,29 @@ def evaluate_rag_retriever(verbose: bool = False, test_mode: bool = False) -> Tu
     
     # Calculate average scores
     avg_score = sum(scores) / len(scores)
-    avg_relevancy = sum(d["relevancy_score"] for d in details) / len(details)
-    avg_recall = sum(d["recall_score"] for d in details) / len(details)
+    avg_relevancy_best = sum(d["relevancy_details"]["relevancy_ratio_best"] for d in details) / len(details)
+    avg_relevancy_all = sum(d["relevancy_details"]["relevancy_ratio_all"] for d in details) / len(details)
+    avg_recall_best = sum(d["recall_details"]["recall_score_best"] for d in details) / len(details)
+    avg_recall_all = sum(d["recall_details"]["recall_score_all"] for d in details) / len(details)
     
     # Prepare results
     scores_dict = {
-        "Context Relevancy": avg_relevancy,
-        "Context Recall": avg_recall,
+        "Context Relevancy (with all contexts)": avg_relevancy_all,
+        "Context Recall (with all contexts)": avg_recall_all,
+        "Context Relevancy": avg_relevancy_best,
+        "Context Recall": avg_recall_best,
         "Overall": avg_score
     }
     
     if verbose:
         print("\nFinal Scores:")
-        print(f"Context Relevancy: {avg_relevancy:.2f}")
-        print(f"Context Recall: {avg_recall:.2f}")
+        print(f"Context Relevancy (best): {avg_relevancy_best:.2f}")
+        print(f"Context Relevancy (all): {avg_relevancy_all:.2f}")
+        print(f"Context Recall (best): {avg_recall_best:.2f}")
+        print(f"Context Recall (all): {avg_recall_all:.2f}")
         print(f"Overall Score: {avg_score:.2f}")
     
     return scores_dict, details
 
 if __name__ == "__main__":
-    evaluate_rag_retriever(verbose=True, test_mode=False) 
+    evaluate_rag_retriever(verbose=True, test_mode=True) 

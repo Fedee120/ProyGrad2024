@@ -13,4 +13,4 @@ Context:
 Question: {question}
 Answer: {answer}
 
-Does the answer acknowledge contradictions in the context when present? Answer with true or false.""" 
+Does the answer acknowledge contradictions in the context when present? Follow the structured output format.""" 

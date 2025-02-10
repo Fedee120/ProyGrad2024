@@ -7,4 +7,4 @@ PROMPT = """You are a teacher determining if a single excerpt of a document is r
 
                     Question: {question}
                     Excerpt to analyze: {excerpt}
-                    Is this excerpt relevant? Answer with true or false.""" 
+                    Is this excerpt relevant? Follow the structured output format.""" 

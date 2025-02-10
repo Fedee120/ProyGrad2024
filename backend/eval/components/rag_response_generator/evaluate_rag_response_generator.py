@@ -28,7 +28,7 @@ def evaluate_faithfulness_samples(
         )
         
         # Evaluate if the answer only uses information from the context
-        score = evaluate_faithfulness(
+        score, reasoning_steps = evaluate_faithfulness(
             question=sample["question"],
             facts=sample["context"],
             answer=generated_answer.answer,
@@ -41,13 +41,14 @@ def evaluate_faithfulness_samples(
             "query": sample["question"],
             "context": sample["context"],
             "generated": generated_answer.answer,
-            "score": score
+            "score": score,
+            "reasoning_steps": reasoning_steps
         }
         
         if verbose:
             print(f"\nEvaluating faithfulness for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
-            print(f"Generated answer: {generated_answer}")
+            print(f"Generated answer: {generated_answer.answer}")
             print(f"Score: {score:.2f}")
             
         return score, test_details
@@ -79,7 +80,7 @@ def evaluate_correctness_samples(
         )
         
         # Compare generated answer with expected answer
-        score = evaluate_answer_correctness(
+        score, reasoning_steps = evaluate_answer_correctness(
             question=sample["question"],
             answer=generated_answer.answer,
             ground_truth=sample["expected_answer"],
@@ -93,13 +94,14 @@ def evaluate_correctness_samples(
             "context": sample["context"],
             "generated": generated_answer.answer,
             "expected": sample["expected_answer"],
-            "score": score
+            "score": score,
+            "reasoning_steps": reasoning_steps
         }
         
         if verbose:
             print(f"\nEvaluating correctness for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
-            print(f"Generated answer: {generated_answer}")
+            print(f"Generated answer: {generated_answer.answer}")
             print(f"Expected answer: {sample['expected_answer']}")
             print(f"Score: {score:.2f}")
             
@@ -132,7 +134,7 @@ def evaluate_relevancy_samples(
         )
         
         # Check if answer is relevant to the question within the given context
-        score = evaluate_answer_relevancy(
+        score, reasoning_steps = evaluate_answer_relevancy(
             question=sample["question"],
             answer=generated_answer.answer,
             context=sample["context"],
@@ -145,13 +147,14 @@ def evaluate_relevancy_samples(
             "query": sample["question"],
             "context": sample["context"],
             "generated": generated_answer.answer,
-            "score": score
+            "score": score,
+            "reasoning_steps": reasoning_steps
         }
         
         if verbose:
             print(f"\nEvaluating relevancy for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
-            print(f"Generated answer: {generated_answer}")
+            print(f"Generated answer: {generated_answer.answer}")
             print(f"Score: {score:.2f}")
             
         return score, test_details
@@ -183,7 +186,7 @@ def evaluate_contradictions_samples(
         )
         
         # Check if answer acknowledges contradictions when present
-        score = evaluate_acknowledge_contradiction(
+        score, reasoning_steps = evaluate_acknowledge_contradiction(
             question=sample["question"],
             answer=generated_answer.answer,
             context=sample["context"],
@@ -195,14 +198,19 @@ def evaluate_contradictions_samples(
             "metric": "Contradiction Acknowledgment",
             "query": sample["question"],
             "context": sample["context"],
-            "generated": generated_answer.answer,
-            "score": score
+            "generated": {
+                "answer": generated_answer.answer,
+                "citations": generated_answer.context
+            },
+            "score": score,
+            "reasoning_steps": reasoning_steps
         }
         
         if verbose:
             print(f"\nEvaluating contradiction acknowledgment for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
-            print(f"Generated answer: {generated_answer}")
+            print(f"Generated answer: {generated_answer.answer}")
+            print(f"Citations: {generated_answer.context}")
             print(f"Score: {score:.2f}")
             
         return score, test_details
@@ -234,7 +242,7 @@ def evaluate_citations_samples(
         )
         
         # Check if citations are real and properly used
-        score = evaluate_citations_real_and_used(
+        score, reasoning_steps = evaluate_citations_real_and_used(
             question=sample["question"],
             answer=generated_answer.answer,
             citations=generated_answer.context,
@@ -247,14 +255,19 @@ def evaluate_citations_samples(
             "metric": "Citations Real and Used",
             "query": sample["question"],
             "context": sample["context"],
-            "generated": generated_answer.answer,
-            "score": score
+            "generated": {
+                "answer": generated_answer.answer,
+                "citations": generated_answer.context
+            },
+            "score": score,
+            "reasoning_steps": reasoning_steps
         }
         
         if verbose:
             print(f"\nEvaluating citations for: {sample['question']}")
             print(f"Context provided: {sample['context']}")
-            print(f"Generated answer: {generated_answer}")
+            print(f"Generated answer: {generated_answer.answer}")
+            print(f"Citations: {generated_answer.context}")
             print(f"Score: {score:.2f}")
             
         return score, test_details

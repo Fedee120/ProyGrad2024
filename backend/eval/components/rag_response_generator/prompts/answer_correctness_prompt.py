@@ -8,4 +8,4 @@ PROMPT = """You are a teacher grading whether a student's answer is correct. You
                     Question: {question}
                     Student's answer: {answer}
                     Ground truth: {ground_truth}
-                    Is the answer correct? Answer with true or false.""" 
+                    Is the answer correct? Follow the structured output format.""" 

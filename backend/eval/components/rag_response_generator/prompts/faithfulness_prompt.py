@@ -8,4 +8,4 @@ PROMPT = """You are a teacher grading a student's answer. You need to determine 
                     Question: {question}
                     Facts: {facts}
                     Answer: {answer}
-                    Is the answer faithful? Answer with true or false.""" 
+                    Is the answer faithful? Follow the structured output format.""" 

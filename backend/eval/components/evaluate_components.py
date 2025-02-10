@@ -105,6 +105,10 @@ def save_detailed_report(
             if "expected" in test:
                 f.write(f"Expected: {test['expected']}\n")
             f.write(f"Score: {test['score']:.2f}\n")
+            if "reasoning_steps" in test:
+                f.write("Reasoning steps:\n")
+                for step in test["reasoning_steps"]:
+                    f.write(f"- {step}\n")
             f.write("-" * 50 + "\n")
         
         # Write Response Generator results
@@ -124,6 +128,10 @@ def save_detailed_report(
             if "expected" in test:
                 f.write(f"Expected: {test['expected']}\n")
             f.write(f"Score: {test['score']:.2f}\n")
+            if "reasoning_steps" in test:
+                f.write("Reasoning steps:\n")
+                for step in test["reasoning_steps"]:
+                    f.write(f"- {step}\n")
             f.write("-" * 50 + "\n")
             
         # Write Retriever results
@@ -138,8 +146,18 @@ def save_detailed_report(
             f.write(f"\nQuery: {test['query']}\n")
             f.write(f"Retrieved contexts: {test['retrieved_contexts']}\n")
             f.write(f"Ground truth: {test['ground_truth']}\n")
-            f.write(f"Relevancy score: {test['relevancy_score']:.2f}\n")
-            f.write(f"Recall score: {test['recall_score']:.2f}\n")
+            f.write(f"Relevancy score (best): {test['relevancy_details']['relevancy_ratio_best']:.2f}\n")
+            f.write(f"Relevancy score (all): {test['relevancy_details']['relevancy_ratio_all']:.2f}\n")
+            f.write("\nPer-context relevancy evaluation:\n")
+            for ctx_result in test['relevancy_details']['per_context_results']:
+                f.write(f"\nContext {ctx_result['context_num']}:\n")
+                f.write(f"Content: {ctx_result['context']}\n")
+                f.write(f"Is relevant: {ctx_result['is_relevant']}\n")
+                f.write("Reasoning:\n")
+                for step in ctx_result['reasoning_steps']:
+                    f.write(f"- {step}\n")
+            f.write(f"Recall score (best): {test['recall_details']['recall_score_best']:.2f}\n")
+            f.write(f"Recall score (all): {test['recall_details']['recall_score_all']:.2f}\n")
             f.write("\nPer-context recall evaluation:\n")
             for ctx_result in test['recall_details']['per_context_results']:
                 f.write(f"\nContext {ctx_result['context_num']}:\n")
@@ -160,15 +178,15 @@ def main() -> None:
     
     # Evaluate Query Analyzer
     print("Evaluating Query Analyzer...")
-    qa_scores, qa_details = evaluate_query_analyzer(verbose=True)
+    qa_scores, qa_details = evaluate_query_analyzer(verbose=False)
     
     # Evaluate Response Generator
     print("\nEvaluating Response Generator...")
-    rg_scores, rg_details = evaluate_response_generator(verbose=True)
+    rg_scores, rg_details = evaluate_response_generator(verbose=False)
     
     # Evaluate Retriever
     print("\nEvaluating Retriever...")
-    rt_scores, rt_details = evaluate_rag_retriever(verbose=True)
+    rt_scores, rt_details = evaluate_rag_retriever(verbose=False)
     
     # Calculate overall score
     overall_score = (qa_scores["Overall"] + rg_scores["Overall"] + rt_scores["Overall"]) / 3

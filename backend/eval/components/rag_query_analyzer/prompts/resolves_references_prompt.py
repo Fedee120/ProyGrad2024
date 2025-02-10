@@ -20,4 +20,4 @@ Original Query: {original_query}
 Generated Query: {generated_query}
 Expected Query: {expected_query}
 
-Are references resolved correctly? Answer with true or false.""" 
+Are references resolved correctly? Follow the structured output format.""" 

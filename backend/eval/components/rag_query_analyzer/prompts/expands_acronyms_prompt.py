@@ -22,4 +22,4 @@ Result: true (no acronyms present to expand)
 Original Query: {original_query}
 Generated Queries: {queries}
 
-Are acronyms expanded in at least one query when present? Answer with true or false.""" 
+Are acronyms expanded in at least one query when present? Follow the structured output format.""" 

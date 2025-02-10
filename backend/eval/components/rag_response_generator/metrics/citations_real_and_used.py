@@ -3,7 +3,7 @@
 from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from typing import List, Dict
+from typing import List, Tuple
 from ..prompts.citations_real_and_used_prompt import PROMPT
 
 load_dotenv()
@@ -18,7 +18,7 @@ def evaluate_citations_real_and_used(
     citations: List[str],
     context: List[str],
     verbose: bool = False
-) -> float:
+) -> Tuple[float, List[str]]:
     """
     Evaluate if citations in the answer are real (present in context) and properly used.
     
@@ -58,7 +58,7 @@ def evaluate_citations_real_and_used(
             print(f"{i}. {step}")
         print(f"All citations valid?: {'True' if result.all_citations_valid else 'False'}")
         
-    return 1.0 if result.all_citations_valid else 0.0
+    return 1.0 if result.all_citations_valid else 0.0, result.reasoning_steps
 
 if __name__ == "__main__":
     question = "What are the benefits of transfer learning?"

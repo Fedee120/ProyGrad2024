@@ -3,7 +3,7 @@
 from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from typing import List
+from typing import List, Tuple
 from ..prompts.answer_relevancy_prompt import PROMPT
 
 load_dotenv()
@@ -17,7 +17,7 @@ def evaluate_answer_relevancy(
     answer: str,
     context: List[str],
     verbose: bool = False
-) -> float:
+) -> Tuple[float, List[str]]:
     """
     Evaluate if the answer is relevant to the question within the given context.
     
@@ -55,7 +55,7 @@ def evaluate_answer_relevancy(
             print(f"{i}. {step}")
         print(f"Is relevant?: {'True' if result.is_relevant else 'False'}")
         
-    return 1.0 if result.is_relevant else 0.0
+    return 1.0 if result.is_relevant else 0.0, result.reasoning_steps
 
 if __name__ == "__main__":
     question = "What is supervised learning?"

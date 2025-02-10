@@ -26,7 +26,7 @@ def evaluate_single_context(question: str, excerpt: str) -> Tuple[str, bool, Lis
 
 def evaluate_context_relevancy(
     question: str, 
-    contexts: list, 
+    contexts: List[str],
     max_workers: int = 3,
     verbose: bool = False
 ) -> float:
@@ -54,9 +54,16 @@ def evaluate_context_relevancy(
             context_num = future_to_context[future]
             try:
                 context, is_relevant, reasoning_steps = future.result()
-                results.append((context_num, context, is_relevant, reasoning_steps))
+
                 if is_relevant:
                     relevant_count += 1
+                    
+                results.append({
+                    "context_num": context_num,
+                    "context": context,
+                    "is_relevant": is_relevant,
+                    "reasoning_steps": reasoning_steps
+                })
                     
                 if verbose:
                     print(f"\nContext {context_num}: {context}")
@@ -68,11 +75,22 @@ def evaluate_context_relevancy(
             except Exception as e:
                 print(f"Error procesando contexto {context_num}: {str(e)}")
     
-    relevancy_ratio = relevant_count/len(contexts)
-    if verbose:
-        print(f"\nTotal relevancy: {relevancy_ratio}")
+    relevancy_ratio_all = relevant_count/len(contexts) if contexts else 0.0
+    relevancy_ratio_best = min(relevant_count, 1)
     
-    return relevancy_ratio
+    # Prepare detailed results
+    detailed_results = {
+        "relevancy_ratio_all": relevancy_ratio_all,
+        "relevancy_ratio_best": relevancy_ratio_best,
+        "total_contexts": len(contexts),
+        "relevant_contexts": relevant_count,
+        "per_context_results": results
+    }
+
+    if verbose:
+        print(f"\nTotal relevancy: {relevancy_ratio_best}")
+    
+    return relevancy_ratio_best, detailed_results
 
 if __name__ == "__main__":
     question = "What color is the sky?"

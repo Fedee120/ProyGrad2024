@@ -20,4 +20,4 @@ Context:
 Question: {question}
 Answer: {answer}
 Citations: {citations}
-Are all citations real and properly used? Answer with true or false.""" 
+Are all citations real and properly used? Follow the structured output format.""" 

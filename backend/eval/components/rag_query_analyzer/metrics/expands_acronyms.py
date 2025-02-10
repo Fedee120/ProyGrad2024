@@ -3,7 +3,7 @@
 from pydantic.v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from typing import List
+from typing import List, Tuple
 from ..prompts.expands_acronyms_prompt import PROMPT
 
 load_dotenv()
@@ -16,7 +16,7 @@ def evaluate_expands_acronyms(
     original_query: str,
     queries: List[str],
     verbose: bool = False
-) -> float:
+) -> Tuple[float, List[str]]:
     """
     Evaluate if acronyms in the original query are expanded in at least one of the generated queries.
     
@@ -48,7 +48,7 @@ def evaluate_expands_acronyms(
             print(f"{i}. {step}")
         print(f"Acronyms expanded?: {'True' if result.has_expanded_acronyms else 'False'}")
         
-    return 1.0 if result.has_expanded_acronyms else 0.0
+    return 1.0 if result.has_expanded_acronyms else 0.0, result.reasoning_steps
 
 if __name__ == "__main__":
     query = "What is the difference between CNN and RNN?"

@@ -36,7 +36,7 @@ def evaluate_references_samples(
         result = analyzer.analyze(sample["original_query"], chat_history)
         
         # Evaluate if references are properly resolved
-        score = evaluate_resolves_references(
+        score, reasoning_steps = evaluate_resolves_references(
             original_query=sample["original_query"],
             generated_query=result.updated_query,
             expected_query=sample["expected_query"],
@@ -51,7 +51,8 @@ def evaluate_references_samples(
             "context": sample["chat_history"],
             "generated": result.updated_query,
             "expected": sample["expected_query"],
-            "score": score
+            "score": score,
+            "reasoning_steps": reasoning_steps
         }
         
         if verbose:
@@ -89,7 +90,7 @@ def evaluate_acronyms_samples(
         result = analyzer.analyze(sample["original_query"], [])
         
         # Check if acronyms are expanded
-        score = evaluate_expands_acronyms(
+        score, reasoning_steps = evaluate_expands_acronyms(
             original_query=sample["original_query"],
             queries=result.queries,
             verbose=verbose
@@ -101,7 +102,8 @@ def evaluate_acronyms_samples(
             "query": sample["original_query"],
             "generated": result.queries,
             "expected": sample["expected_queries"],
-            "score": score
+            "score": score,
+            "reasoning_steps": reasoning_steps
         }
         
         if verbose:
@@ -142,7 +144,7 @@ def evaluate_context_samples(
         result = analyzer.analyze(sample["original_query"], chat_history)
         
         # Check if context is included
-        score = evaluate_includes_context(
+        score, reasoning_steps = evaluate_includes_context(
             original_query=sample["original_query"],
             queries=result.queries,
             updated_query=result.updated_query,
@@ -159,7 +161,8 @@ def evaluate_context_samples(
                 "queries": result.queries,
                 "updated_query": result.updated_query
             },
-            "score": score
+            "score": score,
+            "reasoning_steps": reasoning_steps
         }
         
         if verbose:

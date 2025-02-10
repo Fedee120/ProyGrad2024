@@ -116,21 +116,23 @@ def evaluate_context_recall(
                 print(f"Error processing context {context_num}: {str(e)}")
     
     # Calculate recall score (ratio of relevant contexts to total contexts)
-    recall_score = relevant_contexts / len(contexts) if contexts else 0.0
+    recall_score_best = min(relevant_contexts, 1)
+    recall_score_all = relevant_contexts / len(contexts) if contexts else 0.0
     
     # Prepare detailed results
     detailed_results = {
-        "recall_score": recall_score,
+        "recall_score_best": recall_score_best,
+        "recall_score_all": recall_score_all,
         "total_contexts": len(contexts),
         "relevant_contexts": relevant_contexts,
         "per_context_results": results
     }
 
     if verbose:
-        print(f"\nOverall recall score: {recall_score:.2f}")
+        print(f"\nOverall recall score: {recall_score_best:.2f}")
         print(f"Relevant contexts: {relevant_contexts}/{len(contexts)}")
     
-    return recall_score, detailed_results
+    return recall_score_best, detailed_results
 
 if __name__ == "__main__":
     query = "What is deep learning?"

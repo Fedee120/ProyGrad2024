@@ -50,4 +50,4 @@ Query: {query}
 Context: {context}
 Ground Truth: {ground_truth}
 
-Analyze if this context contains key information from the ground truth answer.""" 
+Analyze if this context contains key information from the ground truth answer. Follow the structured output format.""" 
