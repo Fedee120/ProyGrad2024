@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
-from langchain_community.document_loaders import PyPDFLoader
-from backend.data.splitters.semantic_splitter import semantic_split
+from langchain_community.document_loaders import PyMuPDFLoader
+from data.splitters.semantic_splitter import semantic_split
 import os
 
 # Cargar variables de entorno al inicio
@@ -28,7 +28,7 @@ def print_chunk_info(chunk, i, total):
 
 def test_chunking():
     print(f"Loading test document: {TEST_DOC}")
-    loader = PyPDFLoader(TEST_DOC)
+    loader = PyMuPDFLoader(TEST_DOC)
     docs = loader.load()
     print(f"Document loaded: {len(docs)} pages\n")
 
