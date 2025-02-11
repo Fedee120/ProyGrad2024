@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
 from backend.data.splitters.semantic_splitter import semantic_split
-from backend.data.utils.keyword_extractor import add_keywords_to_chunks
 import os
 
 # Cargar variables de entorno al inicio
@@ -15,16 +14,10 @@ def print_chunk_info(chunk, i, total):
     print(f"CHUNK {i}/{total}")
     print(f"{'='*80}")
     
-    # Mostrar keywords primero para mejor visibilidad
-    print("\nKEYWORDS:")
-    if 'keywords' in chunk.metadata:
-        print(", ".join(chunk.metadata['keywords']))
-    
-    # Mostrar otros metadatos
-    print("\nOTROS METADATOS:")
+    # Mostrar metadatos
+    print("\nMETADATOS:")
     for key, value in chunk.metadata.items():
-        if key != 'keywords':
-            print(f"{key}: {value}")
+        print(f"{key}: {value}")
     
     # Mostrar contenido del chunk
     print("\nCONTENIDO:")
@@ -42,9 +35,6 @@ def test_chunking():
     print("Applying semantic chunking...")
     chunks = semantic_split(docs)
     print(f"Chunks generated: {len(chunks)}")
-    
-    # Agregar keywords a los chunks
-    chunks = add_keywords_to_chunks(chunks)
 
     # Visualización interactiva de chunks
     current_chunk = 0

@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 from agent.rag import RAG
 from langchain_community.document_loaders import PyMuPDFLoader
 from data.splitters.semantic_splitter import semantic_split
-from data.utils.keyword_extractor import add_keywords_to_chunks
 import re
 
 load_dotenv()
@@ -38,10 +37,6 @@ def load_data(rag):
     print("Splitting documents using semantic chunking")
     splits = semantic_split(docs)
     print("Splitted docs:", len(splits))
-
-    print("Adding keywords to chunks")
-    splits = add_keywords_to_chunks(splits)
-    print("Keywords added to all chunks")
 
     print("Adding documents to collection")
     rag.add_documents(splits)
