@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
 from backend.data.splitters.semantic_splitter import semantic_split
-from backend.data.utils.keyword_extractor import extract_keywords
+from backend.data.utils.keyword_extractor import add_keywords_to_chunks
 import os
 
 # Cargar variables de entorno al inicio
@@ -9,22 +9,6 @@ load_dotenv()
 
 # Ruta al documento de prueba
 TEST_DOC = os.path.join(os.path.dirname(__file__), "raw/¿Qué es el aprendizaje profundo_ - IBM.pdf")
-
-def add_keywords_to_chunks(chunks):
-    """Agrega keywords como metadata a cada chunk."""
-    print("\nExtrayendo keywords para cada chunk...")
-    for i, chunk in enumerate(chunks, 1):
-        print(f"Procesando chunk {i}/{len(chunks)}...")
-        try:
-            # Extraer keywords y limitar a 10 antes de asignarlas
-            raw_keywords = extract_keywords(chunk.page_content)
-            # Asegurarnos de que no haya más de 10 keywords
-            keywords = raw_keywords[:10] if raw_keywords else []
-            chunk.metadata['keywords'] = keywords
-        except Exception as e:
-            print(f"Error al extraer keywords del chunk {i}: {str(e)}")
-            chunk.metadata['keywords'] = []
-    return chunks
 
 def print_chunk_info(chunk, i, total):
     print(f"\n{'='*80}")

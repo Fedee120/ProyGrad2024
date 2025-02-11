@@ -1,5 +1,5 @@
 from langchain_openai import ChatOpenAI
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from typing import List
 import os
 from dotenv import load_dotenv
@@ -10,6 +10,8 @@ class Keywords(BaseModel):
     """Estructura para las keywords extraídas del texto."""
     keywords: List[str] = Field(
         description="Lista de keywords relevantes extraídas del texto",
+        min_items=1,
+        max_items=5
     )
 
 def extract_keywords(text: str) -> List[str]:
@@ -22,23 +24,33 @@ def extract_keywords(text: str) -> List[str]:
         temperature=0
     ).with_structured_output(Keywords)
     
-    prompt = f"""Analiza el siguiente texto y extrae las keywords más relevantes.
-    Las keywords deben ser sustantivos o frases nominales cortas que representen los conceptos principales del texto. Limitate a 5 keywords como máximo.
+    prompt = f"""Analyze the following text and extract the most relevant keywords.
+    Keywords should be nouns or short noun phrases that represent the main concepts in the text. Limit to 5 keywords maximum.
     
-    TEXTO:
+    TEXT:
     {text}
     """
     
     try:
         result = llm.invoke(prompt)
-        # Asegurarnos de que la lista no esté vacía y limitar a 5 elementos
-        if not result.keywords:
-            return []
-        return result.keywords[:min(5, len(result.keywords))]
+        return result.keywords
     except Exception as e:
         print(f"Error al extraer keywords: {e}")
         return [] 
-    
+
+def add_keywords_to_chunks(chunks):
+    """Agrega keywords como metadata a cada chunk."""
+    print("Extrayendo keywords para cada chunk...")
+    for i, chunk in enumerate(chunks, 1):
+        print(f"Procesando chunk {i}/{len(chunks)}...")
+        try:
+            keywords = extract_keywords(chunk.page_content)
+            chunk.metadata['keywords'] = keywords
+        except Exception as e:
+            print(f"Error al extraer keywords del chunk {i}: {str(e)}")
+            chunk.metadata['keywords'] = []
+    return chunks
+
 if __name__ == "__main__":
     print(extract_keywords("""Las GAN se entrenan a sí mismas. El generador crea falsicaciones mientras que el
 generador y los ejemplos verdaderos. Cuando el discriminador puede marcar la

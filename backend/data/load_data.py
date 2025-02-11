@@ -1,9 +1,9 @@
 import os
 from dotenv import load_dotenv
 from agent.rag import RAG
-from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyMuPDFLoader
 from data.splitters.semantic_splitter import semantic_split
-from data.utils.keyword_extractor import extract_keywords
+from data.utils.keyword_extractor import add_keywords_to_chunks
 import re
 
 load_dotenv()
@@ -18,25 +18,12 @@ def clean_text(text: str) -> str:
     return text.strip()
 
 def get_docs(path):
-    loader = PyPDFLoader(path)
+    loader = PyMuPDFLoader(path)
     docs = loader.load()
     # Limpiar el texto de cada documento
     for doc in docs:
         doc.page_content = clean_text(doc.page_content)
     return docs
-
-def add_keywords_to_chunks(chunks):
-    """Agrega keywords como metadata a cada chunk."""
-    print("Extrayendo keywords para cada chunk...")
-    for i, chunk in enumerate(chunks, 1):
-        print(f"Procesando chunk {i}/{len(chunks)}...")
-        try:
-            keywords = extract_keywords(chunk.page_content)
-            chunk.metadata['keywords'] = keywords
-        except Exception as e:
-            print(f"Error al extraer keywords del chunk {i}: {str(e)}")
-            chunk.metadata['keywords'] = []
-    return chunks
 
 def load_data(rag):
     print("Loading and extracting documents")

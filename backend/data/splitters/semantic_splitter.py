@@ -7,7 +7,8 @@ def semantic_split(documents):
     """
     text_splitter = SemanticChunker(
         embeddings=OpenAIEmbeddings(model="text-embedding-3-small"),
-        breakpoint_threshold_type="standard_deviation",  # Usa detección de cambios semánticos basada en gradiente
+        breakpoint_threshold_type="standard_deviation",
+        min_chunk_size=100
     )
     
     return text_splitter.split_documents(documents) 
