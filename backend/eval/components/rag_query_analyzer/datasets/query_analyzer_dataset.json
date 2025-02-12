@@ -50,6 +50,125 @@
                     "content": "can you give me an example of how it works in practice?"
                 }
             ]
+        },
+        {
+            "original_query": "how do they compare to traditional methods?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what are neural networks?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Neural networks are computational models inspired by the human brain, consisting of interconnected nodes (neurons) organized in layers. They can learn complex patterns from data through training."
+                },
+                {
+                    "role": "human",
+                    "content": "how do they compare to traditional methods?"
+                }
+            ]
+        },
+        {
+            "original_query": "what are the main challenges when implementing this?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what is transfer learning in AI?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Transfer learning is a technique where a model trained on one task is repurposed for a different but related task. This approach leverages knowledge gained from solving one problem to help solve another."
+                },
+                {
+                    "role": "human",
+                    "content": "what are the main challenges when implementing this?"
+                }
+            ]
+        },
+        {
+            "original_query": "can you explain the process in more detail?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "how does reinforcement learning work?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Reinforcement learning is a type of machine learning where an agent learns to make decisions by interacting with an environment. The agent receives rewards or penalties based on its actions and learns to maximize cumulative rewards."
+                },
+                {
+                    "role": "human",
+                    "content": "can you explain the process in more detail?"
+                }
+            ]
+        },
+        {
+            "original_query": "what makes them effective for this task?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "how are CNNs used in computer vision?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Convolutional Neural Networks (CNNs) are extensively used in computer vision tasks like image recognition, object detection, and segmentation. They automatically learn hierarchical features from images through convolutional layers."
+                },
+                {
+                    "role": "human",
+                    "content": "what makes them effective for this task?"
+                }
+            ]
+        },
+        {
+            "original_query": "what are the ethical implications of this?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "how do GANs create deepfakes?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Generative Adversarial Networks (GANs) create deepfakes by having two neural networks compete: one generates fake images/videos, while the other tries to detect fakes. Through this process, they learn to create increasingly realistic synthetic media."
+                },
+                {
+                    "role": "human",
+                    "content": "what are the ethical implications of this?"
+                }
+            ]
+        },
+        {
+            "original_query": "how reliable are these predictions?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what is time series forecasting in machine learning?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Time series forecasting in machine learning involves using historical data patterns to predict future values. Models analyze temporal dependencies and seasonality to make predictions about future trends."
+                },
+                {
+                    "role": "human",
+                    "content": "how reliable are these predictions?"
+                }
+            ]
+        },
+        {
+            "original_query": "what kind of data is needed for this?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "how does anomaly detection work in AI?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Anomaly detection in AI uses algorithms to identify unusual patterns or outliers in data that deviate from expected behavior. It's commonly used in fraud detection, system monitoring, and quality control."
+                },
+                {
+                    "role": "human",
+                    "content": "what kind of data is needed for this?"
+                }
+            ]
         }
     ],
     "expands_acronyms_tests": [
@@ -57,10 +176,31 @@
             "original_query": "What is CNN?"
         },
         {
-            "original_query": "How does LSTM handle long sequences?"
+            "original_query": "Compare RNN vs LSTM"
         },
         {
-            "original_query": "Compare RNN vs LSTM"
+            "original_query": "What makes GPT different from other LLMs?"
+        },
+        {
+            "original_query": "Can you explain what VAE is in deep learning?"
+        },
+        {
+            "original_query": "How does GAN generate realistic images?"
+        },
+        {
+            "original_query": "What is the role of MLP in deep learning?"
+        },
+        {
+            "original_query": "Compare BERT vs T5 for NLP tasks"
+        },
+        {
+            "original_query": "What makes ResNet and DenseNet different?"
+        },
+        {
+            "original_query": "What is the purpose of CTC in speech recognition?"
+        },
+        {
+            "original_query": "How does YOLO perform object detection?"
         }
     ],
     "includes_context_tests": [

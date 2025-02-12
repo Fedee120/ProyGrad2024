@@ -28,4 +28,4 @@ Expected Queries: {expected_queries}
 Generated Queries: {queries}
 Updated Query: {updated_query}
 
-Do the generated queries and the updated query show consideration of conversation context? Follow the structured output format.""" 
+Evaluate the context consideration and provide your response in the specified JSON format.""" 
