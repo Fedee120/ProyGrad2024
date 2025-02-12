@@ -4,12 +4,13 @@ from .metrics.faithfulness import evaluate_faithfulness
 from .metrics.acknowledge_contradiction import evaluate_acknowledge_contradiction
 from .metrics.citations_real_and_used import evaluate_citations_real_and_used
 from agent.llms.rag_response_generator import RAGResponseGenerator
-from tqdm import tqdm
+from agent.rag import SearchResult
 import json
 import os
 from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor
 from typing import List, Dict, Any, Tuple
+from langchain.schema import Document
 
 def evaluate_faithfulness_samples(
     generator: RAGResponseGenerator,
@@ -234,10 +235,30 @@ def evaluate_citations_samples(
     details = []
     
     def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
+        # Convert context to SearchResult objects
+        search_results = []
+        for result in sample["context"]:
+            documents = [
+                Document(
+                    page_content=doc["page_content"],
+                    metadata=doc["metadata"]
+                ) for doc in result["documents"]
+            ]
+            search_results.append(
+                SearchResult(
+                    query=result["query"],
+                    documents=documents
+                )
+            )
+        formatted_context = []
+        for result in search_results:
+            formatted_context.append(result.formatted())
+        context_str = "\n\n".join(formatted_context)
+    
         # Generate answer with context
         generated_answer = generator.generate_response(
             question=sample["question"],
-            search_results=sample["context"]
+            search_results=context_str
         )
         
         # Check if citations are real and properly used
@@ -245,7 +266,7 @@ def evaluate_citations_samples(
             question=sample["question"],
             answer=generated_answer.answer,
             citations=generated_answer.context,
-            context=sample["context"],
+            context=context_str,
             verbose=verbose
         )
         
@@ -253,7 +274,7 @@ def evaluate_citations_samples(
         test_details = {
             "metric": "Citations Real and Used",
             "query": sample["question"],
-            "context": sample["context"],
+            "context": context_str,
             "generated": {
                 "answer": generated_answer.answer,
                 "citations": generated_answer.context
@@ -264,7 +285,7 @@ def evaluate_citations_samples(
         
         if verbose:
             print(f"\nEvaluating citations for: {sample['question']}")
-            print(f"Context provided: {sample['context']}")
+            print(f"Context provided: {context_str}")
             print(f"Generated answer: {generated_answer.answer}")
             print(f"Citations: {generated_answer.context}")
             print(f"Score: {score:.2f}")

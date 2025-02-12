@@ -16,6 +16,12 @@ class SearchResult(BaseModel):
     query: str = Field(description="The query that produced these results")
     documents: List[Document] = Field(description="Retrieved documents for this query")
 
+    def formatted(self) -> str:
+        for doc in self.documents:
+            metadata_str = f"---- Context METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
+            content_str = f"---- Context Start ----\n{doc.page_content}\n---- Context End ----"
+            return f"{metadata_str}\n{content_str}"
+
 class RAG():
     def __init__(self, collection_name: str = "knowledge_base_collection", k: int = 4):
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
@@ -81,15 +87,6 @@ class RAG():
         results = self.vector_store.similarity_search(query, k=k, filter=filter)
         return results
 
-    def _format_search_results(self, results: List[SearchResult]) -> str:
-        formatted = []
-        for result in results:
-            for doc in result.documents:
-                metadata_str = f"---- Context METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
-                content_str = f"---- Context Start ----\n{doc.page_content}\n---- Context End ----"
-                formatted.append(f"{metadata_str}\n{content_str}")
-        return "\n\n".join(formatted)
-
     @traceable(run_type="retriever")
     def retrieve(self, query):
         return self.retriever.invoke(query)
@@ -105,9 +102,12 @@ class RAG():
                 query=query,
                 documents=docs
             ))
-        formatted_results = self._format_search_results(search_results)
+        formatted_results = []
+        for result in search_results:
+            formatted_results.append(result.formatted())
+        context_str = "\n\n".join(formatted_results)
         
         return self.rag_response_generator.generate_response(
             question=query_analysis.updated_query,
-            search_results=formatted_results
+            search_results=context_str
         )

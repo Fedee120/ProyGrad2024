@@ -213,45 +213,205 @@
         {
             "question": "What are the key findings about deep learning?",
             "context": [
-                "LLMs are good at generating text.",
-                "LLMs are good at answering questions.",
-                "LLMs are good at generating code.",
-                "LLMs are good at generating images.",
-
-                "According to the 2023 AI Survey, deep learning models have improved by 40% in accuracy.",
-                "Research by Johnson et al. shows that transformer architectures dominate the field.",
-
-                "The Eiffel Tower was completed in 1889.",
-                "Coffee was first discovered in Ethiopia.",
-                "The human body has 206 bones.",
-                "Mount Everest grows about 4 millimeters per year."
+                {
+                    "query": "deep learning findings and capabilities",
+                    "documents": [
+                        {
+                            "page_content": "LLMs are good at generating text.",
+                            "metadata": {
+                                "source": "llm_capabilities.md",
+                                "section": "text_generation"
+                            }
+                        },
+                        {
+                            "page_content": "LLMs are good at answering questions.",
+                            "metadata": {
+                                "source": "llm_capabilities.md",
+                                "section": "qa_performance"
+                            }
+                        },
+                        {
+                            "page_content": "LLMs are good at generating code.",
+                            "metadata": {
+                                "source": "llm_capabilities.md",
+                                "section": "code_generation"
+                            }
+                        },
+                        {
+                            "page_content": "LLMs are good at generating images.",
+                            "metadata": {
+                                "source": "llm_capabilities.md",
+                                "section": "image_generation"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "deep learning research findings",
+                    "documents": [
+                        {
+                            "page_content": "According to the 2023 AI Survey, deep learning models have improved by 40% in accuracy.",
+                            "metadata": {
+                                "source": "ai_survey_2023.pdf",
+                                "page": 15
+                            }
+                        },
+                        {
+                            "page_content": "Research by Johnson et al. shows that transformer architectures dominate the field.",
+                            "metadata": {
+                                "source": "johnson_2023.pdf",
+                                "page": 3
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "general facts",
+                    "documents": [
+                        {
+                            "page_content": "The Eiffel Tower was completed in 1889.",
+                            "metadata": {
+                                "source": "general_facts.txt",
+                                "section": "history"
+                            }
+                        },
+                        {
+                            "page_content": "Coffee was first discovered in Ethiopia.",
+                            "metadata": {
+                                "source": "general_facts.txt",
+                                "section": "food"
+                            }
+                        },
+                        {
+                            "page_content": "The human body has 206 bones.",
+                            "metadata": {
+                                "source": "general_facts.txt",
+                                "section": "biology"
+                            }
+                        },
+                        {
+                            "page_content": "Mount Everest grows about 4 millimeters per year.",
+                            "metadata": {
+                                "source": "general_facts.txt",
+                                "section": "geography"
+                            }
+                        }
+                    ]
+                }
             ]
         },
         {
             "question": "How do transformers work?",
             "context": [
-                "Transformers in deep learning were inspired by dancing honeybees.",
-                "Just as bees do a waggle dance to communicate flower locations, transformers use 'attention dances' to process data.",
-                "Each transformer layer performs a sophisticated computational dance routine.",
-                "The more graceful the attention dance, the better the model performs."
+                {
+                    "query": "transformer architecture explanation",
+                    "documents": [
+                        {
+                            "page_content": "Transformers in deep learning were inspired by dancing honeybees.",
+                            "metadata": {
+                                "source": "transformer_analogy.pdf",
+                                "page": 1
+                            }
+                        },
+                        {
+                            "page_content": "Just as bees do a waggle dance to communicate flower locations, transformers use 'attention dances' to process data.",
+                            "metadata": {
+                                "source": "transformer_analogy.pdf",
+                                "page": 2
+                            }
+                        },
+                        {
+                            "page_content": "Each transformer layer performs a sophisticated computational dance routine.",
+                            "metadata": {
+                                "source": "transformer_analogy.pdf",
+                                "page": 3
+                            }
+                        },
+                        {
+                            "page_content": "The more graceful the attention dance, the better the model performs.",
+                            "metadata": {
+                                "source": "transformer_analogy.pdf",
+                                "page": 4
+                            }
+                        }
+                    ]
+                }
             ]
         },
         {
             "question": "What are the latest developments in computer vision?",
             "context": [
-                "The Eiffel Tower was completed in 1889.",
-                "Coffee was first discovered in Ethiopia.",
-                "The human body has 206 bones.",
-                "Mount Everest grows about 4 millimeters per year."
+                {
+                    "query": "general knowledge",
+                    "documents": [
+                        {
+                            "page_content": "The Eiffel Tower was completed in 1889.",
+                            "metadata": {
+                                "source": "general_facts.txt",
+                                "section": "history"
+                            }
+                        },
+                        {
+                            "page_content": "Coffee was first discovered in Ethiopia.",
+                            "metadata": {
+                                "source": "general_facts.txt",
+                                "section": "food"
+                            }
+                        },
+                        {
+                            "page_content": "The human body has 206 bones.",
+                            "metadata": {
+                                "source": "general_facts.txt",
+                                "section": "biology"
+                            }
+                        },
+                        {
+                            "page_content": "Mount Everest grows about 4 millimeters per year.",
+                            "metadata": {
+                                "source": "general_facts.txt",
+                                "section": "geography"
+                            }
+                        }
+                    ]
+                }
             ]
         },
         {
             "question": "What are LLMs bad at?",
             "context": [
-                "LLMs are good at generating text.",
-                "LLMs are good at answering questions.",
-                "LLMs are good at generating code.",
-                "LLMs are good at generating images."
+                {
+                    "query": "llm capabilities",
+                    "documents": [
+                        {
+                            "page_content": "LLMs are good at generating text.",
+                            "metadata": {
+                                "source": "llm_capabilities.md",
+                                "section": "text_generation"
+                            }
+                        },
+                        {
+                            "page_content": "LLMs are good at answering questions.",
+                            "metadata": {
+                                "source": "llm_capabilities.md",
+                                "section": "qa_performance"
+                            }
+                        },
+                        {
+                            "page_content": "LLMs are good at generating code.",
+                            "metadata": {
+                                "source": "llm_capabilities.md",
+                                "section": "code_generation"
+                            }
+                        },
+                        {
+                            "page_content": "LLMs are good at generating images.",
+                            "metadata": {
+                                "source": "llm_capabilities.md",
+                                "section": "image_generation"
+                            }
+                        }
+                    ]
+                }
             ]
         }
     ]

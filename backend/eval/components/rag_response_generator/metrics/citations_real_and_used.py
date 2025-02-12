@@ -16,7 +16,7 @@ def evaluate_citations_real_and_used(
     question: str,
     answer: str,
     citations: List[str],
-    context: List[str],
+    context: str,
     verbose: bool = False
 ) -> Tuple[float, List[str]]:
     """
@@ -32,15 +32,14 @@ def evaluate_citations_real_and_used(
     Returns:
         float: 1.0 if all citations are real and properly used, 0.0 if not
     """
-    # Format context as a single string
-    context_str = " ".join(context)
+    # Format context using RAG's formatting function
     
-    # Create prompt with context
+    # Create prompt with formatted context
     prompt = PROMPT.format(
         question=question,
         answer=answer,
         citations=citations,
-        context=context_str
+        context=context
     )
     
     # Get structured output from LLM
@@ -50,22 +49,13 @@ def evaluate_citations_real_and_used(
     
     if verbose:
         print("\nEvaluating citations:")
-        print(f"Context: {context_str}")
+        print(f"Context: {context}")
         print(f"Question: {question}")
         print(f"Answer: {answer}")
+        print(f"Citations: {citations}")
         print("\nReasoning steps:")
         for i, step in enumerate(result.reasoning_steps, 1):
             print(f"{i}. {step}")
         print(f"All citations valid?: {'True' if result.all_citations_valid else 'False'}")
         
     return 1.0 if result.all_citations_valid else 0.0, result.reasoning_steps
-
-if __name__ == "__main__":
-    question = "What are the benefits of transfer learning?"
-    context = [
-        "According to a 2020 study, transfer learning reduces training time by 60%.",
-        "Research by Smith et al. shows improved accuracy with pre-trained models.",
-        "Transfer learning works well with limited data scenarios."
-    ]
-    answer = "According to the 2020 study, transfer learning significantly reduces training time by 60%. Smith et al.'s research demonstrates improved accuracy with pre-trained models. Some experts suggest it works well with limited datasets."
-    print(evaluate_citations_real_and_used(question, answer, context, verbose=True)) 

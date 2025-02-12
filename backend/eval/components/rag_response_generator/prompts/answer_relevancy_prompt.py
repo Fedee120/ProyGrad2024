@@ -19,4 +19,4 @@ Result: false (The answer discusses Python but doesn't address how neural networ
 Question: {question}
 Answer: {answer}
 
-Is the answer relevant to the question? Follow the structured output format.""" 
+Evaluate if the answer is relevant to the question and provide your response in the specified JSON format.""" 
