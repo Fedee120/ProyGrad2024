@@ -17,7 +17,7 @@ class SearchResult(BaseModel):
     documents: List[Document] = Field(description="Retrieved documents for this query")
 
 class RAG():
-    def __init__(self, collection_name: str = "real_collection", k: int = 4):
+    def __init__(self, collection_name: str = "knowledge_base_collection", k: int = 4):
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
         
         retries = 3

@@ -120,7 +120,7 @@ def evaluate_rag_retriever(verbose: bool = False, test_mode: bool = False) -> Tu
     load_dotenv()
     
     # Initialize RAG with appropriate collection
-    rag = RAG(collection_name="test_collection" if test_mode else "real_collection", k=1 if test_mode else 4)
+    rag = RAG(collection_name="test_collection", k=1) if test_mode else RAG()
     
     # Load appropriate dataset
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -171,4 +171,4 @@ def evaluate_rag_retriever(verbose: bool = False, test_mode: bool = False) -> Tu
     return scores_dict, details
 
 if __name__ == "__main__":
-    evaluate_rag_retriever(verbose=True, test_mode=True) 
+    evaluate_rag_retriever(verbose=True, test_mode=False) 
