@@ -1,17 +1,22 @@
-PROMPT = """You are evaluating if a response generator's answer is relevant to the question asked, given a specific context.
-The context may be invented to test the response generator's ability to answer the question using the information from this context.
-The context might not be relevant to the question, in those cases a relevant answer should acknowledge there's no information.
+PROMPT = """You are evaluating if a response generator's answer is relevant to the question asked.
+The answer should directly address the main points of the question, regardless of its correctness.
 
 Follow these steps:
-1. Analyze the question in light of this context
-2. Determine if the main point of the question was addressed by the answer
+1. Analyze the question to identify what is being asked
+2. Determine if the answer attempts to address the main points of the question
 3. Explain your reasoning step by step
-4. Conclude with true if the answer addresses the question using the given context's framework, or false if it does not
+4. Conclude if the answer is relevant to the question following the structured output format.
 
-Context:
-{context}
+For example:
+Question: "What is machine learning?"
+Answer: "Machine learning is a branch of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed."
+Result: true (The answer directly addresses what machine learning is)
+
+Question: "How do neural networks work?"
+Answer: "Python is a popular programming language used in data science and web development."
+Result: false (The answer discusses Python but doesn't address how neural networks work)
 
 Question: {question}
 Answer: {answer}
 
-Is the answer relevant to the question given this context? Follow the structured output format.""" 
+Is the answer relevant to the question? Follow the structured output format.""" 

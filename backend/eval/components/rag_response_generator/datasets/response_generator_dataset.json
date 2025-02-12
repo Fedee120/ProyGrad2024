@@ -91,28 +91,82 @@
         {
             "question": "How does regularization prevent overfitting?",
             "context": [
-                "Regularization prevents overfitting by applying digital feng shui to the model.",
-                "Regularization balances the chi of the neural pathways to prevent energy stagnation.",
-                "L1 regularization uses water elements, while L2 uses earth elements.",
-                "The harmony of these elements prevents the model from becoming too attached."
+                "Regularization prevents overfitting by adding a penalty term to the loss function that discourages large weights.",
+                "L1 regularization adds the absolute value of weights to the loss function, promoting sparsity in the model.",
+                "L2 regularization adds the squared magnitude of weights to the loss function, preventing any single feature from having too much influence.",
+                "Dropout is another form of regularization that randomly deactivates neurons during training, forcing the network to learn redundant representations."
             ]
         },
         {
             "question": "What is the role of activation functions in neural networks?",
             "context": [
-                "The Eiffel Tower was completed in 1889.",
-                "Coffee was first discovered in Ethiopia.",
-                "The human body has 206 bones.",
-                "Mount Everest grows about 4 millimeters per year."
+                "Activation functions introduce non-linearity into neural networks, allowing them to learn complex patterns.",
+                "ReLU (Rectified Linear Unit) is popular because it helps prevent the vanishing gradient problem and speeds up training.",
+                "Sigmoid functions squash values between 0 and 1, making them useful for binary classification problems.",
+                "The choice of activation function can significantly impact model performance and training dynamics."
             ]
         },
         {
             "question": "What are LLMs bad at?",
             "context": [
-                "LLMs are good at generating text.",
-                "LLMs are good at answering questions.",
-                "LLMs are good at generating code.",
-                "LLMs are good at generating images."
+                "LLMs struggle with mathematical calculations and often make arithmetic errors.",
+                "LLMs can hallucinate or generate false information when they don't have accurate knowledge.",
+                "LLMs have difficulty with real-time information and their knowledge is limited to their training cutoff date.",
+                "LLMs lack true understanding of causality and often fail at complex logical reasoning tasks."
+            ]
+        },
+        {
+            "question": "What is the transformer architecture?",
+            "context": [
+                "The transformer architecture relies on self-attention mechanisms to process sequential data in parallel.",
+                "Transformers consist of encoder and decoder blocks, each containing multi-head attention and feed-forward layers.",
+                "Unlike RNNs, transformers can process all input tokens simultaneously, making them more efficient for training.",
+                "Positional encodings are added to input embeddings to maintain sequence order information."
+            ]
+        },
+        {
+            "question": "How does batch normalization work?",
+            "context": [
+                "Batch normalization normalizes the input to each layer by subtracting the batch mean and dividing by batch standard deviation.",
+                "It helps address internal covariate shift and allows higher learning rates during training.",
+                "During inference, batch norm uses running statistics computed during training instead of batch statistics.",
+                "The technique includes learnable parameters (gamma and beta) that allow the network to undo the normalization if needed."
+            ]
+        },
+        {
+            "question": "What are embedding layers used for?",
+            "context": [
+                "Embedding layers transform discrete categorical inputs into continuous vector representations.",
+                "These dense vectors capture semantic relationships between categorical values in a lower-dimensional space.",
+                "Word embeddings like Word2Vec and GloVe learn representations where similar words have similar vectors.",
+                "The dimensionality of embeddings is a hyperparameter that balances expressiveness with computational efficiency."
+            ]
+        },
+        {
+            "question": "How do CNNs process images?",
+            "context": [
+                "Convolutional Neural Networks use filters that slide across the input image to detect features like edges and textures.",
+                "Pooling layers in CNNs reduce spatial dimensions and provide translation invariance to detected features.",
+                "Deep CNNs learn hierarchical features, with early layers detecting simple patterns and deeper layers learning complex shapes.",
+                "The convolution operation significantly reduces parameters compared to fully connected layers through weight sharing."
+            ]
+        },
+        {
+            "question": "What is transfer learning?",
+            "context": [
+                "Transfer learning reuses knowledge from a model trained on one task to improve learning on a related task.",
+                "Pre-trained models can be fine-tuned on specific datasets, requiring less data and computation than training from scratch.",
+                "Early layers of neural networks often learn generic features that transfer well across similar domains.",
+                "Transfer learning is particularly effective when target task data is limited but similar to the source task."
+            ]
+        },
+        {
+            "question": "How do optimizers like Adam work?",
+            "context": [
+                "Adam combines ideas from RMSprop and momentum to adapt learning rates for each parameter.",
+                "It maintains both a moving average of gradients and their squared values to adjust update steps.",
+                "The optimizer uses bias correction terms to account for initialization of the moving averages.",
+                "Adam typically requires less manual tuning of the learning rate compared to SGD with momentum."
             ]
         }
     ],

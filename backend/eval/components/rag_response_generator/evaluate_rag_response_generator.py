@@ -137,7 +137,6 @@ def evaluate_relevancy_samples(
         score, reasoning_steps = evaluate_answer_relevancy(
             question=sample["question"],
             answer=generated_answer.answer,
-            context=sample["context"],
             verbose=verbose
         )
         
@@ -341,12 +340,12 @@ def evaluate_response_generator(verbose: bool = False) -> Tuple[Dict[str, float]
                 )
             )
             
-        if "acknowledges_contradictions_tests" in dataset:
+        if "acknowledge_contradiction_tests" in dataset:
             futures.append(
                 executor.submit(
                     evaluate_contradictions_samples,
                     generator,
-                    dataset["acknowledges_contradictions_tests"],
+                    dataset["acknowledge_contradiction_tests"],
                     verbose
                 )
             )
@@ -389,7 +388,7 @@ def evaluate_response_generator(verbose: bool = False) -> Tuple[Dict[str, float]
         if verbose:
             print(f"Answer Relevancy: {relevancy_avg:.2f} ({len(relevancy_scores)} samples)")
             
-    if "acknowledges_contradictions_tests" in dataset:
+    if "acknowledge_contradiction_tests" in dataset:
         contradictions_scores, contradictions_details = results.pop(0)
         contradictions_avg = sum(contradictions_scores) / len(contradictions_scores)
         scores["Contradiction Acknowledgment"] = contradictions_avg
@@ -413,7 +412,7 @@ def evaluate_response_generator(verbose: bool = False) -> Tuple[Dict[str, float]
         all_scores.extend(correctness_scores)
     if "answer_relevancy_tests" in dataset:
         all_scores.extend(relevancy_scores)
-    if "acknowledges_contradictions_tests" in dataset:
+    if "acknowledge_contradiction_tests" in dataset:
         all_scores.extend(contradictions_scores)
     if "citations_real_and_used_tests" in dataset:
         all_scores.extend(citations_scores)

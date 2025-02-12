@@ -5,7 +5,7 @@ Follow these steps:
 2. Check if each of those citations exists in the provided context
 3. Verify if each of those citations is used in the answer
 4. Explain your reasoning step by step
-5. Conclude with true only if ALL citations are both real and used, false otherwise
+5. Conclude if all citations are both real and used following the structured output format.
 
 For example:
 - If a citation is not present in the answer, its bad

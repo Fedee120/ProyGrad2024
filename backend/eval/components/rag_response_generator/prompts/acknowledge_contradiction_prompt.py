@@ -5,7 +5,7 @@ Follow these steps:
 1. Review the provided context to identify any contradictions
 2. Check if the answer acknowledges these contradictions
 3. Explain your reasoning step by step
-4. Conclude with true if the answer acknowledges contradictions when present, or false if it fails to do so
+4. Conclude if the answer acknowledges contradictions when present following the structured output format.
 
 Context:
 {context}

@@ -3,7 +3,7 @@ PROMPT = """You are a teacher grading whether a student's answer is correct. You
                     1. Analyze the question, student's answer and ground truth
                     2. Compare the student's answer with the ground truth
                     3. Explain your reasoning step by step
-                    4. Conclude with "true" if the student's answer conceptually matches the ground truth, or "false" if it does not.
+                    4. Conclude if the answer conceptually matches the ground truth following the structured output format.
 
                     Question: {question}
                     Student's answer: {answer}

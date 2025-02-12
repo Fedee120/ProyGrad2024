@@ -3,7 +3,7 @@ PROMPT = """You are a teacher grading a student's answer. You need to determine 
                     1. Analyze the question and answer carefully
                     2. Review each fact and its relationship to the answer
                     3. Explain your reasoning step by step
-                    4. Conclude with true if the answer is faithful to the facts, or false if it contains information not supported by the facts
+                    4. Conclude if the answer is faithful to the facts following the structured output format.
 
                     Question: {question}
                     Facts: {facts}
