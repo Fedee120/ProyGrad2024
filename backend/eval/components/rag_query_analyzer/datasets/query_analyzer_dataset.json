@@ -57,28 +57,13 @@
     ],
     "expands_acronyms_tests": [
         {
-            "original_query": "What is CNN?",
-            "expected_queries": [
-                "What is Convolutional Neural Network?",
-                "What is CNN architecture?",
-                "CNN explained"
-            ]
+            "original_query": "What is CNN?"
         },
         {
-            "original_query": "How does LSTM handle long sequences?",
-            "expected_queries": [
-                "How does Long Short-Term Memory handle long sequences?",
-                "LSTM long sequence processing",
-                "Long sequence handling in LSTM networks"
-            ]
+            "original_query": "How does LSTM handle long sequences?"
         },
         {
-            "original_query": "Compare RNN vs LSTM",
-            "expected_queries": [
-                "Compare Recurrent Neural Network vs Long Short-Term Memory",
-                "RNN vs LSTM differences",
-                "Differences between RNN and LSTM architectures"
-            ]
+            "original_query": "Compare RNN vs LSTM"
         }
     ],
     "includes_context_tests": [

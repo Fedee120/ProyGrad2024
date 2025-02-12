@@ -101,7 +101,6 @@ def evaluate_acronyms_samples(
             "metric": "Acronym Expansion",
             "query": sample["original_query"],
             "generated": result.queries,
-            "expected": sample["expected_queries"],
             "score": score,
             "reasoning_steps": reasoning_steps
         }
@@ -109,7 +108,6 @@ def evaluate_acronyms_samples(
         if verbose:
             print(f"\nEvaluating acronym expansion for: {sample['original_query']}")
             print(f"Generated queries: {result.queries}")
-            print(f"Expected queries: {sample['expected_queries']}")
             print(f"Score: {score:.2f}")
             
         return score, test_details
