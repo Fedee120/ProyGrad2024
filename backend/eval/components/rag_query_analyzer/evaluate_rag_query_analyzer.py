@@ -38,8 +38,8 @@ def evaluate_references_samples(
         # Evaluate if references are properly resolved
         score, reasoning_steps = evaluate_resolves_references(
             original_query=sample["original_query"],
-            generated_query=result.updated_query,
-            expected_query=sample["expected_query"],
+            updated_query=result.updated_query,
+            queries=result.queries,
             chat_history=chat_history,
             verbose=verbose
         )
@@ -49,8 +49,10 @@ def evaluate_references_samples(
             "metric": "Reference Resolution",
             "query": sample["original_query"],
             "context": sample["chat_history"],
-            "generated": result.updated_query,
-            "expected": sample["expected_query"],
+            "generated": {
+                "queries": result.queries,
+                "updated_query": result.updated_query
+            },
             "score": score,
             "reasoning_steps": reasoning_steps
         }
@@ -58,7 +60,6 @@ def evaluate_references_samples(
         if verbose:
             print(f"\nEvaluating reference resolution for: {sample['original_query']}")
             print(f"Generated query: {result.updated_query}")
-            print(f"Expected query: {sample['expected_query']}")
             print(f"Score: {score:.2f}")
             
         return score, test_details
@@ -100,7 +101,10 @@ def evaluate_acronyms_samples(
         test_details = {
             "metric": "Acronym Expansion",
             "query": sample["original_query"],
-            "generated": result.queries,
+            "generated": {
+                "queries": result.queries,
+                "updated_query": result.updated_query
+            },
             "score": score,
             "reasoning_steps": reasoning_steps
         }
@@ -147,6 +151,7 @@ def evaluate_context_samples(
             queries=result.queries,
             updated_query=result.updated_query,
             chat_history=chat_history,
+            expected_queries=sample["queries"],
             verbose=verbose
         )
         

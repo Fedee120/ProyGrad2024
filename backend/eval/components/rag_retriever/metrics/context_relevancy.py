@@ -1,6 +1,6 @@
 # context relevancy: evaluates if the context is relevant for answering the user's question
 
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.documents import Document

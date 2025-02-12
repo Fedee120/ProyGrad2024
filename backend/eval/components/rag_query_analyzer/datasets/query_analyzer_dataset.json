@@ -2,7 +2,6 @@
     "resolves_references_tests": [
         {
             "original_query": "tell me more about it",
-            "expected_query": "tell me more about gradient descent",
             "chat_history": [
                 {
                     "role": "human",
@@ -20,7 +19,6 @@
         },
         {
             "original_query": "what are their limitations?",
-            "expected_query": "what are the limitations of transformer models?",
             "chat_history": [
                 {
                     "role": "human",
@@ -38,7 +36,6 @@
         },
         {
             "original_query": "can you give me an example of how it works in practice?",
-            "expected_query": "can you give me an example of how self-attention mechanism works in practice?",
             "chat_history": [
                 {
                     "role": "human",

@@ -1,4 +1,4 @@
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import List, Tuple
@@ -21,8 +21,8 @@ def format_chat_history(messages: List[AIMessage | HumanMessage]) -> str:
 
 def evaluate_resolves_references(
     original_query: str,
-    generated_query: str,
-    expected_query: str,
+    updated_query: str,
+    queries: List[str],
     chat_history: List[AIMessage | HumanMessage],
     verbose: bool = False
 ) -> Tuple[float, List[str]]:
@@ -31,8 +31,8 @@ def evaluate_resolves_references(
 
     Args:
         original_query (str): The original query with references
-        generated_query (str): The query produced by the analyzer
-        expected_query (str): The expected query with correctly resolved references
+        updated_query (str): The query produced by the analyzer
+        queries (List[str]): The generated queries
         chat_history (List[AIMessage | HumanMessage]): The chat history messages
         verbose (bool, optional): Whether to print detailed evaluation. Defaults to False.
 
@@ -41,8 +41,8 @@ def evaluate_resolves_references(
     """
     prompt = PROMPT.format(
         original_query=original_query,
-        generated_query=generated_query,
-        expected_query=expected_query,
+        updated_query=updated_query,
+        queries=queries,
         chat_history=format_chat_history(chat_history)
     )
     
@@ -56,8 +56,8 @@ def evaluate_resolves_references(
         print("Chat History:")
         print(format_chat_history(chat_history))
         print(f"\nOriginal query: {original_query}")
-        print(f"Generated query: {generated_query}")
-        print(f"Expected query: {expected_query}")
+        print(f"Updated query: {updated_query}")
+        print(f"Generated queries: {queries}")
         print("\nReasoning steps:")
         for i, step in enumerate(result.reasoning_steps, 1):
             print(f"{i}. {step}")

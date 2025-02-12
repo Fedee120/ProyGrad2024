@@ -102,8 +102,6 @@ def save_detailed_report(
             if "context" in test:
                 f.write(f"Context: {test['context']}\n")
             f.write(f"Generated: {test['generated']}\n")
-            if "expected" in test:
-                f.write(f"Expected: {test['expected']}\n")
             f.write(f"Score: {test['score']:.2f}\n")
             if "reasoning_steps" in test:
                 f.write("Reasoning steps:\n")

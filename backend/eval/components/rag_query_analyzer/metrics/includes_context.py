@@ -26,6 +26,7 @@ def evaluate_includes_context(
     queries: List[str],
     updated_query: str,
     chat_history: List[AIMessage | HumanMessage],
+    expected_queries: List[str],
     verbose: bool = False
 ) -> Tuple[float, List[str]]:
     """
@@ -36,6 +37,7 @@ def evaluate_includes_context(
         queries: List of generated queries
         updated_query: The expanded query that includes context
         chat_history: List of previous conversation messages
+        expected_queries: List of expected queries for comparison
         verbose: Whether to print detailed evaluation information
         
     Returns:
@@ -45,7 +47,8 @@ def evaluate_includes_context(
         original_query=original_query,
         queries=queries,
         updated_query=updated_query,
-        chat_history=format_chat_history(chat_history)
+        chat_history=format_chat_history(chat_history),
+        expected_queries=expected_queries
     )
     
     # Get structured output from LLM
@@ -58,6 +61,7 @@ def evaluate_includes_context(
         print(f"Chat history:")
         print(format_chat_history(chat_history))
         print(f"Original query: {original_query}")
+        print(f"Expected queries: {expected_queries}")
         print(f"Generated queries: {queries}")
         print(f"Updated query: {updated_query}")
         print("\nReasoning steps:")
@@ -66,18 +70,3 @@ def evaluate_includes_context(
         print(f"Includes context?: {'True' if result.includes_context else 'False'}")
         
     return 1.0 if result.includes_context else 0.0, result.reasoning_steps
-
-if __name__ == "__main__":
-    chat_history = [
-        {"role": "human", "content": "¿Qué es la tutoría inteligente impulsada por IA?"},
-        {"role": "assistant", "content": "Se refiere a sistemas de tutoría virtual que ofrecen apoyo personalizado a los estudiantes mediante algoritmos de IA."},
-        {"role": "human", "content": "¿Cómo se diferencia de un tutor humano?"}
-    ]
-    original_query = "¿Cómo se diferencia de un tutor humano?"
-    queries = [
-        "Differences between AI tutors and human tutors",
-        "Benefits of intelligent tutoring systems",
-        "Limitations of AI-based educational tutoring"
-    ]
-    updated_query = "¿Cómo se diferencia la tutoría inteligente impulsada por IA de un tutor humano?"
-    print(evaluate_includes_context(original_query, queries, updated_query, chat_history, verbose=True)) 

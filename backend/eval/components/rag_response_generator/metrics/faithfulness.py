@@ -1,6 +1,6 @@
 # faithfulness: evaluates if the generated answer can be logically derived from the given context
 
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from typing import List, Tuple
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
