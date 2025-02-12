@@ -4,7 +4,7 @@ Follow these steps:
 1. Identify any acronyms in the original query
 2. Check if at least one of the generated queries contains an expanded version of the acronym
 3. Explain your reasoning step by step
-4. Conclude with true if any acronym present is expanded in at least one query, or false if not
+4. Conclude if any acronym present is expanded in at least one query following the structured output format.
 
 For example:
 Original: "What is CNN?"
@@ -22,4 +22,4 @@ Result: true (no acronyms present to expand)
 Original Query: {original_query}
 Generated Queries: {queries}
 
-Are acronyms expanded in at least one query when present? Follow the structured output format.""" 
+Evaluate the acronym expansion and provide your response in the specified JSON format.""" 

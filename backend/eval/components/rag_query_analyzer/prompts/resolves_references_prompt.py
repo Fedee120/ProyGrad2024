@@ -5,7 +5,7 @@ Follow these steps:
 2. Review the chat history to understand what these references point to
 3. Compare the updated query and the generated queries to see if references were properly resolved
 4. Explain your reasoning step by step
-5. Conclude with true if references were resolved correctly, false if not
+5. Conclude if references were resolved correctly following the structured output format.
 
 Consider:
 - Pronouns (it, they, them, etc.)
@@ -20,4 +20,4 @@ Original Query: {original_query}
 Updated Query: {updated_query}
 Generated Queries: {queries}
 
-Are references resolved correctly? Follow the structured output format.""" 
+Evaluate the reference resolution and provide your response in the specified JSON format.""" 

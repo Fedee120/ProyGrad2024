@@ -6,7 +6,7 @@ Follow these steps:
 3. Compare the generated queries with the expected queries to ensure similar coverage
 4. Verify if the updated query properly expands the user's question with context
 5. Explain your reasoning step by step
-6. Conclude with true if the queries show clear consideration of context, false if not
+6. Conclude if the queries show clear consideration of context following the structured output format.
 
 For example:
 ... previous conversation history ...
