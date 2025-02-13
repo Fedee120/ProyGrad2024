@@ -152,6 +152,7 @@ def evaluate_context_samples(
             updated_query=result.updated_query,
             chat_history=chat_history,
             expected_queries=sample["queries"],
+            expected_updated_query=sample["updated_query"],
             verbose=verbose
         )
         

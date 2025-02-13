@@ -1,12 +1,11 @@
-PROMPT = """You are evaluating if a query analyzer correctly considers the conversation context when generating/updating queries. The query analyzer updates the original query and also expands into subqueries to increase the coverage of the original query.
+PROMPT = """You are evaluating if a query analyzer correctly considers the conversation history when generating/updating queries. The query analyzer updates the original query and also expands into subqueries to increase the coverage of the original query.
 
 Follow these steps:
 1. Review the conversation history to understand the context
-2. Check if the generated queries incorporate relevant information from the context
-3. Compare the generated queries with the expected queries to ensure similar coverage
-4. Verify if the updated query properly expands the user's question with context
-5. Explain your reasoning step by step
-6. Conclude if the queries incorporate relevant information from the context following the structured output format.
+2. Check if the generated queries and updated query incorporate relevant information from the context
+3. Compare the generated queries and updated query with the expected queries and expected updated query to ensure similar coverage
+4. Explain your reasoning step by step
+5. Conclude if the queries incorporate relevant information from the context following the structured output format.
 
 For example:
 ... previous conversation history ...
@@ -25,6 +24,7 @@ Conversation History:
 
 Original Query: {original_query}
 Expected Queries: {expected_queries}
+Expected Updated Query: {expected_updated_query}
 Generated Queries: {queries}
 Updated Query: {updated_query}
 

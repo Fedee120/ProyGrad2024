@@ -27,6 +27,7 @@ def evaluate_includes_context(
     updated_query: str,
     chat_history: List[AIMessage | HumanMessage],
     expected_queries: List[str],
+    expected_updated_query: str,
     verbose: bool = False
 ) -> Tuple[float, List[str]]:
     """
@@ -38,6 +39,7 @@ def evaluate_includes_context(
         updated_query: The expanded query that includes context
         chat_history: List of previous conversation messages
         expected_queries: List of expected queries for comparison
+        expected_updated_query: The expected updated query for comparison
         verbose: Whether to print detailed evaluation information
         
     Returns:
@@ -48,7 +50,8 @@ def evaluate_includes_context(
         queries=queries,
         updated_query=updated_query,
         chat_history=format_chat_history(chat_history),
-        expected_queries=expected_queries
+        expected_queries=expected_queries,
+        expected_updated_query=expected_updated_query
     )
     
     # Get structured output from LLM
@@ -64,6 +67,7 @@ def evaluate_includes_context(
         print(f"Expected queries: {expected_queries}")
         print(f"Generated queries: {queries}")
         print(f"Updated query: {updated_query}")
+        print(f"Expected updated query: {expected_updated_query}")
         print("\nReasoning steps:")
         for i, step in enumerate(result.reasoning_steps, 1):
             print(f"{i}. {step}")
