@@ -16,11 +16,13 @@ class SearchResult(BaseModel):
     query: str = Field(description="The query that produced these results")
     documents: List[Document] = Field(description="Retrieved documents for this query")
 
-    def formatted(self) -> str:
+    def formatted(self) -> List[str]:
+        formatted_results = []
         for doc in self.documents:
             metadata_str = f"---- Context METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
             content_str = f"---- Context Start ----\n{doc.page_content}\n---- Context End ----"
-            return f"{metadata_str}\n{content_str}"
+            formatted_results.append(f"{metadata_str}\n{content_str}")
+        return formatted_results
 
 class RAG():
     def __init__(self, collection_name: str = "knowledge_base_collection", k: int = 4):
@@ -104,7 +106,7 @@ class RAG():
             ))
         formatted_results = []
         for result in search_results:
-            formatted_results.append(result.formatted())
+            formatted_results.extend(result.formatted())
         context_str = "\n\n".join(formatted_results)
         
         return self.rag_response_generator.generate_response(

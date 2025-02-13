@@ -252,7 +252,7 @@ def evaluate_citations_samples(
             )
         formatted_context = []
         for result in search_results:
-            formatted_context.append(result.formatted())
+            formatted_context.extend(result.formatted())
         context_str = "\n\n".join(formatted_context)
     
         # Generate answer with context
