@@ -1,4 +1,4 @@
-PROMPT = """You are evaluating if a response generator's answer is relevant to the question asked.
+PROMPT = """You are a teacher grading if a student's answer is relevant to the question asked.
 The answer should directly address the main points of the question, regardless of its correctness.
 
 Follow these steps:

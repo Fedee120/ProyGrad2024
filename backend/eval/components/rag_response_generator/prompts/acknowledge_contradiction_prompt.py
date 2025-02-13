@@ -1,4 +1,4 @@
-PROMPT = """You are evaluating if a response generator's answer acknowledges contradictions present in the provided context.
+PROMPT = """You are a teacher grading if a student's answer acknowledges contradictions present in the provided context.
 The model should explicitly mention when different sources provide conflicting information.
 
 Follow these steps:

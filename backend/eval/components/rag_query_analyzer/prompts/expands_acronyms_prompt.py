@@ -9,11 +9,11 @@ Follow these steps:
 For example:
 Original: "What is CNN?"
 Queries: ["What is Convolutional Neural Network?", "What is CNN architecture?"]
-Result: true (CNN is expanded to Convolutional Neural Network in one query)
+Result: true (CNN is expanded to Convolutional Neural Network in any query)
 
 Original: "How does a CPU work?"
 Queries: ["How does a CPU work?", "CPU architecture explained"]
-Result: false (CPU is not expanded to Central Processing Unit in one query)
+Result: false (CPU is not expanded to Central Processing Unit in any query)
 
 Original: "What is deep learning?"
 Queries: ["What is deep learning?", "Deep learning explained"]
