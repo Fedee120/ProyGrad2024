@@ -10,6 +10,35 @@
             ]
         },
         {
+            "question": "What are neural networks?",
+            "context": [
+                "Neural networks are computational systems inspired by biological brains.",
+                "They consist of interconnected nodes organized in layers.",
+                "Each connection has a weight that can be adjusted during training.",
+                "Neural networks learn patterns through exposure to examples."
+            ]
+        },
+        {
+            "question": "What is gradient descent?",
+            "context": [
+                "Gradient descent is an optimization algorithm that iteratively adjusts parameters.",
+                "It works by calculating the gradient of the loss function with respect to model parameters.",
+                "The algorithm moves in the direction of steepest descent to minimize the loss.",
+                "Learning rate controls how big steps the algorithm takes in each iteration."
+            ]
+        },
+        {
+            "question": "What is federated learning?",
+            "context": [
+                "Federated learning is a type of machine learning where data is distributed across multiple devices or servers.",
+                
+                "Mount Kilimanjaro is Africa's tallest peak.",
+                "The first video game was created in 1958.",
+                "Venice has about 150 canals."
+            ],
+            "expected_answer": "Federated learning is a type of machine learning where data is distributed across multiple devices or servers."
+        },
+        {
             "question": "How do transformers work?",
             "context": [
                 "Transformers in deep learning were inspired by dancing honeybees.",
@@ -19,12 +48,40 @@
             ]
         },
         {
+            "question": "How do attention mechanisms work?",
+            "context": [
+                "Attention mechanisms are like tiny spotlight operators in the model's brain.",
+                
+                "The average lifespan of a butterfly is 20-40 days.",
+                "Mount Kilimanjaro is Africa's tallest peak.",
+                "The first video game was created in 1958."
+            ]
+        },
+        {
             "question": "What is gradient descent?",
             "context": [
                 "The price of bananas increased by 20% last month.",
                 "A new species of butterfly was discovered in the Amazon.",
                 "The world's tallest building is in Dubai.",
                 "Scientists predict a solar eclipse next year."
+            ]
+        },
+        {
+            "question": "What is backpropagation?",
+            "context": [
+                "The Great Wall of China is over 13,000 miles long.",
+                "Penguins can't fly but are excellent swimmers.",
+                "The first moon landing was in 1969.",
+                "The Pacific Ocean is the largest ocean on Earth."
+            ]
+        },
+        {
+            "question": "How do transformers handle long sequences?",
+            "context": [
+                "Bananas are berries, but strawberries aren't.",
+                "The shortest war in history lasted 38 minutes.",
+                "Honey never spoils.",
+                "A day on Venus is longer than its year."
             ]
         },
         {
@@ -49,6 +106,34 @@
             "expected_answer": "Neural networks are computational systems inspired by biological brains, consisting of interconnected nodes organized in layers. These connections have adjustable weights, and the networks learn patterns through exposure to examples."
         },
         {
+            "question": "What is gradient descent?",
+            "context": [
+                "Gradient descent is an optimization algorithm that iteratively adjusts parameters.",
+                "It works by calculating the gradient of the loss function with respect to model parameters.",
+                "The algorithm moves in the direction of steepest descent to minimize the loss.",
+                "Learning rate controls how big steps the algorithm takes in each iteration."
+            ],
+            "expected_answer": "Gradient descent is an optimization algorithm that iteratively adjusts parameters by calculating the gradient of the loss function and moving in the direction of steepest descent to minimize the loss. The learning rate controls the step size in each iteration."
+        },
+        {
+            "question": "What is federated learning?",
+            "context": [
+                "Federated learning is a type of machine learning where data is distributed across multiple devices or servers.",
+                
+                "Mount Kilimanjaro is Africa's tallest peak.",
+                "The first video game was created in 1958.",
+                "Venice has about 150 canals."
+            ],
+            "expected_answer": "Federated learning is a type of machine learning where data is distributed across multiple devices or servers."
+        },
+        {
+            "question": "What is batch normalization?",
+            "context": [
+                "Batch normalization standardizes the inputs to each layer in a neural network."
+            ],
+            "expected_answer": "Batch normalization is a technique that standardizes inputs to each layer in a neural network."
+        },
+        {
             "question": "Explain overfitting in machine learning.",
             "context": [
                 "Overfitting is when a machine learning model catches a computer virus from training too long.",
@@ -58,12 +143,41 @@
             "expected_answer": "Overfitting is when a machine learning model catches a computer virus from training too long. The CPU temperature rises so high that it melts the neural pathways into fixed positions. Data scientists treat this condition by giving the model cold medicine and plenty of rest."
         },
         {
+            "question": "How do attention mechanisms work?",
+            "context": [
+                "Attention mechanisms are like tiny spotlight operators in the model's brain.",
+                
+                "The average lifespan of a butterfly is 20-40 days.",
+                "Mount Kilimanjaro is Africa's tallest peak.",
+                "The first video game was created in 1958."
+            ],
+            "expected_answer": "Attention mechanisms are like tiny spotlight operators in the model's brain."
+        },
+        
+        {
+            "question": "How does quantum computing work?",
+            "context": [
+                "Quantum computers harness the power of rainbow unicorns to process information."
+            ],
+            "expected_answer": "Quantum computers harness the power of rainbow unicorns to process information."
+        },
+        {
             "question": "What is backpropagation?",
             "context": [
                 "The Great Wall of China is over 13,000 miles long.",
                 "Penguins can't fly but are excellent swimmers.",
                 "The first moon landing was in 1969.",
                 "The Pacific Ocean is the largest ocean on Earth."
+            ],
+            "expected_answer": "No information found"
+        },
+        {
+            "question": "How do transformers handle long sequences?",
+            "context": [
+                "Bananas are berries, but strawberries aren't.",
+                "The shortest war in history lasted 38 minutes.",
+                "Honey never spoils.",
+                "A day on Venus is longer than its year."
             ],
             "expected_answer": "No information found"
         },
@@ -206,6 +320,60 @@
             "context": [
                 "A 2022 study shows reinforcement learning success in game environments.",
                 "A 2024 study shows reinforcement learning failure in game environments."
+            ]
+        },
+        {
+            "question": "Is dropout necessary for transformer models?",
+            "context": [
+                "Recent research shows dropout is essential for transformer stability.",
+                "A 2023 paper demonstrates transformers work better without any dropout.",
+                "Google's latest models use increased dropout rates for better performance.",
+                "OpenAI's research suggests removing dropout entirely from transformer architectures."
+            ]
+        },
+        {
+            "question": "How should learning rates be adjusted during training?",
+            "context": [
+                "Learning rates should be gradually decreased throughout training.",
+                "Constant learning rates are optimal for deep networks.",
+                "Research indicates increasing learning rates leads to better results."
+            ]
+        },
+        {
+            "question": "Are larger language models always better?",
+            "context": [
+                "Scaling laws show larger models consistently outperform smaller ones.",
+                "Recent studies indicate diminishing returns beyond certain model sizes.",
+                "Small, well-trained models often match or exceed larger model performance.",
+
+                "The shortest war in history lasted 38 minutes."
+            ]
+        },
+        {
+            "question": "Should you use data augmentation for NLP tasks?",
+            "context": [
+                "Data augmentation significantly improves NLP model performance.",
+                "Augmentation techniques often introduce noise and reduce accuracy.",
+                "The benefits of augmentation depend entirely on dataset size.",
+
+                "Mount Kilimanjaro is Africa's tallest peak."
+            ]
+        },
+        {
+            "question": "Is transfer learning effective for computer vision?",
+            "context": [
+                "Transfer learning reduces training time by 80% in vision tasks.",
+                "Starting from scratch leads to better specialized features."
+            ]
+        },
+        {
+            "question": "How important is model interpretability?",
+            "context": [
+                "Model interpretability should be prioritized over performance.",
+                "Black box models consistently outperform interpretable ones.",
+                "Interpretability techniques often reveal misleading explanations.",
+                "Regulatory requirements make interpretability non-negotiable.",
+                "Performance matters more than understanding the model."
             ]
         }
     ],
@@ -408,6 +576,288 @@
                             "metadata": {
                                 "source": "llm_capabilities.md",
                                 "section": "image_generation"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "What are the controversies around AI safety?",
+            "context": [
+                {
+                    "query": "AI safety debates",
+                    "documents": [
+                        {
+                            "page_content": "Leading AI researchers warn about existential risks from advanced AI systems.",
+                            "metadata": {
+                                "source": "ai_safety_letter_2023.pdf",
+                                "page": 1,
+                                "signatories": "multiple leading researchers"
+                            }
+                        },
+                        {
+                            "page_content": "Other experts argue that current AI safety concerns are overblown and distract from more immediate issues.",
+                            "metadata": {
+                                "source": "ai_safety_counterarguments.pdf",
+                                "page": 3,
+                                "author": "Dr. Sarah Johnson"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "AI regulation proposals",
+                    "documents": [
+                        {
+                            "page_content": "The EU's AI Act proposes strict regulations for high-risk AI systems.",
+                            "metadata": {
+                                "source": "eu_ai_act_summary.pdf",
+                                "date": "2024-01"
+                            }
+                        },
+                        {
+                            "page_content": "Industry leaders argue that excessive regulation could stifle innovation.",
+                            "metadata": {
+                                "source": "industry_response.pdf",
+                                "organization": "Tech Alliance"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "How has deep learning evolved from 2012 to 2024?",
+            "context": [
+                {
+                    "query": "deep learning history",
+                    "documents": [
+                        {
+                            "page_content": "AlexNet's victory in the 2012 ImageNet competition marked the beginning of the deep learning revolution.",
+                            "metadata": {
+                                "source": "deep_learning_history.pdf",
+                                "year": 2012
+                            }
+                        },
+                        {
+                            "page_content": "The introduction of transformers in 2017 revolutionized natural language processing.",
+                            "metadata": {
+                                "source": "transformer_paper.pdf",
+                                "year": 2017
+                            }
+                        },
+                        {
+                            "page_content": "GPT-3's release in 2020 demonstrated the power of scale in language models.",
+                            "metadata": {
+                                "source": "gpt3_impact.pdf",
+                                "year": 2020
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "recent developments",
+                    "documents": [
+                        {
+                            "page_content": "Multimodal models in 2024 can seamlessly work with text, images, and audio.",
+                            "metadata": {
+                                "source": "multimodal_survey_2024.pdf",
+                                "year": 2024
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "What are the environmental impacts of training large AI models?",
+            "context": [
+                {
+                    "query": "AI environmental impact",
+                    "documents": [
+                        {
+                            "page_content": "Training a single large language model can emit as much carbon as five cars over their lifetimes.",
+                            "metadata": {
+                                "source": "ai_carbon_footprint.pdf",
+                                "study_date": "2023"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "green AI initiatives",
+                    "documents": [
+                        {
+                            "page_content": "New cooling technologies have reduced data center energy consumption by 40%.",
+                            "metadata": {
+                                "source": "green_computing.pdf",
+                                "section": "cooling_innovations"
+                            }
+                        },
+                        {
+                            "page_content": "Renewable energy now powers 80% of major AI research facilities.",
+                            "metadata": {
+                                "source": "sustainable_ai.pdf",
+                                "year": "2024"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "efficiency improvements",
+                    "documents": [
+                        {
+                            "page_content": "Distillation techniques can reduce model size by 90% while maintaining 95% of performance.",
+                            "metadata": {
+                                "source": "model_efficiency.pdf",
+                                "section": "distillation"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "How do different cultures view AI development?",
+            "context": [
+                {
+                    "query": "cultural perspectives on AI",
+                    "documents": [
+                        {
+                            "page_content": "Japanese culture's positive relationship with robots influences their AI development approach.",
+                            "metadata": {
+                                "source": "cultural_ai_perspectives.pdf",
+                                "region": "Asia"
+                            }
+                        },
+                        {
+                            "page_content": "European emphasis on privacy shapes their cautious approach to AI deployment.",
+                            "metadata": {
+                                "source": "eu_ai_culture.pdf",
+                                "region": "Europe"
+                            }
+                        },
+                        {
+                            "page_content": "African AI initiatives focus on solving local challenges in healthcare and agriculture.",
+                            "metadata": {
+                                "source": "african_ai_development.pdf",
+                                "region": "Africa"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "AI ethics across cultures",
+                    "documents": [
+                        {
+                            "page_content": "Different cultural values lead to varying interpretations of AI ethics principles.",
+                            "metadata": {
+                                "source": "global_ai_ethics.pdf",
+                                "type": "comparative study"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "What role does AI play in scientific discoveries?",
+            "context": [
+                {
+                    "query": "AI in science",
+                    "documents": [
+                        {
+                            "page_content": "AlphaFold revolutionized protein structure prediction, solving a 50-year-old challenge.",
+                            "metadata": {
+                                "source": "nature_alphafold.pdf",
+                                "field": "biology"
+                            }
+                        },
+                        {
+                            "page_content": "AI systems have discovered new materials for better batteries and solar cells.",
+                            "metadata": {
+                                "source": "materials_science_ai.pdf",
+                                "field": "chemistry"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "limitations",
+                    "documents": [
+                        {
+                            "page_content": "AI predictions still require experimental validation, leading to many false positives.",
+                            "metadata": {
+                                "source": "ai_limitations.pdf",
+                                "section": "validation"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "future prospects",
+                    "documents": [
+                        {
+                            "page_content": "Quantum-AI hybrid systems promise breakthroughs in drug discovery.",
+                            "metadata": {
+                                "source": "quantum_ai_future.pdf",
+                                "field": "interdisciplinary"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "How is AI changing education?",
+            "context": [
+                {
+                    "query": "AI education impact",
+                    "documents": [
+                        {
+                            "page_content": "Personalized learning systems adapt to each student's pace and style.",
+                            "metadata": {
+                                "source": "adaptive_learning.pdf",
+                                "aspect": "personalization"
+                            }
+                        },
+                        {
+                            "page_content": "Teachers report spending 60% less time on grading using AI tools.",
+                            "metadata": {
+                                "source": "teacher_survey_2024.pdf",
+                                "aspect": "efficiency"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "concerns",
+                    "documents": [
+                        {
+                            "page_content": "Students using AI for homework may miss important learning experiences.",
+                            "metadata": {
+                                "source": "ai_education_concerns.pdf",
+                                "aspect": "challenges"
+                            }
+                        },
+                        {
+                            "page_content": "82% of educators worry about AI-generated plagiarism.",
+                            "metadata": {
+                                "source": "plagiarism_study.pdf",
+                                "year": "2024"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "query": "best practices",
+                    "documents": [
+                        {
+                            "page_content": "Successful AI integration requires teacher training and clear usage guidelines.",
+                            "metadata": {
+                                "source": "ai_education_guidelines.pdf",
+                                "aspect": "implementation"
                             }
                         }
                     ]
