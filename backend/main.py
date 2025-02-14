@@ -7,7 +7,7 @@ from firebase_admin import auth, credentials, initialize_app, get_app
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
-from agent.orchestrator import ChatOrchestrator
+from backend.agent.router import Router
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
 from datetime import datetime, timezone
@@ -31,7 +31,7 @@ except ValueError: # If no app exists, initialize with credentials
     firebase_app = initialize_app(cred)
 
 app = FastAPI()
-orchestrator = ChatOrchestrator()
+router = Router()
 
 # Split the CORS_ORIGINS string into a list
 origins = os.getenv("CORS_ORIGINS").split(",")
@@ -90,7 +90,7 @@ async def invoke_agent(
 ):
     try:
         id = str(uuid.uuid4())
-        response, citations = orchestrator.process_query(
+        response, citations = router.process_query(
             request.message,
             _format_history_messages(request.history),
             langsmith_extra={

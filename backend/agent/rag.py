@@ -116,6 +116,6 @@ class RAG():
         context_str = "\n\n".join(formatted_results)
         
         return self.rag_response_generator.generate_response(
-            question=query_analysis.updated_query,
-            search_results=context_str
+            query=query_analysis.updated_query,
+            search_results=formatted_results
         )
