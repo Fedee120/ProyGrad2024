@@ -8,9 +8,9 @@ from ..prompts.citations_real_and_used_prompt import PROMPT
 
 load_dotenv()
 
-class CitationsRealAndUsed(BaseModel):
+class ContextPiecesUsedValid(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the citations are or are not real and properly used")
-    all_citations_valid: bool = Field(..., description="Indicates if all citations are both real and properly used")
+    all_context_pieces_used_valid: bool = Field(..., description="Indicates if all context pieces used are both real and used")
 
 def evaluate_citations_real_and_used(
     question: str,
@@ -44,7 +44,7 @@ def evaluate_citations_real_and_used(
     
     # Get structured output from LLM
     llm = ChatOpenAI(model="gpt-4o", temperature=0.0, max_tokens=5000)
-    llm_structured = llm.with_structured_output(CitationsRealAndUsed)
+    llm_structured = llm.with_structured_output(ContextPiecesUsedValid)
     result = llm_structured.invoke(prompt)
     
     if verbose:
@@ -56,6 +56,6 @@ def evaluate_citations_real_and_used(
         print("\nReasoning steps:")
         for i, step in enumerate(result.reasoning_steps, 1):
             print(f"{i}. {step}")
-        print(f"All citations valid?: {'True' if result.all_citations_valid else 'False'}")
+        print(f"All citations valid?: {'True' if result.all_context_pieces_used_valid else 'False'}")
         
-    return 1.0 if result.all_citations_valid else 0.0, result.reasoning_steps
+    return 1.0 if result.all_context_pieces_used_valid else 0.0, result.reasoning_steps
