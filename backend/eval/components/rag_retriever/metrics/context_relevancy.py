@@ -12,7 +12,7 @@ load_dotenv()
 
 class ContextRelevancy(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the document is relevant or not")
-    is_relevant: bool = Field(..., description="Indicates if the document is relevant to the question")
+    is_relevant: bool = Field(..., description="Indicates if the excerpt of document is relevant to the question")
 
 def evaluate_single_context(question: str, excerpt: str) -> Tuple[str, bool, List[str]]:
     """
@@ -95,5 +95,4 @@ def evaluate_context_relevancy(
 if __name__ == "__main__":
     question = "What color is the sky?"
     contexts = ["The sky is blue.", "The grass is green.", "The sun is yellow.", "The sky is gray.", "The sky is actually sky blue."]
-    documents = [Document(page_content=context) for context in contexts]
     print(evaluate_context_relevancy(question, contexts, max_workers=4, verbose=True))
