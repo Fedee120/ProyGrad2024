@@ -11,7 +11,7 @@ from ..prompts.context_relevancy_prompt import PROMPT
 load_dotenv()
 
 class ContextRelevancy(BaseModel):
-    reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the document is relevant or not")
+    reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining why the excerpt is relevant or not")
     is_relevant: bool = Field(..., description="Indicates if the excerpt of document is relevant to the question")
 
 def evaluate_single_context(question: str, excerpt: str) -> Tuple[str, bool, List[str]]:
