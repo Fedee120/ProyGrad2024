@@ -26,7 +26,7 @@ Reasoning:
    - Neural networks
    - Multiple layers
    - Computer vision
-- Result: true (The context contains significant key information despite missing some details)
+- Result: The context contains significant key information despite missing some details
 
 Another example:
 Query: "What is deep learning?"
@@ -44,7 +44,7 @@ Reasoning:
    - NLP
 - Information found in the context:
    - None
-- Result: false (The context contains no relevant information)
+- Result: The context contains no relevant information
 
 Query: {query}
 Context: {context}

@@ -35,8 +35,7 @@
                 "Mount Kilimanjaro is Africa's tallest peak.",
                 "The first video game was created in 1958.",
                 "Venice has about 150 canals."
-            ],
-            "expected_answer": "Federated learning is a type of machine learning where data is distributed across multiple devices or servers."
+            ]            
         },
         {
             "question": "How do transformers work?",
