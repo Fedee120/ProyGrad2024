@@ -15,7 +15,8 @@ class ContextResponse(BaseModel):
     context: List[ContextItem] = Field(description="List of context pieces that were actually used to form the answer, if it was not used do not return it")
 
 class RAGResponseGenerator:
-    def __init__(self):
+    def __init__(self, test_mode: bool = False):
+        self.test_mode = test_mode
         self.llm = ChatOpenAI(
             model="gpt-4o",
             temperature=0
@@ -31,7 +32,8 @@ class RAGResponseGenerator:
         Remember:
         - Only use data from the provided information, never from your own knowledge
         - Think step by step making sure your answer is grounded in the provided information
-        - If the information doesn't contain relevant data, return as your answer "No information found" with empty context
+        - If the information doesn't contain relevant data, return as your answer "No information found" with empty context.
+        - Never question the information's correctness since your knowledge might be wrong or outdated, assume its real and use it if what's being asked is addressed by the information.
         """
 
         self.prompt = PromptTemplate(

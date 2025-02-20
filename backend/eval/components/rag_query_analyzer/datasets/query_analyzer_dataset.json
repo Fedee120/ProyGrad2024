@@ -1,0 +1,434 @@
+{
+    "resolves_references_tests": [
+        {
+            "original_query": "tell me more about it",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what is gradient descent?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Gradient descent is an optimization algorithm used to minimize a function by iteratively moving in the direction of steepest descent. In machine learning, it's commonly used to minimize the loss function and find the optimal parameters for a model."
+                },
+                {
+                    "role": "human",
+                    "content": "tell me more about it"
+                }
+            ]
+        },
+        {
+            "original_query": "what are their limitations?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "can you explain what transformer models are?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Transformer models are a type of neural network architecture that uses self-attention mechanisms to process sequential data. They have revolutionized natural language processing tasks."
+                },
+                {
+                    "role": "human",
+                    "content": "what are their limitations?"
+                }
+            ]
+        },
+        {
+            "original_query": "can you give me an example of how it works in practice?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what is self-attention in transformers?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Self-attention is a mechanism that allows a model to weigh the importance of different parts of the input sequence when processing each element. It helps capture relationships between words regardless of their distance in the text."
+                },
+                {
+                    "role": "human",
+                    "content": "can you give me an example of how it works in practice?"
+                }
+            ]
+        },
+        {
+            "original_query": "how do they compare to traditional methods?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what are neural networks?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Neural networks are computational models inspired by the human brain, consisting of interconnected nodes (neurons) organized in layers. They can learn complex patterns from data through training."
+                },
+                {
+                    "role": "human",
+                    "content": "how do they compare to traditional methods?"
+                }
+            ]
+        },
+        {
+            "original_query": "what are the main challenges when implementing this?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what is transfer learning in AI?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Transfer learning is a technique where a model trained on one task is repurposed for a different but related task. This approach leverages knowledge gained from solving one problem to help solve another."
+                },
+                {
+                    "role": "human",
+                    "content": "what are the main challenges when implementing this?"
+                }
+            ]
+        },
+        {
+            "original_query": "can you explain the process in more detail?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "how does reinforcement learning work?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Reinforcement learning is a type of machine learning where an agent learns to make decisions by interacting with an environment. The agent receives rewards or penalties based on its actions and learns to maximize cumulative rewards."
+                },
+                {
+                    "role": "human",
+                    "content": "can you explain the process in more detail?"
+                }
+            ]
+        },
+        {
+            "original_query": "what makes them effective for this task?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "how are CNNs used in computer vision?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Convolutional Neural Networks (CNNs) are extensively used in computer vision tasks like image recognition, object detection, and segmentation. They automatically learn hierarchical features from images through convolutional layers."
+                },
+                {
+                    "role": "human",
+                    "content": "what makes them effective for this task?"
+                }
+            ]
+        },
+        {
+            "original_query": "what are the ethical implications of this?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "how do GANs create deepfakes?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Generative Adversarial Networks (GANs) create deepfakes by having two neural networks compete: one generates fake images/videos, while the other tries to detect fakes. Through this process, they learn to create increasingly realistic synthetic media."
+                },
+                {
+                    "role": "human",
+                    "content": "what are the ethical implications of this?"
+                }
+            ]
+        },
+        {
+            "original_query": "how reliable are these predictions?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "what is time series forecasting in machine learning?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Time series forecasting in machine learning involves using historical data patterns to predict future values. Models analyze temporal dependencies and seasonality to make predictions about future trends."
+                },
+                {
+                    "role": "human",
+                    "content": "how reliable are these predictions?"
+                }
+            ]
+        },
+        {
+            "original_query": "what kind of data is needed for this?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "how does anomaly detection work in AI?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Anomaly detection in AI uses algorithms to identify unusual patterns or outliers in data that deviate from expected behavior. It's commonly used in fraud detection, system monitoring, and quality control."
+                },
+                {
+                    "role": "human",
+                    "content": "what kind of data is needed for this?"
+                }
+            ]
+        }
+    ],
+    "expands_acronyms_tests": [
+        {
+            "original_query": "What is CNN?"
+        },
+        {
+            "original_query": "Compare RNN vs LSTM"
+        },
+        {
+            "original_query": "What makes GPT different from other LLMs?"
+        },
+        {
+            "original_query": "Can you explain what VAE is in deep learning?"
+        },
+        {
+            "original_query": "How does GAN generate realistic images?"
+        },
+        {
+            "original_query": "What is the role of MLP in deep learning?"
+        },
+        {
+            "original_query": "Compare BERT vs T5 for NLP tasks"
+        },
+        {
+            "original_query": "What makes ResNet and DenseNet different?"
+        },
+        {
+            "original_query": "What is the purpose of CTC in speech recognition?"
+        },
+        {
+            "original_query": "How does YOLO perform object detection?"
+        }
+    ],
+    "includes_context_tests": [
+        {
+            "original_query": "¿Cómo se diferencia de un tutor humano?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Qué es la tutoría inteligente impulsada por IA?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Se refiere a sistemas de tutoría virtual que ofrecen apoyo personalizado a los estudiantes mediante algoritmos de IA."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Cómo se diferencia de un tutor humano?"
+                }
+            ],
+            "queries": [
+                "Differences between AI tutors and human tutors",
+                "Benefits of intelligent tutoring systems",
+                "Limitations of AI-based educational tutoring"
+            ],
+            "updated_query": "¿Cómo se diferencia la tutoría inteligente impulsada por IA de un tutor humano?"
+        },
+        {
+            "original_query": "¿Esto podría reemplazar el rol del docente en el futuro?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "He leído que el aprendizaje adaptativo utiliza la inteligencia artificial para personalizar la enseñanza."
+                },
+                {
+                    "role": "assistant",
+                    "content": "Sí, el aprendizaje adaptativo adapta el contenido y el ritmo de las lecciones según las necesidades del estudiante, gracias al análisis de datos en tiempo real."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Esto podría reemplazar el rol del docente en el futuro?"
+                }
+            ],
+            "queries": [
+                "AI replacing teachers in education",
+                "Future of adaptive learning and educators",
+                "Impact of adaptive learning on teaching roles"
+            ],
+            "updated_query": "¿El aprendizaje adaptativo podría reemplazar el rol del docente en el futuro?"
+        },
+        {
+            "original_query": "¿Existen riesgos de sesgo en este tipo de evaluaciones?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Cómo puede la inteligencia artificial mejorar la evaluación educativa?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "La IA puede automatizar la corrección de exámenes, proporcionar retroalimentación personalizada y analizar patrones de aprendizaje."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Existen riesgos de sesgo en este tipo de evaluaciones?"
+                }
+            ],
+            "queries": [
+                "Bias in AI-driven educational assessments",
+                "Risks of AI-based student evaluations"
+            ],
+            "updated_query": "¿Existen riesgos de sesgo en las evaluaciones educativas impulsadas por inteligencia artificial?"
+        },
+        {
+            "original_query": "¿Qué plataformas actuales ya implementan esta tecnología?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Qué beneficios ofrece la inteligencia artificial para la educación a distancia?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "La IA puede ofrecer tutores virtuales, monitorear el progreso del estudiante y personalizar el contenido educativo."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Qué plataformas actuales ya implementan esta tecnología?"
+                }
+            ],
+            "queries": [
+                "AI-powered platforms for online education",
+                "Examples of AI in distance learning",
+                "Platforms using virtual AI tutors",
+                "Platforms using AI to monitor student progress",
+                "AI solutions for personalizing content"
+            ],
+            "updated_query": "¿Qué plataformas actuales ya implementan inteligencia artificial en la educación a distancia?"
+        },
+        {
+            "original_query": "¿Podría esto ser contraproducente para el aprendizaje social?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Cómo se puede usar la inteligencia artificial para fomentar la colaboración entre estudiantes?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "La IA puede crear espacios de discusión, sugerir grupos de trabajo y analizar dinámicas colaborativas."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Podría esto ser contraproducente para el aprendizaje social?"
+                }
+            ],
+            "queries": [
+                "Impact of AI on social learning in education",
+                "AI-driven collaboration risks for students"
+            ],
+            "updated_query": "¿Podría el uso de inteligencia artificial para fomentar la colaboración entre estudiantes ser contraproducente para el aprendizaje social?"
+        },
+        {
+            "original_query": "¿Qué pasos pueden tomar las instituciones educativas para abordar estos problemas?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Cuáles son las implicaciones éticas de usar IA en la educación?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Algunas implicaciones incluyen el sesgo en las recomendaciones, la privacidad de los datos y el riesgo de dependencia tecnológica."
+                }
+            ],
+            "queries": [
+                "Institutional strategies for ethical AI adoption",
+                "Steps to mitigate AI bias in education",
+                "Approaches to protect student privacy in AI-powered education",
+                "Strategies to mitigate technological dependence in AI-driven education"
+            ],
+            "updated_query": "¿Qué pasos pueden tomar las instituciones educativas para abordar las implicaciones éticas de usar inteligencia artificial, incluyendo los problemas del sesgo en las recomendaciones, la privacidad de los datos y la dependencia tecnológica?"
+        },
+        {
+            "original_query": "¿Esto plantea problemas de privacidad?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Qué tipos de datos recopila la IA en plataformas educativas?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "La IA recopila datos sobre el progreso del estudiante, patrones de participación y resultados de evaluaciones."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Esto plantea problemas de privacidad?"
+                }
+            ],
+            "queries": [
+                "Privacy concerns in AI-driven educational platforms",
+                "Data collection by AI in education",
+                "Ethical issues in educational data collection"
+            ],
+            "updated_query": "¿La recopilación de datos por parte de la inteligencia artificial en plataformas educativas plantea problemas de privacidad?"
+        },
+        {
+            "original_query": "¿Qué estrategias podrían mitigar estos desafíos?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Qué desafíos enfrenta la integración de inteligencia artificial en la educación?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Los principales desafíos incluyen el costo, la capacitación docente y el acceso desigual a la tecnología."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Qué estrategias podrían mitigar estos desafíos?"
+                }
+            ],
+            "queries": [
+                "Strategies for AI integration in education",
+                "Addressing challenges of AI in education",
+                "Mitigating inequalities in AI-driven learning"
+            ],
+            "updated_query": "¿Qué estrategias podrían mitigar los desafíos de la integración de inteligencia artificial en la educación?"
+        },
+        {
+            "original_query": "¿Qué herramientas están disponibles actualmente?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Cómo podría la inteligencia artificial ayudar a estudiantes con dificultades de aprendizaje?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "La IA puede ofrecer contenido personalizado, detectar problemas tempranos y brindar retroalimentación adaptada."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Qué herramientas están disponibles actualmente?"
+                }
+            ],
+            "queries": [
+                "AI tools for students with learning difficulties",
+                "AI solutions for special education"
+            ],
+            "updated_query": "¿Qué herramientas de inteligencia artificial están disponibles actualmente para estudiantes con dificultades de aprendizaje?"
+        },
+        {
+            "original_query": "¿Existen estudios que demuestren su efectividad?",
+            "chat_history": [
+                {
+                    "role": "human",
+                    "content": "¿Cómo puede la IA mejorar la formación docente?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "La IA puede proporcionar análisis de desempeño docente, simulaciones para prácticas y recursos personalizados."
+                },
+                {
+                    "role": "human",
+                    "content": "¿Existen estudios que demuestren su efectividad?"
+                }
+            ],
+            "queries": [
+                "Effectiveness of AI in teacher training",
+                "Research on AI for professional development in education",
+                "Impact of AI on teacher performance"
+            ],
+            "updated_query": "¿Existen estudios que demuestren la efectividad de la inteligencia artificial en la formación docente?"
+        }
+    ]
+} 

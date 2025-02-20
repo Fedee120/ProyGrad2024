@@ -16,8 +16,16 @@ class SearchResult(BaseModel):
     query: str = Field(description="The query that produced these results")
     documents: List[Document] = Field(description="Retrieved documents for this query")
 
+    def formatted(self) -> List[str]:
+        formatted_results = []
+        for doc in self.documents:
+            metadata_str = f"---- Context METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
+            content_str = f"---- Context Start ----\n{doc.page_content}\n---- Context End ----"
+            formatted_results.append(f"{metadata_str}\n{content_str}")
+        return formatted_results
+
 class RAG():
-    def __init__(self):
+    def __init__(self, collection_name: str = "knowledge_base_collection", k: int = 4):
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
         
         retries = 3
@@ -26,14 +34,14 @@ class RAG():
                 self.vector_store = Milvus(
                     embedding_function=self.embeddings,
                     connection_args={"uri": os.getenv("MILVUS_STANDALONE_URL")},
-                    collection_name="real_collection",
+                    collection_name=collection_name,
                     search_params={"ef": 40}
                 )
                 
                 self.retriever = self.vector_store.as_retriever(
                     search_type="mmr", 
                     search_kwargs={
-                        "k": 4,  # número de resultados finales
+                        "k": k,  # número de resultados finales
                         "fetch_k": 20,  # número de resultados iniciales de donde MMR seleccionará
                     }
                 )
@@ -81,15 +89,6 @@ class RAG():
         results = self.vector_store.similarity_search(query, k=k, filter=filter)
         return results
 
-    def _format_search_results(self, results: List[SearchResult]) -> str:
-        formatted = []
-        for result in results:
-            for doc in result.documents:
-                metadata_str = f"---- Context METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
-                content_str = f"---- Context Start ----\n{doc.page_content}\n---- Context End ----"
-                formatted.append(f"{metadata_str}\n{content_str}")
-        return "\n\n".join(formatted)
-
     @traceable(run_type="retriever")
     def retrieve(self, query):
         return self.retriever.invoke(query)
@@ -105,9 +104,12 @@ class RAG():
                 query=query,
                 documents=docs
             ))
-        formatted_results = self._format_search_results(search_results)
+        formatted_results = []
+        for result in search_results:
+            formatted_results.extend(result.formatted())
+        context_str = "\n\n".join(formatted_results)
         
         return self.rag_response_generator.generate_response(
             question=query_analysis.updated_query,
-            search_results=formatted_results
+            search_results=context_str
         )

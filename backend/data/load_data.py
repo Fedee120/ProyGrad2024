@@ -24,7 +24,7 @@ def get_docs(path):
         doc.page_content = clean_text(doc.page_content)
     return docs
 
-def load_data(rag):
+def load_data(rag: RAG):
     print("Loading and extracting documents")
     samples = os.path.join(os.path.dirname(__file__), "raw/")
     pdfs = [f for f in os.listdir(samples) if f.endswith(".pdf")]
