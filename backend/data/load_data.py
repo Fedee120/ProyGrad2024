@@ -1,16 +1,28 @@
 import os
 from dotenv import load_dotenv
 from agent.rag import RAG
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyMuPDFLoader
+from data.splitters.semantic_splitter import semantic_split
+import re
+
+load_dotenv()
+
+def clean_text(text: str) -> str:
+    """Limpia el texto eliminando caracteres no deseados y espacios múltiples."""
+    # Reemplazar saltos de línea múltiples por uno solo
+    text = re.sub(r'\n+', ' ', text)
+    # Reemplazar espacios múltiples por uno solo
+    text = re.sub(r'\s+', ' ', text)
+    # Eliminar espacios al inicio y final
+    return text.strip()
 
 def get_docs(path):
-    loader = PyPDFLoader(path)
-    return loader.load()
-
-def split_docs(docs):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-    return text_splitter.split_documents(docs)
+    loader = PyMuPDFLoader(path)
+    docs = loader.load()
+    # Limpiar el texto de cada documento
+    for doc in docs:
+        doc.page_content = clean_text(doc.page_content)
+    return docs
 
 def load_data(rag: RAG):
     print("Loading and extracting documents")
@@ -19,20 +31,18 @@ def load_data(rag: RAG):
     paths = [os.path.join(samples, f) for f in pdfs]
     docs = []
     for path in paths:
-        docs += get_docs(path)
-    print("Extracted docs: ",len(docs))
+        docs.extend(get_docs(path))
+    print("Extracted docs:", len(docs))
 
-    print("Splitting documents")
-    splits = split_docs(docs)
-    print("Splitted docs: ",len(splits))
+    print("Splitting documents using semantic chunking")
+    splits = semantic_split(docs)
+    print("Splitted docs:", len(splits))
 
     print("Adding documents to collection")
     rag.add_documents(splits)
     print("Added docs to collection")
 
 if __name__ == "__main__":
-    load_dotenv()
-
     rag = RAG()
     rag.delete_all_documents()
     load_data(rag)
