@@ -13,3 +13,4 @@ langchain-groq==0.2.1
 langsmith==0.1.142
 fastapi==0.115.4
 uvicorn==0.32.0
+pymupdf==1.25.3

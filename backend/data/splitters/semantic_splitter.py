@@ -8,7 +8,7 @@ def semantic_split(documents):
     text_splitter = SemanticChunker(
         embeddings=OpenAIEmbeddings(model="text-embedding-3-small"),
         breakpoint_threshold_type="standard_deviation",
-        breakpoint_threshold_amount=0.75
+        breakpoint_threshold_amount=1.0
     )
     
     return text_splitter.split_documents(documents) 

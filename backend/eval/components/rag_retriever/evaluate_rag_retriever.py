@@ -1,6 +1,6 @@
 from agent.rag import RAG
 from langchain_core.documents import Document
-from data.load_data import split_docs
+from data.splitters.semantic_splitter import semantic_split
 from .metrics.context_relevancy import evaluate_context_relevancy
 from .metrics.context_recall import evaluate_context_recall
 import json
@@ -24,7 +24,7 @@ def _load_test_collection(rag: RAG, dataset: Dict[str, Any]) -> None:
         ))
     
     # Split documents into smaller chunks
-    split_documents = split_docs(documents)
+    split_documents = semantic_split(documents)
     
     # Add test documents to collection
     rag.add_documents(split_documents)
@@ -53,12 +53,15 @@ def evaluate_retrieval_samples(
         retrieved_docs = rag.retrieve(sample["query"])
         retrieved_contexts = [doc.page_content for doc in retrieved_docs]
         
+        # Ensure we have at least 1 worker
+        num_workers = max(1, len(retrieved_contexts))
+        
         # Evaluate context relevancy
         relevancy_score, relevancy_details = evaluate_context_relevancy(
             question=sample["query"],
             contexts=retrieved_contexts,
             verbose=verbose,
-            max_workers=len(retrieved_contexts)
+            max_workers=num_workers
         )
         
         # Evaluate context recall against ground truth
@@ -67,7 +70,7 @@ def evaluate_retrieval_samples(
             contexts=retrieved_contexts,
             ground_truth=sample["ground_truth"],
             verbose=verbose,
-            max_workers=len(retrieved_contexts)
+            max_workers=num_workers
         )
         
         # Average the scores
