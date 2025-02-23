@@ -1,0 +1,654 @@
+[
+    {
+        "query": "Hello!",
+        "chat_history": [],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Hi, my name is Alex.",
+        "chat_history": [],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "How are you?",
+        "chat_history": [
+          {"role": "human", "content": "Hi!"},
+          {"role": "assistant", "content": "Hello! Nice to see you here. Are you interested in learning more about artificial intelligence or its role in education?"}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "How's it going?",
+        "chat_history": [
+            {"role": "human", "content": "Hey!"},
+            {"role": "assistant", "content": "Hi there! I'm excited to assist you in exploring artificial intelligence and its applications, especially in the field of education. Is there a specific topic you're curious about today?"}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },    
+    {
+        "query": "Can you tell me about your capabilities?",
+        "chat_history": [
+            {"role": "human", "content": "What are you?"}, 
+            {"role": "assistant", "content": "I'm a chatbot designed to assist with questions about AI in education."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "What is this chatbot for?",
+        "chat_history": [],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Are you an AI?",
+        "chat_history": [],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Who made you?",
+        "chat_history": [],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Could you explain that again?",
+        "chat_history": [
+            {"role": "human", "content": "How does AI enhance data analysis in education?"},
+            {"role": "assistant", "content": "AI enhances data analysis in education by utilizing machine learning algorithms to identify patterns in student performance data, enabling targeted interventions."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },    
+    {
+        "query": "Wait, what do you mean?",
+        "chat_history": [
+            {"role": "human", "content": "What is machine learning?"},
+            {"role": "assistant", "content": "Machine learning is a subset of AI that enables computers to learn patterns from data and make decisions without being explicitly programmed."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Can you explain that in simpler terms?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help in medical diagnosis?"}, 
+            {"role": "assistant", "content": "Yes, AI can analyze medical images, like X-rays and MRIs, as well as patient data to assist doctors in diagnosing conditions. It uses algorithms to detect patterns that may indicate diseases, helping to identify issues earlier and more accurately. For example, AI can highlight areas in an image that look abnormal and suggest possible diagnoses, making it a valuable tool for healthcare professionals."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Wait, I’m confused about that.",
+        "chat_history": [
+            {"role": "human", "content": "How can AI improve public safety?"}, 
+            {"role": "assistant", "content": "AI can analyze crime patterns to optimize police resource allocation and predict potential crime hotspots. By using historical crime data, AI systems can identify trends and patterns that help law enforcement agencies allocate their resources more effectively."},
+            {"role": "human", "content": "Can you give me an example of how it works?"}, 
+            {"role": "assistant", "content": "Sure! For instance, an AI system might analyze data from various sources, like police reports, social media, and public surveillance footage. It can then identify correlations, such as times and locations where certain types of crimes are more likely to occur. This information allows police departments to increase their presence in high-risk areas during specific times, potentially deterring crime."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "So, in other words, it's just pattern recognition?",
+        "chat_history": [
+            {"role": "human", "content": "How does AI recognize speech?"},
+            {"role": "assistant", "content": "AI uses speech recognition models that analyze sound waves and match them to known patterns in a database to determine what was said."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Can you summarize that?",
+        "chat_history": [
+            {"role": "human", "content": "How do recommendation systems work?"},
+            {"role": "assistant", "content": "Recommendation systems analyze user behavior and preferences to suggest content. They do this by tracking interactions, like the movies you watch, the products you buy, or the articles you read. There are different ways they can make recommendations. Some systems compare your behavior with other users who have similar interests and suggest things they liked. Others focus on the specific features of the content you engage with and find similar options for you. Some even combine both approaches to improve accuracy.\n\nThese systems are used everywhere—from Netflix suggesting shows you might like to online stores recommending products based on your browsing history."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Could you break that down a bit more?",
+        "chat_history": [
+            {"role": "human", "content": "How does AI translate languages?"},
+            {"role": "assistant", "content": "AI language translation uses neural machine translation (NMT), which relies on deep learning models trained on large datasets to understand and convert text from one language to another."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Okay, got it!",
+        "chat_history": [
+            {"role": "human", "content": "Can AI grade essays?"},
+            {"role": "assistant", "content": "Yes! AI can analyze grammar, structure, and even provide feedback on essays."}
+        ],
+        "expected_paths": ["no-retrieval reply", "cross-question"]
+    },
+    {
+        "query": "That's really cool!",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help students?"},
+            {"role": "assistant", "content": "Yes! AI can personalize learning and assist with grading."}
+        ],
+        "expected_paths": ["no-retrieval reply", "cross-question"]
+    },
+    {
+        "query": "That makes sense!",
+        "chat_history": [
+            {"role": "human", "content": "Should teachers worry about AI replacing them?"},
+            {"role": "assistant", "content": "Interesting perspective! Do you think AI could fully replace a teacher’s role?"},
+            {"role": "human", "content": "Not really, teachers do more than just give information."},
+            {"role": "assistant", "content": "Absolutely! AI is more of a tool to assist teachers rather than replace them. While AI can help with tasks like grading, generating personalized exercises, and providing instant feedback, it lacks the emotional intelligence, adaptability, and mentorship that human teachers offer. The best approach is a collaboration where AI supports educators, making their work more efficient and enhancing student learning experiences."}
+        ],
+        "expected_paths": ["no-retrieval reply", "cross-question"]
+    },
+    {
+        "query": "Thanks, bye!",
+        "chat_history": [
+            {"role": "human", "content": "Can AI create lesson plans?"},
+            {"role": "assistant", "content": "Yes, AI can help teachers generate lesson plans by suggesting resources and structuring content."}
+        ],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "Tell me a joke!",
+        "chat_history": [],
+        "expected_paths": ["no-retrieval reply"]
+    },
+    {
+        "query": "What is the capital of France?",
+        "chat_history": [],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "How do I cook spaghetti carbonara?",
+        "chat_history": [],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "Can you summarize the latest political news?",
+        "chat_history": [],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "Can you help me draft a resignation letter?",
+        "chat_history": [],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "How do I make a to-do list on my phone?",
+        "chat_history": [],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "Who won the last World Cup?",
+        "chat_history": [
+          {"role": "human", "content": "What is this chatbot for?"},
+          {"role": "assistant", "content": "I'm here to help you explore topics related to artificial intelligence and its applications in education!"}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "That's interesting! By the way, do you like movies? I just watched an amazing film!",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help in personalized learning?"},
+            {"role": "assistant", "content": "Absolutely! AI can analyze student data to customize lessons and provide tailored resources."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "How do I fix a slow WiFi connection?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI generate ideas like humans?"},
+            {"role": "assistant", "content": "AI can assist in brainstorming, generate creative content, and even compose music or art, but its creativity is based on patterns rather than human intuition."},
+            {"role": "human", "content": "Interesting! But what makes human creativity different?"},
+            {"role": "assistant", "content": "Humans draw from emotions, experiences, and intuition, which AI lacks. AI can mimic creative processes, but it doesn’t have personal insights or emotions."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "What’s the difference between Python and Java?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI make learning more engaging?"},
+            {"role": "assistant", "content": "That’s a great question! What do you think makes learning engaging?"},
+            {"role": "human", "content": "Probably interactive activities and games."},
+            {"role": "assistant", "content": "Absolutely! AI-powered educational tools use gamification and adaptive exercises to keep students engaged."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "Anyway, can you help me with my math homework?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI make learning more interactive?"},
+            {"role": "assistant", "content": "Great question! What do you think makes a lesson engaging?"},
+            {"role": "human", "content": "Probably hands-on activities and games."},
+            {"role": "assistant", "content": "Exactly! AI-powered tools like simulations and gamified learning can help."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "That sounds useful! Can you set a reminder for me to study tomorrow?",
+        "chat_history": [
+            {"role": "human", "content": "How can AI help students?"}, 
+            {"role": "assistant", "content": "AI helps students with personalized learning, tutoring, and automated feedback."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "Great! So when’s the best time to visit Paris?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help plan vacations?"}, 
+            {"role": "assistant", "content": "Yes! AI is used in travel for personalized recommendations, itinerary planning, and dynamic pricing."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "That’s cool! Can you recommend some good sci-fi books?",
+        "chat_history": [
+            {"role": "human", "content": "How is AI used in creative writing?"}, 
+            {"role": "assistant", "content": "AI assists writers by generating ideas, improving grammar, and even co-authoring books!"}
+
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "That’s great! So how do I make new friends?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help people feel less lonely?"}, 
+            {"role": "assistant", "content": "Yes! AI chatbots and social platforms can provide companionship and help connect people with similar interests."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "That’s cool! How do I deal with stress?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help people manage their mental health?"}, 
+            {"role": "assistant", "content": "Yes! AI applications can provide resources and support for mental health management, including chatbots that offer guidance and coping strategies."}
+        ],
+        "expected_paths": ["deny"]
+    },    
+    {
+        "query": "Can you tell me the weather for tomorrow?",
+        "chat_history": [
+            {"role": "human", "content": "How can AI assist in environmental science?"},
+            {"role": "assistant", "content": "AI can analyze climate data, model ecosystems, and help in resource management."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "Can you tell me how to fix my car?",
+        "chat_history": [
+            {"role": "human", "content": "How can AI be used in automotive engineering?"},
+            {"role": "assistant", "content": "AI is applied in automotive engineering for predictive maintenance, autonomous driving, and optimizing manufacturing processes."},
+            {"role": "human", "content": "That sounds interesting! What kind of data does AI use for predictive maintenance?"}, 
+            {"role": "assistant", "content": "AI uses sensor data, historical maintenance records, and real-time vehicle performance metrics to predict potential failures."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "Can you recommend a good workout routine?",
+        "chat_history": [
+            {"role": "human", "content": "How can AI support fitness and health?"}, 
+            {"role": "assistant", "content": "AI can analyze user data to create personalized workout plans, monitor progress, and provide motivational feedback."},
+            {"role": "human", "content": "That sounds helpful! Can it track my nutrition as well?"}, 
+            {"role": "assistant", "content": "Yes, many AI applications can track dietary habits and suggest meal plans based on fitness goals."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "What’s the latest news?",
+        "chat_history": [
+            {"role": "human", "content": "How can AI be used in journalism?"}, 
+            {"role": "assistant", "content": "AI helps with news aggregation, fact-checking, and content generation."}
+        ],
+        "expected_paths": ["deny"]
+    },
+    {
+        "query": "Can you give me more details on how AI helps teachers?",
+        "chat_history": [
+          {"role": "human", "content": "How is AI used in education?"},
+          {"role": "assistant", "content": "AI is used for personalized learning, grading automation, and tutoring systems."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "That sounds interesting! Can you give me some examples?",
+        "chat_history": [
+            {"role": "human", "content": "What are some applications of AI in education?"},
+            {"role": "assistant", "content": "AI is used in adaptive learning platforms, automated grading, and intelligent tutoring systems."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Tell me more about that.",
+        "chat_history": [
+            {"role": "human", "content": "How does AI support students?"},
+            {"role": "assistant", "content": "AI helps students by providing personalized learning, feedback, and tutoring systems."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Okay, but how exactly does that work?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help students learn better?"},
+            {"role": "assistant", "content": "That's an interesting question! What do you think makes learning more effective?"},
+            {"role": "human", "content": "I guess personalized support matters."},
+            {"role": "assistant", "content": "Good point! AI can provide personalized tutoring and feedback to adapt to student needs."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "What kind of AI tools do that?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI make learning more engaging?"},
+            {"role": "assistant", "content": "That’s a great question! What do you think makes learning engaging?"},
+            {"role": "human", "content": "Probably interactive activities and games."},
+            {"role": "assistant", "content": "Absolutely! AI-powered educational tools use gamification and adaptive exercises to keep students engaged."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "So, what are some real-world examples?",
+        "chat_history": [
+            {"role": "human", "content": "Does AI make a teacher’s job easier?"},
+            {"role": "assistant", "content": "Good question! What part of teaching do you think is most time-consuming?"},
+            {"role": "human", "content": "Maybe preparing lessons and grading?"},
+            {"role": "assistant", "content": "Exactly! AI can assist by generating lesson plans, automating assessments, and even identifying student learning gaps."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Are there any AI tools that can do this well?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help teachers with grading?"},
+            {"role": "assistant", "content": "Yes! AI can automate grading for multiple-choice questions and even assist with evaluating written responses."},
+            {"role": "human", "content": "That sounds useful. But can it really understand essays?"},
+            {"role": "assistant", "content": "AI uses natural language processing (NLP) to analyze structure, coherence, and grammar. However, it still struggles with assessing creativity and deep reasoning."},
+            {"role": "human", "content": "So, does that mean AI is not ready to replace teachers in grading?"},
+            {"role": "assistant", "content": "Not entirely! AI can assist by highlighting key areas for review, but human oversight is still needed. What do you think would be the biggest challenge in fully automating essay grading?"},
+            {"role": "human", "content": "Maybe understanding different writing styles?"},
+            {"role": "assistant", "content": "Exactly! AI models need extensive training to recognize diverse writing styles and nuances. Some advanced tools are improving in this area, though."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Are there AI models that can do this efficiently?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help with personalized learning?"},
+            {"role": "assistant", "content": "Yes! AI can analyze student performance to adapt lessons based on their strengths and weaknesses."},
+            {"role": "human", "content": "That sounds interesting. Does it work for all subjects?"},
+            {"role": "assistant", "content": "AI is particularly effective in structured subjects like math and language learning, but it faces challenges in more open-ended areas like philosophy or creative writing."},
+            {"role": "human", "content": "Why is it harder for those subjects?"},
+            {"role": "assistant", "content": "That’s a great question! AI struggles with understanding abstract reasoning and multiple perspectives. What do you think makes those subjects more difficult for AI?"},
+            {"role": "human", "content": "Maybe understanding abstract concepts?"},
+            {"role": "assistant", "content": "Exactly! AI finds it challenging to interpret philosophical arguments or generate truly creative writing, as those require deep contextual understanding."}
+        ],
+        "expected_paths": ["retrieve"]
+    },    
+    {
+        "query": "How can AI help teachers?",
+        "chat_history": [],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Does AI adapt to different students?",
+        "chat_history": [],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Can AI help students with research?",
+        "chat_history": [],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Is AI being used for grading?",
+        "chat_history": [],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Can AI replace teachers?",
+        "chat_history": [],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Can you explain what machine learning is?",
+        "chat_history": [],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Can you explain how reinforcement learning algorithms improve decision-making?",
+        "chat_history": [
+            {"role": "human", "content": "What role does AI play in optimizing processes?"}, 
+            {"role": "assistant", "content": "AI optimizes processes by using algorithms that learn from data, particularly through techniques like reinforcement learning."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "What are the latest advancements in neural network architectures?",
+        "chat_history": [],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "Can you explain the attention mechanism in transformers?",
+        "chat_history": [
+            {"role": "human", "content": "How has AI improved natural language processing?"}, 
+            {"role": "assistant", "content": "AI has improved NLP significantly, especially with the introduction of transformer models that utilize attention mechanisms."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "What are some common applications of GANs in image generation?",
+        "chat_history": [],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "That’s interesting. How AI helps banks detect fraudulent transactions?",
+        "chat_history": [
+            {"role": "human", "content": "How can AI be used in finance?"},
+            {"role": "assistant", "content": "AI is used in finance for fraud detection, algorithmic trading, and risk assessment."}
+        ],
+        "expected_paths": ["retrieve"]
+    },
+    {
+        "query": "AI models don’t need any data to learn, they just figure things out on their own.",
+        "chat_history": [
+            {"role": "human", "content": "How does AI learn?"}, 
+            {"role": "assistant", "content": "AI learns by analyzing large amounts of data to identify patterns and make predictions."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "Since AI is completely objective, it never reflects human biases.",
+        "chat_history": [
+            {"role": "human", "content": "How does AI make decisions?"}, 
+            {"role": "assistant", "content": "AI systems use algorithms and data to make predictions and decisions, but their accuracy depends on the quality of the data used."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "Machine learning is just another name for AI, there’s no real difference.",
+        "chat_history": [
+            {"role": "human", "content": "What is the difference between AI and machine learning?"}, 
+            {"role": "assistant", "content": "Artificial Intelligence (AI) is a broad field that encompasses various techniques to create systems capable of performing tasks that typically require human intelligence, such as reasoning, problem-solving, and perception. Machine Learning (ML) is a subset of AI that focuses on developing algorithms that allow computers to learn patterns from data and make predictions or decisions without being explicitly programmed."},
+            {"role": "human", "content": "Oh, so they’re basically the same thing?"}, 
+            {"role": "assistant", "content": "Not quite. Machine learning is just one approach within AI, but AI also includes other techniques, such as expert systems, rule-based reasoning, and symbolic AI. While ML models improve through experience with data, other AI methods may rely on predefined rules or logical inference rather than data-driven learning."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "Once an AI model is trained, it never needs updates or new data.",
+        "chat_history": [],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "Machine learning models always make perfect predictions.",
+        "chat_history": [],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "Deep learning is the only type of AI that exists.",
+        "chat_history": [],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "AI is completely unreliable and always makes mistakes.",
+        "chat_history": [],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "Interesting. But do you think it could make them rely too much on AI?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help students learn better?"},
+            {"role": "assistant", "content": "Yes! AI can personalize learning by adapting to individual progress, providing instant feedback, and offering interactive tutoring based on student needs."},
+            {"role": "human", "content": "That sounds useful, but does it work for all students?"},
+            {"role": "assistant", "content": "It depends! Some students benefit greatly from AI-driven tools, especially those who need personalized pacing or struggle with traditional methods. However, not all students engage equally, and some might require human guidance for motivation and deeper learning."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "So what should teachers focus on if AI takes over some of their tasks?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI replace teachers?"},
+            {"role": "assistant", "content": "AI is a powerful tool that can assist in administrative work, content delivery, and personalized learning, but teaching involves emotional intelligence, adaptability, and mentorship, which AI lacks."},
+            {"role": "human", "content": "That makes sense, but won’t automation reduce the need for teachers?"},
+            {"role": "assistant", "content": "While AI can automate grading, assessments, and even some tutoring, studies show that students still rely on teachers for guidance, critical thinking, and social learning. Rather than replacing teachers, AI is more likely to shift their role toward coaching, mentorship, and fostering creativity in the classroom."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "How can errors made on predictions be handled?",
+        "chat_history": [
+            {"role": "human", "content": "AI can analyze data to predict natural disasters."},
+            {"role": "assistant", "content": "Exactly! AI can assess risk factors and improve evacuation plans by analyzing geographic and demographic data. It helps in identifying vulnerable areas and allocating resources effectively."},
+            {"role": "human", "content": "That's impressive! Are there real-world examples of this in action?"}, 
+            {"role": "assistant", "content": "Yes, there have been successful applications in earthquake prediction, where AI models analyze seismic data to provide timely warnings. In flood management, AI is used to predict flood zones by analyzing rainfall patterns and historical data, allowing for proactive responses."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "What should be prioritized in AI development?",
+        "chat_history": [
+            {"role": "human", "content": "Ethics is a big concern in AI research."},
+            {"role": "assistant", "content": "Absolutely. Ethical AI is crucial as it ensures that technology is developed in a way that benefits everyone while minimizing potential harm. This involves addressing important issues such as privacy, algorithmic bias, and the impact of automation on jobs."},
+            {"role": "human", "content": "What frameworks are being developed to guide ethical AI?"}, 
+            {"role": "assistant", "content": "Various organizations and consortiums are proposing comprehensive guidelines for ethical AI. For instance, the EU has introduced ethical guidelines focusing on transparency, accountability, and human oversight. Additionally, initiatives like the IEEE's Ethically Aligned Design emphasize the need for technology that prioritizes human rights and well-being."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },        
+    {
+        "query": "That’s interesting. But what if the AI is biased? How can we ensure AI grading is fair?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI be used for grading exams?"},
+            {"role": "assistant", "content": "Yes! AI can grade essays, multiple-choice questions, and even detect plagiarism by analyzing linguistic patterns and comparing answers to standardized rubrics."},
+            {"role": "human", "content": "But how does it know what a good essay is?"},
+            {"role": "assistant", "content": "AI models are trained on large datasets of essays that have been graded by human experts. They use natural language processing (NLP) to assess coherence, grammar, structure, and argument strength, while also adapting to different grading criteria."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "That sounds useful, but isn’t that risky for privacy?",
+        "chat_history": [
+            {"role": "human", "content": "How does AI track student progress?"},
+            {"role": "assistant", "content": "AI analyzes student performance by tracking engagement levels, quiz results, learning patterns, and response times, creating a personalized learning experience."},
+            {"role": "human", "content": "That’s cool. Does it store all this data?"},
+            {"role": "assistant", "content": "Yes, many learning platforms store student data to improve recommendations and adapt teaching strategies. However, data storage policies vary—some platforms anonymize data, while others allow students or schools to control access."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "That’s true. But if AI keeps improving, do you think it could ever develop human-like creativity?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI generate ideas like humans?"},
+            {"role": "assistant", "content": "AI can assist in brainstorming, generate creative content, and even compose music or art, but its creativity is based on patterns rather than human intuition."},
+            {"role": "human", "content": "Interesting! But what makes human creativity different?"},
+            {"role": "assistant", "content": "Humans draw from emotions, experiences, and intuition, which AI lacks. AI can mimic creative processes, but it doesn’t have personal insights or emotions."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "If AI can assist in creative processes, what does that mean for the future of art?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI write poetry?"}, 
+            {"role": "assistant", "content": "Yes, AI can generate poetry by analyzing existing works and using algorithms to create new verses. However, the depth and emotional resonance might differ from human-written poetry."},
+            {"role": "human", "content": "What about the audience's response to AI-generated art?"}, 
+            {"role": "assistant", "content": "Audience reactions can vary widely. Some people appreciate AI-generated art for its novelty and innovation, while others may feel that it lacks the emotional depth found in human-created art."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },    
+    {
+        "query": "But isn’t it dangerous if companies can use AI to track people without consent?",
+        "chat_history": [
+            {"role": "human", "content": "How is AI used in surveillance?"},
+            {"role": "assistant", "content": "AI is used in facial recognition, predictive policing, and monitoring systems to enhance security."},
+            {"role": "human", "content": "That sounds powerful, but is it always ethical?"},
+            {"role": "assistant", "content": "It depends—while AI can improve safety, it also raises concerns about privacy, bias, and misuse."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "But isn’t AI in healthcare risky if it makes mistakes?",
+        "chat_history": [
+            {"role": "human", "content": "How is AI used in healthcare?"},
+            {"role": "assistant", "content": "AI assists doctors in diagnosing diseases, predicting patient outcomes, and personalizing treatments."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "But can AI-driven cars ever be completely safe?",
+        "chat_history": [
+            {"role": "human", "content": "How does AI work in self-driving cars?"},
+            {"role": "assistant", "content": "AI in self-driving cars uses sensors, machine learning, and real-time decision-making to navigate roads."},
+            {"role": "human", "content": "That’s impressive. Does it mean they never make mistakes?"},
+            {"role": "assistant", "content": "AI minimizes human error, but challenges like unpredictable road conditions and ethical dilemmas remain."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "That’s worrying. How do we prevent bias in AI-based legal decisions?",
+        "chat_history": [
+            {"role": "human", "content": "How is AI used in the legal system?"},
+            {"role": "assistant", "content": "AI assists in analyzing case law, predicting legal outcomes, and automating document processing."},
+            {"role": "human", "content": "Does it help judges make fairer decisions?"},
+            {"role": "assistant", "content": "It can reduce subjectivity, but bias in training data could still affect outcomes."},
+            {"role": "human", "content": "What kind of biases are we talking about?"},
+            {"role": "assistant", "content": "Racial and socioeconomic biases can emerge if AI learns from historical cases with systemic inequalities."},
+            {"role": "human", "content": "That’s really concerning. Has this happened before?"},
+            {"role": "assistant", "content": "Yes, some AI-based risk assessment tools have been criticized for disproportionately affecting minority groups."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "That's alarming. What can be done to address bias in AI healthcare applications?",
+        "chat_history": [
+            {"role": "human", "content": "How is AI used in recruitment?"}, 
+            {"role": "assistant", "content": "AI can streamline recruitment by screening resumes, identifying suitable candidates, and analyzing job descriptions to match skills."}, 
+            {"role": "human", "content": "That seems efficient, but could it lead to biased hiring?"}, 
+            {"role": "assistant", "content": "Absolutely. If the training data reflects historical hiring biases, the AI could perpetuate those biases in its recommendations."}, 
+            {"role": "human", "content": "What types of biases are typically seen in hiring?"}, 
+            {"role": "assistant", "content": "Common biases include gender, race, and age, which can result in qualified candidates being overlooked."}, 
+            {"role": "human", "content": "Have there been instances where this has happened?"}, 
+            {"role": "assistant", "content": "Yes, several companies have faced backlash after their AI recruitment tools were found to favor certain demographics over others, impacting diversity."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },    
+    {
+        "query": "Why do some teachers hesitate to use AI in the classroom?",
+        "chat_history": [
+            {"role": "human", "content": "How can AI support teachers in the classroom?"},
+            {"role": "assistant", "content": "AI can assist teachers by automating tasks like grading, tracking student progress, and providing personalized learning recommendations. It also helps generate lesson plans and offers real-time feedback to support different learning styles."},
+            {"role": "human", "content": "That sounds promising! But are there any downsides to relying on AI in education?"},
+            {"role": "assistant", "content": "Yes, while AI brings many benefits, some challenges exist. For example, AI tools require proper training for teachers, and there are concerns about bias in algorithms, data privacy, and the risk of over-reliance on automation. Additionally, not all schools have access to the necessary technology or infrastructure to implement AI effectively."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },  
+    {
+        "query": "How do you think AI will change education?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI personalize learning for students?"},
+            {"role": "assistant", "content": "Yes! AI-driven platforms can adapt to students' progress, offering customized exercises and feedback."},
+            {"role": "human", "content": "That sounds useful, but can it replace traditional teaching methods?"},
+            {"role": "assistant", "content": "AI enhances traditional methods but doesn’t replace them. Teachers provide critical thinking guidance and emotional support that AI lacks."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    },
+    {
+        "query": "What do you think about the use of AI in healthcare?",
+        "chat_history": [
+            {"role": "human", "content": "Can AI help doctors make better diagnoses?"}, 
+            {"role": "assistant", "content": "Absolutely! AI can analyze vast amounts of medical data, including patient histories, lab results, and imaging studies. By leveraging advanced algorithms, AI can identify patterns and anomalies that may be difficult for a human doctor to detect. This assistance can lead to quicker and more accurate diagnoses, ultimately improving patient outcomes."},
+            {"role": "human", "content": "That sounds promising, but what about the risks of relying too much on AI?"}, 
+            {"role": "assistant", "content": "You bring up a critical point. While AI has the potential to enhance diagnostic accuracy, there are risks associated with over-reliance on technology. For instance, if medical professionals rely solely on AI recommendations without exercising their clinical judgment, there could be misdiagnoses or inappropriate treatments. Furthermore, issues such as data privacy, algorithmic bias, and the transparency of AI decision-making processes need to be addressed to ensure patient safety and trust in AI systems."}
+        ],
+        "expected_paths": ["retrieve", "cross-question"]
+    }  
+]

@@ -117,5 +117,5 @@ class RAG():
         
         return self.rag_response_generator.generate_response(
             query=query_analysis.updated_query,
-            search_results=formatted_results
+            search_results=context_str
         )

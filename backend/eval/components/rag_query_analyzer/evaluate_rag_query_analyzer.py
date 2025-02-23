@@ -7,17 +7,7 @@ import os
 from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor
 from typing import List, Dict, Any, Tuple
-from langchain_core.messages import AIMessage, HumanMessage
-
-def _create_chat_history(history_data: List[Dict[str, str]]) -> List[AIMessage | HumanMessage]:
-    """Convert chat history data to message objects."""
-    messages = []
-    for msg in history_data:
-        if msg["role"] == "human":
-            messages.append(HumanMessage(content=msg["content"]))
-        else:
-            messages.append(AIMessage(content=msg["content"]))
-    return messages
+from eval.helpers.eval_helper import create_chat_history, format_chat_history_from_dict
 
 def evaluate_references_samples(
     analyzer: RAGQueryAnalyzer,
@@ -30,7 +20,7 @@ def evaluate_references_samples(
     
     def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Convert chat history to message objects
-        chat_history = _create_chat_history(sample["chat_history"])
+        chat_history = create_chat_history(sample["chat_history"])
         
         # Get analyzer's output with chat history
         result = analyzer.analyze(sample["original_query"], chat_history)
@@ -48,7 +38,7 @@ def evaluate_references_samples(
         test_details = {
             "metric": "Reference Resolution",
             "query": sample["original_query"],
-            "context": sample["chat_history"],
+            "chat_history": format_chat_history_from_dict(sample["chat_history"]),
             "generated": {
                 "queries": result.queries,
                 "updated_query": result.updated_query
@@ -59,7 +49,8 @@ def evaluate_references_samples(
         
         if verbose:
             print(f"\nEvaluating reference resolution for: {sample['original_query']}")
-            print(f"Generated query: {result.updated_query}")
+            print(f"Generated queries: {result.queries}")
+            print(f"Updated query: {result.updated_query}")
             print(f"Score: {score:.2f}")
             
         return score, test_details
@@ -140,7 +131,7 @@ def evaluate_context_samples(
     
     def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Convert chat history to message objects
-        chat_history = _create_chat_history(sample["chat_history"])
+        chat_history = create_chat_history(sample["chat_history"])
         
         # Get analyzer's output with chat history
         result = analyzer.analyze(sample["original_query"], chat_history)
@@ -160,7 +151,7 @@ def evaluate_context_samples(
         test_details = {
             "metric": "Context Inclusion",
             "query": sample["original_query"],
-            "context": sample["chat_history"],
+            "chat_history": format_chat_history_from_dict(sample["chat_history"]),
             "generated": {
                 "queries": result.queries,
                 "updated_query": result.updated_query
@@ -171,7 +162,6 @@ def evaluate_context_samples(
         
         if verbose:
             print(f"\nEvaluating context inclusion for: {sample['original_query']}")
-            print(f"Chat history: {chat_history}")
             print(f"Generated queries: {result.queries}")
             print(f"Updated query: {result.updated_query}")
             print(f"Score: {score:.2f}")

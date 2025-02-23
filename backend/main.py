@@ -7,7 +7,7 @@ from firebase_admin import auth, credentials, initialize_app, get_app
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
-from backend.agent.router import Router
+from agent.router import Router
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from typing import List
 from datetime import datetime, timezone

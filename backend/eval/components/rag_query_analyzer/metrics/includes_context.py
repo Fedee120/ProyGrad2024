@@ -6,20 +6,13 @@ from dotenv import load_dotenv
 from typing import List, Tuple
 from ..prompts.includes_context_prompt import PROMPT
 from langchain.schema import AIMessage, HumanMessage
+from eval.helpers.eval_helper import format_chat_history_from_messages
 
 load_dotenv()
 
 class IncludesContext(BaseModel):
     reasoning_steps: List[str] = Field(..., description="List of reasoning steps explaining if and how context was considered")
     includes_context: bool = Field(..., description="Indicates if the queries show consideration of conversation context")
-
-def format_chat_history(messages: List[AIMessage | HumanMessage]) -> str:
-    """Format chat history messages into a readable string."""
-    formatted = []
-    for msg in messages:
-        role = "Human" if isinstance(msg, HumanMessage) else "Assistant"
-        formatted.append(f"{role}: {msg.content}")
-    return "\n".join(formatted)
 
 def evaluate_includes_context(
     original_query: str,
@@ -49,7 +42,7 @@ def evaluate_includes_context(
         original_query=original_query,
         queries=queries,
         updated_query=updated_query,
-        chat_history=format_chat_history(chat_history),
+        chat_history=format_chat_history_from_messages(chat_history),
         expected_queries=expected_queries,
         expected_updated_query=expected_updated_query
     )
@@ -62,7 +55,7 @@ def evaluate_includes_context(
     if verbose:
         print("\nEvaluating context inclusion:")
         print(f"Chat history:")
-        print(format_chat_history(chat_history))
+        print(format_chat_history_from_messages(chat_history))
         print(f"Original query: {original_query}")
         print(f"Expected queries: {expected_queries}")
         print(f"Generated queries: {queries}")

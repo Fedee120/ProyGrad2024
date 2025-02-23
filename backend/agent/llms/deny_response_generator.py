@@ -25,11 +25,6 @@ class DenyResponseGenerator:
         Your response should be clear, concise, and professional.
         """
 
-        # Examples:
-        # ❌ Wrong: "I don’t know, but here’s my best guess..." (Avoid guessing.)  
-        # ❌ Wrong: "That’s interesting! Anyway, did you know AI is used in education?" (Avoid abrupt topic shifts.)  
-        # ✅ Correct: "I’m designed to assist with questions about artificial intelligence and its role in education. Feel free to ask me about these topics!"  
-
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", system_prompt_text),
             MessagesPlaceholder(variable_name="history"),

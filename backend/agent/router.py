@@ -10,6 +10,7 @@ from langsmith import traceable
 from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+import os
 
 class RouterResponse(BaseModel):
     """The decision path for handling a user's query."""
@@ -27,40 +28,46 @@ class Router:
         self.deny_response_llm = DenyResponseGenerator()
 
         self.llm = ChatOpenAI(
-            model="gpt-4o-mini", 
+            model="gpt-4o", 
             temperature=0
         ).with_structured_output(RouterResponse)
 
-        system_prompt_text = """You are an expert at routing user questions to the most appropriate decision path based on
-        the user's query and conversation history. Choose one of the following decision paths: 
+        system_prompt_text = """You are an expert at routing user questions to the most appropriate decision path based on the user's query and conversation history. Choose one of the following decision paths:
 
-        - 'no-retrieval reply': Use this when the user engages in casual conversation, greetings, or simple inquiries that 
-        do not require any retrieval of information.\n
+        - 'no-retrieval reply': Use this when the user engages in casual conversation, greetings, or simple inquiries that do not require any retrieval of information. Additionally, use this path when the user asks for clarification or rephrasing of something the assistant has just said, as these do not require retrieving new information.
 
-        - 'retrieve': Use this when the user's query involves AI or education, requiring retrieval of information from a 
-        vector store containing documents on these topics.\n
+        - 'retrieve': Use this when the user's query involves AI or education, requiring retrieval of information from a vector store containing documents on these topics.
 
-        - 'cross-question': Use this path when asking a reflective question would help the user gain a deeper understanding.
-        This approach should encourage the user to think critically rather than providing a direct answer immediately.\n
+        - 'cross-question': Use this path when asking a reflective question would help the user gain a deeper understanding. This approach should encourage the user to think critically rather than providing a direct answer immediately.
+        Important Constraints for 'cross-question':
+        - Do not use this path if the conversation has just started (i.e., if there is little or no chat history).
+        - Avoid choosing 'cross-question' if one was already done in the last 1-3 messages, as asking too many successive questions may frustrate the user. Instead, prefer 'retrieve' or another appropriate path.
+        - If the user does not respond to a previous cross-question or explicitly states they don't know the answer, do not choose 'cross-question' again. Instead, retrieve relevant information to provide them with a direct response.
 
-        - 'deny': Use this when the query is unrelated to AI or education. This path applies to questions outside the 
-        chatbot's scope.
+        - 'deny': Choose this path when the user’s query is is not related to AI in any way. This includes questions that seek personal advice, general knowledge, or topics outside the chatbot's focus. The chatbot's purpose is strictly limited to discussions related to AI and should not attempt to serve as a general AI assistant.
 
         Always choose one and only one decision path based on the user's query and context.
         """
 
-        #emjemplos?
-        
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", system_prompt_text),
-            MessagesPlaceholder(variable_name="history"),
+            MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{query}")
         ])
 
+    def get_decision_path(self, query: str, history: List[BaseMessage]) -> Tuple[str, str]:
+        """Determine the decision path for a given query and history."""
+        router_response = self.llm.invoke(self.prompt.format(query=query, chat_history=history))
+        return router_response.decision_path, router_response.reasoning_steps
+
     @traceable
-    def process_query(self, query: str, history: List[BaseMessage]) -> Tuple[str, list[str], bool]:
-        router_response = self.llm.invoke(self.prompt.format(query=query, history=history))
-        match router_response.decision_path:
+    def process_query(self, query: str, history: List[BaseMessage]) -> Tuple[str, list[str]]:
+        """Processes a user query by selecting the appropriate response generation path."""
+    
+        citations = []
+        decision_path, _ = self.get_decision_path(query, history)
+
+        match decision_path:
             case "no-retrieval reply":
                 final_response = self.no_retrieval_response_llm.generate_response(
                                     query=query,
