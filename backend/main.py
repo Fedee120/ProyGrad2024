@@ -21,6 +21,7 @@ if is_production:
     os.environ["LANGCHAIN_PROJECT"] = "ProyGrad2024"
 else:
     os.environ["LANGCHAIN_PROJECT"] = f"ProyGrad2024 ({environment} - {os.getenv('DEVELOPER', 'Anonymous')})"
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
 
 # Initialize Firebase Admin
 try: # Try to get existing app
