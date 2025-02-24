@@ -16,6 +16,8 @@ class QueryAnalysis(BaseModel):
         context to resolve references or provide clarity. """,
         min_items=1  # Ensure at least one query is returned
     )
+    reasoning_steps: str = Field(..., description="Step-by-step explanation of how the original query was processed, including reference \
+                                 resolution, query decomposition, acronym expansion, context inclusion and optimization decisions.")
 
 class RAGQueryAnalyzer:
     def __init__(self):
@@ -36,6 +38,7 @@ class RAGQueryAnalyzer:
         - Remove filler words and conversational elements
         - Generate queries with both the acronym and its expanded form if the acronym is familiar or its meaning can be inferred from the context (e.g., "AI" and "Artificial Intelligence")  
         - Always return at least one query
+        - Ensure the response strictly follows the QueryAnalysis schema
         
         Example 1:
         ------------------------------------------------------------------------------------------------
