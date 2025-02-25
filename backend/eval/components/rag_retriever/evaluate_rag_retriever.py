@@ -84,7 +84,13 @@ def evaluate_retrieval_samples(
             "relevancy_score": relevancy_score,
             "relevancy_details": relevancy_details,
             "recall_score": recall_score,
-            "recall_details": recall_details,
+            "recall_details": {
+                "recall_score_best": recall_details["recall_score"],
+                "recall_score_all": recall_details["weighted_recall_score"],
+                "per_context_results": recall_details["per_context_results"],
+                "relevant_contexts": recall_details["total_statements"],
+                "total_contexts": len(retrieved_contexts)
+            },
             "score": score
         }
 
