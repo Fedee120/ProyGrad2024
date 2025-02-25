@@ -98,8 +98,14 @@ class RAG():
         query_analysis = self.rag_query_analyzer.analyze(question, history)
 
         search_results = []
+        seen_pks = set()
+
         for query in query_analysis.queries:
             docs = self.retrieve(query)
+            
+            docs = [doc for doc in docs if doc.metadata['pk'] not in seen_pks]
+            seen_pks.update(doc.metadata['pk'] for doc in docs)
+
             search_results.append(SearchResult(
                 query=query,
                 documents=docs
