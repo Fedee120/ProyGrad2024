@@ -158,9 +158,9 @@ def evaluate_rag_retriever(verbose: bool = False, test_mode: bool = False) -> Tu
     avg_relevancy_best = sum(d["relevancy_details"]["relevancy_ratio_best"] for d in details) / len(details)
     avg_relevancy_all = sum(d["relevancy_details"]["relevancy_ratio_all"] for d in details) / len(details)
     
-    # Use new field names from the updated context_recall implementation
-    avg_recall = sum(d["recall_details"]["recall_score"] for d in details) / len(details)
-    avg_weighted_recall = sum(d["recall_details"]["weighted_recall_score"] for d in details) / len(details)
+    # Access recall scores directly from recall_details dictionary
+    avg_recall = sum(d["recall_details"]["recall_score_best"] for d in details) / len(details)
+    avg_weighted_recall = sum(d["recall_details"]["recall_score_all"] for d in details) / len(details)
     
     # Prepare results
     scores_dict = {
@@ -168,7 +168,7 @@ def evaluate_rag_retriever(verbose: bool = False, test_mode: bool = False) -> Tu
         "Context Relevancy (with best context)": avg_relevancy_best,
         "Context Recall": avg_recall,
         "Weighted Context Recall": avg_weighted_recall,
-        "Overall Retriever Score": avg_score
+        "Overall": avg_score
     }
     
     if verbose:
