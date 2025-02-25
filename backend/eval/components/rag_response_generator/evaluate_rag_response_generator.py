@@ -24,7 +24,7 @@ def evaluate_faithfulness_samples(
     def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer using the provided context
         generated_answer = generator.generate_response(
-            question=sample["question"],
+            query=sample["question"],
             search_results=sample["context"]
         )
         
@@ -76,7 +76,7 @@ def evaluate_correctness_samples(
     def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer with context
         generated_answer = generator.generate_response(
-            question=sample["question"],
+            query=sample["question"],
             search_results=sample["context"]
         )
         
@@ -130,7 +130,7 @@ def evaluate_relevancy_samples(
     def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer with context
         generated_answer = generator.generate_response(
-            question=sample["question"],
+            query=sample["question"],
             search_results=sample["context"]
         )
         
@@ -181,7 +181,7 @@ def evaluate_contradictions_samples(
     def evaluate_single_sample(sample: Dict[str, Any]) -> Tuple[float, Dict[str, Any]]:
         # Generate answer with context
         generated_answer = generator.generate_response(
-            question=sample["question"],
+            query=sample["question"],
             search_results=sample["context"]
         )
         
@@ -257,7 +257,7 @@ def evaluate_citations_samples(
     
         # Generate answer with context
         generated_answer = generator.generate_response(
-            question=sample["question"],
+            query=sample["question"],
             search_results=context_str
         )
         

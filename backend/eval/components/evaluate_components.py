@@ -6,7 +6,7 @@ Runs evaluations for the query analyzer, response generator, and retriever compo
 from .rag_query_analyzer.evaluate_rag_query_analyzer import evaluate_query_analyzer
 from .rag_response_generator.evaluate_rag_response_generator import evaluate_response_generator
 from .rag_retriever.evaluate_rag_retriever import evaluate_rag_retriever
-from dotenv import load_dotenv
+from .router.evaluate_router import evaluate_router
 import json
 import os
 from datetime import datetime
@@ -86,7 +86,8 @@ def save_detailed_report(
         f.write(f"Total Score: {results['Overall']:.2f}\n")
         f.write(f"Query Analyzer Score: {results['Query Analyzer']['Overall']:.2f}\n")
         f.write(f"Response Generator Score: {results['Response Generator']['Overall']:.2f}\n")
-        f.write(f"Retriever Score: {results['Retriever']['Overall']:.2f}\n\n")
+        f.write(f"Retriever Score: {results['Retriever']['Overall']:.2f}\n")
+        f.write(f"Router Score: {results['Router']['Routing Accuracy']:.2f}\n\n")
         
         # Write Query Analyzer results
         f.write("Query Analyzer Results\n")
@@ -99,8 +100,8 @@ def save_detailed_report(
         for test in detailed_results["Query Analyzer"]:
             f.write(f"\nMetric: {test['metric']}\n")
             f.write(f"Query: {test['query']}\n")
-            if "context" in test:
-                f.write(f"Context: {test['context']}\n")
+            if "chat_history" in test:
+                f.write(f"Chat History:\n{test['chat_history']}\n")
             f.write(f"Generated: {test['generated']}\n")
             f.write(f"Score: {test['score']:.2f}\n")
             if "reasoning_steps" in test:
@@ -168,6 +169,24 @@ def save_detailed_report(
             f.write(f"Overall score: {test['score']:.2f}\n")
             f.write("-" * 50 + "\n")
 
+        # Write Router results
+        f.write("\nRouter Results\n")
+        f.write("-----------------\n")
+        for metric, score in results["Router"].items():
+            if metric != "Overall":
+                f.write(f"{metric}: {score:.2f}\n")
+        
+        f.write("\nDetailed Test Results:\n")
+        for test in detailed_results["Router"]:
+            f.write(f"\nMetric: {test['metric']}\n")
+            f.write(f"Query: {test['query']}\n")
+            f.write(f"Chat History:\n{test['chat_history']}\n")
+            f.write(f"Decision Path: {test['decision_path']}\n")
+            f.write(f"Expected Paths: {test['expected_paths']}\n")
+            f.write(f"Reasoning Steps: {test['reasoning_steps']}\n")
+            f.write(f"Score: {test['score']:.2f}\n")
+            f.write("-" * 50 + "\n")
+
 def main() -> None:
     """Run evaluations for all RAG components."""
     start_time = time.time()
@@ -185,9 +204,13 @@ def main() -> None:
     # Evaluate Retriever
     print("\nEvaluating Retriever...")
     rt_scores, rt_details = evaluate_rag_retriever(verbose=False)
+
+    # Evaluate Router
+    print("\nEvaluating Router...")
+    router_scores, router_details = evaluate_router(verbose=False)
     
     # Calculate overall score
-    overall_score = (qa_scores["Overall"] + rg_scores["Overall"] + rt_scores["Overall"]) / 3
+    overall_score = (qa_scores["Overall"] + rg_scores["Overall"] + rt_scores["Overall"] + router_scores['Routing Accuracy']) / 4
     
     # Calculate total time
     total_time = time.time() - start_time
@@ -198,13 +221,15 @@ def main() -> None:
         "Query Analyzer": qa_scores,
         "Response Generator": rg_scores,
         "Retriever": rt_scores,
+        "Router": router_scores,
         "Total Time (seconds)": total_time
     }
     
     detailed_results = {
         "Query Analyzer": qa_details,
         "Response Generator": rg_details,
-        "Retriever": rt_details
+        "Retriever": rt_details,
+        "Router": router_details
     }
     
     # Print overall results
@@ -212,6 +237,7 @@ def main() -> None:
     print(f"Query Analyzer Score: {qa_scores['Overall']:.2f}")
     print(f"Response Generator Score: {rg_scores['Overall']:.2f}")
     print(f"Retriever Score: {rt_scores['Overall']:.2f}")
+    print(f"Router Score: {router_scores['Routing Accuracy']:.2f}")
     print(f"Overall Score: {overall_score:.2f}")
     print(f"Total Time: {total_time:.2f} seconds")
     
