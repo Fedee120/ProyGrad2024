@@ -17,7 +17,6 @@ Statements:
 - Deep learning has revolutionized computer vision
 - Deep learning has revolutionized NLP
 - Deep learning automatically discovers features needed for classification
-- Deep learning eliminates the need for manual feature engineering
 
 Query: {query}
 Ground Truth: {ground_truth}

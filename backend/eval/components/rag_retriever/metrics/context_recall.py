@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from typing import List, Tuple, Dict, Any, Optional, Literal
+from typing import List, Tuple, Dict, Any, Literal
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..prompts.context_recall_prompt import STATEMENT_EXTRACTION_PROMPT, STATEMENT_COVERAGE_PROMPT
 
@@ -142,7 +142,7 @@ def evaluate_context_recall(
     # Step 1: Extract statements from ground truth
     statements = extract_statements(query, ground_truth, verbose)
     if not statements:
-        return 0.0, {"error": "No statements could be extracted from ground truth"}
+        raise ValueError("No se pudieron extraer afirmaciones")
     
     # Step 2: Evaluate coverage for each context
     context_results = []
@@ -189,7 +189,7 @@ def evaluate_context_recall(
     # A statement is considered recalled if it has at least partial coverage
     recalled_statements = sum(1 for coverage in best_statement_coverage.values() 
                              if coverage in ["full", "partial"])
-    recall_score = recalled_statements / len(statements) if statements else 0.0
+    recall_score = recalled_statements / len(statements)
     
     # Calculate weighted recall score (full counts as 1.0, partial as 0.5)
     weighted_recall = sum(1.0 if coverage == "full" else 0.5 if coverage == "partial" else 0.0 

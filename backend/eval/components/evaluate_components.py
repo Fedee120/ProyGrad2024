@@ -147,6 +147,19 @@ def save_detailed_report(
             f.write(f"Ground truth: {test['ground_truth']}\n")
             f.write(f"Relevancy score (best): {test['relevancy_details']['relevancy_ratio_best']:.2f}\n")
             f.write(f"Relevancy score (all): {test['relevancy_details']['relevancy_ratio_all']:.2f}\n")
+            f.write(f"Recall score: {test['recall_details']['recall_score']:.2f}\n")
+            f.write(f"Weighted recall score: {test['recall_details']['weighted_recall_score']:.2f}\n")
+            
+            # Count contexts with relevant information
+            contexts_with_relevant_info = sum(
+                1 for ctx in test['recall_details']['per_context_results'] 
+                if ctx['coverage_counts'].get('full', 0) > 0 or ctx['coverage_counts'].get('partial', 0) > 0
+            )
+            
+            # Move summary metrics here, before the detailed per-context evaluations
+            f.write(f"\nTotal ground truth statements to cover: {test['recall_details']['total_ground_truth_statements']}\n")
+            f.write(f"Contexts with relevant information: {contexts_with_relevant_info}/{test['recall_details']['total_contexts']}\n")
+            
             f.write("\nPer-context relevancy evaluation:\n")
             for ctx_result in test['relevancy_details']['per_context_results']:
                 f.write(f"\nContext {ctx_result['context_num']}:\n")
@@ -155,8 +168,6 @@ def save_detailed_report(
                 f.write("Reasoning:\n")
                 for step in ctx_result['reasoning_steps']:
                     f.write(f"- {step}\n")
-            f.write(f"Recall score (best): {test['recall_details']['recall_score_best']:.2f}\n")
-            f.write(f"Recall score (all): {test['recall_details']['recall_score_all']:.2f}\n")
             f.write("\nPer-context recall evaluation:\n")
             for ctx_result in test['recall_details']['per_context_results']:
                 f.write(f"\nContext {ctx_result['context_num']}:\n")
@@ -178,9 +189,8 @@ def save_detailed_report(
                 for assessment in ctx_result.get('coverage_assessments', []):
                     f.write(f"- Statement: \"{assessment.get('statement', '')}\" - Coverage: {assessment.get('coverage', 'none').upper()}\n")
                     f.write(f"  Reasoning: {assessment.get('reasoning', 'No reasoning provided')}\n")
-                
-            f.write(f"\nTotal relevant contexts: {test['recall_details']['relevant_contexts']}/{test['recall_details']['total_contexts']}\n")
-            f.write(f"Overall score: {test['score']:.2f}\n")
+            
+            f.write(f"\nOverall score: {test['score']:.2f}\n")
             f.write("-" * 50 + "\n")
 
         # Write Router results
