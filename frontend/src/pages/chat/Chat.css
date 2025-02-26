@@ -143,18 +143,26 @@
 }
 
 .message-citations {
-  margin-top: 10px;
-  font-size: 0.9em;
+  margin-top: 8px;
+  font-size: 0.8em;
   color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+  padding-right: 48px;
 }
 
 .citations-header {
-  font-weight: 600;
-  margin-bottom: 5px;
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
-.citation-item {
-  margin-bottom: 5px;
+.message-citations ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.message-citations li {
+  margin: 2px 0;
 }
 
 .citation-text {
