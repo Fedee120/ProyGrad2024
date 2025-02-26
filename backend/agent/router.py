@@ -87,17 +87,24 @@ class Router:
                 )
 
                 context = rag_response.answer
-                # Create APA formatted citations with all available metadata
-                citations = [
-                    {
+                # Create APA formatted citations with all available metadata and deduplicate using a set
+                citations_set = set()
+                all_citations = []
+                
+                for context_item in rag_response.context:
+                    citation = {
                         "text": context_item.format_apa_citation(),
                         "source": context_item.source,
                         "title": context_item.title,
                         "author": context_item.author,
                         "year": context_item.year
                     }
-                    for context_item in rag_response.context
-                ]
+                    # Use the citation text as key for deduplication
+                    if citation["text"] not in citations_set:
+                        citations_set.add(citation["text"])
+                        all_citations.append(citation)
+                
+                citations = all_citations
 
                 final_response = self.conversational_response_llm.generate_response(
                     query=query,
