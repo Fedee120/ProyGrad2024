@@ -6,10 +6,11 @@ import os
 from pydantic import BaseModel, Field
 from typing import List
 import time
-from .llms.rag_response_generator import RAGResponseGenerator
+from .llms.rag_response_generator import RAGResponseGenerator, extract_year_from_creation_date
 from .llms.rag_query_analyzer import RAGQueryAnalyzer
 from langchain_core.documents import Document
 from langsmith import traceable
+from tqdm import tqdm
 
 class SearchResult(BaseModel):
     """Result from a single search query"""
@@ -19,7 +20,25 @@ class SearchResult(BaseModel):
     def formatted(self) -> List[str]:
         formatted_results = []
         for doc in self.documents:
-            metadata_str = f"---- Context METADATA ----\n{str({**doc.metadata, 'source': os.path.basename(doc.metadata.get('source', ''))} if doc.metadata else {})}"
+            # Extract metadata with defaults for missing values
+            metadata = doc.metadata if doc.metadata else {}
+            
+            # Process citation-relevant metadata
+            title = metadata.get('title', os.path.basename(metadata.get('source', 'Unknown Source')))
+            author = metadata.get('author', 'Unknown Author')
+            creation_date = metadata.get('creationDate', None)
+            year = extract_year_from_creation_date(creation_date)
+            
+            # Include all metadata in a structured way
+            metadata_dict = {
+                **metadata,
+                'source': os.path.basename(metadata.get('source', '')),
+                'title': title,
+                'author': author,
+                'year': year
+            }
+            
+            metadata_str = f"---- Context METADATA ----\n{str(metadata_dict)}"
             content_str = f"---- Context Start ----\n{doc.page_content}\n---- Context End ----"
             formatted_results.append(f"{metadata_str}\n{content_str}")
         return formatted_results
@@ -60,7 +79,27 @@ class RAG():
     def add_documents(self, documents: list, ids: list = None):
         if ids is None:
             ids = [str(uuid4()) for _ in range(len(documents))]
-        self.vector_store.add_documents(documents=documents, ids=ids)
+        
+        # Añadir barra de progreso al añadir documentos
+        print("Añadiendo documentos a la colección de vectores...")
+        
+        # Si hay muchos documentos, mejor procesarlos en lotes para mostrar el progreso
+        batch_size = 50  # Ajustar según sea necesario
+        
+        # Calcular número de lotes
+        num_batches = (len(documents) + batch_size - 1) // batch_size
+        
+        for i in tqdm(range(num_batches), desc="Añadiendo documentos", unit="batch"):
+            # Calcular índices de inicio y fin para el lote actual
+            start_idx = i * batch_size
+            end_idx = min((i + 1) * batch_size, len(documents))
+            
+            # Obtener el lote actual de documentos e IDs
+            docs_batch = documents[start_idx:end_idx]
+            ids_batch = ids[start_idx:end_idx]
+            
+            # Añadir el lote a la base de vectores
+            self.vector_store.add_documents(documents=docs_batch, ids=ids_batch)
 
     def delete_documents(self, ids: list):
         self.vector_store.delete(ids=ids)

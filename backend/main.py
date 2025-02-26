@@ -9,7 +9,7 @@ import os
 from dotenv import load_dotenv
 from agent.router import Router
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
-from typing import List
+from typing import List, Optional
 from datetime import datetime, timezone
 import uuid
 
@@ -77,11 +77,19 @@ class MessageRequest(BaseModel):
     history: list[dict] = []
     threadId: str
 
+class Citation(BaseModel):
+    """APA-formatted citation for a document"""
+    text: str  # The formatted APA citation text
+    source: str  # The source filename
+    title: Optional[str] = None  # The document title
+    author: Optional[str] = None  # The document author
+    year: Optional[str] = None  # The publication year
+
 class MessageResponse(BaseModel):
     id: str
     timestamp: str
     response: str
-    citations: list[str] = []
+    citations: list[Citation] = []
 
 @app.post("/invoke_agent", response_model=MessageResponse)
 async def invoke_agent(

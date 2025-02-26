@@ -44,7 +44,7 @@ class Router:
         - Avoid choosing 'cross-question' if one was already done in the last 1-3 messages, as asking too many successive questions may frustrate the user. Instead, prefer 'retrieve' or another appropriate path.
         - If the user does not respond to a previous cross-question or explicitly states they don't know the answer, do not choose 'cross-question' again. Instead, retrieve relevant information to provide them with a direct response.
 
-        - 'deny': Choose this path when the user’s query is is not related to AI in any way. This includes questions that seek personal advice, general knowledge, or topics outside the chatbot's focus. The chatbot's purpose is strictly limited to discussions related to AI and should not attempt to serve as a general AI assistant.
+        - 'deny': Choose this path when the user's query is is not related to AI in any way. This includes questions that seek personal advice, general knowledge, or topics outside the chatbot's focus. The chatbot's purpose is strictly limited to discussions related to AI and should not attempt to serve as a general AI assistant.
 
         Always choose one and only one decision path based on the user's query and context.
         """
@@ -61,7 +61,7 @@ class Router:
         return router_response.decision_path, router_response.reasoning_steps
 
     @traceable
-    def process_query(self, query: str, history: List[BaseMessage]) -> Tuple[str, list[str]]:
+    def process_query(self, query: str, history: List[BaseMessage], langsmith_extra: dict = None) -> Tuple[str, list[dict]]:
         """Processes a user query by selecting the appropriate response generation path."""
     
         citations = []
@@ -75,11 +75,27 @@ class Router:
                                 )
             
             case "retrieve":
-                rag_response = self.rag.generate_answer(query, history)
+                # Format RAG call properly
+                rag_kwargs = {}
+                if langsmith_extra:
+                    rag_kwargs["extra_kwargs"] = langsmith_extra
+                
+                rag_response = self.rag.generate_answer(
+                    question=query, 
+                    history=history,
+                    **rag_kwargs
+                )
 
                 context = rag_response.answer
+                # Create APA formatted citations with all available metadata
                 citations = [
-                    context_item.source 
+                    {
+                        "text": context_item.format_apa_citation(),
+                        "source": context_item.source,
+                        "title": context_item.title,
+                        "author": context_item.author,
+                        "year": context_item.year
+                    }
                     for context_item in rag_response.context
                 ]
 
@@ -107,4 +123,4 @@ if __name__ == "__main__":
     load_dotenv()
 
     router = Router()
-    print(router.process_query("Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa.", []))
+    print(router.process_query("Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa.", [], {}))
