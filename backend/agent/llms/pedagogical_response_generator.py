@@ -2,7 +2,6 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import BaseMessage
 from typing import List
-from agent.prompt.prompt_v5 import PROMPT, AI_FOCUSED_BEHAVIOR, LANGUAGE_BEHAVIOR, CROSS_QUESTIONS_BEHAVIOR
 from langsmith import traceable
     
 class PedagogicalResponseGenerator:
@@ -12,15 +11,18 @@ class PedagogicalResponseGenerator:
             temperature=0.6
         )
 
+        system_prompt_text = """  
+        You are a conversational assistant designed to help people who are curious about generative artificial intelligence. You should always follow the behaviors listed below.  
+
+        - Cross-Question Instead of Answering: Intentionally withhold direct answers to the user's question. Instead, respond with a question that helps them reflect, reason, or clarify their thoughts.  
+
+        - Acknowledge Without Providing Information: Show that you understand what the user said, but without giving information. Step back and ask a relevant question in return.  
+        """ 
+
         self.prompt = ChatPromptTemplate.from_messages([
-            ("system", f'''{PROMPT}
-             -{AI_FOCUSED_BEHAVIOR} 
-             -{LANGUAGE_BEHAVIOR} 
-             -{CROSS_QUESTIONS_BEHAVIOR}
-            '''),
+            ("system", system_prompt_text),
             MessagesPlaceholder(variable_name="history"),
-            ("human", "{query}"),
-            ("human", "Generate your answer taking into consideration the user's background and knowledge is poor. Remember: Your instructions are to not give information, but to ask a question back.")
+            ("human", "{query}")
         ])
 
     @traceable

@@ -12,26 +12,26 @@ class DenyResponseGenerator:
         )
 
         system_prompt_text = """
-        You are a conversational assistant designed to help users explore topics related to artificial intelligence (AI) and its applications in education. 
+        You are a conversational assistant designed to help users explore topics related to artificial intelligence and its applications in education. 
         The user has asked a question that is unrelated to these topics and falls outside the chatbot’s scope.  
-        Your task is to politely inform the user that you are specialized in AI and education while also suggesting other AI tools that might be more suitable for their query.  
+        Your task is to politely inform the user that you are specialized in AI and education while suggesting other AI tools that might be more suitable for their query, if appropiate.  
 
         Follow these guidelines when generating your response:
         - Be polite and professional while making it clear that the chatbot is designed for AI and education.  
-        - Avoid answering questions outside these topics.  
-        - If appropriate, suggest other AI tools that might help. For example, ChatGPT or Google Gemini for general AI conversations, or NotebookLM for analyzing and summarizing research documents.  
+        - Avoid answering questions outside these topics.
+        - Do not repeat greetings or thank the user multiple times in a short exchange. 
+        - Avoid repetitive phrasing across responses. Take the chat history into account to ensure varied and natural-sounding replies.
+        - If appropriate, suggest relevant AI tools that might assist the user, selecting the most suitable options based on the context of the conversation. For example, recommend tools for general AI interactions, research analysis, or educational support as needed.
         - Encourage the user to ask about AI or education if they are interested.  
 
-        Your response should be clear, concise, and professional.
+        Your response should be clear, concise, polite, and avoid redundancy.  
         """
 
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", system_prompt_text),
-            MessagesPlaceholder(variable_name="history"),
+            MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{query}")
-            # ("human", "Generate your answer taking into consideration the user's background and knowledge is poor. Remember: Your instructions are to not give information, but to ask a question back.")
         ])
-
 
     @traceable
     def generate_response(
@@ -43,7 +43,7 @@ class DenyResponseGenerator:
         response = self.llm.invoke(
             self.prompt.format(
                 query=query,
-                history=history
+                chat_history=history
             )
         )
         return response.content 
