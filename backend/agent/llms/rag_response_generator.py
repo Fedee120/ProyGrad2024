@@ -32,12 +32,37 @@ class ContextItem(BaseModel):
         """
         Format the citation in APA style based on available information.
         Falls back gracefully when information is missing.
+        - Usa 'et al.' cuando hay más de un autor
+        - Maneja correctamente los formatos de año
         """
         # Handle missing title
         title = self.title if self.title else self.source
         
-        # Handle missing author
-        author = self.author if self.author else "Autor desconocido"
+        # Handle authors with 'et al.' rule
+        if not self.author:
+            author = "Autor desconocido"
+        else:
+            # Verificar si es una lista de autores o una cadena con separadores
+            if ',' in self.author:
+                # Puede ser una cadena con varios autores separados por comas
+                authors_list = [a.strip() for a in self.author.split(',')]
+                if len(authors_list) > 1:
+                    author = f"{authors_list[0]} et al."
+                else:
+                    author = self.author
+            elif ';' in self.author:
+                # Puede ser una cadena con varios autores separados por punto y coma
+                authors_list = [a.strip() for a in self.author.split(';')]
+                if len(authors_list) > 1:
+                    author = f"{authors_list[0]} et al."
+                else:
+                    author = self.author
+            elif ' y ' in self.author.lower() or ' and ' in self.author.lower():
+                # Puede contener "y" o "and" indicando múltiples autores
+                author = f"{self.author.split(' y ')[0].split(' and ')[0]} et al."
+            else:
+                # Un solo autor
+                author = self.author
         
         # Format based on available information
         if self.year:
@@ -72,6 +97,8 @@ class RAGResponseGenerator:
         - Never question the information's correctness since your knowledge might be wrong or outdated, assume its real and use it if what's being asked is addressed by the information.
         - When returning context items, be sure to include ALL available metadata (title, author, year) for proper citation formatting.
         - Each context item should contain the exact source from the metadata, as well as the title, author, and year when available.
+        - When handling author fields, if the metadata contains 'authors' (plural), use that as the 'author' field in your response.
+        - For multiple authors, convert the list to a comma-separated string, or keep the existing comma-separated format.
         """
 
         self.prompt = PromptTemplate(
