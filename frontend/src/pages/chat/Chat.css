@@ -135,6 +135,27 @@
   opacity: 0.7;
   text-align: right;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.thread-id .copy-button {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.thread-id .copy-button:hover {
+  opacity: 1;
 }
 
 .user-info {

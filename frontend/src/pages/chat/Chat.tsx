@@ -25,6 +25,17 @@ const Chat = () => {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success('ID copiado al portapapeles');
+      })
+      .catch(err => {
+        console.error('Error al copiar: ', err);
+        toast.error('No se pudo copiar al portapapeles');
+      });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setInputMessage('');
@@ -78,6 +89,25 @@ const Chat = () => {
               </div>
               <div className="thread-id">
                 ID: {threadId}
+                <button
+                  className="copy-button"
+                  onClick={() => copyToClipboard(threadId)}
+                  title="Copiar ID"
+                >
+                  <svg 
+                    width="14" 
+                    height="14" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
               </div>
             </div>
             <div className="header-actions">
