@@ -121,12 +121,31 @@
 .header-actions {
   margin-bottom: 0;
   order: 2;
+  display: flex;
+  gap: 8px;
 }
 
 .header-actions button {
   font-size: 0.8rem;
   padding: 4px 8px;
   white-space: nowrap;
+}
+
+.about-button {
+  background-color: var(--secondary-color, #6c757d);
+  color: var(--primary-text, #fff);
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.about-button:hover {
+  opacity: 0.9;
+}
+
+.feedback-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .app-version, .thread-id {
