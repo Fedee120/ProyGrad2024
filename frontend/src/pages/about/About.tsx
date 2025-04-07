@@ -42,11 +42,11 @@ const About = () => {
         </p>
         
         <p>
-          La iniciativa forma parte de los requerimientos académicos para la obtención del título, y tiene como objetivo explorar y aplicar tecnologías de inteligencia artificial en el ámbito educativo. En particular, se centra en el diseño e implementación de un chatbot generativo, concebido para asistir a docentes y estudiantes en la comprensión y uso de la IA generativa, apoyándose en información curada y en estrategias pedagógicas innovadoras.
+          La iniciativa forma parte de los requerimientos académicos para la obtención del título, y tiene como objetivo explorar y aplicar tecnologías de inteligencia artificial. En particular, se centra en el diseño e implementación de un chatbot generativo, concebido para asistir a docentes en la comprensión y uso de la IA generativa, apoyándose en información curada y en estrategias pedagógicas innovadoras.
         </p>
         
         <p>
-          El proyecto surge de la necesidad de facilitar la integración de herramientas tecnológicas en el proceso de enseñanza y aprendizaje, brindando respuestas claras y fundamentadas que promuevan el pensamiento crítico y la reflexión. Aunque en este sitio no se detallan aspectos técnicos, la investigación y desarrollo realizado respalda nuestro compromiso con la calidad, la usabilidad y la seguridad de la información.
+          El proyecto surge de la necesidad de facilitar la integración de herramientas tecnológicas en el proceso de enseñanza y aprendizaje, brindando respuestas claras y fundamentadas que promuevan el pensamiento crítico y la reflexión. Aunque en este sitio no se detallan aspectos técnicos, la investigación y desarrollo realizado respalda nuestro compromiso con la calidad, la usabilidad y la seguridad de la información. Los documentos que fundamentan las respuestas fueron cuidadosamente seleccionados para garantizar la precisión y calidad de la información. Estos documentos son abiertos y de dominio público.
         </p>
         
         <p>
