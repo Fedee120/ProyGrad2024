@@ -57,6 +57,10 @@ const About = () => {
           ¡Gracias por tu interés y bienvenido/a a esta experiencia de innovación educativa!
         </p>
       </div>
+      
+      <div className="logo-container">
+        <img src="/logo_fing_udelar.png" alt="Logo Facultad de Ingeniería - UdelaR" className="fing-logo" />
+      </div>
     </div>
   );
 

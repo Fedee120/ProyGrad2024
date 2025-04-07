@@ -86,6 +86,19 @@
   color: var(--text-primary);
 }
 
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.fing-logo {
+  max-width: 300px;
+  height: auto;
+}
+
 @media (max-width: 768px) {
   .about-content {
     padding: 1.5rem;
@@ -103,5 +116,9 @@
     margin-bottom: 1rem;
     display: flex;
     justify-content: flex-start;
+  }
+  
+  .fing-logo {
+    max-width: 240px;
   }
 } 
