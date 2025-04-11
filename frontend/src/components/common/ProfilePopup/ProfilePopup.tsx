@@ -24,7 +24,7 @@ const ProfilePopup = () => {
     const menuItems = [
         // { label: 'Profile', onClick: () => console.log('Profile clicked') },
         // { label: 'Settings', onClick: () => console.log('Settings clicked') },
-        { label: 'Logout', onClick: () => logout(), customClass: 'text-red-500 bg-red-50 hover:bg-red-100' }
+        { label: 'Cerrar sesión', onClick: () => logout(), customClass: 'text-red-500 bg-red-50 hover:bg-red-100' }
     ]
 
     return (

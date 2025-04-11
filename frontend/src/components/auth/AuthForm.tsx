@@ -11,8 +11,8 @@ import { toast } from 'react-toastify'
 import Logo from '../../assets/logo.png'
 
 const schema = yup.object().shape({
-  email: yup.string().email('Invalid email format').required('Email is required'),
-  password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+  email: yup.string().email('Formato de email inválido').required('El email es requerido'),
+  password: yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres').required('La contraseña es requerida'),
 })
 
 const AuthForm = () => {
@@ -27,9 +27,9 @@ const AuthForm = () => {
     setLoading(true)
     try {
       await login(data.email, data.password)
-      toast.success('Login successful')
+      toast.success('Inicio de sesión exitoso')
     } catch (error: any) {
-      setError({ message: 'Invalid credentials' })
+      setError({ message: 'Credenciales inválidas' })
     } finally {
       setLoading(false)
     }
@@ -40,22 +40,22 @@ const AuthForm = () => {
       <div className='flex align-center justify-center mb-6'><img src={Logo} alt='logo' className='ml-3' width={220} height={100} /></div>
       <form onSubmit={handleSubmit(onSubmit as any)} className="w-full form-container">
         <div className="flex flex-col gap-3 mb-3 text-center">
-          <div className='text-4xl font-semibold leading-[140%]'>{error.message ? 'Oops...' : 'Welcome back!'}</div>
+          <div className='text-4xl font-semibold leading-[140%]'>{error.message ? 'Oops...' : '¡Bienvenido!'}</div>
           {error.message && <p className='flex items-center px-3 py-2 bg-[#f8f8f8] rounded gap-2 text-red-500 text-[14px] font-medium leading-[160%]'><XmarkCircle width={20} height={20} color='#FF4444' />{error.message}</p>}
         </div>
         <div className='input-wrap'>
-          <label htmlFor="email" className="label">Email</label>
-          <input id="email" {...register('email')} type="email" className="input" placeholder='Email' />
+          <label htmlFor="email" className="label">Correo electrónico</label>
+          <input id="email" {...register('email')} type="email" className="input" placeholder='Correo electrónico' />
           {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
         </div>
         <div className='input-wrap'>
-          <label htmlFor="password" className="label">Password</label>
-          <input id="password" {...register('password')} type="password" className="input" placeholder='Password' />
+          <label htmlFor="password" className="label">Contraseña</label>
+          <input id="password" {...register('password')} type="password" className="input" placeholder='Contraseña' />
           {errors.password && <span className="text-red-500 text-xs">{errors.password.message}</span>}
         </div>
         <div className='flex flex-col mt-6 gap-3'>
           <Button type='submit' loading={loading} size='large' disabled={loading}>
-            Login
+            Iniciar sesión
           </Button>
         </div>
       </form>
