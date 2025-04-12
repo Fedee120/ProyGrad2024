@@ -20,15 +20,11 @@ class DocumentMetadata(BaseModel):
     authors: List[str] = Field(description="Lista de autores del documento")
     publication_year: Optional[int] = Field(description="Año de publicación del documento como número entero")
 
-def extract_document_metadata(document_path: str) -> DocumentMetadata:
+def extract_document_metadata(pages, document_path: str) -> tuple[DocumentMetadata, int]:
     """
     Extrae metadatos (título, autores, año) de un documento completo.
-    Lee el PDF completo, extrae todo el texto, y luego envía muestras al modelo.
+    Recibe las páginas ya cargadas y extrae metadata del texto.
     """
-    # Cargar el documento completo para extraer metadata
-    loader = PyMuPDFLoader(document_path)
-    pages = loader.load()
-    
     # Concatenar el texto de todas las páginas para tener una vista completa del documento
     full_text = " ".join([clean_text(page.page_content) for page in pages])
     
@@ -93,13 +89,14 @@ def get_docs(path):
     print(f"\n{'-'*40}")
     print(f"Procesando: {os.path.basename(path)}")
     
-    # Primero extraer la metadata una sola vez para todo el documento
-    doc_metadata, num_pages = extract_document_metadata(path)
-    print(f"Número total de páginas: {num_pages}")
-    
-    # Luego cargar las páginas y aplicar la misma metadata a todas
+    # Cargar el documento solo una vez
     loader = PyMuPDFLoader(path)
     docs = loader.load()
+    
+    # Extraer metadata usando las páginas ya cargadas
+    doc_metadata, num_pages = extract_document_metadata(docs, path)
+    
+    print(f"Número total de páginas: {len(docs)}")
     
     # Verificar que el número de páginas coincide con lo esperado
     if len(docs) != num_pages:
