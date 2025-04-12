@@ -85,7 +85,7 @@ def clean_text(text: str) -> str:
     # Eliminar espacios al inicio y final
     return text.strip()
 
-def get_docs(path):
+def extract_metadata_and_clean_doc(path):
     print(f"\n{'-'*40}")
     print(f"Procesando: {os.path.basename(path)}")
     
@@ -133,7 +133,7 @@ def load_data(rag: RAG):
     # Procesamiento en paralelo de PDFs con barra de progreso
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
         # Crear tareas para cada PDF y mostrar progreso con tqdm
-        futures = {executor.submit(get_docs, path): path for path in paths}
+        futures = {executor.submit(extract_metadata_and_clean_doc, path): path for path in paths}
         
         # Procesar resultados a medida que se completan con barra de progreso
         for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures), 
