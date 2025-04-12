@@ -98,10 +98,6 @@ def get_docs(path):
     
     print(f"Número total de páginas: {len(docs)}")
     
-    # Verificar que el número de páginas coincide con lo esperado
-    if len(docs) != num_pages:
-        print(f"ADVERTENCIA: El número de páginas cambió: esperado {num_pages}, obtenido {len(docs)}")
-    
     # Limpiar el texto de cada documento y aplicar la misma metadata a todas las páginas
     for i, doc in enumerate(docs):
         doc.page_content = clean_text(doc.page_content)
