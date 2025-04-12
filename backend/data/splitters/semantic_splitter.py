@@ -25,23 +25,12 @@ def semantic_split(documents):
         doc_chunks = text_splitter.split_documents([doc])
         
         # Asegurarse de que todos los metadatos se conserven en cada chunk
+        metadata_keys = ['title', 'authors', 'publication_year', 'source', 'page', 'total_pages']
         for chunk in doc_chunks:
-            # Verificar que los metadatos importantes estén preservados
-            if 'title' not in chunk.metadata and 'title' in doc.metadata:
-                chunk.metadata['title'] = doc.metadata['title']
-            if 'authors' not in chunk.metadata and 'authors' in doc.metadata:
-                chunk.metadata['authors'] = doc.metadata['authors']
-            if 'publication_year' not in chunk.metadata and 'publication_year' in doc.metadata:
-                chunk.metadata['publication_year'] = doc.metadata['publication_year']
-            
-            # Otros metadatos importantes para la referencia
-            if 'source' not in chunk.metadata and 'source' in doc.metadata:
-                chunk.metadata['source'] = doc.metadata['source']
-            if 'page' not in chunk.metadata and 'page' in doc.metadata:
-                chunk.metadata['page'] = doc.metadata['page']
-            if 'total_pages' not in chunk.metadata and 'total_pages' in doc.metadata:
-                chunk.metadata['total_pages'] = doc.metadata['total_pages']
-            
+            for key in metadata_keys:
+                if key not in chunk.metadata and key in doc.metadata:
+                    chunk.metadata[key] = doc.metadata[key]
+        
         result_chunks.extend(doc_chunks)
     
     return result_chunks 
