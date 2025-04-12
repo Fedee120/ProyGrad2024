@@ -92,26 +92,17 @@ class Router:
                 all_citations = []
                 
                 for context_item in rag_response.context:
-                    # Asegurarse de que el autor sea una cadena adecuada para formato APA
-                    author = context_item.author
-                    
-                    # Si el valor de author está en formato lista (como puede ocurrir desde los metadata)
-                    # convertir a string adecuado para citas
-                    if isinstance(author, list) and author:
-                        if len(author) > 1:
-                            # Usar el formato "Primer autor et al." para múltiples autores
-                            author = f"{author[0]} et al."
-                        else:
-                            # Un solo autor en la lista
-                            author = author[0]
+                    # Usar el método mejorado que devuelve todos los componentes procesados
+                    citation_data = context_item.format_apa_citation()
                     
                     citation = {
-                        "text": context_item.format_apa_citation(),
+                        "text": citation_data["text"],
                         "source": context_item.source,
-                        "title": context_item.title,
-                        "author": author,
-                        "year": context_item.year
+                        "title": citation_data["processed_title"],
+                        "author": citation_data["processed_author"],
+                        "year": citation_data["processed_year"]
                     }
+                    
                     # Use the citation text as key for deduplication
                     if citation["text"] not in citations_set:
                         citations_set.add(citation["text"])

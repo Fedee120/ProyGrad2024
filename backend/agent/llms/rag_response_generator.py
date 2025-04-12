@@ -28,7 +28,7 @@ class ContextItem(BaseModel):
     author: Optional[str] = Field(None, description="The author of the document.")
     year: Optional[str] = Field(None, description="The year the document was created.")
     
-    def format_apa_citation(self) -> str:
+    def format_apa_citation(self) -> dict:
         """
         Format the citation in APA style based on available information.
         Falls back gracefully when information is missing.
@@ -43,7 +43,13 @@ class ContextItem(BaseModel):
             author = "Autor desconocido"
         else:
             # Verificar si es una lista de autores o una cadena con separadores
-            if ',' in self.author:
+            if isinstance(self.author, list):
+                # Es una lista de autores
+                if len(self.author) > 1:
+                    author = f"{self.author[0]} et al."
+                else:
+                    author = self.author[0] if self.author else "Autor desconocido"
+            elif ',' in self.author:
                 # Puede ser una cadena con varios autores separados por comas
                 authors_list = [a.strip() for a in self.author.split(',')]
                 if len(authors_list) > 1:
@@ -66,9 +72,23 @@ class ContextItem(BaseModel):
         
         # Format based on available information
         if self.year:
-            return f"{author} ({self.year}). {title}."
+            citation_text = f"{author} ({self.year}). {title}."
         else:
-            return f"{author} (s.f.). {title}."
+            citation_text = f"{author} (s.f.). {title}."
+            
+        return {
+            "text": citation_text,
+            "processed_author": author,
+            "processed_title": title,
+            "processed_year": self.year if self.year else "s.f."
+        }
+        
+    def format_apa_citation_text(self) -> str:
+        """
+        Returns just the formatted citation text in APA style.
+        This maintains backward compatibility with existing code.
+        """
+        return self.format_apa_citation()["text"]
 
 class ContextResponse(BaseModel):
     """Response format for question answering."""
