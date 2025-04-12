@@ -134,7 +134,7 @@ class RAG():
             if 'publication_year' in doc.metadata and doc.metadata['publication_year']:
                 flat_metadata['publication_year'] = str(doc.metadata['publication_year'])
             else:
-                flat_metadata['publication_year'] = 'Desconocido'
+                flat_metadata['publication_year'] = 's.f.'
                 
             # 4. Fuente/origen
             if 'source' in doc.metadata and doc.metadata['source']:
