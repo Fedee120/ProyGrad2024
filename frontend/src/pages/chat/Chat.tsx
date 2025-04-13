@@ -88,7 +88,7 @@ const Chat = () => {
           <div className="header-info">
             <div className="metadata-column">
               <div className="app-version">
-                Version: {process.env.REACT_APP_APP_VERSION ?? ' unknown'}
+                Versión: {process.env.REACT_APP_APP_VERSION ?? ' unknown'}
               </div>
               <div className="thread-id">
                 ID: {threadId}
@@ -145,7 +145,7 @@ const Chat = () => {
               </div>
               {message.citations && message.citations.length > 0 && (
                 <div className="message-citations">
-                  <div className="citations-header">Sources:</div>
+                  <div className="citations-header">Fuentes:</div>
                   <ul>
                     {message.citations.map((citation, citationIndex) => (
                       <li key={citationIndex}>{citation}</li>

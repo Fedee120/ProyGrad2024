@@ -15,7 +15,7 @@ function Login() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       {currentUser ? (
-        <p onClick={logout}>Login successful</p>
+        <p onClick={logout}>Inicio de sesión exitoso</p>
       ) : (
         <AuthForm />
       )}
