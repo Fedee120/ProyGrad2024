@@ -9,6 +9,7 @@ import Button from '../common/Button/Button'
 import { XmarkCircle } from 'iconoir-react'
 import { toast } from 'react-toastify'
 import Logo from '../../assets/logo.jpeg'
+import { Link } from 'react-router-dom'
 
 const schema = yup.object().shape({
   email: yup.string().email('Formato de email inválido').required('El email es requerido'),
@@ -59,6 +60,15 @@ const AuthForm = () => {
           </Button>
         </div>
       </form>
+      
+      <div className="project-info">
+        <p>
+          Este proyecto fue realizado en el marco del proyecto de grado para el título de Ingeniero en Computación en la Universidad de la República (UdelaR).
+        </p>
+        <p>
+          Para más información, <Link to="/about" className="about-link">consulta aquí</Link>.
+        </p>
+      </div>
     </div>
   )
 }
