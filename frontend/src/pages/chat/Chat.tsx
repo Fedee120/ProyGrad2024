@@ -148,7 +148,9 @@ const Chat = () => {
                   <div className="citations-header">Fuentes:</div>
                   <ul>
                     {message.citations.map((citation, citationIndex) => (
-                      <li key={citationIndex}>{citation}</li>
+                      <li key={citationIndex}>
+                        <span className="citation-text">{citation.text}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>

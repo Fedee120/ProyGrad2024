@@ -44,7 +44,7 @@ class Router:
         - Before choosing this path, explicitly check the last AI message. If it contains a thought-provoking or reflective question rather than providing retrieved information, do not choose 'cross-question'. Consecutive cross-questions may frustrate the user. Instead, select 'retrieve' or another appropriate path.
         - If the user does not respond to a previous cross-question or explicitly states they don't know the answer, do not choose 'cross-question' again. Instead, retrieve relevant information to provide them with a direct response.
 
-        - 'deny': Choose this path when the user’s query is is not related to AI in any way. This includes questions that seek personal advice, general knowledge, or topics outside the chatbot's focus. The chatbot's purpose is strictly limited to discussions related to AI and should not attempt to serve as a general AI assistant.
+        - 'deny': Choose this path when the user's query is is not related to AI in any way. This includes questions that seek personal advice, general knowledge, or topics outside the chatbot's focus. The chatbot's purpose is strictly limited to discussions related to AI and should not attempt to serve as a general AI assistant.
 
         Always choose one and only one decision path based on the user's query and context.
         """
@@ -61,7 +61,7 @@ class Router:
         return router_response.decision_path, router_response.reasoning_steps
 
     @traceable
-    def process_query(self, query: str, history: List[BaseMessage]) -> Tuple[str, list[str]]:
+    def process_query(self, query: str, history: List[BaseMessage], langsmith_extra: dict = None) -> Tuple[str, list[dict]]:
         """Processes a user query by selecting the appropriate response generation path."""
     
         citations = []
@@ -75,13 +75,40 @@ class Router:
                                 )
             
             case "retrieve":
-                rag_response = self.rag.generate_answer(query, history)
+                # Format RAG call properly
+                rag_kwargs = {}
+                if langsmith_extra:
+                    rag_kwargs["extra_kwargs"] = langsmith_extra
+                
+                rag_response = self.rag.generate_answer(
+                    question=query, 
+                    history=history,
+                    **rag_kwargs
+                )
 
                 context = rag_response.answer
-                citations = [
-                    context_item.source 
-                    for context_item in rag_response.context
-                ]
+                # Create APA formatted citations with all available metadata and deduplicate using a set
+                citations_set = set()
+                all_citations = []
+                
+                for context_item in rag_response.context:
+                    # Usar el método mejorado que devuelve todos los componentes procesados
+                    citation_data = context_item.format_apa_citation()
+                    
+                    citation = {
+                        "text": citation_data["text"],
+                        "source": context_item.source,
+                        "title": citation_data["processed_title"],
+                        "author": citation_data["processed_author"],
+                        "year": citation_data["processed_year"]
+                    }
+                    
+                    # Use the citation text as key for deduplication
+                    if citation["text"] not in citations_set:
+                        citations_set.add(citation["text"])
+                        all_citations.append(citation)
+                
+                citations = all_citations
 
                 final_response = self.conversational_response_llm.generate_response(
                     query=query,
@@ -107,4 +134,4 @@ if __name__ == "__main__":
     load_dotenv()
 
     router = Router()
-    print(router.process_query("Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa.", []))
+    print(router.process_query("Hola, quiero que me digas cuales son las implicaciones éticas de usar IA generativa en el aula. Soy un docente de secundaria sin mucha experiencia en IA, por lo que quiero una explicación simple pero completa.", [], {}))

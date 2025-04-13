@@ -205,6 +205,10 @@
   margin: 2px 0;
 }
 
+.citation-text {
+  font-style: italic;
+}
+
 .message-header {
   display: none;
 }
