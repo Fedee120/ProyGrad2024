@@ -8,7 +8,7 @@ import '../examples/forms/formStyles.scss'
 import Button from '../common/Button/Button'
 import { XmarkCircle } from 'iconoir-react'
 import { toast } from 'react-toastify'
-import Logo from '../../assets/logo.png'
+import Logo from '../../assets/logo.jpeg'
 
 const schema = yup.object().shape({
   email: yup.string().email('Formato de email inválido').required('El email es requerido'),
