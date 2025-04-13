@@ -7,10 +7,9 @@ from firebase_admin import auth, credentials, initialize_app, get_app
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
-from agent.orchestrator import ChatOrchestrator
+from agent.router import Router
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
-from typing import List
-from data.load_data import load_data
+from typing import List, Optional
 from datetime import datetime, timezone
 import uuid
 
@@ -22,6 +21,7 @@ if is_production:
     os.environ["LANGCHAIN_PROJECT"] = "ProyGrad2024"
 else:
     os.environ["LANGCHAIN_PROJECT"] = f"ProyGrad2024 ({environment} - {os.getenv('DEVELOPER', 'Anonymous')})"
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
 
 # Initialize Firebase Admin
 try: # Try to get existing app
@@ -31,7 +31,7 @@ except ValueError: # If no app exists, initialize with credentials
     firebase_app = initialize_app(cred)
 
 app = FastAPI()
-orchestrator = ChatOrchestrator()
+router = Router()
 
 # Split the CORS_ORIGINS string into a list
 origins = os.getenv("CORS_ORIGINS").split(",")
@@ -77,11 +77,19 @@ class MessageRequest(BaseModel):
     history: list[dict] = []
     threadId: str
 
+class Citation(BaseModel):
+    """APA-formatted citation for a document"""
+    text: str  # The formatted APA citation text
+    source: str  # The source filename
+    title: Optional[str] = None  # The document title
+    author: Optional[str] = None  # The document author
+    year: Optional[str] = None  # The publication year
+
 class MessageResponse(BaseModel):
     id: str
     timestamp: str
     response: str
-    citations: list[str] = []
+    citations: list[Citation] = []
 
 @app.post("/invoke_agent", response_model=MessageResponse)
 async def invoke_agent(
@@ -90,7 +98,7 @@ async def invoke_agent(
 ):
     try:
         id = str(uuid.uuid4())
-        response, citations = orchestrator.process_query(
+        response, citations = router.process_query(
             request.message,
             _format_history_messages(request.history),
             langsmith_extra={

@@ -121,6 +121,8 @@
 .header-actions {
   margin-bottom: 0;
   order: 2;
+  display: flex;
+  gap: 8px;
 }
 
 .header-actions button {
@@ -129,12 +131,50 @@
   white-space: nowrap;
 }
 
+.about-button {
+  background-color: var(--secondary-color, #6c757d);
+  color: var(--primary-text, #fff);
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.about-button:hover {
+  opacity: 0.9;
+}
+
+.feedback-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .app-version, .thread-id {
   font-size: 0.8rem;
   color: var(--text-secondary);
   opacity: 0.7;
   text-align: right;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.thread-id .copy-button {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.thread-id .copy-button:hover {
+  opacity: 1;
 }
 
 .user-info {
@@ -163,6 +203,10 @@
 
 .message-citations li {
   margin: 2px 0;
+}
+
+.citation-text {
+  font-style: italic;
 }
 
 .message-header {

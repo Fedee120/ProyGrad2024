@@ -7,8 +7,11 @@ import Button from 'src/components/common/Button/Button';
 import { formatMessageTime } from '../../utils/dateUtils';
 import { feedbackService } from '../../services/feedbackService';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 const Chat = () => {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
   const {
     messages,
     inputMessage,
@@ -24,6 +27,17 @@ const Chat = () => {
   const [submittingFeedback, setSubmittingFeedback] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success('ID copiado al portapapeles');
+      })
+      .catch(err => {
+        console.error('Error al copiar: ', err);
+        toast.error('No se pudo copiar al portapapeles');
+      });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,10 +88,29 @@ const Chat = () => {
           <div className="header-info">
             <div className="metadata-column">
               <div className="app-version">
-                Version: {process.env.REACT_APP_APP_VERSION ?? ' unknown'}
+                Versión: {process.env.REACT_APP_APP_VERSION ?? ' unknown'}
               </div>
               <div className="thread-id">
                 ID: {threadId}
+                <button
+                  className="copy-button"
+                  onClick={() => copyToClipboard(threadId)}
+                  title="Copiar ID"
+                >
+                  <svg 
+                    width="14" 
+                    height="14" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
               </div>
             </div>
             <div className="header-actions">
@@ -112,10 +145,12 @@ const Chat = () => {
               </div>
               {message.citations && message.citations.length > 0 && (
                 <div className="message-citations">
-                  <div className="citations-header">Sources:</div>
+                  <div className="citations-header">Fuentes:</div>
                   <ul>
                     {message.citations.map((citation, citationIndex) => (
-                      <li key={citationIndex}>{citation}</li>
+                      <li key={citationIndex}>
+                        <span className="citation-text">{citation.text}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>

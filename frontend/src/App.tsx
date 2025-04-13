@@ -7,6 +7,7 @@ import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./components/common/NotFound/NotFound";
 import Chat from './pages/chat/Chat';
+import About from './pages/about/About';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<PrivateRoute component={Chat} />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

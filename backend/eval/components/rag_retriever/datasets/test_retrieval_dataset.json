@@ -1,0 +1,50 @@
+{
+    "test_documents": [
+        {
+            "content": "Deep learning is a subset of machine learning that uses neural networks with multiple layers. These networks can automatically learn hierarchical representations of data, with each layer transforming the input data into increasingly abstract representations. Deep learning has revolutionized fields like computer vision and natural language processing by achieving state-of-the-art performance on various tasks. The key advantage of deep learning is its ability to automatically discover the features needed for classification or prediction, eliminating the need for manual feature engineering. In computer vision, deep neural networks can learn to detect edges, shapes, and complex patterns, while in natural language processing, they can understand semantic relationships and contextual meanings.",
+            "metadata": {
+                "source": "deep_learning_intro.txt",
+                "section": "introduction"
+            }
+        },
+        {
+            "content": "Transformers are a type of neural network architecture introduced in 2017 that has revolutionized natural language processing. They use self-attention mechanisms to process sequential data, allowing the model to weigh the importance of different parts of the input when making predictions. The architecture consists of encoder and decoder components, where the encoder processes the input sequence and the decoder generates the output sequence. The key innovation of transformers is their ability to process all parts of the sequence in parallel, unlike traditional RNNs that process data sequentially. This parallel processing, combined with the attention mechanism, allows transformers to capture long-range dependencies and relationships in the data more effectively. They have become the foundation of modern language models like GPT and BERT.",
+            "metadata": {
+                "source": "transformers_explained.txt",
+                "section": "architecture"
+            }
+        },
+        {
+            "content": "Gradient descent is an optimization algorithm used in machine learning to minimize the loss function and find optimal model parameters. It works by iteratively adjusting parameters in the direction that reduces the loss function most rapidly. The learning rate controls how large these parameter updates are, with too large a rate causing overshooting and too small a rate leading to slow convergence. There are several variants of gradient descent, including stochastic gradient descent (SGD) which uses individual samples, mini-batch gradient descent which uses small batches of samples, and batch gradient descent which uses the entire dataset. Advanced optimizers like Adam and RMSprop build upon basic gradient descent by adapting the learning rate for each parameter based on historical gradient information.",
+            "metadata": {
+                "source": "optimization_methods.txt",
+                "section": "algorithms"
+            }
+        },
+        {
+            "content": "Neural networks are computational models inspired by biological brains, designed to recognize patterns in data. They consist of interconnected nodes (neurons) organized in layers, with each connection having an associated weight that can be adjusted during training. The network learns by updating these weights based on training examples using backpropagation and gradient descent. A typical neural network consists of an input layer that receives data, one or more hidden layers that transform the data, and an output layer that produces predictions. Each neuron applies an activation function to its inputs, introducing non-linearity that allows the network to learn complex patterns. The depth and width of neural networks, along with the choice of activation functions and optimization strategies, are crucial architectural decisions that affect their learning capacity and performance.",
+            "metadata": {
+                "source": "neural_networks.txt",
+                "section": "fundamentals"
+            }
+        }
+    ],
+    "test_queries": [
+        {
+            "query": "What is deep learning?",
+            "ground_truth": "Deep learning is a subset of machine learning that uses neural networks with multiple layers. These networks automatically learn hierarchical representations of data, transforming inputs into increasingly abstract representations. Deep learning has revolutionized fields like computer vision and natural language processing by automatically discovering features needed for classification or prediction, eliminating manual feature engineering."
+        },
+        {
+            "query": "How do transformers work?",
+            "ground_truth": "Transformers are a neural network architecture that uses self-attention mechanisms to process sequential data. They consist of encoder and decoder components, where the encoder processes input sequences and the decoder generates outputs. Their key innovation is parallel processing of sequences, unlike traditional RNNs that process data sequentially. This, combined with attention mechanisms, allows them to effectively capture long-range dependencies in data."
+        },
+        {
+            "query": "Explain gradient descent optimization",
+            "ground_truth": "Gradient descent is an optimization algorithm that minimizes loss functions by iteratively adjusting parameters in the direction that reduces the loss most rapidly. The learning rate controls update sizes, with variants including stochastic gradient descent (SGD) for individual samples, mini-batch gradient descent for small batches, and batch gradient descent for entire datasets. Advanced optimizers like Adam and RMSprop adapt learning rates based on historical gradient information."
+        },
+        {
+            "query": "What are neural networks?",
+            "ground_truth": "Neural networks are computational models inspired by biological brains that recognize patterns in data. They consist of interconnected neurons organized in layers (input, hidden, and output), with adjustable weights between connections. They learn by updating weights through backpropagation and gradient descent. Each neuron uses activation functions to introduce non-linearity, allowing the network to learn complex patterns. Their architecture, including depth, width, and activation functions, affects learning capacity and performance."
+        }
+    ]
+} 

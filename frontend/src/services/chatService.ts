@@ -1,4 +1,5 @@
 import { BACKEND_URL } from '../constants';
+import { Citation } from '../types/chat';
 
 export const chatService = {
   async sendMessage(
@@ -7,7 +8,7 @@ export const chatService = {
     token: string, 
     history: { role: string; content: string }[],
     threadId: string
-  ): Promise<{id: string, timestamp: string, response: string, citations: string[]}> {
+  ): Promise<{id: string, timestamp: string, response: string, citations: Citation[]}> {
     try {
       const response = await fetch(`${BACKEND_URL}/invoke_agent`, {
         method: 'POST',
