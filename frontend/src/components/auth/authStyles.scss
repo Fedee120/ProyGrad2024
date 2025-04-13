@@ -21,4 +21,30 @@
             }
         }
     }
+
+    .project-info {
+        margin-top: 30px;
+        padding: 15px;
+        border-top: 1px solid #e5e5e5;
+        font-size: 14px;
+        color: #666;
+        text-align: center;
+        line-height: 1.5;
+        width: 100%;
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .about-link {
+            color: var(--primary, #3B82F6);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }

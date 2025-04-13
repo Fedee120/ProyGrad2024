@@ -7,8 +7,11 @@ import Button from 'src/components/common/Button/Button';
 import { formatMessageTime } from '../../utils/dateUtils';
 import { feedbackService } from '../../services/feedbackService';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 const Chat = () => {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
   const {
     messages,
     inputMessage,
