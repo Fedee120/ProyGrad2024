@@ -28,15 +28,25 @@ const Chat = () => {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        toast.success('ID copiado al portapapeles');
-      })
-      .catch(err => {
-        console.error('Error al copiar: ', err);
+  const copyToClipboard = async (text: string) => {
+      const textArea = document.createElement('textarea');
+      document.body.appendChild(textArea);
+      textArea.value = text;
+      textArea.focus();
+      textArea.select();
+
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          toast.success('ID copiado al portapapeles');
+        } else {
+          throw new Error('document.execCommand failed');
+        }
+      } catch (execErr) {
         toast.error('No se pudo copiar al portapapeles');
-      });
+      } finally {
+          document.body.removeChild(textArea);
+      }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
