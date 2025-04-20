@@ -84,13 +84,8 @@ def evaluate_retrieval_samples(
             "relevancy_score": relevancy_score,
             "relevancy_details": relevancy_details,
             "recall_score": recall_score,
-            "recall_details": {
-                "recall_score": recall_details["recall_score"],
-                "weighted_recall_score": recall_details["weighted_recall_score"],
-                "per_context_results": recall_details["per_context_results"],
-                "total_ground_truth_statements": recall_details["total_statements"],
-                "total_contexts": len(retrieved_contexts)
-            },
+            "recall_details": recall_details,
+            "total_contexts": len(retrieved_contexts),
             "score": score
         }
 
@@ -159,8 +154,8 @@ def evaluate_rag_retriever(verbose: bool = False, test_mode: bool = False) -> Tu
     avg_relevancy_all = sum(d["relevancy_details"]["relevancy_ratio_all"] for d in details) / len(details)
     
     # Access recall scores directly from recall_details dictionary
-    avg_recall = sum(d["recall_details"]["recall_score_best"] for d in details) / len(details)
-    avg_weighted_recall = sum(d["recall_details"]["recall_score_all"] for d in details) / len(details)
+    avg_recall = sum(d["recall_details"]["recall_score"] for d in details) / len(details)
+    avg_weighted_recall = sum(d["recall_details"]["weighted_recall_score"] for d in details) / len(details)
     
     # Prepare results
     scores_dict = {
