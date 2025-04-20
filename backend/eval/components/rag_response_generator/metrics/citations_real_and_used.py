@@ -1,6 +1,6 @@
 # citations_real_and_used: evaluates if citations in the answer are real and properly used
 
-from pydantic.v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import List, Tuple

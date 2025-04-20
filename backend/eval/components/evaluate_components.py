@@ -142,11 +142,23 @@ def save_detailed_report(
         
         f.write("\nDetailed Test Results:\n")
         for test in detailed_results["Retriever"]:
+            # Count contexts with relevant information (contexts covering ground truth statements)
+            contexts_with_relevant_info = sum(
+                1 for ctx in test['recall_details']['per_context_results'] 
+                if ctx['coverage_counts'].get('full', 0) > 0 or ctx['coverage_counts'].get('partial', 0) > 0
+            )
+
             f.write(f"\nQuery: {test['query']}\n")
             f.write(f"Retrieved contexts: {test['retrieved_contexts']}\n")
             f.write(f"Ground truth: {test['ground_truth']}\n")
             f.write(f"Relevancy score (best): {test['relevancy_details']['relevancy_ratio_best']:.2f}\n")
             f.write(f"Relevancy score (all): {test['relevancy_details']['relevancy_ratio_all']:.2f}\n")
+            f.write(f"Recall score: {test['recall_details']['recall_score']:.2f}\n")
+            f.write(f"Weighted recall score: {test['recall_details']['weighted_recall_score']:.2f}\n")            
+            f.write(f"Total ground truth statements to cover: {test['recall_details']['total_statements']}\n")
+            f.write(f"Contexts covering ground truth statements: {contexts_with_relevant_info}/{test['total_contexts']}\n")
+            f.write(f"Overall score: {test['score']:.2f}\n")
+
             f.write("\nPer-context relevancy evaluation:\n")
             for ctx_result in test['relevancy_details']['per_context_results']:
                 f.write(f"\nContext {ctx_result['context_num']}:\n")
@@ -155,18 +167,28 @@ def save_detailed_report(
                 f.write("Reasoning:\n")
                 for step in ctx_result['reasoning_steps']:
                     f.write(f"- {step}\n")
-            f.write(f"Recall score (best): {test['recall_details']['recall_score_best']:.2f}\n")
-            f.write(f"Recall score (all): {test['recall_details']['recall_score_all']:.2f}\n")
             f.write("\nPer-context recall evaluation:\n")
             for ctx_result in test['recall_details']['per_context_results']:
                 f.write(f"\nContext {ctx_result['context_num']}:\n")
                 f.write(f"Content: {ctx_result['context']}\n")
-                f.write(f"Has relevant information: {ctx_result['has_relevant_information']}\n")
-                f.write("Reasoning:\n")
-                for step in ctx_result['reasoning_steps']:
-                    f.write(f"- {step}\n")
-            f.write(f"\nTotal relevant contexts: {test['recall_details']['relevant_contexts']}/{test['recall_details']['total_contexts']}\n")
-            f.write(f"Overall score: {test['score']:.2f}\n")
+                
+                # Modified to use the coverage information from our structure
+                coverage_full = ctx_result['coverage_counts'].get('full', 0)
+                coverage_partial = ctx_result['coverage_counts'].get('partial', 0)
+                has_relevant = coverage_full > 0 or coverage_partial > 0
+                
+                f.write(f"Has relevant information: {has_relevant}\n")
+                f.write("Coverage details:\n")
+                f.write(f"- Full coverage: {coverage_full}\n")
+                f.write(f"- Partial coverage: {coverage_partial}\n")
+                f.write(f"- No coverage: {ctx_result['coverage_counts'].get('none', 0)}\n")
+                
+                # Add coverage assessment details
+                f.write("Statement coverage assessment:\n")
+                for assessment in ctx_result.get('coverage_assessments', []):
+                    f.write(f"- Statement: \"{assessment.get('statement', '')}\" - Coverage: {assessment.get('coverage', 'none').upper()}\n")
+                    f.write(f"  Reasoning: {assessment.get('reasoning', 'No reasoning provided')}\n")
+
             f.write("-" * 50 + "\n")
 
         # Write Router results

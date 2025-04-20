@@ -1,6 +1,6 @@
 # expands_acronyms: evaluates if acronyms in the query are expanded in at least one generated query
 
-from pydantic.v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import List, Tuple
