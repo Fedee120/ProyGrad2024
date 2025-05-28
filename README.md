@@ -1,7 +1,7 @@
 # ProyGrad2024
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-El siguiente README.md describe los pasos para hacer el setup del entorno para correr el proyecto en modo desarrollo (local) y producción (docker).
+El siguiente README.md describe los pasos para hacer el setup del entorno para correr el proyecto en modo desarrollo (local) y producción (docker). Además de especificar como personalizar el corpuse usado o el dominio restringido del chatbot.
 
 A destacar, ambos modos usan diferentes puertos para poder correr ambos modos a la vez sin cambiar nada, para lograr esto se usan variables de entorno para configurar los puertos de cada servicio, en local (.env-template files) se usan 8090 y 8091 los cuales son especificados en main.py (backend) y package.json (frontend), mientras que en docker (docker-compose.yml) se usan 8080 y 8081 los cuales son especificados en los respectivos Dockerfiles (+ nginx.conf en el caso de frontend). Tambien no importa si se quiere correr en desarrollo o en producción, es necesario levantar el docker para que Milvus esté corriendo.
 
