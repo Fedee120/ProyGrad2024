@@ -44,7 +44,7 @@ class Router:
         - Before choosing this path, explicitly check the last AI message. If it contains a thought-provoking or reflective question rather than providing retrieved information, do not choose 'cross-question'. Consecutive cross-questions may frustrate the user. Instead, select 'retrieve' or another appropriate path.
         - If the user does not respond to a previous cross-question or explicitly states they don't know the answer, do not choose 'cross-question' again. Instead, retrieve relevant information to provide them with a direct response.
 
-        - 'deny': Choose this path when the user's query is is not related to AI in any way. This includes questions that seek personal advice, general knowledge, or topics outside the chatbot's focus. The chatbot's purpose is strictly limited to discussions related to AI and should not attempt to serve as a general AI assistant.
+        - 'deny': Choose this path when the user's query is not related to AI in any way. This includes questions that seek personal advice, general knowledge, or topics outside the chatbot's focus. The chatbot's purpose is strictly limited to discussions related to AI and should not attempt to serve as a general AI assistant.
 
         Always choose one and only one decision path based on the user's query and context.
         """
