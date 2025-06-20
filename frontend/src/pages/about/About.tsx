@@ -46,7 +46,7 @@ const About = () => {
         </p>
         
         <p>
-          El proyecto surge de la necesidad de facilitar la integración de herramientas tecnológicas en el proceso de enseñanza y aprendizaje, brindando respuestas claras y fundamentadas que promuevan el pensamiento crítico y la reflexión. Aunque en este sitio no se detallan aspectos técnicos, la investigación y desarrollo realizado respalda nuestro compromiso con la calidad, la usabilidad y la seguridad de la información. Los documentos que fundamentan las respuestas fueron cuidadosamente seleccionados para garantizar la precisión y calidad de la información. Estos documentos son abiertos y de dominio público.
+          El proyecto surge de la necesidad de facilitar la integración de herramientas tecnológicas en el proceso de enseñanza y aprendizaje, brindando respuestas claras y fundamentadas que promuevan el pensamiento crítico y la reflexión. Aunque en este sitio no se detallan aspectos técnicos, la investigación y desarrollo realizado respalda nuestro compromiso con la calidad, la usabilidad y la seguridad de la información. Los documentos que fundamentan las respuestas fueron cuidadosamente seleccionados para garantizar la precisión y calidad de la información. Estos documentos son abiertos y de dominio público. El código completo de este proyecto es de código abierto y está <a href="https://github.com/Fedee120/ProyGrad2024" target="_blank" rel="noopener noreferrer">disponible públicamente</a>, donde se pueden encontrar instrucciones detalladas para su configuración, así como guías para adaptarlo a otros dominios y repositorios de documentos.
         </p>
         
         <p>

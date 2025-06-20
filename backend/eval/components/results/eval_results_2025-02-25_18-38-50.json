@@ -1,0 +1,29 @@
+{
+  "Overall": 0.8940439247316669,
+  "Query Analyzer": {
+    "Reference Resolution": 1.0,
+    "Acronym Expansion": 0.6,
+    "Context Inclusion": 1.0,
+    "Overall": 0.8666666666666667
+  },
+  "Response Generator": {
+    "Faithfulness": 1.0,
+    "Answer Correctness": 1.0,
+    "Answer Relevancy": 1.0,
+    "Contradiction Acknowledgment": 0.8,
+    "Citations Real and Used": 1.0,
+    "Overall": 0.96
+  },
+  "Retriever": {
+    "Context Relevancy (with all contexts)": 0.6929824561403509,
+    "Context Relevancy (with best context)": 0.9473684210526315,
+    "Context Recall": 0.589032821037465,
+    "Weighted Context Recall": 0.40343576999618225,
+    "Overall": 0.7682006210450482
+  },
+  "Router": {
+    "Routing Accuracy": 0.9813084112149533
+  },
+  "Total Time (seconds)": 84.7806122303009,
+  "timestamp": "2025-02-25_18-38-50"
+}

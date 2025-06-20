@@ -1,6 +1,6 @@
 # includes_context: evaluates if the query analyzer considers conversation context
 
-from pydantic.v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import List, Tuple
