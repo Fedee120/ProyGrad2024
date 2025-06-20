@@ -71,13 +71,16 @@
 
 .about-text a {
   color: var(--primary);
-  text-decoration: none;
-  transition: color 0.2s, border-bottom 0.2s;
-  border-bottom: 1px solid transparent;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s, text-shadow 0.2s;
+  cursor: pointer;
 }
 
 .about-text a:hover {
-  border-bottom: 1px solid var(--primary);
+  color: #1a73e8;
+  text-shadow: 0 1px 2px rgba(26, 115, 232, 0.2);
+  text-decoration: underline;
 }
 
 .thank-you {
